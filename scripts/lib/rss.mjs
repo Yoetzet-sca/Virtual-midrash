@@ -1,12 +1,20 @@
 // Reads a podcast RSS feed (SoundCloud, Spotify/Anchor, or any standard feed) into plain class records.
 import { XMLParser } from 'fast-xml-parser';
 
-const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@', cdataPropName: '#cdata', trimValues: true });
+// Entities are decoded here rather than by the parser: long feeds (2,000+ episodes) exceed the parser's built-in entity limit.
+const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@', cdataPropName: '#cdata', trimValues: true, processEntities: false, parseTagValue: false, parseAttributeValue: false });
+
+const NAMED = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
+export const decode = (s) => String(s).replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (m, e) => {
+  if (e[0] === '#') { const n = e[1].toLowerCase() === 'x' ? parseInt(e.slice(2), 16) : parseInt(e.slice(1), 10); return Number.isFinite(n) ? String.fromCodePoint(n) : m; }
+  return NAMED[e.toLowerCase()] ?? m;
+});
 
 const text = (v) => {
   if (v == null) return '';
-  if (typeof v === 'object') return String(v['#cdata'] ?? v['#text'] ?? '').trim();
-  return String(v).trim();
+  // CDATA is already literal text; everything else may carry entities.
+  if (typeof v === 'object') return v['#cdata'] != null ? String(v['#cdata']).trim() : decode(v['#text'] ?? '').trim();
+  return decode(v).trim();
 };
 
 export function durationToSeconds(v) {
@@ -26,16 +34,16 @@ export function parseFeed(xml) {
   const links = [].concat(ch['atom:link'] ?? []);
   return {
     title: text(ch.title),
-    image: ch['itunes:image']?.['@href'] || text(ch.image?.url) || '',
-    next: links.find((l) => l['@rel'] === 'next')?.['@href'] || '',
+    image: decode(ch['itunes:image']?.['@href'] || '') || text(ch.image?.url) || '',
+    next: decode(links.find((l) => l['@rel'] === 'next')?.['@href'] || ''),
     items: items
       .map((it) => ({
         guid: text(it.guid) || text(it.link),
         title: text(it.title),
         date: new Date(text(it.pubDate)).toISOString(),
         durationSec: durationToSeconds(it['itunes:duration']),
-        audioUrl: it.enclosure?.['@url'] || '',
-        image: it['itunes:image']?.['@href'] || '',
+        audioUrl: decode(it.enclosure?.['@url'] || ''),
+        image: decode(it['itunes:image']?.['@href'] || ''),
         link: text(it.link),
       }))
       // Publish rule: title, date and audio are enough. Anything missing audio is skipped.

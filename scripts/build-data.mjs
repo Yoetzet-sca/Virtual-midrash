@@ -104,6 +104,7 @@ for (const e of settings.erub) {
     catch (err) { warnings.push(`Erub check failed for ${e.name}: ${err.message}`); }
   }
   erub.push({ ...e, ...r });
+  console.log(`${r.status === 'unknown' ? '!' : '✓'} Erub ${e.short}: ${r.status}${r.date ? ' (' + r.date + ')' : ''}${r.fresh ? '' : ' — not shown as current'}`);
 }
 
 const out = {

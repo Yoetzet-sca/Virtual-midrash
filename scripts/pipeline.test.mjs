@@ -29,6 +29,15 @@ test('Spotify/Anchor feed: CDATA titles and encoded audio links', async () => {
   assert.match(f.items[0].audioUrl, /^https:\/\/anchor\.fm\//);
 });
 
+test('very long feeds with thousands of entities still parse', () => {
+  const item = (i) => `<item><title>Tom &amp; Jerry &quot;${i}&quot; &#8211; caf&#xE9;</title><pubDate>Sun, 15 Nov 2026 19:25:24 GMT</pubDate><enclosure url="https://example.org/a.mp3?x=1&amp;y=${i}" type="audio/mpeg"/></item>`;
+  const xml = `<rss><channel><title>Big</title>${Array.from({ length: 2500 }, (_, i) => item(i)).join('')}</channel></rss>`;
+  const f = parseFeed(xml);
+  assert.equal(f.items.length, 2500);
+  assert.equal(f.items[7].title, 'Tom & Jerry "7" – café');
+  assert.equal(f.items[7].audioUrl, 'https://example.org/a.mp3?x=1&y=7');
+});
+
 test('durations', () => {
   assert.equal(durationToSeconds('00:09:39'), 579);
   assert.equal(durationToSeconds('45:03'), 2703);
