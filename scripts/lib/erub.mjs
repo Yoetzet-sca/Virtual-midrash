@@ -1,6 +1,6 @@
 // Reads the erub status from the two community erub websites.
 // Safety rule: a status only counts as current if it was checked for the coming Shabbat
-// (within the last 6 days). Otherwise the app shows "Not yet checked this week".
+// (see isFresh below). Otherwise the app shows "Not yet checked this week".
 const strip = (html) => html.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ');
 
 const MONTHS = 'january february march april may june july august september october november december'.split(' ');
@@ -18,10 +18,13 @@ export function findDate(textBlock, now) {
   return null;
 }
 
+// A check covers the Shabbat on or after its date. Once that Shabbat ends (Saturday night, Eastern time),
+// the status is stale until the next Friday check is posted.
 const isFresh = (date, now) => {
   if (!date) return false;
-  const days = (now - date) / 86400000;
-  return days > -2 && days < 6;
+  const shabbat = new Date(date.getTime() + ((6 - date.getUTCDay() + 7) % 7) * 86400000);
+  const ends = shabbat.getTime() + 86400000 + 5 * 3600000; // midnight after Shabbat, Eastern
+  return now.getTime() < ends && now.getTime() > date.getTime() - 2 * 86400000;
 };
 
 export function parseBrooklyn(html, now = new Date()) {

@@ -72,7 +72,9 @@ test('Daf Yomi is a subset of Gemara', () => {
 test('erub: Brooklyn status only counts when it is this week', () => {
   const html = '<h2>Erub is UP</h2><p>Shabbat Toledot</p><p>November 14, 2026</p><p>Candle lighting 4:22pm</p>';
   assert.deepEqual(parseBrooklyn(html, new Date('2026-11-13T18:00:00Z')), { status: 'up', date: '2026-11-14', fresh: true });
-  assert.equal(parseBrooklyn(html, new Date('2026-11-20T18:00:00Z')).fresh, false);
+  assert.equal(parseBrooklyn(html, new Date('2026-11-14T22:00:00Z')).fresh, true); // Shabbat afternoon
+  assert.equal(parseBrooklyn(html, new Date('2026-11-15T14:00:00Z')).fresh, false); // Sunday morning
+  assert.equal(parseBrooklyn(html, new Date('2026-11-18T17:00:00Z')).fresh, false); // midweek
   assert.equal(parseBrooklyn('<h2>Erub is DOWN</h2> November 14, 2026', new Date('2026-11-13T18:00:00Z')).status, 'down');
   assert.deepEqual(parseBrooklyn('<p>nothing here</p>'), { status: 'unknown', date: null, fresh: false });
 });
@@ -80,6 +82,7 @@ test('erub: Brooklyn status only counts when it is this week', () => {
 test('erub: Deal reads the checked date and the up/down image', () => {
   const html = '<table><tr><td><img src="images/erub-up.gif"></td><td>11/13/2026 THE ERUB HAS BEEN CHECKED.</td></tr></table><p>3/11/22 THE ERUB IS DOWN.</p>';
   assert.deepEqual(parseDeal(html, new Date('2026-11-13T20:00:00Z')), { status: 'up', date: '2026-11-13', fresh: true });
+  assert.equal(parseDeal(html, new Date('2026-11-16T15:00:00Z')).fresh, false); // Monday after
   assert.equal(parseDeal(html, new Date('2026-11-25T20:00:00Z')).fresh, false);
   assert.equal(parseDeal('<td>11/13/2026 THE ERUB HAS BEEN CHECKED.</td>', new Date('2026-11-13T20:00:00Z')).status, 'checked');
 });
