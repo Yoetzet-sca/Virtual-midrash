@@ -1,0 +1,11 @@
+{
+  "weekly": [
+    { "day": "Tue", "time": "11:00 AM", "teacherId": "vivien-hidary", "title": "Torah for Today", "mode": "zoom", "location": "", "zoomUrl": "", "privateAddress": "" },
+    { "day": "Wed", "time": "12:00 PM", "teacherId": "michal-tawil", "title": "Connecting to God through our Personal Relationships", "mode": "zoom", "location": "", "zoomUrl": "", "privateAddress": "" },
+    { "day": "Wed", "time": "1:00 PM", "teacherId": "naftali-besser", "title": "Staying Inspired", "mode": "both", "location": "Yeshivah of Flatbush Joel Braverman High School · 1609 Avenue J", "zoomUrl": "", "privateAddress": "" },
+    { "day": "Wed", "time": "1:30 PM", "teacherId": "jacqueline-mizrachi", "title": "Psychology in Torah", "mode": "inperson", "location": "Sephardic Synagogue · 511 Ave R", "zoomUrl": "", "privateAddress": "" },
+    { "day": "Thu", "time": "11:15 AM", "teacherId": "ilana-alouf", "title": "Perashat HaShabuah", "mode": "zoom", "location": "", "zoomUrl": "", "privateAddress": "" },
+    { "day": "Thu", "time": "11:30 AM", "teacherId": "", "title": "Living Room Torah", "mode": "inperson", "location": "At a community home", "zoomUrl": "", "privateAddress": "" }
+  ],
+  "notices": []
+}

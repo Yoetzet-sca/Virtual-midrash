@@ -1,0 +1,10 @@
+[
+  { "id": "avi-harari", "name": "Rabbi Avi Harari", "title": "Rosh Bet Midrash, Yeshivah of Flatbush · Head Rabbi, Mikdash Eliyahu", "bio": "", "photo": "", "affiliations": ["Yeshivah of Flatbush", "Mikdash Eliyahu"], "feed": "https://feeds.soundcloud.com/users/soundcloud:users:127279884/sounds.rss", "defaultTopic": "" },
+  { "id": "joey-soffer", "name": "Rabbi Joey Soffer", "title": "", "bio": "", "photo": "", "affiliations": [], "feed": "https://feeds.soundcloud.com/users/soundcloud:users:1044681742/sounds.rss", "defaultTopic": "" },
+  { "id": "richard-hidary", "name": "Rabbi Dr. Richard Hidary", "title": "Rabbi, Sephardic Synagogue · Professor of Judaic Studies, Yeshiva University", "bio": "", "photo": "", "affiliations": ["Sephardic Synagogue"], "feed": "https://anchor.fm/s/41523974/podcast/rss", "defaultTopic": "Daf Yomi" },
+  { "id": "vivien-hidary", "name": "Mrs. Vivien Hidary", "title": "", "bio": "", "photo": "", "affiliations": [], "feed": "", "defaultTopic": "" },
+  { "id": "ilana-alouf", "name": "Mrs. Ilana Alouf", "title": "", "bio": "", "photo": "", "affiliations": [], "feed": "", "defaultTopic": "" },
+  { "id": "michal-tawil", "name": "Mrs. Michal Tawil", "title": "", "bio": "", "photo": "", "affiliations": [], "feed": "", "defaultTopic": "" },
+  { "id": "naftali-besser", "name": "Rabbi Naftali Besser", "title": "Dean of Students, Yeshivah of Flatbush High School", "bio": "", "photo": "", "affiliations": ["Yeshivah of Flatbush"], "feed": "", "defaultTopic": "" },
+  { "id": "jacqueline-mizrachi", "name": "Ms. Jacqueline Mizrachi", "title": "", "bio": "", "photo": "", "affiliations": [], "feed": "", "defaultTopic": "" }
+]

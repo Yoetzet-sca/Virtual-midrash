@@ -1,0 +1,25 @@
+{
+  "name": "virtual-midrash",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "data": "node scripts/build-data.mjs",
+    "data:sample": "node scripts/build-data.mjs --fixtures",
+    "build": "tsc --noEmit && vite build",
+    "test": "node --test scripts/pipeline.test.mjs"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "fast-xml-parser": "^4.4.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2"
+  }
+}

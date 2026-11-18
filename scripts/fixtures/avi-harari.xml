@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <atom:link href="https://feeds.soundcloud.com/users/soundcloud:users:127279884/sounds.rss" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://feeds.soundcloud.com/users/soundcloud:users:127279884/sounds.rss?before=2244514157" rel="next" type="application/rss+xml"/>
+    <title>Rabbi Avi Harari</title>
+    <itunes:image href="https://i1.sndcdn.com/avatars-yL7llBZ3V05graYf-Nr9P1g-original.jpg"/>
+    <item>
+      <guid isPermaLink="false">tag:soundcloud,2010:tracks/2440515357</guid>
+      <title>&quot;Shnayim Mikra...&quot; - The Haftarah</title>
+      <pubDate>Wed, 18 Nov 2026 13:15:53 +0000</pubDate>
+      <link>https://soundcloud.com/rabbiharari/shnayim-mikra-the-haftarah</link>
+      <itunes:duration>00:09:39</itunes:duration>
+      <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/2440515357-rabbiharari-shnayim-mikra-the-haftarah.mp3" length="9455546"/>
+      <itunes:image href="https://i1.sndcdn.com/artworks-Wsx68FMHdZl9yfZQ-4a9E4w-t3000x3000.jpg"/>
+    </item><item>
+      <guid isPermaLink="false">tag:soundcloud,2010:tracks/2440485360</guid>
+      <title>Bava Batra 8a (1)</title>
+      <pubDate>Wed, 18 Nov 2026 12:09:34 +0000</pubDate>
+      <link>https://soundcloud.com/rabbiharari/bava-batra-8a-1</link>
+      <itunes:duration>00:45:03</itunes:duration>
+      <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/2440485360-rabbiharari-bava-batra-8a-1.mp3" length="44110070"/>
+      <itunes:image href="https://i1.sndcdn.com/artworks-klBecLRNSvtGBOwD-rjQElA-t3000x3000.jpg"/>
+    </item>
+    <item>
+      <guid isPermaLink="false">no-audio</guid>
+      <title>An item without audio is skipped</title>
+      <pubDate>Wed, 18 Nov 2026 10:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>

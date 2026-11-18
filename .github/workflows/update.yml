@@ -1,0 +1,55 @@
+# Rebuilds the site with the latest classes, schedule and erub status, then publishes it.
+# Runs four times a day (rabbis post in the morning), on every change to the code, and on demand.
+name: Update and publish
+
+on:
+  schedule:
+    # 6am, 10am, 2pm and 8pm Eastern (UTC times; shifts by an hour in summer)
+    - cron: '0 11,15,19 * * *'
+    - cron: '0 1 * * *'
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Read feeds, schedule and erub status
+        run: npm run data
+        env:
+          COMMUNITY_CODE: ${{ secrets.COMMUNITY_CODE }}
+          SHEET_TEACHERS_URL: ${{ secrets.SHEET_TEACHERS_URL }}
+          SHEET_SCHEDULE_URL: ${{ secrets.SHEET_SCHEDULE_URL }}
+          SHEET_NOTICES_URL: ${{ secrets.SHEET_NOTICES_URL }}
+          SHEET_RESOURCES_URL: ${{ secrets.SHEET_RESOURCES_URL }}
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

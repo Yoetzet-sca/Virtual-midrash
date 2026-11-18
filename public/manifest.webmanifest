@@ -1,0 +1,1 @@
+{ "name": "Virtual Midrash", "short_name": "Midrash", "start_url": "./", "display": "standalone", "background_color": "#0B2540", "theme_color": "#0B2540", "icons": [{ "src": "brand/icon-512.png", "sizes": "512x512", "type": "image/png" }] }

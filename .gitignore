@@ -1,0 +1,4 @@
+node_modules
+dist
+public/data/app.json
+.DS_Store
