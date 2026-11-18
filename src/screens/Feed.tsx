@@ -116,7 +116,7 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
                   {img && <img src={img} alt="" loading={i < 2 ? 'eager' : 'lazy'} onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
                   {isVideo && video === c.id
                     ? <iframe title={c.title} src={`https://www.youtube-nocookie.com/embed/${c.youtubeId}?autoplay=1&playsinline=1&rel=0`} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen />
-                    : <button className="card-play" aria-label={playing ? 'Pause' : 'Play'} onClick={tap}>{playing ? <IPause size={26} /> : <IPlay size={26} />}</button>}
+                    : <button className="card-play" aria-label={playing ? 'Pause' : 'Play'} onClick={tap}><span className="disc">{playing ? <IPause size={28} /> : <IPlay size={28} />}</span></button>}
                 </div>
               </div>
               <div className="card-info">
@@ -137,8 +137,8 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
                 {mine && <div className="card-time">{clock(p.time)} / {clock(p.duration || c.durationSec)}</div>}
                 {mine && p.error && <div className="card-error" role="alert">{p.error}</div>}
               </div>
-              <div className="rail">
-                <a href={'#/teacher/' + c.teacherId} aria-label={t?.name + ' page'}><Avatar t={t} size={52} ring /></a>
+              <div className={'rail' + (isVideo ? ' no-who' : '')}>
+                <a className="rail-who" href={'#/teacher/' + c.teacherId} aria-label={t?.name + ' page'}><Avatar t={t} size={52} ring /></a>
                 <button onClick={() => like(c)} aria-pressed={prefs.liked.includes(c.id)} className={prefs.liked.includes(c.id) ? 'hot' : ''}>
                   <IHeart size={30} fill={prefs.liked.includes(c.id) ? 'currentColor' : 'none'} />{prefs.liked.includes(c.id) ? 'Liked' : 'Like'}
                 </button>

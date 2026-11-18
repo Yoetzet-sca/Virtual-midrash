@@ -76,11 +76,19 @@ h1 { font-family: var(--display); font-weight: 800; font-size: 28px; line-height
 .card-tap { position: absolute; inset: 0; width: 100%; border: 0; background: none; }
 /* Set areas: the picture always sits in the same frame, the class details in the same block below it. */
 .card-stage { position: absolute; left: 0; right: 0; top: calc(128px + env(safe-area-inset-top)); bottom: 232px; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.card-stage:has(.video) { align-items: flex-start; }
 .card-photo { position: relative; height: min(100%, 62vw, 290px); aspect-ratio: 1; border-radius: 22px; overflow: hidden; background: #d3e4f5; color: var(--ink); display: flex; align-items: center; justify-content: center; font: 800 64px var(--display); box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45); }
 .card-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.card-photo.video { height: auto; width: min(calc(100% - 28px), 460px); aspect-ratio: 16 / 9; border-radius: 16px; background: #000; pointer-events: auto; }
+.card-photo.video { height: auto; width: min(calc(100% - 28px), 460px, calc((100vh - 474px) * 16 / 9)); aspect-ratio: 16 / 9; border-radius: 16px; background: #000; pointer-events: auto; }
+/* Keep the video above the side buttons on every screen height (dvh = the part of the screen actually visible). */
+@supports (height: 100dvh) { .card-photo.video { width: min(calc(100% - 28px), 460px, calc((100dvh - 474px - env(safe-area-inset-top)) * 16 / 9)); } }
+.rail.no-who .rail-who { display: none; }
 .card-photo iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.card-play { position: absolute; right: 12px; bottom: 12px; width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--white); background: rgba(7, 24, 43, 0.75); color: var(--white); display: flex; align-items: center; justify-content: center; pointer-events: auto; }
+/* The whole picture or video is the play button; the round icon sits in its centre, clear of the side buttons. */
+.card-play { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: none; display: flex; align-items: center; justify-content: center; pointer-events: auto; }
+.card-play .disc { width: 68px; height: 68px; border-radius: 50%; border: 2px solid var(--white); background: rgba(7, 24, 43, 0.72); color: var(--white); display: flex; align-items: center; justify-content: center; }
+/* Short screens: the teacher's picture leaves the side column so nothing overlaps the picture or video. */
+@media (max-height: 740px) { .rail .rail-who { display: none; } }
 .card-info { position: absolute; left: 18px; right: 82px; bottom: 22px; height: 198px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; pointer-events: none; }
 .card-info a, .card-info button { pointer-events: auto; }
 .tags { display: flex; flex-wrap: nowrap; gap: 6px; overflow: hidden; }
@@ -90,7 +98,7 @@ h1 { font-family: var(--display); font-weight: 800; font-size: 28px; line-height
 .card-title { font-family: var(--display); font-weight: 800; font-size: 20px; line-height: 1.2; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .card-by { display: flex; align-items: center; gap: 10px; font-weight: 700; }
 .card-by a { min-height: 44px; display: flex; align-items: center; }
-.follow { min-height: 32px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--white); background: transparent; font: 700 12px var(--body); position: relative; }
+.follow { white-space: nowrap; flex-shrink: 0; min-height: 32px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--white); background: transparent; font: 700 12px var(--body); position: relative; }
 .follow::after { content: ''; position: absolute; inset: -7px; }
 .follow.on { background: var(--white); color: var(--ink); }
 .card-time { font-size: 12px; color: var(--soft); font-variant-numeric: tabular-nums; }
