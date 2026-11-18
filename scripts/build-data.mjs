@@ -11,6 +11,7 @@ import { topicFor, TOPICS } from './lib/topics.mjs';
 import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv } from './lib/csv.mjs';
 import { lock } from './lib/lock.mjs';
+import { channelIdFrom, feedUrl, parseYoutube, teacherForTitle } from './lib/youtube.mjs';
 
 const FIXTURES = process.argv.includes('--fixtures');
 const root = new URL('..', import.meta.url);
@@ -18,7 +19,7 @@ const json = async (p) => JSON.parse(await readFile(new URL(p, root), 'utf8'));
 const list = (v) => (Array.isArray(v) ? v : String(v || '').split(';').map((s) => s.trim()).filter(Boolean));
 
 async function get(url) {
-  const res = await fetch(url, { headers: { 'user-agent': 'VirtualMidrash/1.0 (+https://virtualmidrash.com)' }, signal: AbortSignal.timeout(30000) });
+  const res = await fetch(url, { headers: { 'user-agent': 'Mozilla/5.0 (compatible; VirtualMidrash/1.0; +https://virtualmidrash.com)', 'accept-language': 'en-US,en;q=0.9' }, signal: AbortSignal.timeout(30000) });
   if (!res.ok) throw new Error(`${res.status} ${url}`);
   return res.text();
 }
@@ -64,6 +65,36 @@ for (const t of teachers) {
   } catch (e) {
     warnings.push(`Feed failed for ${t.name}: ${e.message}`);
     console.warn(`! ${t.name}: ${e.message}`);
+  }
+}
+
+// ---- Videos from YouTube channels ---------------------------------------------
+// Each video is filed under the teacher named in its title; otherwise under the SCA itself.
+for (const y of settings.youtube || []) {
+  try {
+    let xml;
+    if (FIXTURES) {
+      const f = new URL('scripts/fixtures/youtube.xml', root);
+      if (!existsSync(f)) continue;
+      xml = await readFile(f, 'utf8');
+    } else {
+      const channelId = y.channelId || channelIdFrom(await get(y.url));
+      if (!channelId) throw new Error('could not find the channel id — set "channelId" in content/settings.json');
+      xml = await get(feedUrl(channelId));
+    }
+    const videos = parseYoutube(xml).slice(0, settings.maxVideosPerChannel || 15);
+    for (const v of videos) {
+      let teacherId = teacherForTitle(v.title, teachers);
+      if (!teacherId) {
+        teacherId = 'sca';
+        if (!teachers.some((t) => t.id === 'sca')) teachers.push({ id: 'sca', name: 'Sephardic Community Alliance', title: 'Classes and events from the SCA', bio: '', photo: '', affiliations: [], feed: '', defaultTopic: '' });
+      }
+      classes.push({ id: `yt:${v.youtubeId}`, teacherId, title: v.title, date: v.date, durationSec: 0, audioUrl: '', youtubeId: v.youtubeId, image: v.image, link: v.link, topic: topicFor(v.title, null), kind: 'video' });
+    }
+    console.log(`✓ YouTube ${y.url}: ${videos.length} videos`);
+  } catch (e) {
+    warnings.push(`YouTube failed for ${y.url}: ${e.message}`);
+    console.warn(`! YouTube ${y.url}: ${e.message}`);
   }
 }
 classes.sort((a, b) => b.date.localeCompare(a.date));

@@ -3,10 +3,34 @@
   "newsletterUrl": "",
   "giveLivelyUrl": "https://secure.givelively.org/donate/sephardic-community-alliance",
   "officeEmail": "info@scaupdates.org",
-  "resourceCategories": ["Tutors / Bar Mizva", "Sofer Stam", "Mohel", "Marriage Teachers", "Hebra Kadisha", "Hazzan"],
-  "erub": [
-    { "id": "brooklyn", "name": "Sephardic Brooklyn Community Erub", "short": "Brooklyn", "url": "https://www.erub.org/" },
-    { "id": "deal", "name": "Jersey Shore Erub", "short": "Deal", "url": "https://www.njerub.org/" }
+  "resourceCategories": [
+    "Tutors / Bar Mizva",
+    "Sofer Stam",
+    "Mohel",
+    "Marriage Teachers",
+    "Hebra Kadisha",
+    "Hazzan"
   ],
-  "maxClassesPerTeacher": 60
+  "erub": [
+    {
+      "id": "brooklyn",
+      "name": "Sephardic Brooklyn Community Erub",
+      "short": "Brooklyn",
+      "url": "https://www.erub.org/"
+    },
+    {
+      "id": "deal",
+      "name": "Jersey Shore Erub",
+      "short": "Deal",
+      "url": "https://www.njerub.org/"
+    }
+  ],
+  "maxClassesPerTeacher": 60,
+  "youtube": [
+    {
+      "url": "https://www.youtube.com/c/SCAUpdates",
+      "channelId": ""
+    }
+  ],
+  "maxVideosPerChannel": 15
 }

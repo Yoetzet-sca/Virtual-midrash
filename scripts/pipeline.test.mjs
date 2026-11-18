@@ -7,6 +7,7 @@ import { topicFor, matchesTopic } from './lib/topics.mjs';
 import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv } from './lib/csv.mjs';
 import { lock, normalizeCode } from './lib/lock.mjs';
+import { channelIdFrom, parseYoutube, teacherForTitle } from './lib/youtube.mjs';
 
 const fx = (n) => readFile(new URL(`fixtures/${n}`, import.meta.url), 'utf8');
 
@@ -105,4 +106,18 @@ test('community code: locked text opens with the code (same method the app uses)
   assert.ok(!blob.includes('East'));
   assert.equal(await open(blob, ' shalom26 '), '1853 East 8th Street');
   await assert.rejects(open(blob, 'wrong'));
+});
+
+test('YouTube: channel id, videos, and matching a video to its teacher', async () => {
+  assert.equal(channelIdFrom('<link rel="alternate" type="application/rss+xml" href="https://www.youtube.com/feeds/videos.xml?channel_id=UCabcdefghijklmnopqrstuv">'), 'UCabcdefghijklmnopqrstuv');
+  assert.equal(channelIdFrom('{"externalId":"UC1234567890123456789012"}'), 'UC1234567890123456789012');
+  assert.equal(channelIdFrom('<p>nothing</p>'), null);
+  const vids = parseYoutube(await fx('youtube.xml'));
+  assert.equal(vids.length, 2);
+  assert.deepEqual(vids[0], { youtubeId: 'dQw4w9WgXcQ', title: 'Mrs. Vivien Hidary – Vayelech & the "Song"', date: '2026-11-09T18:00:00.000Z', image: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg', link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' });
+  const teachers = [{ id: 'rh', name: 'Rabbi Dr. Richard Hidary' }, { id: 'vh', name: 'Mrs. Vivien Hidary' }, { id: 'nb', name: 'Rabbi Naftali Besser' }];
+  assert.equal(teacherForTitle(vids[0].title, teachers), 'vh');
+  assert.equal(teacherForTitle('Staying Inspired with Rabbi Besser', teachers), 'nb');
+  assert.equal(teacherForTitle('The Hidary family dinner', teachers), null); // two Hidarys, no first name
+  assert.equal(teacherForTitle('SCA Annual Dinner Highlights', teachers), null);
 });

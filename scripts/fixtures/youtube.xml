@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015" xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
+ <id>yt:channel:sample</id>
+ <yt:channelId>UCsamplesamplesamplesampl</yt:channelId>
+ <title>Sample channel</title>
+ <entry>
+  <id>yt:video:dQw4w9WgXcQ</id>
+  <yt:videoId>dQw4w9WgXcQ</yt:videoId>
+  <title>Mrs. Vivien Hidary – Vayelech &amp; the &quot;Song&quot;</title>
+  <link rel="alternate" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>
+  <published>2026-11-09T18:00:00+00:00</published>
+  <media:group><media:thumbnail url="https://i1.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg" width="480" height="360"/></media:group>
+ </entry>
+ <entry>
+  <id>yt:video:aaaaaaaaaaa</id>
+  <yt:videoId>aaaaaaaaaaa</yt:videoId>
+  <title>SCA Annual Dinner Highlights</title>
+  <published>2026-11-01T18:00:00+00:00</published>
+ </entry>
+</feed>

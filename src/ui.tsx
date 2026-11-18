@@ -33,11 +33,11 @@ export function ClassRow({ c, teacher, showTeacher = true }: { c: ClassItem; tea
   const p = usePlayer();
   const active = p.cls?.id === c.id && p.playing;
   return (
-    <button className="row" onClick={() => p.toggle(c)} aria-label={(active ? 'Pause ' : 'Play ') + c.title}>
+    <button className="row" onClick={() => (c.kind === 'video' ? go('/class/' + encodeURIComponent(c.id)) : p.toggle(c))} aria-label={(active ? 'Pause ' : 'Play ') + c.title}>
       <span className="row-play">{active ? <IPause size={18} /> : <IPlay size={18} />}</span>
       <span className="row-text">
         <span className="row-title">{c.title}</span>
-        <span className="row-meta">{[showTeacher && teacher?.name, c.topic, when(c.date), minutes(c.durationSec)].filter(Boolean).join(' · ')}</span>
+        <span className="row-meta">{[showTeacher && teacher?.name, c.kind === 'video' && 'Video', c.topic, when(c.date), minutes(c.durationSec)].filter(Boolean).join(' · ')}</span>
       </span>
     </button>
   );

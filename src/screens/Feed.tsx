@@ -12,6 +12,7 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
   const scroller = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState('');
   const [toast, setToast] = useState('');
+  const [video, setVideo] = useState(''); // the class whose YouTube player is open
 
   // The order is fixed when the feed opens so cards don't jump around while someone is swiping.
   const order = useMemo(() => {
@@ -70,10 +71,12 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
   const moves = useRef(0);
   useEffect(() => {
     if (active && ++moves.current === 4 && !prefs.swiped) setPrefs({ swiped: true });
+    if (video && video !== active) setVideo(''); // swiping away closes the video
     if (!active || !p.cls || p.cls.id === active || !p.playing) return;
     const next = cards.find((c) => c.id === active);
     if (!next) return;
     if (Date.now() - started.current < 5000) learn(['t:' + p.cls.teacherId, p.cls.topic && 'k:' + p.cls.topic], -1); // swiped away within seconds
+    if (next.kind === 'video') { p.pause(); return; } // videos start when tapped
     started.current = Date.now();
     p.play(next);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -99,24 +102,27 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
           const mine = p.cls?.id === c.id;
           const playing = mine && p.playing;
           const img = c.image || t?.photo;
+          const isVideo = c.kind === 'video' && !!c.youtubeId;
+          const tap = () => { if (isVideo) { p.pause(); setVideo(c.id); } else { started.current = Date.now(); p.toggle(c); } };
           return (
             <section key={c.id} data-id={c.id} className="card">
               <div className="card-bg none" />
               {img && <img className="card-bg blur" src={img} alt="" loading={i < 2 ? 'eager' : 'lazy'} onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
               <div className="card-shade" />
-              <button className="card-tap" aria-label={playing ? 'Pause' : 'Play'} onClick={() => { started.current = Date.now(); p.toggle(c); }} />
+              <button className="card-tap" aria-label={playing ? 'Pause' : 'Play'} onClick={tap} />
               <div className="card-stage">
-                <div className="card-photo">
-                  <span>{initials(t?.name || '')}</span>
+                <div className={'card-photo' + (isVideo ? ' video' : '')}>
+                  <span>{isVideo ? '' : initials(t?.name || '')}</span>
                   {img && <img src={img} alt="" loading={i < 2 ? 'eager' : 'lazy'} onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
-                  <button className="card-play" aria-label={playing ? 'Pause' : 'Play'} onClick={() => { started.current = Date.now(); p.toggle(c); }}>
-                    {playing ? <IPause size={26} /> : <IPlay size={26} />}
-                  </button>
+                  {isVideo && video === c.id
+                    ? <iframe title={c.title} src={`https://www.youtube-nocookie.com/embed/${c.youtubeId}?autoplay=1&playsinline=1&rel=0`} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen />
+                    : <button className="card-play" aria-label={playing ? 'Pause' : 'Play'} onClick={tap}>{playing ? <IPause size={26} /> : <IPlay size={26} />}</button>}
                 </div>
               </div>
               <div className="card-info">
                 <div className="tags">
                   {daysAgo(c.date) <= 0 && <span className="tag new">NEW TODAY</span>}
+                  {isVideo && <span className="tag">VIDEO</span>}
                   {c.topic && <span className="tag">{c.topic.toUpperCase()}</span>}
                   {c.durationSec > 0 && <span className="tag">{(c.durationSec < 660 ? 'QUICK · ' : '') + minutes(c.durationSec).toUpperCase()}</span>}
                 </div>

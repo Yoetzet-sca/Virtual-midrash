@@ -78,6 +78,8 @@ h1 { font-family: var(--display); font-weight: 800; font-size: 28px; line-height
 .card-stage { position: absolute; left: 0; right: 0; top: calc(128px + env(safe-area-inset-top)); bottom: 232px; display: flex; align-items: center; justify-content: center; pointer-events: none; }
 .card-photo { position: relative; height: min(100%, 62vw, 290px); aspect-ratio: 1; border-radius: 22px; overflow: hidden; background: #d3e4f5; color: var(--ink); display: flex; align-items: center; justify-content: center; font: 800 64px var(--display); box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45); }
 .card-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card-photo.video { height: auto; width: min(calc(100% - 28px), 460px); aspect-ratio: 16 / 9; border-radius: 16px; background: #000; pointer-events: auto; }
+.card-photo iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .card-play { position: absolute; right: 12px; bottom: 12px; width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--white); background: rgba(7, 24, 43, 0.75); color: var(--white); display: flex; align-items: center; justify-content: center; pointer-events: auto; }
 .card-info { position: absolute; left: 18px; right: 82px; bottom: 22px; height: 198px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; pointer-events: none; }
 .card-info a, .card-info button { pointer-events: auto; }
