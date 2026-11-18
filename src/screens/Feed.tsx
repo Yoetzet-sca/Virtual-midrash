@@ -3,7 +3,7 @@ import type { AppData, ClassItem } from '../types';
 import { usePrefs, setPrefs, toggleIn, learn } from '../store';
 import { usePlayer } from '../player';
 import { Avatar, erubLabel, go } from '../ui';
-import { clock, matchesTopic, minutes, rank, shareLink, daysAgo } from '../util';
+import { clock, initials, matchesTopic, minutes, rank, shareLink, daysAgo } from '../util';
 import { IGift, IHeart, IPause, IPlay, ISave, ISearch, IShare } from '../icons';
 
 export function Feed({ data, startId, topic, setTopic }: { data: AppData; startId?: string; topic: string; setTopic: (t: string) => void }) {
@@ -29,7 +29,8 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
   const columns = useMemo(() => {
     const by = new Map<string, ClassItem[]>();
     for (const c of cards) { if (!by.has(c.teacherId)) by.set(c.teacherId, []); by.get(c.teacherId)!.push(c); }
-    return [...by.entries()].map(([teacherId, list]) => {
+    const startTeacher = startId ? cards.find((c) => c.id === startId)?.teacherId : undefined;
+    return [...by.entries()].sort((a, b) => Number(b[0] === startTeacher) - Number(a[0] === startTeacher)).map(([teacherId, list]) => {
       const sorted = [...list].sort((a, b) => b.date.localeCompare(a.date));
       // A shared link opens on that exact class.
       const first = startId ? sorted.find((c) => c.id === startId) : undefined;
@@ -39,6 +40,21 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
   const activeCol = Math.max(0, columns.findIndex((col) => col.list.some((c) => c.id === active)));
 
   useEffect(() => { scroller.current?.scrollTo({ left: 0 }); setActive(''); }, [topic]);
+  // Coming back to a class (tapping the player bar, or a shared link): show that class, in any topic.
+  const pending = useRef(startId);
+  useEffect(() => { pending.current = startId; }, [startId]);
+  useEffect(() => {
+    if (!pending.current) return;
+    if (!cards.some((c) => c.id === pending.current)) { if (topic !== 'For You') setTopic('For You'); else pending.current = undefined; return; }
+    pending.current = undefined;
+    // Wait for the list to settle, then go to the top-left, where that class now sits.
+    const id = requestAnimationFrame(() => requestAnimationFrame(() => {
+      scroller.current?.scrollTo({ left: 0 });
+      scroller.current?.querySelector('.feed-col')?.scrollTo({ top: 0 });
+    }));
+    return () => cancelAnimationFrame(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startId, columns]);
 
   // Which card is on screen
   useEffect(() => {
@@ -86,12 +102,18 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
           return (
             <section key={c.id} data-id={c.id} className="card">
               <div className="card-bg none" />
-              {img && <img className="card-bg" src={img} alt="" loading={i < 2 ? 'eager' : 'lazy'} onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
+              {img && <img className="card-bg blur" src={img} alt="" loading={i < 2 ? 'eager' : 'lazy'} onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
               <div className="card-shade" />
               <button className="card-tap" aria-label={playing ? 'Pause' : 'Play'} onClick={() => { started.current = Date.now(); p.toggle(c); }} />
-              <button className="card-play" aria-label={playing ? 'Pause' : 'Play'} onClick={() => { started.current = Date.now(); p.toggle(c); }}>
-                {playing ? <IPause size={30} /> : <IPlay size={30} />}
-              </button>
+              <div className="card-stage">
+                <div className="card-photo">
+                  <span>{initials(t?.name || '')}</span>
+                  {img && <img src={img} alt="" loading={i < 2 ? 'eager' : 'lazy'} onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
+                  <button className="card-play" aria-label={playing ? 'Pause' : 'Play'} onClick={() => { started.current = Date.now(); p.toggle(c); }}>
+                    {playing ? <IPause size={26} /> : <IPlay size={26} />}
+                  </button>
+                </div>
+              </div>
               <div className="card-info">
                 <div className="tags">
                   {daysAgo(c.date) <= 0 && <span className="tag new">NEW TODAY</span>}

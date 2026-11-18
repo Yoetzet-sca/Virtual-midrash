@@ -17,15 +17,12 @@ export function TeacherPage({ data, id }: { data: AppData; id: string }) {
   const following = prefs.following.includes(id);
   return (
     <div className="page flush">
-      <div className="hero">
-        <div className="hero-none"><Avatar t={{ ...t, photo: '' }} size={120} /></div>
-        {t.photo && <img src={t.photo} alt="" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
-        <div className="hero-shade" />
-        <button className="round" onClick={() => history.back()} aria-label="Back"><IBack size={22} /></button>
-        <button className="round right" onClick={() => shareLink(t.name + ' on Virtual Midrash', '/teacher/' + id)} aria-label="Share this page"><IShare size={20} /></button>
-      </div>
-      <div className="page-body lift">
-        <h1 className="big">{t.name}</h1>
+      <div className="page-body top">
+        <div className="spread">
+          <button className="round line" onClick={() => history.back()} aria-label="Back"><IBack size={22} /></button>
+          <button className="round line" onClick={() => shareLink(t.name + ' on Virtual Midrash', '/teacher/' + id)} aria-label="Share this page"><IShare size={20} /></button>
+        </div>
+        <div className="who"><Avatar t={t} size={104} ring /><h1>{t.name}</h1></div>
         {t.affiliations.length > 0 && (
           <div className="chips wrap">{t.affiliations.map((a) => <a key={a} className="chip outline" href={'#/explore/' + encodeURIComponent(a)}>{a}</a>)}</div>
         )}

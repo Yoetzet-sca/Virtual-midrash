@@ -70,16 +70,22 @@ h1 { font-family: var(--display); font-weight: 800; font-size: 28px; line-height
 .people .person { scroll-snap-align: start; }
 .card { height: 100%; position: relative; scroll-snap-align: start; scroll-snap-stop: always; background: var(--navy); overflow: hidden; }
 .card-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card-bg.blur { filter: blur(28px) brightness(0.55); transform: scale(1.25); }
 .card-bg.none { background: linear-gradient(160deg, var(--mid), var(--ink)); }
 .card-shade { position: absolute; inset: 0; background: linear-gradient(rgba(7, 24, 43, 0.55) 0%, rgba(7, 24, 43, 0) 28%, rgba(7, 24, 43, 0.25) 50%, rgba(7, 24, 43, 0.96) 100%); }
 .card-tap { position: absolute; inset: 0; width: 100%; border: 0; background: none; }
-.card-play { position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%); width: 76px; height: 76px; border-radius: 50%; border: 2px solid var(--white); background: rgba(7, 24, 43, 0.55); display: flex; align-items: center; justify-content: center; }
-.card-info { position: absolute; left: 18px; right: 82px; bottom: 22px; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+/* Set areas: the picture always sits in the same frame, the class details in the same block below it. */
+.card-stage { position: absolute; left: 0; right: 0; top: calc(128px + env(safe-area-inset-top)); bottom: 232px; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.card-photo { position: relative; height: min(100%, 62vw, 290px); aspect-ratio: 1; border-radius: 22px; overflow: hidden; background: #d3e4f5; color: var(--ink); display: flex; align-items: center; justify-content: center; font: 800 64px var(--display); box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45); }
+.card-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card-play { position: absolute; right: 12px; bottom: 12px; width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--white); background: rgba(7, 24, 43, 0.75); color: var(--white); display: flex; align-items: center; justify-content: center; pointer-events: auto; }
+.card-info { position: absolute; left: 18px; right: 82px; bottom: 22px; height: 198px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; pointer-events: none; }
 .card-info a, .card-info button { pointer-events: auto; }
-.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tags { display: flex; flex-wrap: nowrap; gap: 6px; overflow: hidden; }
+.tag { white-space: nowrap; }
 .tag { font-size: 11px; font-weight: 700; letter-spacing: 1px; background: rgba(255, 255, 255, 0.2); padding: 5px 9px; border-radius: 999px; }
 .tag.new { background: var(--orange); color: var(--ink); font-weight: 800; }
-.card-title { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1.15; overflow-wrap: anywhere; }
+.card-title { font-family: var(--display); font-weight: 800; font-size: 20px; line-height: 1.2; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .card-by { display: flex; align-items: center; gap: 10px; font-weight: 700; }
 .card-by a { min-height: 44px; display: flex; align-items: center; }
 .follow { min-height: 32px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--white); background: transparent; font: 700 12px var(--body); position: relative; }
@@ -142,14 +148,11 @@ h1 { font-family: var(--display); font-weight: 800; font-size: 28px; line-height
 .person { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; font-size: 12px; font-weight: 600; line-height: 1.3; background: none; border: 0; padding: 0; }
 .person.on .avatar { border-color: var(--orange); }
 .search { display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 14px; border-radius: 12px; background: var(--panel); border: 1px solid var(--line); color: var(--sky); }
-.search input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; color: var(--white); font-size: 16px; }
+.search input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; color: var(--white); font-size: 16px; text-overflow: ellipsis; }
 input::placeholder { color: var(--sky); opacity: 1; }
-.hero { height: 270px; position: relative; background: var(--navy); }
-.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-.hero-none { height: 100%; display: flex; align-items: center; justify-content: center; }
-.hero-shade { position: absolute; left: 0; right: 0; bottom: 0; height: 160px; background: linear-gradient(rgba(11, 37, 64, 0), var(--ink)); }
-.hero .round { position: absolute; top: calc(14px + env(safe-area-inset-top)); left: 12px; }
-.hero .round.right { left: auto; right: 12px; }
+.page-body.top { padding-top: calc(14px + env(safe-area-inset-top)); }
+.who { display: flex; align-items: center; gap: 16px; }
+.who h1 { font-size: 26px; }
 
 .erub { background: var(--panel); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
 .erub-head { display: flex; justify-content: space-between; align-items: center; }
