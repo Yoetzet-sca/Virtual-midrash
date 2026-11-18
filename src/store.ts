@@ -8,11 +8,12 @@ export type Prefs = {
   liked: string[];
   saved: string[];
   code: string;
+  swiped: boolean; // has learned the swipe directions, so the hint can go away
   // Quiet learning: small scores per topic and teacher, nudged by what people listen to, like and skip.
   learned: Record<string, number>;
 };
 const KEY = 'vm.prefs.v1';
-const empty: Prefs = { onboarded: false, topics: [], following: [], liked: [], saved: [], code: '', learned: {} };
+const empty: Prefs = { onboarded: false, topics: [], following: [], liked: [], saved: [], code: '', swiped: false, learned: {} };
 
 function read(): Prefs {
   try { return { ...empty, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return empty; }

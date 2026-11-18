@@ -13,7 +13,8 @@ export function Avatar({ t, size = 68, ring = false }: { t?: Teacher; size?: num
   const style = { width: size, height: size, fontSize: size * 0.3 };
   return (
     <span className={'avatar' + (ring ? ' ring' : '')} style={style}>
-      {t?.photo && !bad ? <img src={t.photo} alt="" loading="lazy" onError={() => setBad(true)} /> : initials(t?.name || '?')}
+      {initials(t?.name || '?')}
+      {t?.photo && !bad && <img src={t.photo} alt="" loading="lazy" onError={() => setBad(true)} />}
     </span>
   );
 }

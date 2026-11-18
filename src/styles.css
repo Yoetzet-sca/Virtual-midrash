@@ -51,12 +51,23 @@ h1 { font-family: var(--display); font-weight: 800; font-size: 28px; line-height
 .chip.pick.on { background: var(--orange); border-color: var(--orange); }
 
 .avatar { border-radius: 50%; background: #d3e4f5; color: var(--ink); display: inline-flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; overflow: hidden; flex-shrink: 0; border: 3px solid transparent; }
-.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.avatar { position: relative; }
+.avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .avatar.ring { border-color: var(--orange); }
 
 /* Feed */
 .feed { height: 100%; position: relative; }
-.feed-scroll { height: 100%; overflow-y: auto; scroll-snap-type: y mandatory; scrollbar-width: none; overscroll-behavior: contain; }
+.feed-x { height: 100%; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior: contain; }
+.feed-col { flex: 0 0 100%; height: 100%; overflow-y: auto; scroll-snap-type: y mandatory; scroll-snap-align: start; scroll-snap-stop: always; scrollbar-width: none; overscroll-behavior-y: contain; }
+.feed-x::-webkit-scrollbar, .feed-col::-webkit-scrollbar, .people::-webkit-scrollbar { display: none; }
+.card-hint { font-size: 12px; font-weight: 600; color: var(--soft); }
+.feed-dots { position: absolute; left: 0; right: 0; bottom: 8px; display: flex; justify-content: center; gap: 5px; pointer-events: none; }
+.feed-dots span { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, 0.35); }
+.feed-dots span.on { background: var(--orange); width: 16px; border-radius: 3px; }
+/* Teachers: two rows that scroll sideways, so the list can grow */
+.people { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, auto); grid-auto-columns: 78px; gap: 14px 10px; overflow-x: auto; scrollbar-width: none; margin: 0 -20px; padding: 0 20px 2px; scroll-snap-type: x proximity; scroll-padding-left: 20px; flex-shrink: 0; }
+.people.one { grid-template-rows: auto; }
+.people .person { scroll-snap-align: start; }
 .card { height: 100%; position: relative; scroll-snap-align: start; scroll-snap-stop: always; background: var(--navy); overflow: hidden; }
 .card-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .card-bg.none { background: linear-gradient(160deg, var(--mid), var(--ink)); }

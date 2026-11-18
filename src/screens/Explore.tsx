@@ -31,7 +31,7 @@ export function Explore({ data, place: startPlace, pickTopic }: { data: AppData;
 
           <div className="label">RABBIS &amp; TEACHERS · BY SCHOOL OR SHUL</div>
           <div className="chips scroll bleed">{places.map((pl) => <button key={pl} className={'chip' + (pl === place ? ' on' : '')} aria-pressed={pl === place} onClick={() => setPlace(pl)}>{pl}</button>)}</div>
-          <div className="grid4">{teachers.map((t) => <a key={t.id} className="person" href={'#/teacher/' + t.id}><Avatar t={t} /><span>{t.name}</span></a>)}</div>
+          <div className={'people' + (teachers.length <= 4 ? ' one' : '')}>{teachers.map((t) => <a key={t.id} className="person" href={'#/teacher/' + t.id}><Avatar t={t} /><span>{t.name}</span></a>)}</div>
 
           <div className="label">NEWEST CLASSES</div>
           <div className="rows">{data.classes.slice(0, 8).map((c) => <ClassRow key={c.id} c={c} teacher={teacher(c.teacherId)} />)}</div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import type { AppData } from '../types';
 import { usePrefs, setPrefs, toggleIn } from '../store';
 import { Avatar } from '../ui';
@@ -16,9 +16,7 @@ export function Splash({ onDone }: { onDone: () => void }) {
 
 export function Welcome({ data, onDone }: { data: AppData; onDone: () => void }) {
   const prefs = usePrefs();
-  const [showAll, setShowAll] = useState(false);
   const n = prefs.topics.length + prefs.following.length;
-  const teachers = showAll ? data.teachers : data.teachers.slice(0, 8);
   return (
     <div className="welcome">
       <div className="welcome-scroll">
@@ -27,10 +25,10 @@ export function Welcome({ data, onDone }: { data: AppData; onDone: () => void })
         <div className="label">TOPICS</div>
         <div className="chips wrap">{data.topics.map((t) => <button key={t} className={'chip pick' + (prefs.topics.includes(t) ? ' on' : '')} aria-pressed={prefs.topics.includes(t)} onClick={() => setPrefs({ topics: toggleIn(prefs.topics, t) })}>{t}</button>)}</div>
         <div className="label">TEACHERS TO FOLLOW</div>
-        <div className="grid4">{teachers.map((t) => (
+        <div className="people">{data.teachers.map((t) => (
           <button key={t.id} className={'person' + (prefs.following.includes(t.id) ? ' on' : '')} aria-pressed={prefs.following.includes(t.id)} onClick={() => setPrefs({ following: toggleIn(prefs.following, t.id) })}><Avatar t={t} /><span>{t.name}</span></button>
         ))}</div>
-        {!showAll && data.teachers.length > 8 && <button className="chip" onClick={() => setShowAll(true)}>Show all {data.teachers.length} teachers</button>}
+        {data.teachers.length > 8 && <p className="muted small">Swipe sideways to see all {data.teachers.length} teachers.</p>}
       </div>
       <div className="welcome-foot"><button className="btn wide" onClick={onDone}>{n ? `Start learning (${n} picked)` : 'Start learning'}</button><span className="muted small">No sign-up. Your picks stay on this phone.</span></div>
     </div>

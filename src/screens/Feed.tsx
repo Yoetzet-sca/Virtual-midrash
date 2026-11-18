@@ -24,7 +24,21 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
   const cards = useMemo(() => (topic === 'For You' ? order : order.filter((c) => matchesTopic(c.topic, topic))), [order, topic]);
   const teacher = (id: string) => data.teachers.find((t) => t.id === id);
 
-  useEffect(() => { scroller.current?.scrollTo({ top: 0 }); }, [topic]);
+  // Two directions: up/down stays with one teacher (newest first); left/right moves to another teacher.
+  // Teachers are ordered by how well their best class ranks for this person.
+  const columns = useMemo(() => {
+    const by = new Map<string, ClassItem[]>();
+    for (const c of cards) { if (!by.has(c.teacherId)) by.set(c.teacherId, []); by.get(c.teacherId)!.push(c); }
+    return [...by.entries()].map(([teacherId, list]) => {
+      const sorted = [...list].sort((a, b) => b.date.localeCompare(a.date));
+      // A shared link opens on that exact class.
+      const first = startId ? sorted.find((c) => c.id === startId) : undefined;
+      return { teacherId, list: first ? [first, ...sorted.filter((c) => c !== first)] : sorted };
+    });
+  }, [cards, startId]);
+  const activeCol = Math.max(0, columns.findIndex((col) => col.list.some((c) => c.id === active)));
+
+  useEffect(() => { scroller.current?.scrollTo({ left: 0 }); setActive(''); }, [topic]);
 
   // Which card is on screen
   useEffect(() => {
@@ -33,11 +47,13 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
     const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && setActive((e.target as HTMLElement).dataset.id || '')), { root, threshold: 0.6 });
     root.querySelectorAll('[data-id]').forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, [cards]);
+  }, [columns, activeCol]);
 
   // Swiping moves on: if a class was playing, the next one starts; otherwise nothing plays until tapped.
   const started = useRef(0);
+  const moves = useRef(0);
   useEffect(() => {
+    if (active && ++moves.current === 4 && !prefs.swiped) setPrefs({ swiped: true });
     if (!active || !p.cls || p.cls.id === active || !p.playing) return;
     const next = cards.find((c) => c.id === active);
     if (!next) return;
@@ -58,8 +74,11 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
 
   return (
     <div className="feed">
-      <div className="feed-scroll" ref={scroller}>
-        {cards.map((c, i) => {
+      <div className="feed-x" ref={scroller}>
+        {columns.map((col, ci) => (
+          <div className="feed-col" key={col.teacherId} data-col={ci}>
+            {/* Only the teacher on screen and the ones beside it are drawn in full. */}
+            {Math.abs(ci - activeCol) > 1 ? <section className="card" /> : col.list.map((c, i) => {
           const t = teacher(c.teacherId);
           const mine = p.cls?.id === c.id;
           const playing = mine && p.playing;
@@ -86,6 +105,7 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
                     {prefs.following.includes(c.teacherId) ? 'Following' : '+ Follow'}
                   </button>
                 </div>
+                {!prefs.swiped && <div className="card-hint">Swipe up for more from {t?.name.split(' ').slice(-1)[0]} · swipe sideways for another teacher</div>}
                 {mine && <div className="card-time">{clock(p.time)} / {clock(p.duration || c.durationSec)}</div>}
                 {mine && p.error && <div className="card-error" role="alert">{p.error}</div>}
               </div>
@@ -105,6 +125,8 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
             </section>
           );
         })}
+          </div>
+        ))}
         {cards.length === 0 && (
           <div className="feed-empty">
             <h2>Nothing here yet</h2>
@@ -126,6 +148,7 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
           {topics.map((t) => <button key={t} className={'chip' + (t === topic ? ' on' : '')} aria-pressed={t === topic} onClick={() => setTopic(t)}>{t}</button>)}
         </div>
       </header>
+      {columns.length > 1 && <div className="feed-dots" aria-hidden="true">{columns.slice(0, 12).map((col, i) => <span key={col.teacherId} className={i === activeCol ? 'on' : ''} />)}</div>}
       {current && <div className="feed-progress" style={{ width: `${(current.duration ? current.time / current.duration : 0) * 100}%` }} />}
       {toast && <div className="toast" role="status">{toast}</div>}
     </div>
