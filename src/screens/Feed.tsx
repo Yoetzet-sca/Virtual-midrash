@@ -13,6 +13,23 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
   const [active, setActive] = useState('');
   const [toast, setToast] = useState('');
   const [video, setVideo] = useState(''); // the class whose YouTube player is open
+  const [videoPaused, setVideoPaused] = useState(false);
+  const frame = useRef<HTMLIFrameElement>(null);
+  // YouTube's player takes play/pause commands as messages, and reports its state back the same way.
+  const tellVideo = (func: string) => frame.current?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*');
+  const toggleVideo = () => { tellVideo(videoPaused ? 'playVideo' : 'pauseVideo'); setVideoPaused(!videoPaused); };
+  useEffect(() => {
+    const onMessage = (e: MessageEvent) => {
+      if (!/^https:\/\/www\.youtube(-nocookie)?\.com$/.test(e.origin) || typeof e.data !== 'string') return;
+      try {
+        const state = JSON.parse(e.data)?.info?.playerState;
+        if (state === 1) setVideoPaused(false); // playing
+        if (state === 2 || state === 0) setVideoPaused(true); // paused or ended (e.g. from YouTube's own controls)
+      } catch { /* not a player message */ }
+    };
+    addEventListener('message', onMessage);
+    return () => removeEventListener('message', onMessage);
+  }, []);
 
   // The order is fixed when the feed opens so cards don't jump around while someone is swiping.
   const order = useMemo(() => {
@@ -103,7 +120,11 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
           const playing = mine && p.playing;
           const img = c.image || t?.photo;
           const isVideo = c.kind === 'video' && !!c.youtubeId;
-          const tap = () => { if (isVideo) { p.pause(); setVideo(c.id); } else { started.current = Date.now(); p.toggle(c); } };
+          const tap = () => {
+            if (!isVideo) { started.current = Date.now(); p.toggle(c); }
+            else if (video === c.id) toggleVideo(); // already open: the whole screen pauses and resumes it
+            else { p.pause(); setVideo(c.id); setVideoPaused(false); }
+          };
           return (
             <section key={c.id} data-id={c.id} className="card">
               <div className="card-bg none" />
@@ -115,7 +136,12 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
                   <span>{isVideo ? '' : initials(t?.name || '')}</span>
                   {img && <img src={img} alt="" loading={i < 2 ? 'eager' : 'lazy'} onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
                   {isVideo && video === c.id
-                    ? <iframe title={c.title} src={`https://www.youtube-nocookie.com/embed/${c.youtubeId}?autoplay=1&playsinline=1&rel=0`} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen />
+                    ? <>
+                      <iframe ref={frame} title={c.title} src={`https://www.youtube-nocookie.com/embed/${c.youtubeId}?autoplay=1&playsinline=1&rel=0&enablejsapi=1&origin=${encodeURIComponent(location.origin)}`} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen
+                        onLoad={() => frame.current?.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), '*')} />
+                      {/* Covers the video except its bottom strip, where YouTube's own bar (seek, full screen) stays reachable. */}
+                      <button className="video-tap" aria-label={videoPaused ? 'Play' : 'Pause'} onClick={tap}>{videoPaused && <span className="disc"><IPlay size={28} /></span>}</button>
+                    </>
                     : <button className="card-play" aria-label={playing ? 'Pause' : 'Play'} onClick={tap}><span className="disc">{playing ? <IPause size={28} /> : <IPlay size={28} />}</span></button>}
                 </div>
               </div>
