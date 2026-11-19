@@ -19,6 +19,7 @@ const GROQ = process.env.GROQ_API_KEY, GEMINI = process.env.GEMINI_API_KEY;
 const MAX_CLASSES = Number(process.env.AI_MAX_CLASSES || 20);
 const MAX_MINUTES = Number(process.env.AI_MAX_MINUTES || 600);
 const ONLY_UNDER_MIN = Number(process.env.AI_ONLY_UNDER_MINUTES || 75);
+const TOTAL_CAP = Number(process.env.AI_TOTAL_CAP || 0); // stop once this many classes have summaries in all (0 = no cap)
 console.log(`Keys present — Groq: ${GROQ ? 'yes' : 'NO'}, Gemini: ${GEMINI ? 'yes' : 'NO'}`);
 if (!GROQ || !GEMINI) { console.error('Both GROQ_API_KEY and GEMINI_API_KEY must be set as repository secrets.'); process.exit(1); }
 
@@ -32,6 +33,7 @@ const txFile = (c) => new URL(`ai-transcripts/${c.sid}.json`, root);
 
 // Take turns between teachers, newest first, so a small run covers a mix.
 const todo = data.classes.filter((c) => c.kind === 'audio' && c.sid && c.audioUrl && !existsSync(aiFile(c)) && c.durationSec > 120 && c.durationSec <= ONLY_UNDER_MIN * 60);
+const todoAll = data.classes.filter((c) => c.kind === 'audio' && c.sid && c.audioUrl && c.durationSec > 120 && c.durationSec <= ONLY_UNDER_MIN * 60).length;
 const byTeacher = new Map();
 for (const c of todo) { if (!byTeacher.has(c.teacherId)) byTeacher.set(c.teacherId, []); byTeacher.get(c.teacherId).push(c); }
 const queue = [];
@@ -95,15 +97,17 @@ async function summarize(c, transcript) {
     }
     last = `${model} ${r.status}: ${(await r.text()).replace(/\s+/g, ' ').slice(0, 160)}`;
     console.log(`  (${last})`);
-    if (r.status === 429 || r.status === 404 || r.status === 503) drop(model); // no free allowance, or not available: stop asking it this run
+    if (r.status === 429 || r.status === 404) drop(model); // no free allowance, or not available: stop asking it this run
   }
   if (/ 429:/.test(last)) throw new SlowDown(`Gemini rate limit: ${last}`);
   throw new Error(`Gemini: ${last}`);
 }
 
+const already = todoAll - todo.length;
+if (TOTAL_CAP && already >= TOTAL_CAP) { console.log(`Trial cap reached: ${already} classes have summaries (cap ${TOTAL_CAP}). Nothing to do.`); process.exit(0); }
 let done = 0, minutes = 0, failed = 0, groqResting = false;
 for (const c of queue) {
-  if (done >= MAX_CLASSES || minutes >= MAX_MINUTES) break;
+  if (done >= MAX_CLASSES || minutes >= MAX_MINUTES || (TOTAL_CAP && already + done >= TOTAL_CAP)) break;
   if (groqResting && !existsSync(txFile(c))) continue; // only finish ones already transcribed
   const mins = Math.round(c.durationSec / 60);
   try {

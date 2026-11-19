@@ -33,8 +33,8 @@ Teacher: ${teacher}
 Length: about ${minutes} minutes
 
 Reply with one JSON object and nothing else, with these keys:
-- "summary": 2 to 3 plain sentences saying what this class covers, written for someone deciding whether to listen. Describe the topics; do not give halakhic rulings or conclusions as fact, and do not add anything that is not in the transcript.
-- "subjects": 6 to 12 short phrases naming the specific subjects, sources, people, laws or stories discussed. Use common Sephardic-style English spellings (Shabbat, Perasha, Halakha, Berakhot, Bava Batra).
+- "summary": 2 to 3 plain sentences (same spelling rules as below) saying what this class covers, written for someone deciding whether to listen. Describe the topics; do not give halakhic rulings or conclusions as fact, and do not add anything that is not in the transcript.
+- "subjects": 6 to 12 short phrases naming the specific subjects, sources, people, laws or stories discussed. Spell Hebrew words the way the Sephardic community of Brooklyn does: "h" not "ch" for het (Hodesh, Hakhamim, Hinukh, Hasidim, Hasosrot), "t" not "s" for tav (Shabbat, Berakhot, Bet Din), "s" not "tz" for sadi (Misva, Sedaka), and Perasha, Halakha, Mishna, Masekhet, Bet HaMikdash. Keep the usual English spelling of people's names (Rabbi Chaim Kanievsky).
 - "questions": 3 to 6 questions, in everyday language, that a person might ask and that this class addresses.
 - "quality": "good", or "poor" if the transcript is too garbled or too short to summarize with confidence.
 

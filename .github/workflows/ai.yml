@@ -3,6 +3,9 @@
 name: AI summaries
 
 on:
+  # Hourly, because the free transcription allowance is two hours of audio per hour.
+  schedule:
+    - cron: '23 * * * *'
   workflow_dispatch:
     inputs:
       max_classes:
@@ -51,6 +54,8 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           AI_MAX_CLASSES: ${{ inputs.max_classes || vars.AI_MAX_CLASSES || '20' }}
+          # Trial: stop at 20 classes in all until SCA has reviewed the results. Raise or remove to do the library.
+          AI_TOTAL_CAP: ${{ vars.AI_TOTAL_CAP || '20' }}
       - name: Save the summaries
         run: |
           git config user.name "Virtual Midrash bot"
