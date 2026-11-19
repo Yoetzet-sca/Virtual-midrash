@@ -4,7 +4,7 @@ import { usePrefs, getPrefs, setPrefs, toggleIn, learn } from '../store';
 import { usePlayer } from '../player';
 import { Avatar, erubLabel, go } from '../ui';
 import { classShare, clock, initials, matchesTopic, minutes, rank, shareLink, daysAgo } from '../util';
-import { IGift, IHeart, IPause, IPlay, ISave, ISaved, ISearch, IShare } from '../icons';
+import { IHeart, IPause, IPlay, ISave, ISaved, ISearch, IShare } from '../icons';
 
 export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData; startId?: string; topic: string; setTopic: (t: string) => void }) {
   const prefs = usePrefs();
@@ -210,7 +210,6 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
                 <button onClick={async () => { const r = await shareLink(`${c.title} — ${t?.name}`, classShare(c)); if (r === 'copied') say('Link copied'); }}>
                   <IShare size={28} />Share
                 </button>
-                <a href="#/give" className="hot"><IGift size={28} />Sponsor</a>
               </div>
             </section>
           );
