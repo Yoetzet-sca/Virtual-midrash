@@ -19,7 +19,7 @@ function LiveClass({ w, data }: { w: WeeklyClass; data: AppData }) {
   const contact = data.links.addressContact;
   const needsAddress = w.mode !== 'zoom' && !/\d/.test(place);
   const who = teacher?.name || w.teacherName;
-  const ask = contact ? `sms:${contact.sms}?&body=${encodeURIComponent(`Hi ${contact.name}, can I please get the address for ${w.title}${who ? ' with ' + who : ''} on ${w.day} at ${w.time}? Thank you!`)}` : '';
+  const ask = contact ? `sms:${contact.sms}?&body=${encodeURIComponent(`Hi, can I please get the address for ${w.title}${who ? ' with ' + who : ''} on ${w.day} at ${w.time}? Thank you!`)}` : '';
   return (
     <div className="panel col">
       <div className="spread"><strong className="time">{w.time}</strong><span className="badge">{w.mode === 'zoom' ? 'ZOOM' : w.mode === 'both' ? 'IN PERSON + ZOOM' : 'IN PERSON'}</span></div>
@@ -31,9 +31,9 @@ function LiveClass({ w, data }: { w: WeeklyClass; data: AppData }) {
       </div>
       {locked && !code && <CodeBox data={data} what={w.lockedAddress ? 'the address' : 'the Zoom link'} />}
       <div className="actions">
-        {needsAddress && contact && <a className="btn small grow" href={ask}>Text {contact.name} for the address</a>}
+        {needsAddress && contact && <a className="btn small grow" href={ask}>Text for address</a>}
         {zoom && <a className="btn small grow" href={zoom} target="_blank" rel="noreferrer">Join on Zoom</a>}
-        {w.mode !== 'zoom' && place && (!w.lockedAddress || address) && <a className={'btn small grow' + (zoom ? ' ghost' : '')} href={'https://maps.google.com/?q=' + encodeURIComponent(place.replace(/\s*·\s*/g, ', '))} target="_blank" rel="noreferrer">Get directions</a>}
+        {w.mode !== 'zoom' && place && !needsAddress && (!w.lockedAddress || address) && <a className={'btn small grow' + (zoom ? ' ghost' : '')} href={'https://maps.google.com/?q=' + encodeURIComponent(place.replace(/\s*·\s*/g, ', '))} target="_blank" rel="noreferrer">Get directions</a>}
         <button className="round line" aria-label="Share this class" onClick={() => shareLink(`${w.title} — ${w.day} ${w.time}`, '/week')}><IShare size={20} /></button>
       </div>
     </div>
