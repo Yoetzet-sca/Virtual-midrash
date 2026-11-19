@@ -67,3 +67,17 @@ export const appleSearchUrl = (name) => `https://itunes.apple.com/search?media=p
 const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 // Only accept a show whose name matches exactly, so a similarly named podcast is never pulled in by mistake.
 export const feedFromAppleSearch = (jsonText, name) => JSON.parse(jsonText)?.results?.find((x) => x.feedUrl && norm(x.collectionName) === norm(name))?.feedUrl || null;
+
+// Any other web page for a podcast (Castro, a show website, etc.): find the feed address in the page itself.
+export function feedFromPage(html) {
+  const link = html.match(/<link[^>]+type="application\/rss\+xml"[^>]+href="([^"]+)"/i) || html.match(/<link[^>]+href="([^"]+)"[^>]+type="application\/rss\+xml"/i);
+  if (link) return decode(link[1]);
+  // Shows hosted on Spotify for Creators (Anchor) can be recognised from their audio links.
+  const anchor = html.match(/anchor\.fm(?:%2F|\/)s(?:%2F|\/)([0-9a-f]+)(?:%2F|\/)podcast/i);
+  if (anchor) return `https://anchor.fm/s/${anchor[1]}/podcast/rss`;
+  const sc = html.match(/feeds\.soundcloud\.com\/users\/soundcloud:users:\d+\/sounds\.rss/i);
+  if (sc) return 'https://' + sc[0];
+  const any = html.match(/https?:\/\/[^"'\s<>]+(?:\/rss|\.rss|\/feed(?:\.xml)?|\/podcast\.xml)(?=["'\s<>?])/i);
+  return any ? decode(any[0]) : null;
+}
+export const looksLikeFeed = (text) => /<rss[\s>]/i.test(text.slice(0, 2000));

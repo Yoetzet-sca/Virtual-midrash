@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { webcrypto } from 'node:crypto';
-import { parseFeed, durationToSeconds, applePodcastId, feedFromAppleLookup, isSpotifyShow, spotifyShowName, feedFromAppleSearch } from './lib/rss.mjs';
+import { parseFeed, durationToSeconds, applePodcastId, feedFromAppleLookup, isSpotifyShow, spotifyShowName, feedFromAppleSearch, feedFromPage, looksLikeFeed } from './lib/rss.mjs';
 import { topicFor, matchesTopic } from './lib/topics.mjs';
 import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv } from './lib/csv.mjs';
@@ -157,4 +157,13 @@ test('a Spotify show link resolves by exact show name only', () => {
   const results = JSON.stringify({ results: [{ collectionName: 'Weekly Parsha Gems', feedUrl: 'https://wrong.example/rss' }, { collectionName: 'Perashah Gems with Rabbi Nathan Dweck', feedUrl: 'https://right.example/rss' }] });
   assert.equal(feedFromAppleSearch(results, 'Perashah Gems with Rabbi Nathan Dweck'), 'https://right.example/rss');
   assert.equal(feedFromAppleSearch(results, 'Perashah Gems'), null);
+});
+
+test('finding a feed inside a podcast web page', () => {
+  assert.equal(feedFromPage('<link rel="alternate" type="application/rss+xml" href="https://example.org/show/feed.xml?a=1&amp;b=2">'), 'https://example.org/show/feed.xml?a=1&b=2');
+  assert.equal(feedFromPage('<audio src="https://anchor.fm/s/c85c814/podcast/play/123/https%3A%2F%2Fd3.cloudfront.net%2Fx.mp3">'), 'https://anchor.fm/s/c85c814/podcast/rss');
+  assert.equal(feedFromPage('<a href="https://feeds.soundcloud.com/users/soundcloud:users:127279884/sounds.rss">RSS</a>'), 'https://feeds.soundcloud.com/users/soundcloud:users:127279884/sounds.rss');
+  assert.equal(feedFromPage('<p>no feed here</p>'), null);
+  assert.ok(looksLikeFeed('<?xml version="1.0"?><rss version="2.0">'));
+  assert.ok(!looksLikeFeed('<!doctype html><html>'));
 });

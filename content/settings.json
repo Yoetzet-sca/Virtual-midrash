@@ -45,5 +45,8 @@
   },
   "analytics": {
     "goatcounter": "virtualmidrash"
-  }
+  },
+  "probe": [
+    "https://castro.fm/podcast/3aa0085e-76a3-4e41-b435-13e420df13d7"
+  ]
 }

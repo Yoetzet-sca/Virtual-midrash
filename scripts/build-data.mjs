@@ -7,7 +7,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
-import { parseFeed, applePodcastId, appleLookupUrl, feedFromAppleLookup, isSpotifyShow, spotifyShowName, appleSearchUrl, feedFromAppleSearch } from './lib/rss.mjs';
+import { parseFeed, applePodcastId, appleLookupUrl, feedFromAppleLookup, isSpotifyShow, spotifyShowName, appleSearchUrl, feedFromAppleSearch, feedFromPage, looksLikeFeed } from './lib/rss.mjs';
 import { topicFor, TOPICS } from './lib/topics.mjs';
 import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv } from './lib/csv.mjs';
@@ -76,6 +76,13 @@ for (const t of teachers) {
         console.log(`  ${t.name}: Spotify show "${name}" resolves to ${feedUrl}`);
       }
       xml = await get(feedUrl);
+      // A link to a web page about the podcast rather than the feed itself: find the feed inside the page.
+      if (!looksLikeFeed(xml)) {
+        const inner = feedFromPage(xml);
+        if (!inner) throw new Error('that link is a web page with no podcast feed in it');
+        console.log(`  ${t.name}: page link resolves to ${inner}`);
+        xml = await get(inner);
+      }
     }
     const feed = parseFeed(xml);
     // Headshot supplied by SCA wins; otherwise fall back to the feed's profile picture.
@@ -123,6 +130,15 @@ for (const y of settings.youtube || []) {
     warnings.push(`YouTube failed for ${y.url}: ${e.message}`);
     console.warn(`! YouTube ${y.url}: ${e.message}`);
   }
+}
+// Links being checked before they are assigned to a teacher (content/settings.json → probe). Nothing here reaches the app.
+for (const url of FIXTURES ? [] : settings.probe || []) {
+  try {
+    let text = await get(url), feedUrl = url;
+    if (!looksLikeFeed(text)) { feedUrl = feedFromPage(text); if (!feedUrl) throw new Error('no feed found in the page'); text = await get(feedUrl); }
+    const f = parseFeed(text);
+    console.log(`? Probe ${url} → ${feedUrl} — "${f.title}", ${f.items.length} classes, newest "${f.items[0]?.title}" (${f.items[0]?.date.slice(0, 10)})`);
+  } catch (e) { console.log(`? Probe ${url} failed: ${e.message}`); }
 }
 classes.sort((a, b) => b.date.localeCompare(a.date));
 // Staff corrections: fix a topic or hide a class.
