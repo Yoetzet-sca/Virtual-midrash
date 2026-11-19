@@ -29,7 +29,13 @@
   "youtube": [
     {
       "url": "https://www.youtube.com/c/SCAUpdates",
-      "channelId": ""
+      "channelId": "",
+      "teacherId": ""
+    },
+    {
+      "url": "https://www.youtube.com/@rabbiurilati",
+      "channelId": "",
+      "teacherId": "uri-lati"
     }
   ],
   "maxVideosPerChannel": 15,

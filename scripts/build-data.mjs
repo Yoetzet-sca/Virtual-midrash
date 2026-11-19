@@ -86,14 +86,15 @@ for (const y of settings.youtube || []) {
     }
     const videos = parseYoutube(xml).slice(0, settings.maxVideosPerChannel || 15);
     for (const v of videos) {
-      let teacherId = teacherForTitle(v.title, teachers);
+      // A teacher's own channel files everything under that teacher; a shared channel goes by the name in the title.
+      let teacherId = (y.teacherId && teachers.some((t) => t.id === y.teacherId) ? y.teacherId : null) || teacherForTitle(v.title, teachers);
       if (!teacherId) {
         teacherId = 'sca';
         if (!teachers.some((t) => t.id === 'sca')) teachers.push({ id: 'sca', name: 'Sephardic Community Alliance', title: 'Classes and events from the SCA', bio: '', photo: '', affiliations: [], feed: '', defaultTopic: '' });
       }
       classes.push({ id: `yt:${v.youtubeId}`, teacherId, title: v.title, date: v.date, durationSec: 0, audioUrl: '', youtubeId: v.youtubeId, image: v.image, link: v.link, topic: topicFor(v.title, null), kind: 'video' });
     }
-    console.log(`✓ YouTube ${y.url}: ${videos.length} videos`);
+    console.log(`✓ YouTube ${y.url}: ${videos.length} videos` + (videos[0] ? ` — newest: "${videos[0].title.slice(0, 60)}" (${videos[0].date.slice(0, 10)})` : ''));
   } catch (e) {
     warnings.push(`YouTube failed for ${y.url}: ${e.message}`);
     console.warn(`! YouTube ${y.url}: ${e.message}`);
