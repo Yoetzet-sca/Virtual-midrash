@@ -39,7 +39,24 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
     return first ? [first, ...ranked.filter((c) => c.id !== startId)] : ranked;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, startId]);
-  const cards = useMemo(() => (topic === 'For You' ? order : order.filter((c) => matchesTopic(c.topic, topic))), [order, topic]);
+  // Hidden teachers stay out of the feed, unless someone opens one of their classes directly.
+  const cards = useMemo(() => {
+    const direct = startId ? order.find((c) => c.id === startId)?.teacherId : undefined;
+    const shown = order.filter((c) => !prefs.hidden.includes(c.teacherId) || c.teacherId === direct);
+    return topic === 'For You' ? shown : shown.filter((c) => matchesTopic(c.topic, topic));
+  }, [order, topic, prefs.hidden, startId]);
+
+  // Press and hold Follow to hide a teacher from the feed.
+  const [hideAsk, setHideAsk] = useState('');
+  const hold = useRef<{ timer?: number; fired?: boolean }>({});
+  const holdStart = (teacherId: string) => { hold.current.fired = false; hold.current.timer = window.setTimeout(() => { hold.current.fired = true; setHideAsk(teacherId); }, 550); };
+  const holdEnd = () => window.clearTimeout(hold.current.timer);
+  const hide = (teacherId: string) => {
+    setPrefs({ hidden: [...prefs.hidden.filter((x) => x !== teacherId), teacherId], following: prefs.following.filter((x) => x !== teacherId) });
+    setHideAsk('');
+    scroller.current?.scrollTo({ left: 0 });
+    say('Hidden from your feed');
+  };
   const teacher = (id: string) => data.teachers.find((t) => t.id === id);
 
   // Two directions: up/down stays with one teacher (newest first); left/right moves to another teacher.
@@ -155,11 +172,13 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
                 <h2 className={'card-title' + (c.title.length > 100 ? ' xlong' : c.title.length > 55 ? ' long' : '')}>{c.title}</h2>
                 <div className="card-by">
                   <a href={'#/teacher/' + c.teacherId}>{t?.name}</a>
-                  <button className={'follow' + (prefs.following.includes(c.teacherId) ? ' on' : '')} aria-pressed={prefs.following.includes(c.teacherId)} onClick={() => setPrefs({ following: toggleIn(prefs.following, c.teacherId) })}>
+                  <button className={'follow' + (prefs.following.includes(c.teacherId) ? ' on' : '')} aria-pressed={prefs.following.includes(c.teacherId)}
+                    onPointerDown={() => holdStart(c.teacherId)} onPointerUp={holdEnd} onPointerLeave={holdEnd} onPointerCancel={holdEnd} onContextMenu={(e) => e.preventDefault()}
+                    onClick={() => { if (hold.current.fired) { hold.current.fired = false; return; } setPrefs({ following: toggleIn(prefs.following, c.teacherId) }); }}>
                     {prefs.following.includes(c.teacherId) ? 'Following' : '+ Follow'}
                   </button>
                 </div>
-                {!prefs.swiped && <div className="card-hint">Swipe up for more from {t?.name.split(' ').slice(-1)[0]} · swipe sideways for another teacher</div>}
+                {!prefs.swiped && <div className="card-hint">Swipe up for more from {t?.name.split(' ').slice(-1)[0]} · swipe sideways for another teacher · hold Follow to hide a teacher</div>}
                 {mine && <div className="card-time">{clock(p.time)} / {clock(p.duration || c.durationSec)}</div>}
                 {mine && p.error && <div className="card-error" role="alert">{p.error}</div>}
               </div>
@@ -205,6 +224,16 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
       {columns.length > 1 && <div className="feed-dots" aria-hidden="true">{columns.slice(0, 12).map((col, i) => <span key={col.teacherId} className={i === activeCol ? 'on' : ''} />)}</div>}
       {current && <div className="feed-progress" style={{ width: `${(current.duration ? current.time / current.duration : 0) * 100}%` }} />}
       {toast && <div className="toast" role="status">{toast}</div>}
+      {hideAsk && (
+        <div className="sheet-back" onClick={() => setHideAsk('')}>
+          <div className="sheet" role="dialog" aria-label="Hide teacher" onClick={(e) => e.stopPropagation()}>
+            <h2>Hide {teacher(hideAsk)?.name} from your feed?</h2>
+            <p className="muted">You won’t see their classes while swiping. You can still find them in Explore, and bring them back from their page.</p>
+            <button className="btn wide" onClick={() => hide(hideAsk)}>Hide from my feed</button>
+            <button className="btn wide ghost" onClick={() => setHideAsk('')}>Cancel</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -5,6 +5,7 @@ export type Prefs = {
   onboarded: boolean;
   topics: string[];
   following: string[];
+  hidden: string[]; // teachers this person doesn't want in their feed
   liked: string[];
   saved: string[];
   code: string;
@@ -13,7 +14,7 @@ export type Prefs = {
   learned: Record<string, number>;
 };
 const KEY = 'vm.prefs.v1';
-const empty: Prefs = { onboarded: false, topics: [], following: [], liked: [], saved: [], code: '', swiped: false, learned: {} };
+const empty: Prefs = { onboarded: false, topics: [], following: [], hidden: [], liked: [], saved: [], code: '', swiped: false, learned: {} };
 
 function read(): Prefs {
   try { return { ...empty, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return empty; }

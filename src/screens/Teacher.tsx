@@ -15,6 +15,7 @@ export function TeacherPage({ data, id }: { data: AppData; id: string }) {
   const shown = classes.filter((c) => topic === 'All' || matchesTopic(c.topic, topic));
   const live = data.schedule.weekly.filter((w) => w.teacherId === id);
   const following = prefs.following.includes(id);
+  const hidden = prefs.hidden.includes(id);
   return (
     <div className="page flush">
       <div className="page-body top">
@@ -32,7 +33,9 @@ export function TeacherPage({ data, id }: { data: AppData; id: string }) {
           <button className={'btn' + (following ? ' ghost' : '')} aria-pressed={following} onClick={() => setPrefs({ following: toggleIn(prefs.following, id) })}>{following ? 'Following' : '+ Follow'}</button>
           <a className="btn ghost" href="#/give">Sponsor a class</a>
         </div>
-        <p className="muted small">Follow to put {t.name.split(' ').slice(-1)[0]}’s new classes at the top of your feed.</p>
+{hidden
+          ? <div className="notice spread"><span>Hidden from your feed.</span><button className="btn small" onClick={() => setPrefs({ hidden: prefs.hidden.filter((x) => x !== id) })}>Show again</button></div>
+          : <p className="muted small">Follow to put {t.name.split(' ').slice(-1)[0]}’s new classes at the top of your feed. <button className="textlink" onClick={() => setPrefs({ hidden: [...prefs.hidden, id], following: prefs.following.filter((x) => x !== id) })}>Hide from my feed</button></p>}
 
         {live.length > 0 && <>
           <div className="label">LIVE EVERY WEEK</div>
