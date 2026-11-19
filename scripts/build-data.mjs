@@ -211,7 +211,8 @@ const resources = [...(await resourceSheet().catch((e) => { warnings.push('Resou
   .filter((r) => r.category && r.name)
   .filter((r) => { const k = sameName(r.category) + '|' + sameName(r.name); if (seenResource.has(k)) return false; seenResource.add(k); return true; })
   .map((r) => {
-    const isOpen = open.has(sameName(r.category));
+    // Until SCA sets a community code, every listing is shown openly (SCA's choice); with a code, people's own details are locked.
+    const isOpen = !code || open.has(sameName(r.category));
     return { category: r.category, name: r.name, area: r.area || '', note: r.note || '', open: isOpen,
       phone: isOpen ? r.phone || '' : '', email: isOpen ? r.email || '' : '', lockedPhone: isOpen ? '' : secret(r.phone), lockedEmail: isOpen ? '' : secret(r.email) };
   });

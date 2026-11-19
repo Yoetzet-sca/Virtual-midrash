@@ -28,7 +28,7 @@ export function Welcome({ data, onDone }: { data: AppData; onDone: () => void })
         <div><h1 className="huge">What do you want to learn?</h1><p className="muted">Tap a few. Your feed starts with these and gets better the more you listen.</p></div>
         <div className="label">TOPICS</div>
         <div className="chips wrap">{data.topics.map((t) => <button key={t} className={'chip pick' + (prefs.topics.includes(t) ? ' on' : '')} aria-pressed={prefs.topics.includes(t)} onClick={() => setPrefs({ topics: toggleIn(prefs.topics, t) })}>{t}</button>)}</div>
-        <div className="label">TEACHERS TO FOLLOW</div>
+        <div><div className="label">TEACHERS TO FOLLOW</div><p className="muted small order-note">Listed by most recent class posted.</p></div>
         <div className="people grid">{teachers.map((t) => (
           <button key={t.id} className={'person' + (prefs.following.includes(t.id) ? ' on' : '')} aria-pressed={prefs.following.includes(t.id)} onClick={() => setPrefs({ following: toggleIn(prefs.following, t.id) })}><Avatar t={t} /><span>{t.name}</span></button>
         ))}</div>
