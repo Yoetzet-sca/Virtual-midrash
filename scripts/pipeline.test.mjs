@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { webcrypto } from 'node:crypto';
-import { parseFeed, durationToSeconds } from './lib/rss.mjs';
+import { parseFeed, durationToSeconds, applePodcastId, feedFromAppleLookup } from './lib/rss.mjs';
 import { topicFor, matchesTopic } from './lib/topics.mjs';
 import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv } from './lib/csv.mjs';
@@ -140,4 +140,12 @@ test('overrides: staff can fix a topic or hide a class', () => {
   ]);
   assert.deepEqual(out.map((c) => [c.id, c.topic]), [['1', 'Land of Israel'], ['3', 'Holidays']]);
   assert.equal(applyOverrides(classes, []).length, 3);
+});
+
+test('an Apple Podcasts link can stand in for a feed address', () => {
+  assert.equal(applePodcastId('https://podcasts.apple.com/ca/podcast/torah-talks/id1471588127'), '1471588127');
+  assert.equal(applePodcastId('https://podcasts.apple.com/us/podcast/x/id99?i=1000'), '99');
+  assert.equal(applePodcastId('https://feeds.soundcloud.com/users/soundcloud:users:1/sounds.rss'), null);
+  assert.equal(feedFromAppleLookup('{"resultCount":1,"results":[{"kind":"podcast","feedUrl":"https://anchor.fm/s/abc/podcast/rss"}]}'), 'https://anchor.fm/s/abc/podcast/rss');
+  assert.equal(feedFromAppleLookup('{"resultCount":0,"results":[]}'), null);
 });

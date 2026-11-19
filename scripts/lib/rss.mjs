@@ -50,3 +50,8 @@ export function parseFeed(xml) {
       .filter((it) => it.title && it.audioUrl),
   };
 }
+
+// Staff can paste an Apple Podcasts link instead of a raw feed address; Apple's directory tells us the real feed.
+export const applePodcastId = (url) => String(url || '').match(/podcasts\.apple\.com\/.*?\/id(\d+)/)?.[1] || null;
+export const appleLookupUrl = (id) => `https://itunes.apple.com/lookup?id=${id}&entity=podcast`;
+export const feedFromAppleLookup = (jsonText) => JSON.parse(jsonText)?.results?.find((x) => x.feedUrl)?.feedUrl || null;

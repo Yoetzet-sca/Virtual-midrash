@@ -7,7 +7,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
-import { parseFeed } from './lib/rss.mjs';
+import { parseFeed, applePodcastId, appleLookupUrl, feedFromAppleLookup } from './lib/rss.mjs';
 import { topicFor, TOPICS } from './lib/topics.mjs';
 import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv } from './lib/csv.mjs';
@@ -52,7 +52,16 @@ for (const t of teachers) {
       const f = new URL(`scripts/fixtures/${t.id}.xml`, root);
       if (!existsSync(f)) continue;
       xml = await readFile(f, 'utf8');
-    } else xml = await get(t.feed);
+    } else {
+      let feedUrl = t.feed;
+      const appleId = applePodcastId(feedUrl);
+      if (appleId) {
+        feedUrl = feedFromAppleLookup(await get(appleLookupUrl(appleId)));
+        if (!feedUrl) throw new Error('Apple Podcasts did not list a feed for this show');
+        console.log(`  ${t.name}: Apple Podcasts link resolves to ${feedUrl}`);
+      }
+      xml = await get(feedUrl);
+    }
     const feed = parseFeed(xml);
     // Headshot supplied by SCA wins; otherwise fall back to the feed's profile picture.
     if (!t.photo) t.photo = feed.image;
