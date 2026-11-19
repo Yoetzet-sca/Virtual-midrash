@@ -1,15 +1,16 @@
 {
-  "series": "Women's Daytime Learning",
   "newsletterUrl": "",
   "giveLivelyUrl": "https://secure.givelively.org/donate/sephardic-community-alliance",
   "officeEmail": "info@scaupdates.org",
   "resourceCategories": [
+    "Emergency",
     "Tutors / Bar Mizva",
     "Sofer Stam",
     "Mohel",
     "Marriage Teachers",
+    "Hazzan",
     "Hebra Kadisha",
-    "Hazzan"
+    "Social Services"
   ],
   "erub": [
     {
@@ -46,5 +47,42 @@
   "analytics": {
     "goatcounter": "virtualmidrash"
   },
-  "probe": []
+  "probe": [],
+  "openResourceCategories": [
+    "Emergency",
+    "Social Services",
+    "Hebra Kadisha"
+  ],
+  "resourceSheetTabs": [
+    "Emergency",
+    "Tutors/Bar Mitzva",
+    "Sofer Stam",
+    "Social Services",
+    "Mohel",
+    "Marriage Teachers",
+    "Hazzan",
+    "Hebra Kadisha"
+  ],
+  "connect": [
+    {
+      "label": "Class updates on WhatsApp",
+      "note": "Join the SCA group",
+      "url": "https://chat.whatsapp.com/GomsTRH5hHQ3vjyx8Qz2Ax"
+    },
+    {
+      "label": "SCA email list",
+      "note": "Weekly news and classes",
+      "url": "https://scaupdates.us19.list-manage.com/subscribe?u=fe9463086d1389fcacd133a16&id=e9c6681cf2"
+    },
+    {
+      "label": "SCA on YouTube",
+      "note": "Videos and recorded events",
+      "url": "https://www.youtube.com/@SCAUpdates"
+    },
+    {
+      "label": "About SCA",
+      "note": "A short video",
+      "url": "https://www.youtube.com/watch?v=56aQuREGDPw"
+    }
+  ]
 }

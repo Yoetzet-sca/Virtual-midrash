@@ -3,13 +3,21 @@ import type { AppData, Resource } from '../types';
 import { usePrefs } from '../store';
 import { CodeBox, ErubCard, useUnlocked } from '../ui';
 
+const pretty = (p: string) => { const d = p.replace(/\D/g, ''); return d.length === 10 ? `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}` : p; };
+
 function Entry({ r }: { r: Resource }) {
-  const phone = useUnlocked(r.lockedPhone);
+  const phone = useUnlocked(r.lockedPhone) || r.phone || '';
+  const email = useUnlocked(r.lockedEmail || '') || r.email || '';
+  const locked = !phone && !email && !!(r.lockedPhone || r.lockedEmail);
+  const digits = phone.replace(/[^\d+]/g, '');
   return (
     <div className="entry">
-      <span><b>{r.name}</b><span className="muted small">{[r.area, r.note].filter(Boolean).join(' · ')}</span></span>
-      {phone ? <span className="actions"><a className="btn small" href={'tel:' + phone.replace(/[^\d+]/g, '')}>Call</a><a className="btn small ghost" href={'sms:' + phone.replace(/[^\d+]/g, '')}>Message</a></span>
-        : r.lockedPhone ? <span className="muted small">Number locked</span> : null}
+      <span><b>{r.name}</b><span className="muted small">{[phone && pretty(phone), r.area, r.note].filter(Boolean).join(' · ') || (locked ? 'Contact details locked' : '')}</span></span>
+      <span className="actions">
+        {phone && <a className="btn small" href={'tel:' + digits}>Call</a>}
+        {phone && !r.open && <a className="btn small ghost" href={'sms:' + digits}>Text</a>}
+        {email && <a className="btn small ghost" href={'mailto:' + email}>Email</a>}
+      </span>
     </div>
   );
 }
@@ -17,14 +25,14 @@ function Entry({ r }: { r: Resource }) {
 export function Resources({ data }: { data: AppData }) {
   const { code } = usePrefs();
   const [open, setOpen] = useState('');
-  const anyLocked = data.resources.some((r) => r.lockedPhone);
+  const anyLocked = data.resources.some((r) => r.lockedPhone || r.lockedEmail);
   return (
     <div className="page">
       <div className="head"><div><h1>Community Resources</h1><p className="muted">The people and services our community relies on</p></div><img className="sca" src="./brand/sca-icon-white.png" alt="Sephardic Community Alliance" /></div>
       <div className="label">ERUB</div>
       <ErubCard erub={data.erub} compact />
       <div className="label">FIND SOMEONE</div>
-      {anyLocked && !code && <CodeBox data={data} what="phone numbers" />}
+      {anyLocked && !code && <CodeBox data={data} what="phone numbers and emails" />}
       {data.resourceCategories.map((cat) => {
         const list = data.resources.filter((r) => r.category === cat);
         const isOpen = open === cat;

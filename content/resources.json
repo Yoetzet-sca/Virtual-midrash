@@ -1,1 +1,34 @@
-[]
+[
+ {
+  "category": "Emergency",
+  "name": "Hatzalah of Brooklyn",
+  "phone": "7182301000"
+ },
+ {
+  "category": "Emergency",
+  "name": "Hatzalah of Deal",
+  "phone": "7325319988"
+ },
+ {
+  "category": "Social Services",
+  "name": "SBH Medstar",
+  "phone": "7187871800"
+ },
+ {
+  "category": "Social Services",
+  "name": "Sephardic Bikur Holim",
+  "phone": "7187871100",
+  "email": "contactus@sbhonline.com"
+ },
+ {
+  "category": "Social Services",
+  "name": "The Safe Foundation",
+  "phone": "8665697233",
+  "email": "ask@safefoundation.org"
+ },
+ {
+  "category": "Hebra Kadisha",
+  "name": "Congregation Rodef Zedek",
+  "phone": "7185501818"
+ }
+]

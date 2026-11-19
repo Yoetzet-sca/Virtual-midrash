@@ -58,7 +58,7 @@ export function Week({ data }: { data: AppData }) {
   const notices = data.schedule.notices.filter((n) => n.date === day.key);
   return (
     <div className="page">
-      <div className="head"><div><h1>This Week</h1><p className="muted">{data.schedule.series} · live classes</p></div><img className="sca" src="./brand/sca-icon-white.png" alt="Sephardic Community Alliance" /></div>
+      <div className="head"><div><h1>This Week</h1><p className="muted">Live classes around the community</p></div><img className="sca" src="./brand/sca-icon-white.png" alt="Sephardic Community Alliance" /></div>
       <ErubCard erub={data.erub} />
       <div className="days" style={{ gridTemplateColumns: `repeat(${Math.min(days.length, 5)}, minmax(0, 1fr))` }}>
         {days.map((d, i) => (
@@ -80,6 +80,12 @@ export function Week({ data }: { data: AppData }) {
           <span><span className="label light">EVERY FRIDAY</span><b>Read this week’s newsletter</b></span><IChevron />
         </a>
       )}
+      {(data.links.connect || []).length > 0 && <>
+        <div className="label">STAY CONNECTED</div>
+        {data.links.connect!.map((l) => (
+          <a key={l.url} className="panel live" href={l.url} target="_blank" rel="noreferrer"><span><b>{l.label}</b><span className="muted small">{l.note}</span></span><IChevron /></a>
+        ))}
+      </>}
     </div>
   );
 }

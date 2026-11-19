@@ -5,7 +5,7 @@ import { webcrypto } from 'node:crypto';
 import { parseFeed, durationToSeconds, applePodcastId, feedFromAppleLookup, isSpotifyShow, spotifyShowName, feedFromAppleSearch, feedFromPage, looksLikeFeed } from './lib/rss.mjs';
 import { topicFor, matchesTopic } from './lib/topics.mjs';
 import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
-import { parseCsv } from './lib/csv.mjs';
+import { parseCsv, resourceRows } from './lib/csv.mjs';
 import { lock, normalizeCode } from './lib/lock.mjs';
 import { channelIdFrom, parseYoutube, teacherForTitle } from './lib/youtube.mjs';
 import { applyOverrides } from './lib/overrides.mjs';
@@ -238,4 +238,10 @@ test('ask a question: finds the class by what was said, and the part to jump to'
   assert.deepEqual(top('what is the'), []);           // nothing but filler words
   assert.deepEqual(top('flute'), []);                // only said in passing: not enough
   assert.deepEqual(top('quantum physics'), []);
+});
+
+test('community resources sheet: title and heading rows are skipped, tab spelling is forgiven', () => {
+  const cats = ['Tutors / Bar Mizva', 'Hebra Kadisha'];
+  assert.deepEqual(resourceRows('"Community Resources","","",""\n"Category","Name","Phone","Email"\n"Hebra Kadisha","Some Shul","718-555-0100",""\n"Hebra Kadisha","","",""', cats), [{ category: 'Hebra Kadisha', name: 'Some Shul', phone: '718-555-0100', email: '' }]);
+  assert.deepEqual(resourceRows('"Tutors/Bar Mitzva","A Person","","a@example.org"', cats), [{ category: 'Tutors / Bar Mizva', name: 'A Person', phone: '', email: 'a@example.org' }]);
 });

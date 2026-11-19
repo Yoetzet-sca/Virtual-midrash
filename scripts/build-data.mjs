@@ -10,7 +10,7 @@ import { existsSync } from 'node:fs';
 import { parseFeed, applePodcastId, appleLookupUrl, feedFromAppleLookup, isSpotifyShow, spotifyShowName, appleSearchUrl, feedFromAppleSearch, feedFromPage, looksLikeFeed } from './lib/rss.mjs';
 import { topicFor, TOPICS } from './lib/topics.mjs';
 import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
-import { parseCsv } from './lib/csv.mjs';
+import { parseCsv, resourceRows, sameName } from './lib/csv.mjs';
 import { lock } from './lib/lock.mjs';
 import { applyOverrides } from './lib/overrides.mjs';
 import { dafFor, weekInfo } from './lib/calendar.mjs';
@@ -180,7 +180,6 @@ const secret = (v) => {
   return lock(v, code);
 };
 const schedule = {
-  series: settings.series,
   weekly: weeklyRows.filter((r) => r.day && r.title).map((r) => ({
     day: r.day, time: r.time || '', teacherId: r.teacherId || '', teacherName: r.teacherName || '', title: r.title,
     mode: r.mode || 'inperson', location: r.location || '',
@@ -191,9 +190,32 @@ const schedule = {
 };
 
 // ---- Community resources ------------------------------------------------------
-const resources = (await sheetOr('SHEET_RESOURCES_URL', await json('content/resources.json')))
+// Listed in content/resources.json (organizations with public numbers) and, when SHEET_RESOURCES_URL is set, read from
+// the SCA Community Resources Google Sheet, one tab per category. People's own numbers and emails are never stored in
+// this repository: they come from the Sheet at build time and are locked with the community code.
+async function resourceSheet() {
+  const link = process.env.SHEET_RESOURCES_URL;
+  if (!link || FIXTURES) return [];
+  const id = link.match(/\/spreadsheets\/d\/([\w-]+)/)?.[1];
+  if (!id || /\/pub\?|output=csv/.test(link)) return parseCsv(await get(link)); // a single published CSV tab
+  const rows = [];
+  for (const tab of settings.resourceSheetTabs || settings.resourceCategories) {
+    try { rows.push(...resourceRows(await get(`https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&headers=0&sheet=${encodeURIComponent(tab)}`), settings.resourceCategories)); }
+    catch (e) { warnings.push(`Resources tab "${tab}" could not be read: ${e.message.replace(id, '…')}`); }
+  }
+  return rows;
+}
+const open = new Set((settings.openResourceCategories || []).map(sameName));
+const seenResource = new Set();
+const resources = [...(await resourceSheet().catch((e) => { warnings.push('Resources sheet unavailable: ' + e.message.split(' ')[0]); return []; })), ...(await json('content/resources.json'))]
   .filter((r) => r.category && r.name)
-  .map((r) => ({ category: r.category, name: r.name, area: r.area || '', note: r.note || '', lockedPhone: secret(r.phone) }));
+  .filter((r) => { const k = sameName(r.category) + '|' + sameName(r.name); if (seenResource.has(k)) return false; seenResource.add(k); return true; })
+  .map((r) => {
+    const isOpen = open.has(sameName(r.category));
+    return { category: r.category, name: r.name, area: r.area || '', note: r.note || '', open: isOpen,
+      phone: isOpen ? r.phone || '' : '', email: isOpen ? r.email || '' : '', lockedPhone: isOpen ? '' : secret(r.phone), lockedEmail: isOpen ? '' : secret(r.email) };
+  });
+console.log(`✓ Community resources: ${resources.length} listings (${resources.filter((r) => !r.open).length} with details locked by the community code)`);
 
 // ---- Erub ---------------------------------------------------------------------
 const now = new Date();
@@ -223,7 +245,7 @@ const out = {
   generatedAt: now.toISOString(), topics: TOPICS, teachers, classes, schedule, resources, erub,
   resourceCategories: settings.resourceCategories,
   analytics: settings.analytics || null,
-  links: { giveLively: settings.giveLivelyUrl, officeEmail: settings.officeEmail, newsletter: settings.newsletterUrl, addressContact: settings.addressContact || null },
+  links: { giveLively: settings.giveLivelyUrl, officeEmail: settings.officeEmail, newsletter: settings.newsletterUrl, addressContact: settings.addressContact || null, connect: settings.connect || [] },
   hasLockedDetails: !!code,
 };
 await mkdir(new URL('public/data/', root), { recursive: true });
