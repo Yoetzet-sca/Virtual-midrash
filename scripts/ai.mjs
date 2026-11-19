@@ -79,25 +79,32 @@ async function geminiModels() {
   return models;
 }
 
+const drop = (model) => { if (models) models = models.filter((m) => m !== model); };
+
 async function summarize(c, transcript) {
   const body = { contents: [{ role: 'user', parts: [{ text: summaryPrompt({ title: c.title, teacher: teacherName(c.teacherId), minutes: Math.round(c.durationSec / 60), transcript: transcript.slice(0, 120000) }) }] }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } };
   let last = 'no model available';
-  for (const model of await geminiModels()) {
-    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { method: 'POST', headers: { 'x-goog-api-key': GEMINI, 'content-type': 'application/json' }, body: JSON.stringify(body), signal: AbortSignal.timeout(120000) });
+  for (const model of [...(await geminiModels())]) {
+    let r;
+    try {
+      r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { method: 'POST', headers: { 'x-goog-api-key': GEMINI, 'content-type': 'application/json' }, body: JSON.stringify(body), signal: AbortSignal.timeout(90000) });
+    } catch (e) { last = `${model}: no answer in 90 seconds`; console.log(`  (${last}; trying the next model)`); drop(model); continue; }
     if (r.ok) {
       const text = (await r.json()).candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('') || '';
-      try { return { ...parseModelJson(text), model }; } catch (e) { last = `${model}: ${e.message}`; continue; }
+      try { return { ...parseModelJson(text), model }; } catch (e) { last = `${model}: ${e.message}`; console.log(`  (${last})`); continue; }
     }
-    last = `${model} ${r.status}: ${(await r.text()).slice(0, 160)}`;
-    if (r.status === 429) { models = models?.filter((m) => m !== model) ?? null; continue; } // out of free allowance on this model: try the next
+    last = `${model} ${r.status}: ${(await r.text()).replace(/\s+/g, ' ').slice(0, 160)}`;
+    console.log(`  (${last})`);
+    if (r.status === 429 || r.status === 404 || r.status === 503) drop(model); // no free allowance, or not available: stop asking it this run
   }
   if (/ 429:/.test(last)) throw new SlowDown(`Gemini rate limit: ${last}`);
   throw new Error(`Gemini: ${last}`);
 }
 
-let done = 0, minutes = 0, failed = 0;
+let done = 0, minutes = 0, failed = 0, groqResting = false;
 for (const c of queue) {
   if (done >= MAX_CLASSES || minutes >= MAX_MINUTES) break;
+  if (groqResting && !existsSync(txFile(c))) continue; // only finish ones already transcribed
   const mins = Math.round(c.durationSec / 60);
   try {
     let tx = existsSync(txFile(c)) ? JSON.parse(await readFile(txFile(c), 'utf8')) : null; // already transcribed on an earlier run
@@ -111,6 +118,7 @@ for (const c of queue) {
     console.log(`  Questions: ${ai.questions.join(' | ')}`);
     console.log(`  Transcript opens: ${tx.text.slice(0, 220).replace(/\s+/g, ' ')}…`);
   } catch (e) {
+    if (e instanceof SlowDown && /^Groq/.test(e.message) && !groqResting) { groqResting = true; console.log(`\n⏸ Transcription paused — ${e.message}`); continue; }
     if (e instanceof SlowDown) { console.log(`\n⏸ Stopping for now — ${e.message}`); break; }
     failed++;
     console.log(`\n! ${teacherName(c.teacherId)} — ${c.title}: ${e.message}`);
