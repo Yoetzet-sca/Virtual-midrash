@@ -98,7 +98,7 @@ async function summarize(c, tx) {
     } catch (e) { last = `${model}: no answer in 90 seconds`; console.log(`  (${last}; trying the next model)`); drop(model); continue; }
     if (r.ok) {
       const text = (await r.json()).candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('') || '';
-      try { return { ...parseModelJson(text, c.durationSec), model }; } catch (e) { last = `${model}: ${e.message}`; console.log(`  (${last})`); continue; }
+      try { const out = { ...parseModelJson(text, c.durationSec), model }; if (models) models = [model, ...models.filter((m) => m !== model)]; /* ask the one that answered first next time */ return out; } catch (e) { last = `${model}: ${e.message}`; console.log(`  (${last})`); continue; }
     }
     last = `${model} ${r.status}: ${(await r.text()).replace(/\s+/g, ' ').slice(0, 160)}`;
     console.log(`  (${last})`);
