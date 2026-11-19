@@ -152,7 +152,7 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
                   {c.topic && <span className="tag">{c.topic.toUpperCase()}</span>}
                   {c.durationSec > 0 && <span className="tag">{(c.durationSec < 660 ? 'QUICK · ' : '') + minutes(c.durationSec).toUpperCase()}</span>}
                 </div>
-                <h2 className="card-title">{c.title}</h2>
+                <h2 className={'card-title' + (c.title.length > 100 ? ' xlong' : c.title.length > 55 ? ' long' : '')}>{c.title}</h2>
                 <div className="card-by">
                   <a href={'#/teacher/' + c.teacherId}>{t?.name}</a>
                   <button className={'follow' + (prefs.following.includes(c.teacherId) ? ' on' : '')} aria-pressed={prefs.following.includes(c.teacherId)} onClick={() => setPrefs({ following: toggleIn(prefs.following, c.teacherId) })}>

@@ -8,5 +8,5 @@ export type AppData = {
   generatedAt: string; topics: string[]; teachers: Teacher[]; classes: ClassItem[];
   schedule: { series: string; weekly: WeeklyClass[]; notices: Notice[] };
   resources: Resource[]; resourceCategories: string[]; erub: Erub[];
-  links: { giveLively: string; officeEmail: string; newsletter: string }; hasLockedDetails: boolean;
+  links: { giveLively: string; officeEmail: string; newsletter: string; addressContact?: { name: string; sms: string } | null }; hasLockedDetails: boolean;
 };

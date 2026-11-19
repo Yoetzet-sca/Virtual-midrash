@@ -141,7 +141,7 @@ for (const e of settings.erub) {
 const out = {
   generatedAt: now.toISOString(), topics: TOPICS, teachers, classes, schedule, resources, erub,
   resourceCategories: settings.resourceCategories,
-  links: { giveLively: settings.giveLivelyUrl, officeEmail: settings.officeEmail, newsletter: settings.newsletterUrl },
+  links: { giveLively: settings.giveLivelyUrl, officeEmail: settings.officeEmail, newsletter: settings.newsletterUrl, addressContact: settings.addressContact || null },
   hasLockedDetails: !!code,
 };
 await mkdir(new URL('public/data/', root), { recursive: true });

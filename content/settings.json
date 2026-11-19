@@ -32,5 +32,9 @@
       "channelId": ""
     }
   ],
-  "maxVideosPerChannel": 15
+  "maxVideosPerChannel": 15,
+  "addressContact": {
+    "name": "Gail",
+    "sms": "+13472712141"
+  }
 }
