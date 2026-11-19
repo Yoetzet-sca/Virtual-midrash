@@ -12,20 +12,7 @@
     "Hebra Kadisha",
     "Social Services"
   ],
-  "erub": [
-    {
-      "id": "brooklyn",
-      "name": "Sephardic Brooklyn Community Erub",
-      "short": "Brooklyn",
-      "url": "https://www.erub.org/"
-    },
-    {
-      "id": "deal",
-      "name": "Jersey Shore Erub",
-      "short": "Deal",
-      "url": "https://www.njerub.org/"
-    }
-  ],
+  "erub": [],
   "maxClassesPerTeacher": 60,
   "youtube": [
     {
@@ -83,6 +70,20 @@
       "label": "About SCA",
       "note": "A short video",
       "url": "https://www.youtube.com/watch?v=56aQuREGDPw"
+    }
+  ],
+  "erubOff": [
+    {
+      "id": "brooklyn",
+      "name": "Sephardic Brooklyn Community Erub",
+      "short": "Brooklyn",
+      "url": "https://www.erub.org/"
+    },
+    {
+      "id": "deal",
+      "name": "Jersey Shore Erub",
+      "short": "Deal",
+      "url": "https://www.njerub.org/"
     }
   ]
 }

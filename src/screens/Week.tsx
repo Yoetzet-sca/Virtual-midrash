@@ -59,7 +59,7 @@ export function Week({ data }: { data: AppData }) {
   return (
     <div className="page">
       <div className="head"><div><h1>This Week</h1><p className="muted">Live classes around the community</p></div><img className="sca" src="./brand/sca-icon-white.png" alt="Sephardic Community Alliance" /></div>
-      <ErubCard erub={data.erub} />
+      {data.erub.length > 0 && <ErubCard erub={data.erub} />}
       <div className="days" style={{ gridTemplateColumns: `repeat(${Math.min(days.length, 5)}, minmax(0, 1fr))` }}>
         {days.map((d, i) => (
           <button key={d.key} className={'day' + (d.key === sel ? ' on' : '')} aria-pressed={d.key === sel} onClick={() => setSel(d.key)}>

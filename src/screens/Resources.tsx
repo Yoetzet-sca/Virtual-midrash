@@ -29,8 +29,7 @@ export function Resources({ data }: { data: AppData }) {
   return (
     <div className="page">
       <div className="head"><div><h1>Community Resources</h1><p className="muted">The people and services our community relies on</p></div><img className="sca" src="./brand/sca-icon-white.png" alt="Sephardic Community Alliance" /></div>
-      <div className="label">ERUB</div>
-      <ErubCard erub={data.erub} compact />
+      {data.erub.length > 0 && <><div className="label">ERUB</div><ErubCard erub={data.erub} compact /></>}
       <div className="label">FIND SOMEONE</div>
       {anyLocked && !code && <CodeBox data={data} what="phone numbers and emails" />}
       {data.resourceCategories.map((cat) => {
