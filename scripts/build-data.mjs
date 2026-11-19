@@ -7,7 +7,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
-import { parseFeed, applePodcastId, appleLookupUrl, feedFromAppleLookup } from './lib/rss.mjs';
+import { parseFeed, applePodcastId, appleLookupUrl, feedFromAppleLookup, isSpotifyShow, spotifyShowName, appleSearchUrl, feedFromAppleSearch } from './lib/rss.mjs';
 import { topicFor, TOPICS } from './lib/topics.mjs';
 import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv } from './lib/csv.mjs';
@@ -40,7 +40,7 @@ const warnings = [];
 // ---- Teachers -------------------------------------------------------------
 const teachers = (await sheetOr('SHEET_TEACHERS_URL', await json('content/teachers.json')))
   .filter((t) => t.id && t.name)
-  .map((t) => ({ id: t.id, name: t.name, title: t.title || '', bio: t.bio || '', photo: t.photo || '', affiliations: list(t.affiliations), feed: t.feed || '', defaultTopic: t.defaultTopic || '' }));
+  .map((t) => ({ id: t.id, name: t.name, title: t.title || '', bio: t.bio || '', photo: t.photo || '', affiliations: list(t.affiliations), feed: t.feed || '', podcastName: t.podcastName || '', defaultTopic: t.defaultTopic || '' }));
 
 // ---- Classes from each teacher's feed ---------------------------------------
 const classes = [];
@@ -59,6 +59,13 @@ for (const t of teachers) {
         feedUrl = feedFromAppleLookup(await get(appleLookupUrl(appleId)));
         if (!feedUrl) throw new Error('Apple Podcasts did not list a feed for this show');
         console.log(`  ${t.name}: Apple Podcasts link resolves to ${feedUrl}`);
+      }
+      if (isSpotifyShow(feedUrl)) {
+        const name = t.podcastName || spotifyShowName(await get(feedUrl.split('?')[0]));
+        if (!name) throw new Error('could not read the show name from Spotify');
+        feedUrl = feedFromAppleSearch(await get(appleSearchUrl(name)), name);
+        if (!feedUrl) throw new Error(`no podcast named "${name}" found in Apple's directory — paste the Apple Podcasts link or feed address instead`);
+        console.log(`  ${t.name}: Spotify show "${name}" resolves to ${feedUrl}`);
       }
       xml = await get(feedUrl);
     }

@@ -48,6 +48,20 @@
     "defaultTopic": ""
   },
   {
+    "id": "nathan-dweck",
+    "name": "Rabbi Nathan Dweck",
+    "title": "Rabbi, Congregation Beth Torah · Director of Judaic Studies Curriculum, Barkai",
+    "bio": "",
+    "photo": "",
+    "affiliations": [
+      "Congregation Beth Torah",
+      "Barkai Yeshivah"
+    ],
+    "feed": "https://open.spotify.com/show/0RjG5OulsqGM8Ont6UUV9D",
+    "podcastName": "Perashah Gems with Rabbi Nathan Dweck",
+    "defaultTopic": "Perasha"
+  },
+  {
     "id": "vivien-hidary",
     "name": "Mrs. Vivien Hidary",
     "title": "",

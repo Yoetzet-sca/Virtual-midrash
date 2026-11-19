@@ -55,3 +55,15 @@ export function parseFeed(xml) {
 export const applePodcastId = (url) => String(url || '').match(/podcasts\.apple\.com\/.*?\/id(\d+)/)?.[1] || null;
 export const appleLookupUrl = (id) => `https://itunes.apple.com/lookup?id=${id}&entity=podcast`;
 export const feedFromAppleLookup = (jsonText) => JSON.parse(jsonText)?.results?.find((x) => x.feedUrl)?.feedUrl || null;
+
+// A Spotify show link: Spotify doesn't publish the feed address, so we read the show's name from its page
+// and look that name up in Apple's podcast directory.
+export const isSpotifyShow = (url) => /open\.spotify\.com\/show\//.test(String(url || ''));
+export function spotifyShowName(html) {
+  const m = html.match(/<meta[^>]+property="og:title"[^>]+content="([^"]+)"/i) || html.match(/<title>([^<]+)<\/title>/i);
+  return m ? decode(m[1]).replace(/\s*[|\-–]\s*Podcast on Spotify\s*$/i, '').trim() : null;
+}
+export const appleSearchUrl = (name) => `https://itunes.apple.com/search?media=podcast&limit=10&term=${encodeURIComponent(name)}`;
+const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+// Only accept a show whose name matches exactly, so a similarly named podcast is never pulled in by mistake.
+export const feedFromAppleSearch = (jsonText, name) => JSON.parse(jsonText)?.results?.find((x) => x.feedUrl && norm(x.collectionName) === norm(name))?.feedUrl || null;

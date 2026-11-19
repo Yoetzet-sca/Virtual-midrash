@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { webcrypto } from 'node:crypto';
-import { parseFeed, durationToSeconds, applePodcastId, feedFromAppleLookup } from './lib/rss.mjs';
+import { parseFeed, durationToSeconds, applePodcastId, feedFromAppleLookup, isSpotifyShow, spotifyShowName, feedFromAppleSearch } from './lib/rss.mjs';
 import { topicFor, matchesTopic } from './lib/topics.mjs';
 import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv } from './lib/csv.mjs';
@@ -148,4 +148,13 @@ test('an Apple Podcasts link can stand in for a feed address', () => {
   assert.equal(applePodcastId('https://feeds.soundcloud.com/users/soundcloud:users:1/sounds.rss'), null);
   assert.equal(feedFromAppleLookup('{"resultCount":1,"results":[{"kind":"podcast","feedUrl":"https://anchor.fm/s/abc/podcast/rss"}]}'), 'https://anchor.fm/s/abc/podcast/rss');
   assert.equal(feedFromAppleLookup('{"resultCount":0,"results":[]}'), null);
+});
+
+test('a Spotify show link resolves by exact show name only', () => {
+  assert.ok(isSpotifyShow('https://open.spotify.com/show/0RjG5OulsqGM8Ont6UUV9D?si=x'));
+  assert.ok(!isSpotifyShow('https://anchor.fm/s/abc/podcast/rss'));
+  assert.equal(spotifyShowName('<meta property="og:title" content="Perashah Gems with Rabbi Nathan Dweck | Podcast on Spotify"/>'), 'Perashah Gems with Rabbi Nathan Dweck');
+  const results = JSON.stringify({ results: [{ collectionName: 'Weekly Parsha Gems', feedUrl: 'https://wrong.example/rss' }, { collectionName: 'Perashah Gems with Rabbi Nathan Dweck', feedUrl: 'https://right.example/rss' }] });
+  assert.equal(feedFromAppleSearch(results, 'Perashah Gems with Rabbi Nathan Dweck'), 'https://right.example/rss');
+  assert.equal(feedFromAppleSearch(results, 'Perashah Gems'), null);
 });
