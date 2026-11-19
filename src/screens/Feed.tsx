@@ -3,7 +3,7 @@ import type { AppData, ClassItem } from '../types';
 import { usePrefs, getPrefs, setPrefs, toggleIn, learn } from '../store';
 import { usePlayer } from '../player';
 import { Avatar, erubLabel, go } from '../ui';
-import { classShare, clock, initials, matchesTopic, minutes, newFromFollowed, rank, shareLink, daysAgo } from '../util';
+import { classShare, clock, initials, matchesTopic, minutes, newFromFollowed, rank, shareLink, daysAgo, sized } from '../util';
 import { IHeart, IPause, IPlay, ISave, ISaved, ISearch, IShare, IInfo } from '../icons';
 
 export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData; startId?: string; topic: string; setTopic: (t: string) => void }) {
@@ -77,6 +77,11 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
     });
   }, [cards, startId]);
   const activeCol = Math.max(0, columns.findIndex((col) => col.list.some((c) => c.id === active)));
+  // Only a few cards are drawn in full at a time: the one on screen, the ones just above and below it, and the top of the
+  // teachers on either side. The rest are empty placeholders of the same size. Drawing hundreds of cards with photos
+  // made iPhones run out of memory and reload the page.
+  const place = useRef(new Map<string, number>()); // teacher → index of the card last on screen
+  columns.forEach((col) => { const i = col.list.findIndex((c) => c.id === active); if (i >= 0) place.current.set(col.teacherId, i); });
 
   useEffect(() => { scroller.current?.scrollTo({ left: 0 }); setActive(''); }, [topic]);
   // Coming back to a class (tapping the player bar, or a shared link): show that class, in any topic.
@@ -141,6 +146,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
           <div className="feed-col" key={col.teacherId} data-col={ci}>
             {/* Only the teacher on screen and the ones beside it are drawn in full. */}
             {Math.abs(ci - activeCol) > 1 ? <section className="card" /> : col.list.map((c, i) => {
+          if (Math.abs(i - (place.current.get(col.teacherId) ?? 0)) > 1) return <section key={c.id} data-id={c.id} className="card" />;
           const t = teacher(c.teacherId);
           const mine = p.cls?.id === c.id;
           const playing = mine && p.playing;
@@ -154,13 +160,13 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
           return (
             <section key={c.id} data-id={c.id} className="card">
               <div className="card-bg none" />
-              {img && <img className="card-bg blur" src={img} alt="" loading={i < 2 ? 'eager' : 'lazy'} onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
+              {img && <img className="card-bg blur" src={sized(img, 200)} alt="" loading="lazy" decoding="async" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
               <div className="card-shade" />
               <button className="card-tap" aria-label={playing ? 'Pause' : 'Play'} onClick={tap} />
               <div className="card-stage">
                 <div className={'card-photo' + (isVideo ? ' video' : '')}>
                   <span>{isVideo ? '' : initials(t?.name || '')}</span>
-                  {img && <img src={img} alt="" loading={i < 2 ? 'eager' : 'lazy'} onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
+                  {img && <img src={sized(img, 500)} alt="" loading="lazy" decoding="async" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
                   {isVideo && video === c.id
                     ? <>
                       <iframe ref={frame} title={c.title} src={`https://www.youtube-nocookie.com/embed/${c.youtubeId}?autoplay=1&playsinline=1&rel=0&enablejsapi=1&origin=${encodeURIComponent(location.origin)}`} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen

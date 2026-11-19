@@ -3,7 +3,7 @@ import type { AppData, ClassItem, Erub, Teacher } from './types';
 import { usePrefs, setPrefs } from './store';
 import { unlock } from './lock';
 import { usePlayer } from './player';
-import { initials, minutes, when } from './util';
+import { initials, minutes, when, sized } from './util';
 import { IPause, IPlay } from './icons';
 
 export const go = (hash: string) => { location.hash = hash; };
@@ -14,7 +14,7 @@ export function Avatar({ t, size = 68, ring = false }: { t?: Teacher; size?: num
   return (
     <span className={'avatar' + (ring ? ' ring' : '')} style={style}>
       {initials(t?.name || '?')}
-      {t?.photo && !bad && <img src={t.photo} alt="" loading="lazy" onError={() => setBad(true)} />}
+      {t?.photo && !bad && <img src={sized(t.photo, 200)} alt="" loading="lazy" decoding="async" onError={() => setBad(true)} />}
     </span>
   );
 }

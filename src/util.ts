@@ -59,3 +59,8 @@ export function newFromFollowed(data: AppData, prefs: Prefs) {
   const since = prefs.seenAt || new Date(new Date(data.generatedAt).getTime() - 3 * 86400000).toISOString();
   return data.classes.filter((c) => prefs.following.includes(c.teacherId) && c.date > since).slice(0, 30);
 }
+
+// Podcast artwork is often a 3000-pixel original. Phones (iPhones especially) run out of memory decoding many of those,
+// so ask SoundCloud's image server for a size that fits the screen.
+export const sized = (url: string | undefined, px: 200 | 500) =>
+  url ? url.replace(/(sndcdn\.com\/.*)-(?:original|large|crop|t\d+x\d+)\.(jpe?g|png)/i, `$1-t${px}x${px}.$2`) : url;
