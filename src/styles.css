@@ -257,3 +257,7 @@ input::placeholder { color: var(--sky); opacity: 1; }
 .install small { font-size: 12px; color: #3a5068; }
 .install-x { position: absolute; top: 0; right: 0; width: 44px; height: 44px; border: 0; background: none; font-size: 22px; color: #3a5068; }
 .mini + .install { bottom: calc(var(--nav) + 76px); }
+
+.sub { font-family: var(--display); font-size: 22px; margin-top: 12px; padding-top: 18px; border-top: 1px solid var(--navy); }
+.pref { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--panel); border-radius: 14px; padding: 8px 10px; }
+.pref a { display: flex; align-items: center; gap: 10px; min-width: 0; min-height: 44px; }
