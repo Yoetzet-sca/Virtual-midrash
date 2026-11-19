@@ -4,7 +4,7 @@
 //
 //   node scripts/build-data.mjs             live: reads feeds, the Google Sheet (if set) and erub sites
 //   node scripts/build-data.mjs --fixtures  offline sample from scripts/fixtures (for development)
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { parseFeed, applePodcastId, appleLookupUrl, feedFromAppleLookup, isSpotifyShow, spotifyShowName, appleSearchUrl, feedFromAppleSearch, feedFromPage, looksLikeFeed } from './lib/rss.mjs';
@@ -142,6 +142,24 @@ for (const url of FIXTURES ? [] : settings.probe || []) {
   } catch (e) { console.log(`? Probe ${url} failed: ${e.message}`); }
 }
 classes.sort((a, b) => b.date.localeCompare(a.date));
+// AI summaries (made by scripts/ai.mjs): a topic where the title gave none, the parts of the class, and the search index.
+const sidOf = (id) => createHash('sha1').update(id).digest('hex').slice(0, 10);
+const search = [];
+{
+  const ai = new Map();
+  for (const f of await readdir(new URL('content/ai/', root)).catch(() => [])) {
+    if (f.endsWith('.json')) try { ai.set(f.slice(0, -5), JSON.parse(await readFile(new URL('content/ai/' + f, root), 'utf8'))); } catch { warnings.push(`Could not read content/ai/${f}`); }
+  }
+  let topics = 0;
+  for (const c of classes) {
+    const a = ai.get(sidOf(c.id));
+    if (!a || a.quality === 'poor') continue;
+    if (!c.topic && TOPICS.includes(a.topic)) { c.topic = a.topic; topics++; }
+    if (a.chapters?.length) c.chapters = a.chapters.map((x) => [x.at, x.title]);
+    search.push({ i: sidOf(c.id), m: a.summary, s: (a.subjects || []).join('; '), q: (a.questions || []).join(' '), c: (a.chapters || []).map((x) => x.about || ''), t: a.terms || '' });
+  }
+  if (ai.size) console.log(`✓ AI summaries: ${search.length} classes searchable by what was said; ${topics} given a topic the title did not show`);
+}
 // Staff corrections: fix a topic or hide a class.
 {
   const fixed = applyOverrides(classes, await sheetOr('SHEET_OVERRIDES_URL', await json('content/overrides.json')));
@@ -149,7 +167,7 @@ classes.sort((a, b) => b.date.localeCompare(a.date));
   classes.splice(0, classes.length, ...fixed);
 }
 // A short, link-safe id for each class's share page.
-for (const c of classes) c.sid = createHash('sha1').update(c.id).digest('hex').slice(0, 10);
+for (const c of classes) c.sid = sidOf(c.id);
 
 // ---- Weekly schedule --------------------------------------------------------
 const code = process.env.COMMUNITY_CODE || '';
@@ -210,6 +228,8 @@ const out = {
 };
 await mkdir(new URL('public/data/', root), { recursive: true });
 await writeFile(new URL('public/data/app.json', root), JSON.stringify(out));
+// Loaded by the phone only when someone searches.
+await writeFile(new URL('public/data/search.json', root), JSON.stringify(search.filter((s) => classes.some((c) => c.sid === s.i))));
 console.log(`\nWrote public/data/app.json — ${teachers.length} teachers, ${classes.length} classes, ${schedule.weekly.length} weekly classes.`);
 [...new Set(warnings)].forEach((w) => console.warn('! ' + w));
 // A total wipe-out (every feed failed) should fail the run so the last good site stays up.

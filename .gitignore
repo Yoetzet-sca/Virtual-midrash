@@ -5,3 +5,5 @@ public/data/app.json
 scripts/.search.mjs
 ai-transcripts
 .ai-tmp
+scripts/.ask.mjs
+public/data/search.json

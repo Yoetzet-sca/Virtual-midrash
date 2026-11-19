@@ -7,7 +7,7 @@ import { track, listened } from './analytics';
 type Player = {
   cls: ClassItem | null; playing: boolean; time: number; duration: number; error: string;
   rate: number;
-  play: (c: ClassItem) => void; pause: () => void; toggle: (c: ClassItem) => void; seek: (t: number) => void; skip: (by: number) => void; cycleRate: () => void;
+  play: (c: ClassItem, at?: number) => void; pause: () => void; toggle: (c: ClassItem) => void; seek: (t: number) => void; skip: (by: number) => void; cycleRate: () => void;
 };
 const Ctx = createContext<Player | null>(null);
 export const usePlayer = () => useContext(Ctx)!;
@@ -20,7 +20,7 @@ export function nextInSeries(c: ClassItem, classes: ClassItem[]) {
 }
 
 export function PlayerProvider({ teachers, classes, children }: { teachers: Teacher[]; classes: ClassItem[]; children: React.ReactNode }) {
-  const playRef = useRef<(c: ClassItem) => void>(() => {});
+  const playRef = useRef<(c: ClassItem, at?: number) => void>(() => {});
   const audio = useRef<HTMLAudioElement | null>(null);
   const counted = useRef(new Set<string>());
   const [cls, setCls] = useState<ClassItem | null>(null);
@@ -82,13 +82,13 @@ export function PlayerProvider({ teachers, classes, children }: { teachers: Teac
     return () => { a.pause(); a.src = ''; };
   }, []);
 
-  const play = useCallback((c: ClassItem) => {
+  const play = useCallback((c: ClassItem, at?: number) => {
     const a = audio.current!;
     setError('');
     if (clsRef.current?.id !== c.id) {
       clsRef.current = c;
       setCls(c); setTime(0); setDuration(c.durationSec || 0);
-      resumeAt.current = getPrefs().positions[c.id]?.[0] || 0;
+      resumeAt.current = at ?? (getPrefs().positions[c.id]?.[0] || 0);
       lastSaved.current = resumeAt.current;
       if (resumeAt.current) setTime(resumeAt.current);
       a.src = c.audioUrl;
@@ -98,6 +98,7 @@ export function PlayerProvider({ teachers, classes, children }: { teachers: Teac
         navigator.mediaSession.metadata = new MediaMetadata({ title: c.title, artist: t?.name || 'Virtual Midrash', album: 'Virtual Midrash', artwork: art ? [{ src: art }] : [] });
       }
     }
+    else if (at != null) a.currentTime = at; // same class: jump to that part
     a.play().catch(() => setPlaying(false));
   }, [teachers]);
   playRef.current = play;

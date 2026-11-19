@@ -10,7 +10,8 @@ import { lock, normalizeCode } from './lib/lock.mjs';
 import { channelIdFrom, parseYoutube, teacherForTitle } from './lib/youtube.mjs';
 import { applyOverrides } from './lib/overrides.mjs';
 import { dafFor, weekInfo, CYCLE_DAYS } from './lib/calendar.mjs';
-import { searchTerms, parseModelJson, summaryPrompt } from './lib/ai-text.mjs';
+import { searchTerms, parseModelJson, summaryPrompt, timedTranscript } from './lib/ai-text.mjs';
+import { ask, prepare } from './.ask.mjs';
 
 const fx = (n) => readFile(new URL(`fixtures/${n}`, import.meta.url), 'utf8');
 
@@ -210,8 +211,31 @@ test('AI step: search words and reading the model reply', () => {
   for (const w of ['gemara', 'bava', 'batra', 'shabbat', 'pesik', 'reisha', 'שבת']) assert.ok(terms.includes(w), w);
   for (const w of ['the', 'you', 'know', 'so', '12']) assert.ok(!terms.includes(w), w);
   const r = parseModelJson('```json\n{"summary":" A class about X. ","subjects":["a","b",""],"questions":["q?"],"quality":"good","extra":1}\n```');
-  assert.deepEqual(r, { summary: 'A class about X.', subjects: ['a', 'b'], questions: ['q?'], quality: 'good' });
+  assert.deepEqual(r, { summary: 'A class about X.', subjects: ['a', 'b'], questions: ['q?'], quality: 'good', topic: null, chapters: [] });
+  const r2 = parseModelJson('{"summary":"s","topic":"Halakha","chapters":[{"at":"12:30","title":"Second","about":"x y"},{"at":"0:40","title":"First"},{"at":"0:50","title":"too close"},{"at":"59:00","title":"past the end"},{"at":"soon","title":"bad"}]}', 1800);
+  assert.equal(r2.topic, 'Halakha');
+  assert.deepEqual(r2.chapters, [{ at: 40, title: 'First', about: '' }, { at: 750, title: 'Second', about: 'x y' }]);
+  assert.equal(parseModelJson('{"summary":"s","topic":"Cooking"}').topic, null);
+  assert.equal(timedTranscript([{ start: 0, text: 'a' }, { start: 20, text: 'b' }, { start: 50, text: 'c' }, { start: 3725, text: 'd' }]), '[0:00] a b \n[0:50] c \n[62:05] d');
   assert.throws(() => parseModelJson('sorry, I cannot'));
   assert.throws(() => parseModelJson('{"subjects":[]}'));
   assert.match(summaryPrompt({ title: 'T', teacher: 'R', minutes: 5, transcript: 'hello' }), /Class title: T[\s\S]*Transcript:\nhello$/);
+});
+
+test('ask a question: finds the class by what was said, and the part to jump to', () => {
+  const titles = { s1: 'Wearing the Shoes of Someone Who Passed Away', s2: 'Arakhin 10', s3: 'Arachin daf 2' };
+  const ready = prepare([
+    { i: 's1', m: 'Clothing and shoes of the deceased.', s: 'Sefer Hasidim; Sedaka; leather shoes', q: 'Can I donate the clothing of a deceased family member to charity?', c: ['custom question introduction', 'sefer hasidim source danger', 'donate charity clothing poor'], t: 'shoes dead clothing charity hallel family' },
+    { i: 's2', m: 'Why full Hallel is not said on Purim.', s: 'Hallel; Purim; Rosh Hashana; Hasosrot', q: 'Why is Hallel not recited on Purim?', c: ['trumpets temple', 'hallel purim megilla'], t: 'hallel purim trumpets flute megilla charity' },
+    { i: 's3', m: 'Who can make a valuation vow.', s: 'Erech vows; Hinukh; Megilla reading', q: 'Are children obligated in Sukkah?', c: ['mishna hakol', 'children hinukh sukkah'], t: 'vow children sukkah everyone' },
+  ], (sid) => titles[sid]);
+  const top = (q) => ask(q, ready).map((a) => a.sid);
+  assert.deepEqual(top('Can I give a dead person\'s clothes to charity?').slice(0, 1), ['s1']);
+  assert.equal(ask('donate clothing to charity', ready)[0].part, 2);
+  assert.deepEqual(top('why no hallel on purim').slice(0, 1), ['s2']);
+  assert.deepEqual(top('chinuch'), ['s3']);          // spelled the Ashkenazi way
+  assert.deepEqual(top('chatzotzrot'), ['s2']);
+  assert.deepEqual(top('what is the'), []);           // nothing but filler words
+  assert.deepEqual(top('flute'), []);                // only said in passing: not enough
+  assert.deepEqual(top('quantum physics'), []);
 });

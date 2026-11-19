@@ -11,7 +11,10 @@ import { readFile, writeFile, mkdir, rm, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { searchTerms, parseModelJson, summaryPrompt } from './lib/ai-text.mjs';
+import { readFileSync } from 'node:fs';
+import { searchTerms, parseModelJson, summaryPrompt, timedTranscript } from './lib/ai-text.mjs';
+
+const VERSION = 2; // 2 adds the topic and the parts of the class; older files are redone from the saved transcript
 
 const run = promisify(execFile);
 const root = new URL('..', import.meta.url);
@@ -29,10 +32,11 @@ await mkdir(new URL('ai-transcripts/', root), { recursive: true });
 await mkdir(new URL('.ai-tmp/', root), { recursive: true });
 const teacherName = (id) => data.teachers.find((t) => t.id === id)?.name || id;
 const aiFile = (c) => new URL(`content/ai/${c.sid}.json`, root);
+const upToDate = (c) => { try { return (JSON.parse(readFileSync(aiFile(c), 'utf8')).v || 1) >= VERSION; } catch { return false; } };
 const txFile = (c) => new URL(`ai-transcripts/${c.sid}.json`, root);
 
 // Take turns between teachers, newest first, so a small run covers a mix.
-const todo = data.classes.filter((c) => c.kind === 'audio' && c.sid && c.audioUrl && !existsSync(aiFile(c)) && c.durationSec > 120 && c.durationSec <= ONLY_UNDER_MIN * 60);
+const todo = data.classes.filter((c) => c.kind === 'audio' && c.sid && c.audioUrl && !upToDate(c) && c.durationSec > 120 && c.durationSec <= ONLY_UNDER_MIN * 60);
 const todoAll = data.classes.filter((c) => c.kind === 'audio' && c.sid && c.audioUrl && c.durationSec > 120 && c.durationSec <= ONLY_UNDER_MIN * 60).length;
 const byTeacher = new Map();
 for (const c of todo) { if (!byTeacher.has(c.teacherId)) byTeacher.set(c.teacherId, []); byTeacher.get(c.teacherId).push(c); }
@@ -83,8 +87,9 @@ async function geminiModels() {
 
 const drop = (model) => { if (models) models = models.filter((m) => m !== model); };
 
-async function summarize(c, transcript) {
-  const body = { contents: [{ role: 'user', parts: [{ text: summaryPrompt({ title: c.title, teacher: teacherName(c.teacherId), minutes: Math.round(c.durationSec / 60), transcript: transcript.slice(0, 120000) }) }] }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } };
+async function summarize(c, tx) {
+  const transcript = tx.segments?.length ? timedTranscript(tx.segments) : tx.text;
+  const body = { contents: [{ role: 'user', parts: [{ text: summaryPrompt({ title: c.title, teacher: teacherName(c.teacherId), minutes: Math.round(c.durationSec / 60), transcript: transcript.slice(0, 140000) }) }] }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } };
   let last = 'no model available';
   for (const model of [...(await geminiModels())]) {
     let r;
@@ -93,7 +98,7 @@ async function summarize(c, transcript) {
     } catch (e) { last = `${model}: no answer in 90 seconds`; console.log(`  (${last}; trying the next model)`); drop(model); continue; }
     if (r.ok) {
       const text = (await r.json()).candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('') || '';
-      try { return { ...parseModelJson(text), model }; } catch (e) { last = `${model}: ${e.message}`; console.log(`  (${last})`); continue; }
+      try { return { ...parseModelJson(text, c.durationSec), model }; } catch (e) { last = `${model}: ${e.message}`; console.log(`  (${last})`); continue; }
     }
     last = `${model} ${r.status}: ${(await r.text()).replace(/\s+/g, ' ').slice(0, 160)}`;
     console.log(`  (${last})`);
@@ -113,13 +118,15 @@ for (const c of queue) {
   try {
     let tx = existsSync(txFile(c)) ? JSON.parse(await readFile(txFile(c), 'utf8')) : null; // already transcribed on an earlier run
     if (!tx) { tx = await transcribe(c); await writeFile(txFile(c), JSON.stringify({ id: c.id, title: c.title, ...tx })); minutes += mins; }
-    const ai = await summarize(c, tx.text);
-    await writeFile(aiFile(c), JSON.stringify({ id: c.id, title: c.title, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: tx.language, made: new Date().toISOString().slice(0, 10), by: `groq whisper + ${ai.model}` }, null, 1));
+    const ai = await summarize(c, tx);
+    await writeFile(aiFile(c), JSON.stringify({ v: VERSION, id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: tx.language, made: new Date().toISOString().slice(0, 10), by: `groq whisper + ${ai.model}` }, null, 1));
     done++;
     console.log(`\n✓ ${teacherName(c.teacherId)} — ${c.title} (${mins} min, ${tx.text.split(/\s+/).length} words${tx.sentMb ? ', sent ' + tx.sentMb + ' MB' : ''}, ${ai.model}${ai.quality === 'poor' ? ', marked POOR' : ''})`);
     console.log(`  Summary: ${ai.summary}`);
     console.log(`  Subjects: ${ai.subjects.join('; ')}`);
     console.log(`  Questions: ${ai.questions.join(' | ')}`);
+    console.log(`  Topic: ${ai.topic || 'none'} (title rules said: ${c.topic || 'none'})`);
+    console.log(`  Parts: ${ai.chapters.map((x) => `${Math.floor(x.at / 60)}:${String(x.at % 60).padStart(2, '0')} ${x.title}`).join(' | ')}`);
     console.log(`  Transcript opens: ${tx.text.slice(0, 220).replace(/\s+/g, ' ')}…`);
   } catch (e) {
     if (e instanceof SlowDown && /^Groq/.test(e.message) && !groqResting) { groqResting = true; console.log(`\n⏸ Transcription paused — ${e.message}`); continue; }
