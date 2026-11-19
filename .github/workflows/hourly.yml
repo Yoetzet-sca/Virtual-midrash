@@ -1,0 +1,32 @@
+# Keeps the site fresh every hour. GitHub's own timer often skips runs, so this job starts the site update,
+# waits 55 minutes, and then starts itself again. The timer below is only a backup that restarts the chain if it stops.
+# To stop it: set the repository variable UPDATE_PAUSE to 1.
+name: Hourly check for new classes
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '7 */3 * * *'
+
+permissions:
+  actions: write
+
+# Only one chain at a time: a newer start replaces an older one that is still waiting.
+concurrency:
+  group: hourly
+  cancel-in-progress: true
+
+jobs:
+  tick:
+    if: ${{ vars.UPDATE_PAUSE != '1' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Update the site now
+        run: gh api -X POST repos/${{ github.repository }}/actions/workflows/update.yml/dispatches -f ref=main
+      - name: Wait 55 minutes
+        run: sleep 3300
+      - name: Start the next hour
+        run: gh api -X POST repos/${{ github.repository }}/actions/workflows/hourly.yml/dispatches -f ref=main
