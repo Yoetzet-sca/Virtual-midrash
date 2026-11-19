@@ -3,3 +3,5 @@ dist
 public/data/app.json
 .DS_Store
 scripts/.search.mjs
+ai-transcripts
+.ai-tmp

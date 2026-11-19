@@ -10,6 +10,7 @@ import { lock, normalizeCode } from './lib/lock.mjs';
 import { channelIdFrom, parseYoutube, teacherForTitle } from './lib/youtube.mjs';
 import { applyOverrides } from './lib/overrides.mjs';
 import { dafFor, weekInfo, CYCLE_DAYS } from './lib/calendar.mjs';
+import { searchTerms, parseModelJson, summaryPrompt } from './lib/ai-text.mjs';
 
 const fx = (n) => readFile(new URL(`fixtures/${n}`, import.meta.url), 'utf8');
 
@@ -201,4 +202,16 @@ test('search forgives spelling', async () => {
   ];
   for (const [q, text] of yes) assert.ok(matches(q, text), `"${q}" should find "${text}"`);
   for (const [q, text] of no) assert.ok(!matches(q, text), `"${q}" should not find "${text}"`);
+});
+
+test('AI step: search words and reading the model reply', () => {
+  const terms = searchTerms('So the Gemara in Bava Batra says, you know, that the fridge light, the fridge, on Shabbat is a pesik reisha. שבת 12 12 the the');
+  assert.deepEqual(terms.slice(0, 1), ['fridge']);
+  for (const w of ['gemara', 'bava', 'batra', 'shabbat', 'pesik', 'reisha', 'שבת']) assert.ok(terms.includes(w), w);
+  for (const w of ['the', 'you', 'know', 'so', '12']) assert.ok(!terms.includes(w), w);
+  const r = parseModelJson('```json\n{"summary":" A class about X. ","subjects":["a","b",""],"questions":["q?"],"quality":"good","extra":1}\n```');
+  assert.deepEqual(r, { summary: 'A class about X.', subjects: ['a', 'b'], questions: ['q?'], quality: 'good' });
+  assert.throws(() => parseModelJson('sorry, I cannot'));
+  assert.throws(() => parseModelJson('{"subjects":[]}'));
+  assert.match(summaryPrompt({ title: 'T', teacher: 'R', minutes: 5, transcript: 'hello' }), /Class title: T[\s\S]*Transcript:\nhello$/);
 });

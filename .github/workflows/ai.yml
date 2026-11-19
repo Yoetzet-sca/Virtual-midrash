@@ -1,0 +1,65 @@
+# Transcribes classes and writes AI summaries for search. Stops by itself at the services' rate limits
+# and picks up where it left off on the next run.
+name: AI summaries
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_classes:
+        description: How many classes to do in this run
+        default: '20'
+  push:
+    branches: [main]
+    paths: ['.github/ai-run']
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: ai
+  cancel-in-progress: false
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Install ffmpeg
+        run: command -v ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+      # Full transcripts are kept in this private cache, not in the public repository.
+      - uses: actions/cache@v4
+        with:
+          path: ai-transcripts
+          key: ai-transcripts-${{ github.run_id }}
+          restore-keys: ai-transcripts-
+      - name: Read the class list
+        run: npm run data
+        env:
+          COMMUNITY_CODE: ${{ secrets.COMMUNITY_CODE }}
+          SHEET_TEACHERS_URL: ${{ secrets.SHEET_TEACHERS_URL }}
+          SHEET_OVERRIDES_URL: ${{ secrets.SHEET_OVERRIDES_URL }}
+      - name: Transcribe and summarize
+        run: node scripts/ai.mjs
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AI_MAX_CLASSES: ${{ inputs.max_classes || vars.AI_MAX_CLASSES || '20' }}
+      - name: Save the summaries
+        run: |
+          git config user.name "Virtual Midrash bot"
+          git config user.email "noreply@github.com"
+          git add content/ai
+          if git diff --cached --quiet; then echo "Nothing new to save."; exit 0; fi
+          git commit -q -m "AI summaries: $(git diff --cached --name-only | wc -l) classes"
+          git pull -q --rebase
+          git push -q
+          gh workflow run update.yml || echo "Could not start the publish job; it will pick these up on its next scheduled run."
+        env:
+          GH_TOKEN: ${{ github.token }}
