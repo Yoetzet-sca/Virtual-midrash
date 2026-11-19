@@ -39,7 +39,10 @@ jobs:
           SHEET_SCHEDULE_URL: ${{ secrets.SHEET_SCHEDULE_URL }}
           SHEET_NOTICES_URL: ${{ secrets.SHEET_NOTICES_URL }}
           SHEET_RESOURCES_URL: ${{ secrets.SHEET_RESOURCES_URL }}
+          SHEET_OVERRIDES_URL: ${{ secrets.SHEET_OVERRIDES_URL }}
       - run: npm run build
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

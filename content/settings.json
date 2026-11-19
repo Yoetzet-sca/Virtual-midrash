@@ -36,5 +36,8 @@
   "addressContact": {
     "name": "Gail",
     "sms": "+13472712141"
+  },
+  "analytics": {
+    "goatcounter": ""
   }
 }

@@ -8,6 +8,7 @@ import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv } from './lib/csv.mjs';
 import { lock, normalizeCode } from './lib/lock.mjs';
 import { channelIdFrom, parseYoutube, teacherForTitle } from './lib/youtube.mjs';
+import { applyOverrides } from './lib/overrides.mjs';
 
 const fx = (n) => readFile(new URL(`fixtures/${n}`, import.meta.url), 'utf8');
 
@@ -120,4 +121,21 @@ test('YouTube: channel id, videos, and matching a video to its teacher', async (
   assert.equal(teacherForTitle('Staying Inspired with Rabbi Besser', teachers), 'nb');
   assert.equal(teacherForTitle('The Hidary family dinner', teachers), null); // two Hidarys, no first name
   assert.equal(teacherForTitle('SCA Annual Dinner Highlights', teachers), null);
+});
+
+test('overrides: staff can fix a topic or hide a class', () => {
+  const classes = [
+    { id: '1', teacherId: 'a', title: 'The Future of our Community', topic: null },
+    { id: '2', teacherId: 'a', title: 'Test recording please ignore', topic: null },
+    { id: '3', teacherId: 'b', title: 'Community Dinner', topic: 'Holidays' },
+  ];
+  const out = applyOverrides(classes, [
+    { match: 'future of our community', topic: 'land of israel' },
+    { match: 'please ignore', hide: 'yes' },
+    { match: 'community', topic: 'Mishna', teacherId: 'zzz' }, // other teacher: no effect
+    { match: '', topic: 'Halakha' }, // empty row: ignored
+    { match: 'dinner', topic: 'Not A Topic' }, // unknown topic: ignored
+  ]);
+  assert.deepEqual(out.map((c) => [c.id, c.topic]), [['1', 'Land of Israel'], ['3', 'Holidays']]);
+  assert.equal(applyOverrides(classes, []).length, 3);
 });

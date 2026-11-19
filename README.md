@@ -36,9 +36,11 @@ Sheet columns (first row of each tab, exactly as written):
   `day` is `Sun`…`Sat`; `mode` is `zoom`, `inperson` or `both`.
 - **Notices:** `date, text, dedication` — `date` as `2026-11-18`.
 - **Resources:** `category, name, area, note, phone`.
+- **Overrides** (optional): `match, topic, teacherId, hide` — any class whose title contains `match` gets that
+  `topic`; put `yes` under `hide` to remove a class from the app. `teacherId` limits a row to one teacher.
 
 Publish each tab with File → Share → Publish to web → CSV, and save the links as repository secrets
-`SHEET_TEACHERS_URL`, `SHEET_SCHEDULE_URL`, `SHEET_NOTICES_URL`, `SHEET_RESOURCES_URL`.
+`SHEET_TEACHERS_URL`, `SHEET_SCHEDULE_URL`, `SHEET_NOTICES_URL`, `SHEET_RESOURCES_URL`, `SHEET_OVERRIDES_URL`.
 
 ## The community code
 
@@ -63,9 +65,19 @@ npm run data         # live data (needs internet)
 npm run build
 ```
 
+## Other settings
+
+- **Videos:** YouTube channels are listed in `content/settings.json` → `youtube`.
+- **Listening numbers:** open a free GoatCounter account and put its code in `content/settings.json` →
+  `analytics.goatcounter`. It counts anonymous listens by teacher and topic; no cookies, no personal data.
+- **Site address:** when the site moves to its own domain, set the repository variable `SITE_URL`
+  (for example `https://virtualmidrash.com/`) so share links use it.
+- **A dedication for today:** add a row to Notices with today's date and the `dedication` text. It shows on
+  the feed and on This Week.
+
 ## Not built yet
 
 - Phone notifications when a followed teacher posts (planned: Firebase Cloud Messaging, in the store apps).
-- Captions (planned: automatic, labelled "may contain errors", with an off switch).
-- Video classes from YouTube, and the archive of older recordings.
+- Captions (on hold).
+- The archive of older recordings.
 - App Store / Google Play packaging.

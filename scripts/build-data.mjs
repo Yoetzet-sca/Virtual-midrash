@@ -12,6 +12,7 @@ import { topicFor, TOPICS } from './lib/topics.mjs';
 import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv } from './lib/csv.mjs';
 import { lock } from './lib/lock.mjs';
+import { applyOverrides } from './lib/overrides.mjs';
 import { channelIdFrom, feedUrl, parseYoutube, teacherForTitle } from './lib/youtube.mjs';
 
 const FIXTURES = process.argv.includes('--fixtures');
@@ -99,6 +100,12 @@ for (const y of settings.youtube || []) {
   }
 }
 classes.sort((a, b) => b.date.localeCompare(a.date));
+// Staff corrections: fix a topic or hide a class.
+{
+  const fixed = applyOverrides(classes, await sheetOr('SHEET_OVERRIDES_URL', await json('content/overrides.json')));
+  if (fixed.length !== classes.length) console.log(`✓ Overrides hid ${classes.length - fixed.length} classes`);
+  classes.splice(0, classes.length, ...fixed);
+}
 // A short, link-safe id for each class's share page.
 for (const c of classes) c.sid = createHash('sha1').update(c.id).digest('hex').slice(0, 10);
 
@@ -144,6 +151,7 @@ for (const e of settings.erub) {
 const out = {
   generatedAt: now.toISOString(), topics: TOPICS, teachers, classes, schedule, resources, erub,
   resourceCategories: settings.resourceCategories,
+  analytics: settings.analytics || null,
   links: { giveLively: settings.giveLivelyUrl, officeEmail: settings.officeEmail, newsletter: settings.newsletterUrl, addressContact: settings.addressContact || null },
   hasLockedDetails: !!code,
 };

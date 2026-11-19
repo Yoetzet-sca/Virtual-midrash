@@ -2,6 +2,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import type { ClassItem, Teacher } from './types';
 import { learn, getPrefs, setPrefs, savePosition } from './store';
+import { track } from './analytics';
 
 type Player = {
   cls: ClassItem | null; playing: boolean; time: number; duration: number; error: string;
@@ -11,7 +12,15 @@ type Player = {
 const Ctx = createContext<Player | null>(null);
 export const usePlayer = () => useContext(Ctx)!;
 
-export function PlayerProvider({ teachers, children }: { teachers: Teacher[]; children: React.ReactNode }) {
+// The next class in a series: the same teacher's next-posted class in the same topic (Arakhin 7 → Arakhin 8).
+export function nextInSeries(c: ClassItem, classes: ClassItem[]) {
+  return classes
+    .filter((x) => x.kind === 'audio' && x.teacherId === c.teacherId && x.topic === c.topic && x.date > c.date)
+    .sort((a, b) => a.date.localeCompare(b.date))[0];
+}
+
+export function PlayerProvider({ teachers, classes, children }: { teachers: Teacher[]; classes: ClassItem[]; children: React.ReactNode }) {
+  const playRef = useRef<(c: ClassItem) => void>(() => {});
   const audio = useRef<HTMLAudioElement | null>(null);
   const counted = useRef(new Set<string>());
   const [cls, setCls] = useState<ClassItem | null>(null);
@@ -31,7 +40,18 @@ export function PlayerProvider({ teachers, children }: { teachers: Teacher[]; ch
     const on = (e: string, f: () => void) => a.addEventListener(e, f);
     on('play', () => setPlaying(true));
     on('pause', () => { setPlaying(false); const c = clsRef.current; if (c && a.currentTime > 10 && !a.ended) savePosition(c.id, a.currentTime); });
-    on('ended', () => { setPlaying(false); if (clsRef.current) savePosition(clsRef.current.id, null); });
+    on('ended', () => {
+      setPlaying(false);
+      const done = clsRef.current;
+      if (!done) return;
+      savePosition(done.id, null);
+      // Carry on to the next class in the series, and move the feed to it if the feed is showing.
+      const next = nextInSeries(done, classes);
+      if (next) {
+        playRef.current(next);
+        if (/^#?\/?(class\/.*)?$/.test(location.hash)) location.hash = '/class/' + encodeURIComponent(next.id);
+      }
+    });
     on('loadedmetadata', () => {
       setDuration(Number.isFinite(a.duration) ? a.duration : 0);
       // Pick up where they left off.
@@ -51,6 +71,7 @@ export function PlayerProvider({ teachers, children }: { teachers: Teacher[]; ch
       if (c && a.currentTime > 60 && !counted.current.has(c.id)) {
         counted.current.add(c.id);
         learn(['t:' + c.teacherId, c.topic && 'k:' + c.topic], 2);
+        track('listen', `${teachers.find((x) => x.id === c.teacherId)?.name || c.teacherId} / ${c.topic || 'No topic'}`);
       }
     });
     on('error', () => { setPlaying(false); setError('This class could not be played. It may have been removed by the teacher.'); });
@@ -75,6 +96,7 @@ export function PlayerProvider({ teachers, children }: { teachers: Teacher[]; ch
     }
     a.play().catch(() => setPlaying(false));
   }, [teachers]);
+  playRef.current = play;
   const pause = useCallback(() => audio.current?.pause(), []);
   const toggle = useCallback((c: ClassItem) => {
     if (clsRef.current?.id === c.id && !audio.current!.paused) audio.current!.pause(); else play(c);
@@ -87,6 +109,16 @@ export function PlayerProvider({ teachers, children }: { teachers: Teacher[]; ch
     setPrefs({ rate: next }); setRate(next);
     if (audio.current) audio.current.playbackRate = next;
   }, []);
+
+  // Lock-screen and headphone buttons
+  useEffect(() => {
+    if (!('mediaSession' in navigator)) return;
+    const set = (a: MediaSessionAction, f: (() => void) | null) => { try { navigator.mediaSession.setActionHandler(a, f); } catch { /* not supported on this phone */ } };
+    set('seekbackward', () => skip(-15));
+    set('seekforward', () => skip(30));
+    const next = cls ? nextInSeries(cls, classes) : undefined;
+    set('nexttrack', next ? () => play(next) : null);
+  }, [cls, classes, skip, play]);
 
   const value = useMemo(() => ({ cls, playing, time, duration, error, rate, play, pause, toggle, seek, skip, cycleRate }), [cls, playing, time, duration, error, rate, play, pause, toggle, seek, skip, cycleRate]);
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

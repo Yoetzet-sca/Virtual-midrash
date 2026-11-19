@@ -9,6 +9,8 @@ export type Prefs = {
   liked: string[];
   saved: string[];
   code: string;
+  visits: number;
+  installAsked: boolean; // the add-to-home-screen card was answered or dismissed
   rate: number; // playback speed
   positions: Record<string, [number, number]>; // class id -> [seconds in, when saved] for classes not finished
   swiped: boolean; // has learned the swipe directions, so the hint can go away
@@ -16,12 +18,14 @@ export type Prefs = {
   learned: Record<string, number>;
 };
 const KEY = 'vm.prefs.v1';
-const empty: Prefs = { onboarded: false, topics: [], following: [], hidden: [], liked: [], saved: [], code: '', rate: 1, positions: {}, swiped: false, learned: {} };
+const empty: Prefs = { onboarded: false, topics: [], following: [], hidden: [], liked: [], saved: [], code: '', visits: 0, installAsked: false, rate: 1, positions: {}, swiped: false, learned: {} };
 
 function read(): Prefs {
   try { return { ...empty, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return empty; }
 }
 let state = read();
+// Count app opens (used to time the add-to-home-screen suggestion).
+try { state = { ...state, visits: (state.visits || 0) + 1 }; localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* ignore */ }
 const subs = new Set<() => void>();
 
 export function setPrefs(patch: Partial<Prefs> | ((p: Prefs) => Partial<Prefs>)) {

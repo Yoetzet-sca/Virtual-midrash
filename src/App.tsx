@@ -12,6 +12,8 @@ import { Library } from './screens/Library';
 import { Splash, Welcome } from './screens/Welcome';
 import { ICal, IHeart, IHome, IPause, IPeople, IPlay, ISearch } from './icons';
 import { go } from './ui';
+import { startAnalytics } from './analytics';
+import { InstallPrompt } from './install';
 
 const useHash = () => {
   const [h, setH] = useState(location.hash.replace(/^#\/?/, ''));
@@ -66,6 +68,7 @@ function Shell({ data }: { data: AppData }) {
         {route === 'saved' && <Library data={data} />}
       </main>
       {!isFeed && <MiniPlayer data={data} />}
+      {!isFeed && <InstallPrompt />}
       <nav className="nav">
         {TABS.map((t) => <a key={t.id} href={'#/' + t.id} className={t.id === tab ? 'on' : ''} aria-current={t.id === tab ? 'page' : undefined}><t.icon />{t.label}</a>)}
       </nav>
@@ -76,8 +79,8 @@ function Shell({ data }: { data: AppData }) {
 export function App() {
   const [data, setData] = useState<AppData | null>(null);
   const [failed, setFailed] = useState(false);
-  useEffect(() => { fetch('./data/app.json', { cache: 'no-cache' }).then((r) => r.json()).then(setData).catch(() => setFailed(true)); }, []);
+  useEffect(() => { fetch('./data/app.json', { cache: 'no-cache' }).then((r) => r.json()).then((d: AppData) => { startAnalytics(d.analytics?.goatcounter); setData(d); }).catch(() => setFailed(true)); }, []);
   if (failed) return <div className="state"><h1>Can’t load classes right now</h1><p>Check your connection and try again.</p><button className="btn" onClick={() => location.reload()}>Try again</button></div>;
   if (!data) return <div className="state"><img src="./brand/sca-icon-white.png" alt="" width={96} /></div>;
-  return <PlayerProvider teachers={data.teachers}><Shell data={data} /></PlayerProvider>;
+  return <PlayerProvider teachers={data.teachers} classes={data.classes}><Shell data={data} /></PlayerProvider>;
 }

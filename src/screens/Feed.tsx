@@ -124,12 +124,16 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
     if (!prefs.liked.includes(c.id)) learn(['t:' + c.teacherId, c.topic && 'k:' + c.topic], 3);
     setPrefs({ liked: toggleIn(prefs.liked, c.id) });
   };
+  // Today's dedication (from the Notices tab) shows on the feed and leads to Give.
+  const today = new Date();
+  const todayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+  const dedication = data.schedule.notices.find((n) => n.date === todayKey && n.dedication)?.dedication;
   const erubUp = data.erub.filter((e) => e.fresh && erubLabel(e).good);
   const topics = ['For You', ...data.topics];
   const current = p.cls && p.cls.id === active ? p : null;
 
   return (
-    <div className="feed">
+    <div className={'feed' + (dedication ? ' has-ded' : '')}>
       <div className="feed-x" ref={scroller}>
         {columns.map((col, ci) => (
           <div className="feed-col" key={col.teacherId} data-col={ci}>
@@ -234,6 +238,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
         <div className="chips scroll">
           {topics.map((t) => <button key={t} className={'chip' + (t === topic ? ' on' : '')} aria-pressed={t === topic} onClick={() => setTopic(t)}>{t}</button>)}
         </div>
+        {dedication && <a className="ded" href="#/give"><span>Today’s learning is dedicated</span><b>{dedication}</b></a>}
       </header>
       {columns.length > 1 && <div className="feed-dots" aria-hidden="true">{columns.slice(0, 12).map((col, i) => <span key={col.teacherId} className={i === activeCol ? 'on' : ''} />)}</div>}
       {current && <div className="feed-progress" style={{ width: `${(current.duration ? current.time / current.duration : 0) * 100}%` }} />}
