@@ -23,8 +23,16 @@ const RE = {
   nakh: any(NAKH),
 };
 
+// Titles written in Hebrew
+const HEB = [
+  [/דף\s*(ה)?יומי/, 'Daf Yomi'], [/פרש[תה]|פרשיות/, 'Perasha'], [/הלכ(ה|ות)|דיני/, 'Halakha'], [/מנהג/, 'Minhag of the Week'],
+  [/משנ(ה|יות)|פרקי אבות/, 'Mishna'], [/גמרא|מסכת|תלמוד/, 'Gemara'], [/ארץ ישראל/, 'Land of Israel'],
+  [/ראש השנה|יום (ה)?כיפור|סוכות|חנוכה|פורים|פסח|שבועות|תשעה באב/, 'Holidays'], [/הפטר(ה|ת)|תהלים|נביא/, 'Nebiim and Ketubim'],
+];
+
 export function topicFor(title, defaultTopic = null) {
   const t = String(title || '');
+  for (const [re, topic] of HEB) if (re.test(t)) return topic;
   if (RE.dafYomi.test(t)) return 'Daf Yomi';
   if (RE.gemara.test(t)) return defaultTopic === 'Daf Yomi' ? 'Daf Yomi' : 'Gemara';
   if (RE.halakha.test(t)) return 'Halakha';

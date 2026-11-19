@@ -62,6 +62,8 @@ test('topics from titles', () => {
     ['Yonah 2026', null, 'Nebiim and Ketubim'],
     ["Israel's Declaration of Independence: The Document", null, 'Land of Israel'],
     ['The Future of our Community', null, null],
+    ['حاخام أوري لاطي. חכם אורי לאטי. פרשת חיי שרה תשפ״ז. باللغة العربية', null, 'Perasha'],
+    ['הלכות שבת – חלק ג', null, 'Halakha'],
   ];
   for (const [title, def, want] of cases) assert.equal(topicFor(title, def), want, title);
 });
