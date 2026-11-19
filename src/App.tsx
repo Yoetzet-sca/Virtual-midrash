@@ -8,6 +8,7 @@ import { Explore } from './screens/Explore';
 import { Week } from './screens/Week';
 import { Resources } from './screens/Resources';
 import { Give } from './screens/Give';
+import { Library } from './screens/Library';
 import { Splash, Welcome } from './screens/Welcome';
 import { ICal, IHeart, IHome, IPause, IPeople, IPlay, ISearch } from './icons';
 import { go } from './ui';
@@ -52,7 +53,7 @@ function Shell({ data }: { data: AppData }) {
     return <Welcome data={data} onDone={() => setPrefs({ onboarded: true })} />;
   }
   const isFeed = route === '' || route === 'class';
-  const tab = isFeed ? '' : route === 'teacher' ? 'explore' : route;
+  const tab = isFeed || route === 'saved' ? '' : route === 'teacher' ? 'explore' : route;
   return (
     <div className="shell">
       <main className={isFeed ? 'main feed-main' : 'main'}>
@@ -62,6 +63,7 @@ function Shell({ data }: { data: AppData }) {
         {route === 'week' && <Week data={data} />}
         {route === 'resources' && <Resources data={data} />}
         {route === 'give' && <Give data={data} />}
+        {route === 'saved' && <Library data={data} />}
       </main>
       {!isFeed && <MiniPlayer data={data} />}
       <nav className="nav">

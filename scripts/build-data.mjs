@@ -5,6 +5,7 @@
 //   node scripts/build-data.mjs             live: reads feeds, the Google Sheet (if set) and erub sites
 //   node scripts/build-data.mjs --fixtures  offline sample from scripts/fixtures (for development)
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { parseFeed } from './lib/rss.mjs';
 import { topicFor, TOPICS } from './lib/topics.mjs';
@@ -98,6 +99,8 @@ for (const y of settings.youtube || []) {
   }
 }
 classes.sort((a, b) => b.date.localeCompare(a.date));
+// A short, link-safe id for each class's share page.
+for (const c of classes) c.sid = createHash('sha1').update(c.id).digest('hex').slice(0, 10);
 
 // ---- Weekly schedule --------------------------------------------------------
 const code = process.env.COMMUNITY_CODE || '';

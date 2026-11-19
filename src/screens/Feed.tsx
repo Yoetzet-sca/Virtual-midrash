@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { AppData, ClassItem } from '../types';
-import { usePrefs, setPrefs, toggleIn, learn } from '../store';
+import { usePrefs, getPrefs, setPrefs, toggleIn, learn } from '../store';
 import { usePlayer } from '../player';
 import { Avatar, erubLabel, go } from '../ui';
-import { clock, initials, matchesTopic, minutes, rank, shareLink, daysAgo } from '../util';
-import { IGift, IHeart, IPause, IPlay, ISave, ISearch, IShare } from '../icons';
+import { classShare, clock, initials, matchesTopic, minutes, rank, shareLink, daysAgo } from '../util';
+import { IGift, IHeart, IPause, IPlay, ISave, ISaved, ISearch, IShare } from '../icons';
 
-export function Feed({ data, startId, topic, setTopic }: { data: AppData; startId?: string; topic: string; setTopic: (t: string) => void }) {
+export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData; startId?: string; topic: string; setTopic: (t: string) => void }) {
   const prefs = usePrefs();
   const p = usePlayer();
+  // With no class asked for, open on the class this person was last in the middle of.
+  const [resumeId] = useState(() => Object.entries(getPrefs().positions).sort((a, b) => b[1][1] - a[1][1])[0]?.[0]);
+  const startId = linkId ?? (data.classes.some((c) => c.id === resumeId) ? resumeId : undefined);
   const scroller = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState('');
   const [toast, setToast] = useState('');
@@ -164,6 +167,7 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
               </div>
               <div className="card-info">
                 <div className="tags">
+                  {!mine && prefs.positions[c.id] && <span className="tag new">CONTINUE · {clock(prefs.positions[c.id][0])}</span>}
                   {daysAgo(c.date) <= 0 && <span className="tag new">NEW TODAY</span>}
                   {isVideo && <span className="tag">VIDEO</span>}
                   {c.topic && <span className="tag">{c.topic.toUpperCase()}</span>}
@@ -179,9 +183,18 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
                   </button>
                 </div>
                 {!prefs.swiped && <div className="card-hint">Swipe up for more from {t?.name.split(' ').slice(-1)[0]} · swipe sideways for another teacher · hold Follow to hide a teacher</div>}
-                {mine && <div className="card-time">{clock(p.time)} / {clock(p.duration || c.durationSec)}</div>}
                 {mine && p.error && <div className="card-error" role="alert">{p.error}</div>}
               </div>
+              {!isVideo && (
+                <div className={'scrub' + (mine ? '' : ' idle')}>
+                  <button disabled={!mine} onClick={() => p.skip(-15)} aria-label="Back 15 seconds">−15</button>
+                  <span className="scrub-time">{clock(mine ? p.time : prefs.positions[c.id]?.[0] || 0)}</span>
+                  <input type="range" disabled={!mine} aria-label="Position in class" min={0} max={Math.max(1, Math.floor((mine && p.duration) || c.durationSec))} value={Math.floor(mine ? p.time : prefs.positions[c.id]?.[0] || 0)} onChange={(e) => p.seek(Number(e.target.value))} />
+                  <span className="scrub-time">{clock((mine && p.duration) || c.durationSec)}</span>
+                  <button disabled={!mine} onClick={() => p.skip(30)} aria-label="Forward 30 seconds">+30</button>
+                  <button disabled={!mine} onClick={p.cycleRate} aria-label={'Speed ' + p.rate + ' times'} className="rate">{p.rate}×</button>
+                </div>
+              )}
               <div className={'rail' + (isVideo ? ' no-who' : '')}>
                 <a className="rail-who" href={'#/teacher/' + c.teacherId} aria-label={t?.name + ' page'}><Avatar t={t} size={52} ring /></a>
                 <button onClick={() => like(c)} aria-pressed={prefs.liked.includes(c.id)} className={prefs.liked.includes(c.id) ? 'hot' : ''}>
@@ -190,7 +203,7 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
                 <button onClick={() => setPrefs({ saved: toggleIn(prefs.saved, c.id) })} aria-pressed={prefs.saved.includes(c.id)}>
                   <ISave size={28} fill={prefs.saved.includes(c.id) ? 'currentColor' : 'none'} />{prefs.saved.includes(c.id) ? 'Saved' : 'Save'}
                 </button>
-                <button onClick={async () => { const r = await shareLink(`${c.title} — ${t?.name}`, '/class/' + encodeURIComponent(c.id)); if (r === 'copied') say('Link copied'); }}>
+                <button onClick={async () => { const r = await shareLink(`${c.title} — ${t?.name}`, classShare(c)); if (r === 'copied') say('Link copied'); }}>
                   <IShare size={28} />Share
                 </button>
                 <a href="#/give" className="hot"><IGift size={28} />Sponsor</a>
@@ -215,6 +228,7 @@ export function Feed({ data, startId, topic, setTopic }: { data: AppData; startI
           <span><strong>Virtual Midrash</strong><small>Sephardic Community Alliance</small></span>
           <span className="grow" />
           {erubUp.length > 0 && <a className="erub-pill" href="#/week"><span className="dot good" />ERUB {erubUp.length === data.erub.length ? 'UP' : erubUp[0].short.toUpperCase() + ' UP'}</a>}
+          <a className="icon-btn" href="#/saved" aria-label="Saved and in-progress classes"><ISaved /></a>
           <a className="icon-btn" href="#/explore" aria-label="Search"><ISearch /></a>
         </div>
         <div className="chips scroll">

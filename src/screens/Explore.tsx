@@ -14,7 +14,7 @@ export function Explore({ data, place: startPlace, pickTopic }: { data: AppData;
   const foundTeachers = needle ? data.teachers.filter((t) => t.name.toLowerCase().includes(needle)) : [];
   return (
     <div className="page">
-      <div className="head"><h1>Explore</h1><img className="sca" src="./brand/sca-icon-white.png" alt="Sephardic Community Alliance" /></div>
+      <div className="head"><h1>Explore</h1><span className="grow" /><a className="chip outline" href="#/saved">Your classes</a><img className="sca" src="./brand/sca-icon-white.png" alt="Sephardic Community Alliance" /></div>
       <label className="search"><ISearch size={20} /><span className="sr">Search</span>
         <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search classes or teachers" />
       </label>

@@ -41,11 +41,15 @@ export function rank(data: AppData, prefs: Prefs, now = new Date()): ClassItem[]
   return [...data.classes].map((c) => [score(c), c] as const).sort((a, b) => b[0] - a[0] || b[1].date.localeCompare(a[1].date)).map((x) => x[1]);
 }
 
-export async function shareLink(title: string, hash: string) {
-  const url = location.href.split('#')[0] + '#' + hash;
+// `path` is either an in-app route ('/teacher/x') or a share page ('c/abc.html') that shows a preview in WhatsApp and Messages.
+export async function shareLink(title: string, path: string) {
+  const base = location.href.split('#')[0].replace(/[^/]*$/, '');
+  const url = path.startsWith('/') ? base + '#' + path : base + path;
   try {
     if (navigator.share) { await navigator.share({ title, text: title, url }); return 'shared'; }
     await navigator.clipboard.writeText(url);
     return 'copied';
   } catch { return 'cancelled'; }
 }
+
+export const classShare = (c: ClassItem) => (c.sid ? `c/${c.sid}.html` : '/class/' + encodeURIComponent(c.id));

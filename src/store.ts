@@ -9,12 +9,14 @@ export type Prefs = {
   liked: string[];
   saved: string[];
   code: string;
+  rate: number; // playback speed
+  positions: Record<string, [number, number]>; // class id -> [seconds in, when saved] for classes not finished
   swiped: boolean; // has learned the swipe directions, so the hint can go away
   // Quiet learning: small scores per topic and teacher, nudged by what people listen to, like and skip.
   learned: Record<string, number>;
 };
 const KEY = 'vm.prefs.v1';
-const empty: Prefs = { onboarded: false, topics: [], following: [], hidden: [], liked: [], saved: [], code: '', swiped: false, learned: {} };
+const empty: Prefs = { onboarded: false, topics: [], following: [], hidden: [], liked: [], saved: [], code: '', rate: 1, positions: {}, swiped: false, learned: {} };
 
 function read(): Prefs {
   try { return { ...empty, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return empty; }
@@ -37,5 +39,15 @@ export function learn(keys: (string | null | undefined)[], by: number) {
     const learned = { ...p.learned };
     for (const k of keys) if (k) learned[k] = Math.max(-10, Math.min(10, (learned[k] || 0) + by));
     return { learned };
+  });
+}
+
+// Remember how far into a class someone is, so it can pick up there. Keeps the 60 most recent.
+export function savePosition(id: string, seconds: number | null) {
+  setPrefs((p) => {
+    const positions = { ...p.positions };
+    if (seconds === null) delete positions[id]; else positions[id] = [Math.floor(seconds), Date.now()];
+    const keep = Object.entries(positions).sort((a, b) => b[1][1] - a[1][1]).slice(0, 60);
+    return { positions: Object.fromEntries(keep) };
   });
 }
