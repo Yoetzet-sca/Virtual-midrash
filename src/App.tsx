@@ -52,7 +52,7 @@ function Shell({ data }: { data: AppData }) {
 
   if (!prefs.onboarded) {
     if (!seenSplash) return <Splash onDone={() => setSeenSplash(true)} />;
-    return <Welcome data={data} onDone={() => setPrefs({ onboarded: true })} />;
+    return <Welcome data={data} onDone={() => { setPrefs({ onboarded: true }); location.hash = '/'; }} />;
   }
   const isFeed = route === '' || route === 'class';
   const tab = isFeed || route === 'saved' ? '' : route === 'teacher' ? 'explore' : route;
