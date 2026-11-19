@@ -51,6 +51,8 @@ Class title: ${title}
 Teacher: ${teacher}
 Length: about ${minutes} minutes
 
+Wording, for everything you write: use the names this community uses, which are the ones the teacher uses in the class. The books of the Torah are Bereshit, Shemot, Vayikra, Bemidbar and Debarim, never Genesis, Exodus, Leviticus, Numbers or Deuteronomy; likewise Tehillim, Mishle, Yeshayahu, Yehoshua and so on rather than Psalms, Proverbs, Isaiah, Joshua. Say Hashem, Perasha, Bet HaMikdash, Berit. Call people what the teacher calls them (Abraham Abinu or Avraham Avinu, Moshe Rabbenu). Do not introduce English or academic terms the teacher did not use.
+
 Reply with one JSON object and nothing else, with these keys:
 - "summary": 2 to 3 plain sentences (same spelling rules as below) saying what this class covers, written for someone deciding whether to listen. Describe the topics; do not give halakhic rulings or conclusions as fact, and do not add anything that is not in the transcript.
 - "subjects": 6 to 12 short phrases naming the specific subjects, sources, people, laws or stories discussed. Spell Hebrew words the way the Sephardic community of Brooklyn does: "h" not "ch" for het (Hodesh, Hakhamim, Hinukh, Hasidim, Hasosrot), "t" not "s" for tav (Shabbat, Berakhot, Bet Din), "s" not "tz" for sadi (Misva, Sedaka), and Perasha, Halakha, Mishna, Masekhet, Bet HaMikdash. Keep the usual English spelling of people's names (Rabbi Chaim Kanievsky).

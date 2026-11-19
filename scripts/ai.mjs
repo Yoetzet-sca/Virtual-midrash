@@ -14,7 +14,8 @@ import { promisify } from 'node:util';
 import { readFileSync } from 'node:fs';
 import { searchTerms, parseModelJson, summaryPrompt, timedTranscript } from './lib/ai-text.mjs';
 
-const VERSION = 2; // 2 adds the topic and the parts of the class; older files are redone from the saved transcript
+const VERSION = 3; // 3: the community's own names for books and people (Bereshit, not Genesis)
+// was 2: // 2 adds the topic and the parts of the class; older files are redone from the saved transcript
 
 const run = promisify(execFile);
 const root = new URL('..', import.meta.url);
