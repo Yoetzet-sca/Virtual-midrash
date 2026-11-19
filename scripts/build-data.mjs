@@ -63,7 +63,15 @@ for (const t of teachers) {
       if (isSpotifyShow(feedUrl)) {
         const name = t.podcastName || spotifyShowName(await get(feedUrl.split('?')[0]));
         if (!name) throw new Error('could not read the show name from Spotify');
-        feedUrl = feedFromAppleSearch(await get(appleSearchUrl(name)), name);
+        let found = await get(appleSearchUrl(name));
+        feedUrl = feedFromAppleSearch(found, name);
+        if (!feedUrl) {
+          // Try a shorter search, and list what Apple has so a person can pick the right one.
+          found = await get(appleSearchUrl(name.split(/\s+/).slice(0, 2).join(' ') + ' ' + t.name.split(/\s+/).slice(-2).join(' ')));
+          feedUrl = feedFromAppleSearch(found, name);
+          const names = (JSON.parse(found).results || []).map((x) => `${x.collectionName} — ${x.artistName}`).slice(0, 8);
+          if (!feedUrl) console.warn(`  ${t.name}: Apple lists these similar shows: ${names.join(' | ') || 'none'}`);
+        }
         if (!feedUrl) throw new Error(`no podcast named "${name}" found in Apple's directory — paste the Apple Podcasts link or feed address instead`);
         console.log(`  ${t.name}: Spotify show "${name}" resolves to ${feedUrl}`);
       }
