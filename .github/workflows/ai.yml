@@ -49,6 +49,7 @@ jobs:
           SHEET_TEACHERS_URL: ${{ secrets.SHEET_TEACHERS_URL }}
           SHEET_OVERRIDES_URL: ${{ secrets.SHEET_OVERRIDES_URL }}
       - name: Transcribe and summarize
+        id: ai
         run: node scripts/ai.mjs
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
@@ -66,5 +67,14 @@ jobs:
           git pull -q --rebase
           git push -q
           gh workflow run update.yml || echo "Could not start the publish job; it will pick these up on its next scheduled run."
+        env:
+          GH_TOKEN: ${{ github.token }}
+      # GitHub's own hourly timer often skips runs, so while classes are still waiting this job waits out the
+      # transcription allowance and starts the next run itself. Set the repository variable AI_PAUSE to 1 to stop.
+      - name: Start the next run in 50 minutes
+        if: ${{ steps.ai.outputs.waiting != '0' && steps.ai.outputs.waiting != '' && vars.AI_PAUSE != '1' }}
+        run: |
+          sleep 3000
+          gh api -X POST repos/${{ github.repository }}/actions/workflows/ai.yml/dispatches -f ref=main
         env:
           GH_TOKEN: ${{ github.token }}

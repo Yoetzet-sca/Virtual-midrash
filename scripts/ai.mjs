@@ -137,4 +137,5 @@ for (const c of queue) {
   }
 }
 await rm(new URL('.ai-tmp/', root), { recursive: true, force: true });
+if (process.env.GITHUB_OUTPUT) await writeFile(process.env.GITHUB_OUTPUT, `waiting=${todo.length - done}\n`, { flag: 'a' });
 console.log(`\nDone this run: ${done} classes (${minutes} minutes transcribed). Still waiting: ${todo.length - done}.`);
