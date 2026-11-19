@@ -9,6 +9,7 @@ import { parseCsv } from './lib/csv.mjs';
 import { lock, normalizeCode } from './lib/lock.mjs';
 import { channelIdFrom, parseYoutube, teacherForTitle } from './lib/youtube.mjs';
 import { applyOverrides } from './lib/overrides.mjs';
+import { dafFor, weekInfo, CYCLE_DAYS } from './lib/calendar.mjs';
 
 const fx = (n) => readFile(new URL(`fixtures/${n}`, import.meta.url), 'utf8');
 
@@ -166,4 +167,38 @@ test('finding a feed inside a podcast web page', () => {
   assert.equal(feedFromPage('<p>no feed here</p>'), null);
   assert.ok(looksLikeFeed('<?xml version="1.0"?><rss version="2.0">'));
   assert.ok(!looksLikeFeed('<!doctype html><html>'));
+});
+
+test('daf yomi follows the real cycle', () => {
+  assert.equal(CYCLE_DAYS, 2711);
+  assert.deepEqual(dafFor('2020-01-05'), { tractate: 'Berakhot', page: 2 }); // start of the 14th cycle
+  assert.deepEqual(dafFor('2026-11-18'), { tractate: 'Bekhorot', page: 61 }); // matches the old site that day
+  assert.deepEqual(dafFor('2026-11-19'), { tractate: 'Arakhin', page: 2 });
+  assert.deepEqual(dafFor('2027-06-07'), { tractate: 'Niddah', page: 73 }); // siyum of the cycle
+  assert.deepEqual(dafFor('2027-06-08'), { tractate: 'Berakhot', page: 2 });
+});
+
+test('this week\'s perasha and the next holiday', () => {
+  const w = weekInfo('2026-11-19');
+  assert.equal(w.perasha.name, 'Vayesse');
+  assert.equal(w.perasha.shabbat, '2026-11-21');
+  assert.equal(w.holiday.name, 'Hanukkah');
+  assert.match(w.holiday.date, /^2026-12-0[45]$/);
+  assert.equal(weekInfo('2026-03-09').perasha.name, 'Vayakhel – Pekude'); // a double portion
+  assert.equal(weekInfo('2026-10-19').perasha.name, 'Lekh Lekha'); // a hyphenated single name is not split
+});
+
+test('search forgives spelling', async () => {
+  const { matches } = await import('./.search.mjs');
+  const yes = [
+    ['parsha', 'Perashat Nisabim Episode 2 - Painfully Stubborn'], ['parasha vayetze', "Perasha — Vayesse: Leah's Thanks"], ['Vayetzei', "Vayesse: Leah's Thanks"],
+    ['bechoros 61', 'Bekhorot 61 - The Tithe'], ['Bekhorot', 'Bechoros 12'], ['arachin 8', 'Arakhin 8 - Seven Eleven'], ['baba batra 8a', 'Bava Batra 8a (1)'],
+    ['baba basra', 'Bava Batra 8a (1)'], ['brachos', 'Berakhot 12'], ['pinchas', 'Pinehas 2026'], ['toldot', 'Toledot 2026: Two Worlds'], ['chayei sarah', 'Haye Sarah 2026: The Angel'], ['shabbos', 'The Laws of Shabbat #11'],
+    ['chanukah', 'Hanukkah: lighting at the door'], ['hidary', 'Torah Talks Mrs. Vivien Hidary'], ['fridge', 'When the Fridge Light is On'], ['פרשת', 'חכם אורי לאטי. פרשת חיי שרה'],
+  ];
+  const no = [
+    ['arakhin 8', 'Arakhin 18 - Something'], ['arakhin 8', 'Arakhin 80'], ['bava batra 8', 'Bava Kamma 8'], ['perasha', 'The Laws of Shabbat'], ['harari', 'Rabbi Joey Soffer'], ['', 'anything'],
+  ];
+  for (const [q, text] of yes) assert.ok(matches(q, text), `"${q}" should find "${text}"`);
+  for (const [q, text] of no) assert.ok(!matches(q, text), `"${q}" should not find "${text}"`);
 });

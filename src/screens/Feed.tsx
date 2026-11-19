@@ -3,7 +3,7 @@ import type { AppData, ClassItem } from '../types';
 import { usePrefs, getPrefs, setPrefs, toggleIn, learn } from '../store';
 import { usePlayer } from '../player';
 import { Avatar, erubLabel, go } from '../ui';
-import { classShare, clock, initials, matchesTopic, minutes, rank, shareLink, daysAgo } from '../util';
+import { classShare, clock, initials, matchesTopic, minutes, newFromFollowed, rank, shareLink, daysAgo } from '../util';
 import { IHeart, IPause, IPlay, ISave, ISaved, ISearch, IShare } from '../icons';
 
 export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData; startId?: string; topic: string; setTopic: (t: string) => void }) {
@@ -128,6 +128,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
   const today = new Date();
   const todayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
   const dedication = data.schedule.notices.find((n) => n.date === todayKey && n.dedication)?.dedication;
+  const fresh = newFromFollowed(data, prefs).length;
   const erubUp = data.erub.filter((e) => e.fresh && erubLabel(e).good);
   const topics = ['For You', ...data.topics];
   const current = p.cls && p.cls.id === active ? p : null;
@@ -231,7 +232,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
           <span><strong>Virtual Midrash</strong><small>Sephardic Community Alliance</small></span>
           <span className="grow" />
           {erubUp.length > 0 && <a className="erub-pill" href="#/week"><span className="dot good" />ERUB {erubUp.length === data.erub.length ? 'UP' : erubUp[0].short.toUpperCase() + ' UP'}</a>}
-          <a className="icon-btn" href="#/saved" aria-label="Saved and in-progress classes"><ISaved /></a>
+          <a className="icon-btn has-badge" href="#/saved" aria-label={fresh > 0 ? `Your classes: ${fresh} new from teachers you follow` : 'Your classes'}><ISaved />{fresh > 0 && <span className="badge-dot">{fresh > 9 ? '9+' : fresh}</span>}</a>
           <a className="icon-btn" href="#/explore" aria-label="Search"><ISearch /></a>
         </div>
         <div className="chips scroll">

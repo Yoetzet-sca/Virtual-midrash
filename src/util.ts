@@ -53,3 +53,9 @@ export async function shareLink(title: string, path: string) {
 }
 
 export const classShare = (c: ClassItem) => (c.sid ? `c/${c.sid}.html` : '/class/' + encodeURIComponent(c.id));
+
+// Classes posted by followed teachers since this person last checked.
+export function newFromFollowed(data: AppData, prefs: Prefs) {
+  const since = prefs.seenAt || new Date(new Date(data.generatedAt).getTime() - 3 * 86400000).toISOString();
+  return data.classes.filter((c) => prefs.following.includes(c.teacherId) && c.date > since).slice(0, 30);
+}

@@ -274,3 +274,11 @@ input::placeholder { color: var(--sky); opacity: 1; }
 .gl-wrap iframe { width: 100%; border: 0; }
 .gl-help { margin: 10px 4px 4px; font-size: 13px; color: #3a5068; text-align: center; }
 .gl-help a { color: #1d4f86; font-weight: 700; text-decoration: underline; }
+
+/* This week's shortcuts */
+.shortcuts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.shortcuts button { min-height: 76px; border: 0; border-radius: 14px; background: var(--navy); padding: 10px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; gap: 6px; }
+.shortcuts span { font-size: 11px; font-weight: 700; color: #d3e4f5; line-height: 1.25; }
+.shortcuts b { font-family: var(--display); font-size: 15px; line-height: 1.15; overflow-wrap: anywhere; }
+.has-badge { position: relative; }
+.badge-dot { position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--orange); color: var(--ink); font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }

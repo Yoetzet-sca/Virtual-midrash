@@ -9,6 +9,7 @@ export type Prefs = {
   liked: string[];
   saved: string[];
   code: string;
+  seenAt: string; // when this person last looked at "new from teachers you follow"
   visits: number;
   installAsked: boolean; // the add-to-home-screen card was answered or dismissed
   rate: number; // playback speed
@@ -18,7 +19,7 @@ export type Prefs = {
   learned: Record<string, number>;
 };
 const KEY = 'vm.prefs.v1';
-const empty: Prefs = { onboarded: false, topics: [], following: [], hidden: [], liked: [], saved: [], code: '', visits: 0, installAsked: false, rate: 1, positions: {}, swiped: false, learned: {} };
+const empty: Prefs = { onboarded: false, topics: [], following: [], hidden: [], liked: [], saved: [], code: '', seenAt: '', visits: 0, installAsked: false, rate: 1, positions: {}, swiped: false, learned: {} };
 
 function read(): Prefs {
   try { return { ...empty, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return empty; }

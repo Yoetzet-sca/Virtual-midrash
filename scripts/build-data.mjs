@@ -13,6 +13,7 @@ import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv } from './lib/csv.mjs';
 import { lock } from './lib/lock.mjs';
 import { applyOverrides } from './lib/overrides.mjs';
+import { dafFor, weekInfo } from './lib/calendar.mjs';
 import { channelIdFrom, feedUrl, parseYoutube, teacherForTitle } from './lib/youtube.mjs';
 
 const FIXTURES = process.argv.includes('--fixtures');
@@ -189,7 +190,18 @@ for (const e of settings.erub) {
   console.log(`${r.status === 'unknown' ? '!' : '✓'} Erub ${e.short}: ${r.status}${r.date ? ' (' + r.date + ')' : ''}${r.fresh ? '' : ' — not shown as current'}`);
 }
 
+// ---- This week's shortcuts ------------------------------------------------------
+// Dates are New York calendar dates. The daf is listed for several days so the app is right at midnight between rebuilds.
+const nyDate = (offset = 0) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date(now.getTime() + offset * 86400000));
+let shortcuts = { daf: {}, perasha: null, holiday: null };
+try {
+  for (let i = -1; i <= 4; i++) shortcuts.daf[nyDate(i)] = dafFor(nyDate(i));
+  Object.assign(shortcuts, weekInfo(nyDate(0)));
+  console.log(`✓ Shortcuts: daf ${shortcuts.daf[nyDate(0)].tractate} ${shortcuts.daf[nyDate(0)].page}, perasha ${shortcuts.perasha?.name}, next holiday ${shortcuts.holiday?.name} (${shortcuts.holiday?.date})`);
+} catch (e) { warnings.push(`Shortcuts failed: ${e.message}`); }
+
 const out = {
+  shortcuts,
   generatedAt: now.toISOString(), topics: TOPICS, teachers, classes, schedule, resources, erub,
   resourceCategories: settings.resourceCategories,
   analytics: settings.analytics || null,

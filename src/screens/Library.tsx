@@ -1,13 +1,16 @@
 import type { AppData, ClassItem } from '../types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePrefs, setPrefs, toggleIn } from '../store';
 import { Avatar, ClassRow } from '../ui';
-import { clock } from '../util';
+import { clock, newFromFollowed } from '../util';
 
 // Everything this person has set aside or is in the middle of. Stored on this phone only.
 export function Library({ data }: { data: AppData }) {
   const prefs = usePrefs();
   const [ask, setAsk] = useState(false);
+  // What's new is worked out once on opening; leaving the screen marks it as seen.
+  const [fresh] = useState(() => newFromFollowed(data, prefs));
+  useEffect(() => () => setPrefs({ seenAt: new Date().toISOString() }), []);
   const people = (ids: string[]) => data.teachers.filter((t) => ids.includes(t.id));
   const byId = new Map(data.classes.map((c) => [c.id, c]));
   const pick = (ids: string[]) => ids.map((id) => byId.get(id)).filter(Boolean) as ClassItem[];
@@ -26,6 +29,7 @@ export function Library({ data }: { data: AppData }) {
   return (
     <div className="page">
       <div className="head"><div><h1>Your classes</h1><p className="muted">Kept on this phone</p></div><img className="sca" src="./brand/sca-icon-white.png" alt="Sephardic Community Alliance" /></div>
+      {prefs.following.length > 0 && <Section title="NEW FROM TEACHERS YOU FOLLOW" list={fresh} empty="Nothing new since you last looked. New classes from teachers you follow will show here." />}
       <Section title="CONTINUE LISTENING" list={inProgress} empty="Classes you start and don’t finish will wait for you here." note={(c) => `You’re ${clock(prefs.positions[c.id][0])} in`} />
       <Section title="SAVED" list={saved} empty="Tap Save on a class to keep it here." />
       <Section title="LIKED" list={liked} empty="Classes you like show up here." />
