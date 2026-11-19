@@ -2,7 +2,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import type { ClassItem, Teacher } from './types';
 import { learn, getPrefs, setPrefs, savePosition } from './store';
-import { track } from './analytics';
+import { track, listened } from './analytics';
 
 type Player = {
   cls: ClassItem | null; playing: boolean; time: number; duration: number; error: string;
@@ -30,6 +30,7 @@ export function PlayerProvider({ teachers, classes, children }: { teachers: Teac
   const [error, setError] = useState('');
   const [rate, setRate] = useState(getPrefs().rate || 1);
   const lastSaved = useRef(0);
+  const lastTick = useRef(0);
   const resumeAt = useRef(0);
   const clsRef = useRef<ClassItem | null>(null);
 
@@ -62,6 +63,9 @@ export function PlayerProvider({ teachers, classes, children }: { teachers: Teac
     on('timeupdate', () => {
       setTime(a.currentTime);
       const c = clsRef.current;
+      // Real listening time (ignores skipping ahead): only small forward steps while playing count.
+      const step = a.currentTime - lastTick.current; lastTick.current = a.currentTime;
+      if (c && step > 0 && step < 2) listened(c.id, teachers.find((x) => x.id === c.teacherId)?.name || c.teacherId, step / (a.playbackRate || 1));
       if (c && Math.abs(a.currentTime - lastSaved.current) > 5) {
         lastSaved.current = a.currentTime;
         const nearEnd = Number.isFinite(a.duration) && a.currentTime > a.duration - 30;
