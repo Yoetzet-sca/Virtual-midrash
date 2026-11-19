@@ -4,7 +4,7 @@ import { usePrefs, getPrefs, setPrefs, toggleIn, learn } from '../store';
 import { usePlayer } from '../player';
 import { Avatar, erubLabel, go } from '../ui';
 import { classShare, clock, initials, matchesTopic, minutes, newFromFollowed, rank, shareLink, daysAgo } from '../util';
-import { IHeart, IPause, IPlay, ISave, ISaved, ISearch, IShare } from '../icons';
+import { IHeart, IPause, IPlay, ISave, ISaved, ISearch, IShare, IInfo } from '../icons';
 
 export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData; startId?: string; topic: string; setTopic: (t: string) => void }) {
   const prefs = usePrefs();
@@ -51,6 +51,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
 
   // Press and hold Follow to hide a teacher from the feed.
   const [hideAsk, setHideAsk] = useState('');
+  const [about, setAbout] = useState(''); // the class whose AI summary and parts are open
   const hold = useRef<{ timer?: number; fired?: boolean }>({});
   const holdStart = (teacherId: string) => { hold.current.fired = false; hold.current.timer = window.setTimeout(() => { hold.current.fired = true; setHideAsk(teacherId); }, 550); };
   const holdEnd = () => window.clearTimeout(hold.current.timer);
@@ -208,6 +209,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
                 <button onClick={() => setPrefs({ saved: toggleIn(prefs.saved, c.id) })} aria-pressed={prefs.saved.includes(c.id)}>
                   <ISave size={28} fill={prefs.saved.includes(c.id) ? 'currentColor' : 'none'} />{prefs.saved.includes(c.id) ? 'Saved' : 'Save'}
                 </button>
+                {c.summary && <button onClick={() => setAbout(c.id)} aria-label="About this class"><IInfo size={28} />About</button>}
                 <button onClick={async () => { const r = await shareLink(`${c.title} — ${t?.name}`, classShare(c)); if (r === 'copied') say('Link copied'); }}>
                   <IShare size={28} />Share
                 </button>
@@ -243,6 +245,24 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
       {columns.length > 1 && <div className="feed-dots" aria-hidden="true">{columns.slice(0, 12).map((col, i) => <span key={col.teacherId} className={i === activeCol ? 'on' : ''} />)}</div>}
       {current && <div className="feed-progress" style={{ width: `${(current.duration ? current.time / current.duration : 0) * 100}%` }} />}
       {toast && <div className="toast" role="status">{toast}</div>}
+      {about && (() => {
+        const c = data.classes.find((x) => x.id === about);
+        if (!c) return null;
+        const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+        return (
+          <div className="sheet-back" onClick={() => setAbout('')}>
+            <div className="sheet about" role="dialog" aria-label="About this class" onClick={(e) => e.stopPropagation()}>
+              <h2>{c.title}</h2>
+              <p className="answer-sum flush"><span className="ai-tag">AI summary</span> {c.summary}</p>
+              {c.kind === 'audio' && (c.chapters || []).length > 0 && <>
+                <div className="label">JUMP TO A PART</div>
+                <div className="parts">{c.chapters!.map(([at, title]) => <button key={at} className="part" onClick={() => { p.play(c, at); setAbout(''); }}><IPlay size={12} /><b>{clock(at)}</b><span>{title}</span></button>)}</div>
+              </>}
+              <button className="btn wide ghost" onClick={() => setAbout('')}>Close</button>
+            </div>
+          </div>
+        );
+      })()}
       {hideAsk && (
         <div className="sheet-back" onClick={() => setHideAsk('')}>
           <div className="sheet" role="dialog" aria-label="Hide teacher" onClick={(e) => e.stopPropagation()}>

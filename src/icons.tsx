@@ -15,3 +15,4 @@ export const IChevron = (p: P) => <S {...p}><path d="M9 6l6 6-6 6" /></S>;
 export const IPlay = ({ size = 24, fill = 'currentColor' }: P) => <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" fill={fill}><path d="M8 4l12 8-12 8z" /></svg>;
 export const IPause = ({ size = 24, fill = 'currentColor' }: P) => <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" fill={fill}><rect x="6" y="4" width="4.5" height="16" rx="1" /><rect x="13.5" y="4" width="4.5" height="16" rx="1" /></svg>;
 export const ISaved = (p: P) => <S {...p}><path d="M7 3h10v18l-5-3.800L7 21z" /><path d="M10 8h4" /></S>;
+export const IInfo = (p: P) => <S {...p}><circle cx="12" cy="12" r="9" /><path d="M12 11v6" /><path d="M12 7.500v.010" /></S>;

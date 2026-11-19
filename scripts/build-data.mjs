@@ -155,6 +155,7 @@ const search = [];
     const a = ai.get(sidOf(c.id));
     if (!a || a.quality === 'poor') continue;
     if (!c.topic && TOPICS.includes(a.topic)) { c.topic = a.topic; topics++; }
+    c.summary = a.summary;
     if (a.chapters?.length) c.chapters = a.chapters.map((x) => [x.at, x.title]);
     search.push({ i: sidOf(c.id), m: a.summary, s: (a.subjects || []).join('; '), q: (a.questions || []).join(' '), c: (a.chapters || []).map((x) => x.about || ''), t: a.terms || '' });
   }

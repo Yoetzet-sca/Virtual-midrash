@@ -29,7 +29,7 @@ export function Chips({ items, value, onPick }: { items: { id: string; label: st
   );
 }
 
-export function ClassRow({ c, teacher, showTeacher = true }: { c: ClassItem; teacher?: Teacher; showTeacher?: boolean }) {
+export function ClassRow({ c, teacher, showTeacher = true, brief = true }: { c: ClassItem; teacher?: Teacher; showTeacher?: boolean; brief?: boolean }) {
   const p = usePlayer();
   const active = p.cls?.id === c.id && p.playing;
   return (
@@ -38,6 +38,7 @@ export function ClassRow({ c, teacher, showTeacher = true }: { c: ClassItem; tea
       <span className="row-text">
         <span className="row-title">{c.title}</span>
         <span className="row-meta">{[showTeacher && teacher?.name, c.kind === 'video' && 'Video', c.topic, when(c.date), minutes(c.durationSec)].filter(Boolean).join(' · ')}</span>
+        {brief && c.summary && <span className="row-sum">{c.summary}</span>}
       </span>
     </button>
   );

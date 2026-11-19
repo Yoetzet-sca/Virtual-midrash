@@ -17,7 +17,7 @@ function AnswerCard({ c, teacher, a }: { c: ClassItem; teacher?: Teacher; a: Ans
   const shown = all ? parts.map((_, n) => n) : a.part >= 0 && parts[a.part] ? [a.part] : [];
   return (
     <div className="answer">
-      <ClassRow c={c} teacher={teacher} />
+      <ClassRow c={c} teacher={teacher} brief={false} />
       <p className="answer-sum"><span className="ai-tag">AI summary</span> {a.summary}</p>
       {shown.map((n) => <button key={n} className="part" onClick={() => p.play(c, parts[n][0])}><IPlay size={12} /><b>{clock(parts[n][0])}</b><span>{parts[n][1]}</span></button>)}
       {parts.length > 1 && !all && <button className="part more" onClick={() => setAll(true)}>All {parts.length} parts of this class</button>}

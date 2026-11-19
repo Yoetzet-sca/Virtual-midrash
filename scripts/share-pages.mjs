@@ -14,6 +14,9 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').repl
 export function sharePage(c, teacher, siteUrl) {
   const title = c.title;
   const by = [...new Set([teacher?.name, c.topic, 'Virtual Midrash', 'Sephardic Community Alliance'].filter(Boolean))].join(' · ');
+  // WhatsApp and iMessage show about two lines: the summary of the class if there is one, then who and where.
+  const short = c.summary && (c.summary.length > 180 ? c.summary.slice(0, 180).replace(/\s+\S*$/, '') + '…' : c.summary);
+  const about = short ? `${short} — ${teacher?.name || 'Virtual Midrash'}` : by;
   const image = c.image || teacher?.photo || siteUrl + 'brand/icon-512.png';
   const target = '../#/class/' + encodeURIComponent(c.id);
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +24,8 @@ export function sharePage(c, teacher, siteUrl) {
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Virtual Midrash">
 <meta property="og:title" content="${esc(title)}">
-<meta property="og:description" content="${esc(by)}">
+<meta property="og:description" content="${esc(about)}">
+<meta name="description" content="${esc(about)}">
 <meta property="og:image" content="${esc(image)}">
 <meta property="og:url" content="${esc(siteUrl + 'c/' + c.sid + '.html')}">
 <meta name="twitter:card" content="summary">
