@@ -57,9 +57,20 @@
       "Congregation Beth Torah",
       "Barkai Yeshivah"
     ],
-    "feed": "https://open.spotify.com/show/0RjG5OulsqGM8Ont6UUV9D",
+    "feed": "",
     "podcastName": "Perashah Gems with Rabbi Nathan Dweck",
     "defaultTopic": "Perasha"
+  },
+  {
+    "id": "richard-tobias",
+    "name": "Rabbi Richard Tobias",
+    "title": "",
+    "bio": "",
+    "photo": "",
+    "affiliations": [],
+    "feed": "https://anchor.fm/s/ff688a94/podcast/rss",
+    "podcastName": "",
+    "defaultTopic": ""
   },
   {
     "id": "vivien-hidary",
