@@ -186,6 +186,11 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
                   {c.durationSec > 0 && <span className="tag">{(c.durationSec < 660 ? 'QUICK · ' : '') + minutes(c.durationSec).toUpperCase()}</span>}
                 </div>
                 <h2 className={'card-title' + (c.title.length > 100 ? ' xlong' : c.title.length > 55 ? ' long' : '')}>{c.title}</h2>
+                {c.summary && prefs.swiped && c.title.length <= 100 && (
+                  <button className={'card-sum' + (c.title.length > 55 ? ' one' : '')} onClick={() => setAbout(c.id)} aria-label="AI summary of this class. Open to read it all.">
+                    <span className="ai-tag">AI summary</span>{c.summary}
+                  </button>
+                )}
                 <div className="card-by">
                   <a href={'#/teacher/' + c.teacherId}>{t?.name}</a>
                   <button className={'follow' + (prefs.following.includes(c.teacherId) ? ' on' : '')} aria-pressed={prefs.following.includes(c.teacherId)}
