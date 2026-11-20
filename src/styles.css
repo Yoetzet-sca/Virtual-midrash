@@ -274,7 +274,7 @@ input::placeholder { color: var(--sky); opacity: 1; }
 .money { display: flex; align-items: center; height: 56px; border-radius: 12px; border: 1px solid var(--line); background: var(--panel); padding: 0 14px; gap: 6px; font: 800 24px var(--display); }
 .money input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: none; padding: 0; font: inherit; }
 .btn.off { opacity: 0.45; pointer-events: none; }
-.gl-wrap { background: var(--white); color: var(--ink); border-radius: 16px; padding: 10px; min-height: 420px; }
+.gl-wrap { background: var(--white); color: var(--ink); border-radius: 16px; padding: 10px; min-height: 220px; }
 .gl-wrap iframe { width: 100%; border: 0; }
 .gl-help { margin: 10px 4px 4px; font-size: 13px; color: #3a5068; text-align: center; }
 .gl-help a { color: #1d4f86; font-weight: 700; text-decoration: underline; }

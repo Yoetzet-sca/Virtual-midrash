@@ -1,20 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import type { AppData } from '../types';
 
-// Give Lively's own donation form, shown inside the page. Payment is handled entirely by Give Lively.
+// Give Lively's own donation form (their simpler design: no suggested amounts, no "in honor of", no address), shown inside the page. Payment is handled entirely by Give Lively.
 function GiveLivelyForm({ url }: { url: string }) {
   const box = useRef<HTMLDivElement>(null);
   const slug = url.split('/donate/')[1]?.split(/[?#/]/)[0] || '';
   useEffect(() => {
     if (!slug) return;
     const s = document.createElement('script');
-    s.src = `https://secure.givelively.org/widgets/branded_donation/${slug}.js`;
+    s.src = `https://secure.givelively.org/widgets/simple_donation/${slug}.js?show_suggested_amount_buttons=false&show_in_honor_of=false&address_required=false&has_required_custom_question=false`;
     document.head.appendChild(s);
     return () => { s.remove(); };
   }, [slug]);
   return (
     <div className="gl-wrap">
-      <div ref={box} id="give-lively-widget" className="gl-branded-donation-widget" data-widget-src={`https://secure.givelively.org/donate/${slug}?ref=sd_widget`} />
+      <div ref={box} id="give-lively-widget" className="gl-simple-donation-widget" />
       <p className="gl-help">Form not showing? <a href={url} target="_blank" rel="noreferrer">Open the donation page</a></p>
     </div>
   );
