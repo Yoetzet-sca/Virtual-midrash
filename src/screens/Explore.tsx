@@ -45,7 +45,8 @@ export function Explore({ data, place: startPlace, pickTopic }: { data: AppData;
   const slow = useDeferredValue(needle);
   const answers = useMemo(() => (slow.length >= 3 ? ask(slow, ready) : []), [slow, ready]);
   const answered = new Set(answers.map((a) => a.sid));
-  const found = needle ? data.classes.filter((c) => matches(needle, c.title + ' ' + (teacher(c.teacherId)?.name || '') + ' ' + (c.topic || ''))).filter((c) => !answered.has(c.sid || '')).slice(0, 60) : [];
+  const allFound = needle ? data.classes.filter((c) => matches(needle, c.title + ' ' + (teacher(c.teacherId)?.name || '') + ' ' + (c.topic || ''))) : [];
+  const found = allFound.filter((c) => !answered.has(c.sid || '')).slice(0, 60);
   const foundTeachers = needle ? data.teachers.filter((t) => matches(needle, t.name)) : [];
   // This week's shortcuts
   const now = new Date();
@@ -66,6 +67,7 @@ export function Explore({ data, place: startPlace, pickTopic }: { data: AppData;
       </label>
       {needle ? (
         <>
+          {allFound.length > 1 && <button className="btn wide" onClick={() => pickTopic('q:' + needle)}>Swipe through all {allFound.length} in the feed</button>}
           {foundTeachers.length > 0 && <div className="people one">{foundTeachers.map((t) => <a key={t.id} className="person" href={'#/teacher/' + t.id}><Avatar t={t} /><span>{t.name}</span></a>)}</div>}
           {answers.length > 0 && <>
             <div className="label">CLASSES THAT DEAL WITH THIS</div>

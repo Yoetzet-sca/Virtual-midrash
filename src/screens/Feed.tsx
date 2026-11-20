@@ -57,11 +57,13 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
       daf && { id: 'wk:daf', label: `Today’s daf: ${daf.tractate} ${daf.page}`, test: (title: string) => matches(`${daf.tractate} ${daf.page}`, title) },
     ].filter(Boolean) as { id: string; label: string; test: (title: string) => boolean }[]).filter((x) => data.classes.some((c) => x.test(c.title))); // no chip that leads nowhere
   }, [data]);
-  const labelOf = (id: string) => timely.find((x) => x.id === id)?.label || id;
+  // A search from Explore can be opened in the feed too: its chip is 'q:' followed by what was searched.
+  const labelOf = (id: string) => (id.startsWith('q:') ? `“${id.slice(2)}”` : timely.find((x) => x.id === id)?.label || id);
   // Hidden teachers stay out of the feed, unless someone opens one of their classes directly.
   const cards = useMemo(() => {
     const direct = startId ? order.find((c) => c.id === startId)?.teacherId : undefined;
     const shown = order.filter((c) => !prefs.hidden.includes(c.teacherId) || c.teacherId === direct);
+    if (topic.startsWith('q:')) { const q = topic.slice(2); return shown.filter((c) => matches(q, c.title + ' ' + (data.teachers.find((t) => t.id === c.teacherId)?.name || '') + ' ' + (c.topic || ''))); }
     const special = timely.find((x) => x.id === topic);
     if (special) return shown.filter((c) => special.test(c.title));
     return topic === 'For You' ? shown : shown.filter((c) => matchesTopic(c.topic, topic));
@@ -156,7 +158,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
   const dedication = data.schedule.notices.find((n) => n.date === todayKey && n.dedication)?.dedication;
   const fresh = newFromFollowed(data, prefs).length;
   const erubUp = data.erub.filter((e) => e.fresh && erubLabel(e).good);
-  const topics = ['For You', ...timely.map((x) => x.id), ...data.topics];
+  const topics = ['For You', ...(topic.startsWith('q:') ? [topic] : []), ...timely.map((x) => x.id), ...data.topics];
   const current = p.cls && p.cls.id === active ? p : null;
 
   return (
