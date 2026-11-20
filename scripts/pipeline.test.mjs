@@ -10,7 +10,7 @@ import { lock, normalizeCode } from './lib/lock.mjs';
 import { channelIdFrom, parseYoutube, teacherForTitle } from './lib/youtube.mjs';
 import { applyOverrides } from './lib/overrides.mjs';
 import { dafFor, weekInfo, CYCLE_DAYS } from './lib/calendar.mjs';
-import { searchTerms, parseModelJson, summaryPrompt, timedTranscript } from './lib/ai-text.mjs';
+import { searchTerms, parseModelJson, summaryPrompt, timedTranscript, unsupported, shortName } from './lib/ai-text.mjs';
 import { ask, prepare } from './.ask.mjs';
 
 const fx = (n) => readFile(new URL(`fixtures/${n}`, import.meta.url), 'utf8');
@@ -244,4 +244,17 @@ test('community resources sheet: title and heading rows are skipped, tab spellin
   const cats = ['Tutors / Bar Mizva', 'Hebra Kadisha'];
   assert.deepEqual(resourceRows('"Community Resources","","",""\n"Category","Name","Phone","Email"\n"Hebra Kadisha","Some Shul","718-555-0100",""\n"Hebra Kadisha","","",""', cats), [{ category: 'Hebra Kadisha', name: 'Some Shul', phone: '718-555-0100', email: '' }]);
   assert.deepEqual(resourceRows('"Tutors/Bar Mitzva","A Person","","a@example.org"', cats), [{ category: 'Tutors / Bar Mizva', name: 'A Person', phone: '', email: 'a@example.org' }]);
+});
+
+test('AI summaries are checked against the transcript', () => {
+  const said = "Okay, so today we are in Lech Lecha, Perek Tet Vav. Avram is worried he has no heir. Hashem takes him outside, tells him to count the stars, he is above the mazal. Then the brit bein habetarim, the animals, and Rashi explains each korban.";
+  assert.deepEqual(unsupported('Rabbi Soffer goes through Lech Lecha with Rashi: Avram’s worry about an heir, counting the stars, being above the mazal, and the Berit Ben HaBetarim.', said, 'Lech Lecha Rashi 5 Rabbi Joey Soffer'), []);
+  assert.deepEqual(unsupported('This class examines Genesis Chapter 15, where Avram is shown the stars from above the cosmos and his astrological destiny.', said), ['genesis', 'chapter', 'shown', 'cosmos', 'astrological', 'destiny']);
+  assert.equal(shortName('Rabbi Dr. Richard Hidary'), 'Rabbi Hidary');
+  assert.equal(shortName('Mrs. Vivien Hidary'), 'Mrs. Hidary');
+  assert.equal(shortName('Rabbi Lati'), 'Rabbi Lati');
+  const prompt = summaryPrompt({ title: 'T', teacher: 'Rabbi Joey Soffer', minutes: 5, transcript: 'hello', redo: 'genesis, cosmos' });
+  assert.match(prompt, /Begin with the teacher, as "Rabbi Soffer \.\.\."/);
+  assert.match(prompt, /not found in the transcript: genesis, cosmos\./);
+  assert.match(prompt, /Transcript:\nhello$/);
 });

@@ -12,9 +12,10 @@ import { existsSync } from 'node:fs';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { readFileSync } from 'node:fs';
-import { searchTerms, parseModelJson, summaryPrompt, timedTranscript } from './lib/ai-text.mjs';
+import { searchTerms, parseModelJson, summaryPrompt, timedTranscript, unsupported } from './lib/ai-text.mjs';
 
-const VERSION = 3; // 3: the community's own names for books and people (Bereshit, not Genesis)
+const VERSION = 4; // 4: only what the teacher said (checked against the transcript), and the summary names the teacher
+// was 3: // 3: the community's own names for books and people (Bereshit, not Genesis)
 // was 2: // 2 adds the topic and the parts of the class; older files are redone from the saved transcript
 
 const run = promisify(execFile);
@@ -88,9 +89,27 @@ async function geminiModels() {
 
 const drop = (model) => { if (models) models = models.filter((m) => m !== model); };
 
+// Ask for the summary, check every meaningful word of it against the transcript, and if it used words the teacher
+// never said, ask once more naming those words. The attempt with the fewest such words is kept, and they are recorded.
 async function summarize(c, tx) {
+  const shown = (ai) => [ai.summary, ...ai.chapters.map((x) => x.title)].join(' ');
+  const allowed = `${c.title} ${teacherName(c.teacherId)}`;
+  let best = await askGemini(c, tx);
+  best.unsupported = unsupported(shown(best), tx.text, allowed);
+  if (best.unsupported.length) {
+    console.log(`  (first attempt used words not in the transcript: ${best.unsupported.join(', ')}; asking again)`);
+    try {
+      const again = await askGemini(c, tx, best.unsupported.join(', '));
+      again.unsupported = unsupported(shown(again), tx.text, allowed);
+      if (again.unsupported.length < best.unsupported.length) best = again;
+    } catch (e) { if (e instanceof SlowDown) throw e; }
+  }
+  return best;
+}
+
+async function askGemini(c, tx, redo = '') {
   const transcript = tx.segments?.length ? timedTranscript(tx.segments) : tx.text;
-  const body = { contents: [{ role: 'user', parts: [{ text: summaryPrompt({ title: c.title, teacher: teacherName(c.teacherId), minutes: Math.round(c.durationSec / 60), transcript: transcript.slice(0, 140000) }) }] }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } };
+  const body = { contents: [{ role: 'user', parts: [{ text: summaryPrompt({ title: c.title, teacher: teacherName(c.teacherId), minutes: Math.round(c.durationSec / 60), transcript: transcript.slice(0, 140000), redo }) }] }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } };
   let last = 'no model available';
   for (const model of [...(await geminiModels())]) {
     let r;
@@ -120,12 +139,13 @@ for (const c of queue) {
     let tx = existsSync(txFile(c)) ? JSON.parse(await readFile(txFile(c), 'utf8')) : null; // already transcribed on an earlier run
     if (!tx) { tx = await transcribe(c); await writeFile(txFile(c), JSON.stringify({ id: c.id, title: c.title, ...tx })); minutes += mins; }
     const ai = await summarize(c, tx);
-    await writeFile(aiFile(c), JSON.stringify({ v: VERSION, id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: tx.language, made: new Date().toISOString().slice(0, 10), by: `groq whisper + ${ai.model}` }, null, 1));
+    await writeFile(aiFile(c), JSON.stringify({ v: VERSION, id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, unsupported: ai.unsupported, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: tx.language, made: new Date().toISOString().slice(0, 10), by: `groq whisper + ${ai.model}` }, null, 1));
     done++;
     console.log(`\n✓ ${teacherName(c.teacherId)} — ${c.title} (${mins} min, ${tx.text.split(/\s+/).length} words${tx.sentMb ? ', sent ' + tx.sentMb + ' MB' : ''}, ${ai.model}${ai.quality === 'poor' ? ', marked POOR' : ''})`);
     console.log(`  Summary: ${ai.summary}`);
     console.log(`  Subjects: ${ai.subjects.join('; ')}`);
     console.log(`  Questions: ${ai.questions.join(' | ')}`);
+    console.log(`  Words not found in the transcript: ${ai.unsupported.length ? ai.unsupported.join(', ') : 'none'}`);
     console.log(`  Topic: ${ai.topic || 'none'} (title rules said: ${c.topic || 'none'})`);
     console.log(`  Parts: ${ai.chapters.map((x) => `${Math.floor(x.at / 60)}:${String(x.at % 60).padStart(2, '0')} ${x.title}`).join(' | ')}`);
     console.log(`  Transcript opens: ${tx.text.slice(0, 220).replace(/\s+/g, ' ')}…`);

@@ -43,7 +43,34 @@ export function parseModelJson(reply, durationSec = Infinity) {
   return { summary: summary.slice(0, 600), subjects: list(o.subjects, 14), questions: list(o.questions, 8), quality: o.quality === 'poor' ? 'poor' : 'good', topic: TOPICS.includes(o.topic) ? o.topic : null, chapters };
 }
 
-export const summaryPrompt = ({ title, teacher, minutes, transcript }) => `You are helping a synagogue community organization index recorded Torah classes so people can find them.
+// "Rabbi Dr. Richard Hidary" → "Rabbi Hidary"; "Mrs. Vivien Hidary" → "Mrs. Hidary"
+export const shortName = (name) => { const w = String(name).trim().split(/\s+/); return w.length > 2 ? `${w[0]} ${w[w.length - 1]}` : w.join(' '); };
+
+// ---- Checking a summary against the transcript -------------------------------------------------
+// Words a summary may use to describe a class without the teacher having said them.
+const FRAME = new Set('class classes lesson teacher rabbi explains explain explaining discusses discuss discussing examines examine examining explores explore exploring analyzes analyze analyzing covers cover covering goes going through reviews review reviewing looks looking addresses address addressing presents present presenting describes describe describing compares compare comparing focuses focus focusing considers consider considering teaches teach teaching including include includes various different several whether between their these those which while also then first second third final finally begins begin beginning ends concludes conclude concluding continues continue continuing section part parts topic topics subject subjects question questions answer answers source sources opinion opinions view views reason reasons meaning meanings explanation explanations discussion discussions detail details related based according regarding during along well such each other how what why when where who introduction overview summary practical conclusion conclusions'.split(' '));
+const foldWord = (w) => w.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’'`]s?$/, '').replace(/[^a-z0-9\u0590-\u05ff]/g, '');
+const stemWord = (w) => (w.length > 4 ? w.replace(/(ing|ied|ies|es|ed|ly|s|e|y)$/, '') : w);
+// Speech recognition spells Hebrew by ear ("Masichet", "D'af"), so words are also compared by their consonants.
+const bones = (w) => w.replace(/ch|kh/g, 'h').replace(/tz|ts|ss|z/g, 's').replace(/ph/g, 'f').replace(/ck|q|c/g, 'k').replace(/w|b/g, 'v').replace(/(.)\1+/g, '$1').replace(/(?!^)[aeiouy]/g, '');
+const wordsOf = (text) => String(text).split(/[\s\-–—/]+/).map(foldWord).filter(Boolean);
+
+// The meaningful words in `written` that cannot be found in the transcript (or the class title / teacher's name).
+export function unsupported(written, transcript, alsoAllowed = '') {
+  const said = wordsOf(transcript + ' ' + alsoAllowed);
+  const exact = new Set(said), stems = new Set(said.map(stemWord)), skels = new Set(said.filter((w) => w.length >= 4).map(bones));
+  const missing = new Set();
+  for (const w of wordsOf(written)) {
+    if (w.length < 4 || /^\d/.test(w) || STOP.has(w) || FRAME.has(w)) continue;
+    if (exact.has(w) || stems.has(stemWord(w)) || (w.length >= 5 && skels.has(bones(w)))) continue;
+    // "HaBetarim" said as "betarim", "Hallel" inside a longer run-together word
+    if (w.length >= 6 && said.some((s) => s.length >= 5 && (s.includes(w.replace(/^(ha|ve|be|le)/, '')) || w.includes(s)))) continue;
+    missing.add(w);
+  }
+  return [...missing];
+}
+
+export const summaryPrompt = ({ title, teacher, minutes, transcript, redo = '' }) => `You are helping a synagogue community organization index recorded Torah classes so people can find them.
 
 Below is an automatic transcript of a class, with time marks in square brackets like [12:30] (minutes:seconds from the start). It was made by speech-recognition software, so Hebrew and Aramaic words, names of rabbis and names of books are often misspelled or garbled. Use the title and context to work out what was meant.
 
@@ -53,8 +80,10 @@ Length: about ${minutes} minutes
 
 Wording, for everything you write: use the names this community uses, which are the ones the teacher uses in the class. The books of the Torah are Bereshit, Shemot, Vayikra, Bemidbar and Debarim, never Genesis, Exodus, Leviticus, Numbers or Deuteronomy; likewise Tehillim, Mishle, Yeshayahu, Yehoshua and so on rather than Psalms, Proverbs, Isaiah, Joshua. Say Hashem, Perasha, Bet HaMikdash, Berit. Call people what the teacher calls them (Abraham Abinu or Avraham Avinu, Moshe Rabbenu). Do not introduce English or academic terms the teacher did not use.
 
+The most important rule: report only what is said in this transcript. Every source, person, book, chapter, law, story and idea you mention must be one the teacher actually speaks about in the recording, named with the teacher's own word for it. Do not add background, context, explanations, sources or conclusions from your own knowledge, even if they are correct and even if they would make the summary clearer. Do not guess at what a garbled passage "probably" covers; leave it out. A shorter summary that is entirely from the transcript is better than a fuller one that is not.
+${redo ? `\nYour previous attempt used these words, which are not found in the transcript: ${redo}. Write it again without anything the teacher did not say.\n` : ''}
 Reply with one JSON object and nothing else, with these keys:
-- "summary": 2 to 3 plain sentences (same spelling rules as below) saying what this class covers, written for someone deciding whether to listen. Describe the topics; do not give halakhic rulings or conclusions as fact, and do not add anything that is not in the transcript.
+- "summary": 2 to 3 plain sentences (same spelling rules as below) saying what this class covers, written for someone deciding whether to listen. Begin with the teacher, as "${shortName(teacher)} ..." (for example "${shortName(teacher)} goes through ..."). Describe the topics; do not give halakhic rulings or conclusions as fact.
 - "subjects": 6 to 12 short phrases naming the specific subjects, sources, people, laws or stories discussed. Spell Hebrew words the way the Sephardic community of Brooklyn does: "h" not "ch" for het (Hodesh, Hakhamim, Hinukh, Hasidim, Hasosrot), "t" not "s" for tav (Shabbat, Berakhot, Bet Din), "s" not "tz" for sadi (Misva, Sedaka), and Perasha, Halakha, Mishna, Masekhet, Bet HaMikdash. Keep the usual English spelling of people's names (Rabbi Chaim Kanievsky).
 - "questions": 3 to 6 questions, in everyday language, that a person might ask and that this class addresses.
 - "topic": exactly one of ${TOPICS.map((x) => `"${x}"`).join(', ')}, or null if none fits. Use "Daf Yomi" only for a class going through a page of Gemara as part of the daily daf; other Talmud classes are "Gemara". Practical law is "Halakha".
