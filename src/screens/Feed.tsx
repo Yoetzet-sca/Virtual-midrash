@@ -20,13 +20,23 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
   const [videoPaused, setVideoPaused] = useState(false);
   const frame = useRef<HTMLIFrameElement>(null);
   // YouTube's player takes play/pause commands as messages, and reports its state back the same way.
-  const tellVideo = (func: string) => frame.current?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*');
+  const tellVideo = (func: string, args: unknown[] = []) => frame.current?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
+  // Where the open video is, as YouTube's player reports it, so videos get the same bar as audio classes.
+  const [vTime, setVTime] = useState(0);
+  const [vDur, setVDur] = useState(0);
+  const [vRate, setVRate] = useState(1);
+  const vSeek = (to: number) => { const s = Math.max(0, vDur ? Math.min(vDur - 1, to) : to); setVTime(s); tellVideo('seekTo', [s, true]); };
+  const vCycleRate = () => { const steps = [1, 1.25, 1.5, 2]; const next = steps[(steps.indexOf(vRate) + 1) % steps.length]; setVRate(next); tellVideo('setPlaybackRate', [next]); };
   const toggleVideo = () => { tellVideo(videoPaused ? 'playVideo' : 'pauseVideo'); setVideoPaused(!videoPaused); };
   useEffect(() => {
     const onMessage = (e: MessageEvent) => {
       if (!/^https:\/\/www\.youtube(-nocookie)?\.com$/.test(e.origin) || typeof e.data !== 'string') return;
       try {
-        const state = JSON.parse(e.data)?.info?.playerState;
+        const info = JSON.parse(e.data)?.info;
+        if (typeof info?.currentTime === 'number') setVTime(info.currentTime);
+        if (typeof info?.duration === 'number' && info.duration > 0) setVDur(info.duration);
+        if (typeof info?.playbackRate === 'number') setVRate(info.playbackRate);
+        const state = info?.playerState;
         if (state === 1) setVideoPaused(false); // playing
         if (state === 2 || state === 0) setVideoPaused(true); // paused or ended (e.g. from YouTube's own controls)
       } catch { /* not a player message */ }
@@ -179,7 +189,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
           const tap = () => {
             if (!isVideo) { started.current = Date.now(); p.toggle(c); }
             else if (video === c.id) toggleVideo(); // already open: the whole screen pauses and resumes it
-            else { p.pause(); setVideo(c.id); setVideoPaused(false); }
+            else { p.pause(); setVideo(c.id); setVideoPaused(false); setVTime(0); setVDur(0); setVRate(1); }
           };
           return (
             <section key={c.id} data-id={c.id} className="card">
@@ -236,6 +246,21 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
                   <button disabled={!mine} onClick={p.cycleRate} aria-label={'Speed ' + p.rate + ' times'} className="rate">{p.rate}×</button>
                 </div>
               )}
+              {isVideo && (() => {
+                // The same bar for a video. It comes alive once the video is open; before that it shows the length.
+                const open = video === c.id;
+                const length = (open && vDur) || c.durationSec;
+                return (
+                  <div className={'scrub' + (open ? '' : ' idle')}>
+                    <button disabled={!open} onClick={() => vSeek(vTime - 15)} aria-label="Back 15 seconds">−15</button>
+                    <span className="scrub-time">{clock(open ? vTime : 0)}</span>
+                    <input type="range" disabled={!open} aria-label="Position in video" min={0} max={Math.max(1, Math.floor(length))} value={Math.floor(open ? vTime : 0)} onChange={(e) => vSeek(Number(e.target.value))} />
+                    <span className="scrub-time">{length ? clock(length) : ''}</span>
+                    <button disabled={!open} onClick={() => vSeek(vTime + 30)} aria-label="Forward 30 seconds">+30</button>
+                    <button disabled={!open} onClick={vCycleRate} aria-label={'Speed ' + vRate + ' times'} className="rate">{open ? vRate : 1}×</button>
+                  </div>
+                );
+              })()}
               <div className={'rail' + (isVideo ? ' no-who' : '')}>
                 <a className="rail-who" href={'#/teacher/' + c.teacherId} aria-label={t?.name + ' page'}><Avatar t={t} size={52} ring /></a>
                 <button onClick={() => like(c)} aria-pressed={prefs.liked.includes(c.id)} className={prefs.liked.includes(c.id) ? 'hot' : ''}>

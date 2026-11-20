@@ -35,7 +35,9 @@ await mkdir(new URL('ai-transcripts/', root), { recursive: true });
 await mkdir(new URL('.ai-tmp/', root), { recursive: true });
 const teacherName = (id) => data.teachers.find((t) => t.id === id)?.name || id;
 const aiFile = (c) => new URL(`content/ai/${c.sid}.json`, root);
-const upToDate = (c) => { try { return (JSON.parse(readFileSync(aiFile(c), 'utf8')).v || 1) >= VERSION; } catch { return false; } };
+// Videos filed under the SCA itself (no teacher matched) are redone once more so the summary names the speaker, not the organization.
+const need = (c) => (c.teacherId === 'sca' ? VERSION + 1 : VERSION);
+const upToDate = (c) => { try { return (JSON.parse(readFileSync(aiFile(c), 'utf8')).v || 1) >= need(c); } catch { return false; } };
 const txFile = (c) => new URL(`ai-transcripts/${c.sid}.json`, root);
 
 // Take turns between teachers, newest first, so a small run covers a mix.
@@ -154,7 +156,7 @@ const lengthOf = (c, tx) => c.durationSec || (tx.segments?.length ? tx.segments[
 async function askGemini(c, tx, redo = '') {
   const transcript = tx.segments?.length ? timedTranscript(tx.segments) : tx.text;
   const secs = lengthOf(c, tx);
-  const prompt = summaryPrompt({ title: c.title, teacher: teacherName(c.teacherId), minutes: Math.round(secs / 60), transcript: transcript.slice(0, 140000), redo });
+  const prompt = summaryPrompt({ title: c.title, teacher: c.teacherId === 'sca' ? '' : teacherName(c.teacherId), minutes: Math.round(secs / 60), transcript: transcript.slice(0, 140000), redo });
   return gemini([{ text: prompt }], (text, model) => ({ ...parseModelJson(text, secs || Infinity), model }));
 }
 
@@ -183,7 +185,7 @@ for (const c of queue) {
     let tx = existsSync(txFile(c)) ? JSON.parse(await readFile(txFile(c), 'utf8')) : null; // already transcribed on an earlier run
     if (!tx) { tx = await transcribe(c); await writeFile(txFile(c), JSON.stringify({ id: c.id, title: c.title, ...tx })); minutes += mins; }
     const ai = await summarize(c, tx);
-    await writeFile(aiFile(c), JSON.stringify({ v: VERSION, id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, unsupported: ai.unsupported, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: tx.language, made: new Date().toISOString().slice(0, 10), by: `groq whisper + ${ai.model}` }, null, 1));
+    await writeFile(aiFile(c), JSON.stringify({ v: need(c), id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, unsupported: ai.unsupported, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: tx.language, made: new Date().toISOString().slice(0, 10), by: `groq whisper + ${ai.model}` }, null, 1));
     done++;
     console.log(`\n✓ ${teacherName(c.teacherId)} — ${c.title} (${mins} min, ${tx.text.split(/\s+/).length} words${tx.sentMb ? ', sent ' + tx.sentMb + ' MB' : ''}, ${ai.model}${ai.quality === 'poor' ? ', marked POOR' : ''})`);
     console.log(`  Summary: ${ai.summary}`);
@@ -212,7 +214,7 @@ for (const c of stoppedByGemini ? [] : videos) {
     let tx = existsSync(txFile(c)) ? JSON.parse(await readFile(txFile(c), 'utf8')) : null;
     if (!tx) { tx = await transcribeVideo(c); await writeFile(txFile(c), JSON.stringify({ id: c.id, title: c.title, ...tx })); }
     const ai = await summarize(c, tx);
-    await writeFile(aiFile(c), JSON.stringify({ v: VERSION, id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, unsupported: ai.unsupported, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: '', made: new Date().toISOString().slice(0, 10), by: `gemini (video) + ${ai.model}` }, null, 1));
+    await writeFile(aiFile(c), JSON.stringify({ v: need(c), id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, unsupported: ai.unsupported, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: '', made: new Date().toISOString().slice(0, 10), by: `gemini (video) + ${ai.model}` }, null, 1));
     videosDone++;
     console.log(`\n✓ VIDEO ${teacherName(c.teacherId)} — ${c.title} (about ${Math.round(lengthOf(c, tx) / 60)} min, ${tx.text.split(/\s+/).length} words, ${ai.model}${ai.quality === 'poor' ? ', marked POOR' : ''})`);
     console.log(`  Summary: ${ai.summary}`);
