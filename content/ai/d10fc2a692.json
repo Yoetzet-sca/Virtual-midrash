@@ -2,65 +2,74 @@
  "v": 6,
  "id": "yt:1EWqdI5Zqlo",
  "title": "SCA Minhag of the Week 298: \"Reciting Hallel in a House of Mourning\"",
- "topic": "Minhag of the Week",
+ "topic": "Halakha",
  "chapters": [
   {
    "at": 0,
-   "title": "Customs of Hallel in a Beit Abel",
-   "about": "Introductory overview and Pri Chadash"
+   "title": "Customs of Hallel in a beit abel",
+   "about": "Overview of practices on Chanukah and Rosh Hodesh"
   },
   {
    "at": 45,
-   "title": "Opinions of Chida and Ben Ish Hai",
-   "about": "Distinctions between Chanukah and Rosh Chodesh"
+   "title": "Opinions of the Chida and Ben Ish Hai",
+   "about": "Distinctions between Chanukah and Rosh Hodesh"
   },
   {
    "at": 91,
-   "title": "Kaf HaAhim and Customs in Jerusalem",
-   "about": "Kaf HaAhim Sofer and Keter Shem Tov"
+   "title": "Kaf HaAhim and Keter Shem Tov",
+   "about": "Practices in Jerusalem and home recitation"
   },
   {
    "at": 137,
-   "title": "Yalkut Yosef and Where Death Occurred",
-   "about": "Room arrangements and passing away in the house"
+   "title": "Yalkut Yosef and location of the deceased",
+   "about": "Room arrangements and where the deceased passed away"
+  },
+  {
+   "at": 185,
+   "title": "Reasons for refraining from Hallel",
+   "about": "Sensitivity to the soul of the deceased"
   },
   {
    "at": 231,
-   "title": "Custom of Halab and Brooklyn",
-   "about": "Halab practice and Meir Or"
+   "title": "Customs in Halab and Brooklyn",
+   "about": "Regional practices and the book Meir Or"
   }
  ],
  "unsupported": [
-  "cites",
-  "death",
-  "occurred"
+  "recitation",
+  "authorities",
+  "themselves",
+  "participate",
+  "location"
  ],
- "summary": "Joseph Mosseri discusses different customs regarding reciting Hallel in a beit abel on Rosh Chodesh and Chanukah. He cites various sources, including Sidur beit obed, Chida, Ben Ish Hai, and Kaf HaAhim Sofer, and compares the customs of Halab, Jerusalem, and Brooklyn.",
+ "claims": [],
+ "summary": "Mr. Arking discusses the different customs regarding the recitation of Hallel in a beit abel. He reviews the opinions of various authorities on whether Hallel should be recited in a house of mourning on Chanukah and Rosh Hodesh, and how the mourners themselves participate.",
  "subjects": [
-  "Hallel",
-  "beit abel",
+  "Hallel in a beit abel",
   "Chanukah",
-  "Rosh Chodesh",
-  "Sidur beit obed",
+  "Rosh Hodesh",
+  "Sidur Beit Obed",
   "Pri Chadash",
   "Chida",
+  "Machzik Beracha",
   "Ben Ish Hai",
   "Kaf HaAhim Sofer",
   "Keter Shem Tov",
   "Yalkut Yosef",
-  "Halab"
+  "Meir Or"
  ],
  "questions": [
-  "Is Hallel recited in a house of mourning on Rosh Chodesh or Chanukah?",
-  "What did the Ben Ish Hai say about reciting Hallel in a beit abel?",
-  "What was the custom in Halab regarding Hallel in a beit abel?",
-  "What do people in Brooklyn do regarding Hallel in a beit abel on Rosh Chodesh?"
+  "Is Hallel recited in a house of mourning on Chanukah?",
+  "Is Hallel recited in a house of mourning on Rosh Hodesh?",
+  "Do mourners recite Hallel in a house of mourning?",
+  "What is the custom in Brooklyn regarding Hallel in a beit abel?",
+  "Should mourners leave the room when Hallel is recited?"
  ],
  "quality": "good",
  "terms": "hallel beit abel recite chodesh rosh chanukah recited room mourners custom deceased people wrote house mourning places away main passed reciting appropriate ben case customary day hai hashem ish jerusalem obed according another book century concluded differentiated find haahim halab halachic however kaf leave never obligation opinion opinions praise quote should sidur soul verse 17th 18th ability accordance acknowledged actual added adopted afterwards back based beracha brooklyn chadash changed chida community complete congregants customs different differentiate discussed elsewhere even except first fit follow haida happiness happy homes idea includes insensitive inside keter least leaving lost machzik made make meir mention meyer order period place prayed prayer prayers present pri refrain regarding regards rejoicing rest seven shem similarly small sofer still therefore though tov unable usually various verses walk whether without yalkut yosef",
  "words": 875,
  "language": "",
- "speaker": "Joseph Mosseri",
+ "speaker": "",
  "made": "2026-11-20",
- "by": "gemini (video) + gemini-3.5-flash-lite"
+ "by": "gemini (video) + gemini-3.1-flash-lite"
 }
