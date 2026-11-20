@@ -6,59 +6,58 @@
  "chapters": [
   {
    "at": 0,
-   "title": "The 1897 Aleppo Haggadah",
-   "about": "Introduction to the 1897 printing in Halab and its 2004 reproduction."
+   "title": "The 1897 Halab Haggadah and 2004 Offset",
+   "about": "Introduction to the 1897 Halab Haggadah printing and its 2004 offset."
   },
   {
    "at": 46,
-   "title": "Textual Wording and Kehach Ma'anya",
-   "about": "Comparison of Halach Ma'anya and Kehach Ma'anya in various Haggadot."
+   "title": "Wording and Pronunciation Examples",
+   "about": "Examining Kehach Ma'anya and comparisons with Mahzor Ramsulba."
   },
   {
    "at": 91,
    "title": "Arabic Translation and Avadim Hayinu",
-   "about": "Discussion of Hadal Jawad and traditional pronunciation."
+   "about": "Discussion of Hadal Jawad and Rabbi Solomon Saka's documentation."
   },
   {
    "at": 137,
-   "title": "Pronunciation and Specific Paragraphs",
-   "about": "Shacharit, Lish'ol, Afikomin, and Baruch Shomer Haftahato."
-  },
-  {
-   "at": 182,
-   "title": "Mishadotam and Conclusion",
-   "about": "Omission of Mishadotam and preservation of community customs."
+   "title": "Additional Textual Variations",
+   "about": "Details on Shacharit, Lish'ol, Afikomin, Mechashev Itz, and Tish Amdah."
   }
  ],
  "unsupported": [
-  "editions",
   "specific",
-  "differences"
+  "later",
+  "variations"
  ],
- "summary": "Joey Harari examines the 1897 printing of the Haggadah in Halab and compares its text and pronunciation to other editions. He discusses specific wording differences, Arabic translations, and traditional customs preserved in community Haggadot.",
+ "claims": [
+  "\"Mr. Arking discusses...\" - The speaker's name is not mentioned in the transcript."
+ ],
+ "summary": "Mr. Arking discusses the 1897 printing of the Haggadah in Halab and its Arabic translation in Hebrew letters. He examines specific wording and pronunciation examples from this printing, comparing them with other sources like the Mahzor Ramsulba and later community Haggadot.",
  "subjects": [
   "Haggadah",
-  "Halab",
   "Mahzor Ramsulba",
-  "Young Shera Zion Haggadah",
+  "Young Sharah Zion Haggadah",
   "Shelon Yerushalayim Haggadah",
   "Rabbi Solomon Saka",
   "Daniel Ben Kirtweck",
-  "Kriyat Shema",
-  "Afikomin",
-  "Avadim Hayinu"
+  "Halab",
+  "Avadim Hayinu",
+  "Kriyat Shema shel Shacharit",
+  "Afikomin"
  ],
  "questions": [
-  "What is significant about the 1897 Haggadah printed in Halab?",
-  "How does the 1897 Aleppo Haggadah spell and pronounce certain key phrases like Kehach Ma'anya?",
-  "Why does the Haggadah use Lish'ol instead of Lesh'ol for the son who does not know how to ask?",
-  "What Arabic addition is sung before Avadim Hayinu according to community custom?"
+  "When was the Haggadah printed in Halab, and what did it include?",
+  "How does the 1897 Aleppo printing spell and pronounce certain phrases like Kehach Ma'anya compared to other versions?",
+  "What Arabic words are documented before Avadim Hayinu, and who recorded this custom?",
+  "Why is Lish'ol preferred over Lesh'ol according to the hazan Daniel Ben Kirtweck?",
+  "What are some of the other specific textual differences mentioned, such as Mechashev Itz and Tish Amdah?"
  ],
- "quality": "good",
+ "quality": "poor",
  "terms": "haggadah printed opposed paragraph year arabic avadim begins hayinu printing aleppo custom halab mishadotam questions shacharit textual traditional accordance amdah ancestors ate based bread community customary egypt four hadal hebrew itz jawad kehach lishol maanya mahzor masa pronunciation rabbi ramsulba saka salvation since solomon tense translation version word young zion actual added adding additional afikoman afikomen afikomin always america anachnu anseinu answer anu applies ask asking associated baruch began ben caf call called center chashav color common continue culture customs daniel death described document documented doesnt end enlarged even example examples final find forefathers formally formative found furthermore good hadhak hadohak haftahato haggadot halach hashem hatikak hazan het highlighted however included including janim jews kirtweck kriyat last leshol letters lifarot long mans may meaning mechashev mitzraim moving naimot new next offset original others part past photocopy pictures planning poor portion prayer preferred present preserving print quoted rabot read reading reciting regarding regularly reprinted sharah sheeno shel shelon shema sheol shera shomer shva signs sound source suggests sung syrian texts though throughout time tish tishkulu tune undoubtedly unfortunately vehi vehit versions vetovot wording words world years yerushalayim yodeya york zeh",
  "words": 560,
  "language": "",
- "speaker": "Joey Harari",
+ "speaker": "",
  "made": "2026-11-20",
  "by": "gemini (video) + gemini-3.5-flash-lite"
 }

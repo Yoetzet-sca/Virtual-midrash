@@ -6,59 +6,67 @@
  "chapters": [
   {
    "at": 6,
-   "title": "Pesach Sheni in Torah and Later Custom",
-   "about": "Korban Pesach make-up day, holiday status, and Acharonim views"
+   "title": "Introduction to Pesach Sheni",
+   "about": "Definition and historical background of Pesach Sheni and its observance."
+  },
+  {
+   "at": 53,
+   "title": "Customs of Pesach Sheni",
+   "about": "Views of Acharonim, lack of matzah eating among general Sephardim."
   },
   {
    "at": 98,
-   "title": "Association with Rabbi Meir Ba'al HaNess",
-   "about": "Teveria sanctuary rebuilt in 1867 and connection to the 14th of Iyar"
+   "title": "Association with Rabbi Meir Ba'al Hanes",
+   "about": "Connection to the 14th of Iyar starting in 1867 in Tiberias."
   },
   {
    "at": 145,
-   "title": "Travels to Meron and Special Prayers",
-   "about": "Stops in Tiberias, Meir Ba'al Ayin publication, and spread in communities"
+   "title": "Spread of the Prayers",
+   "about": "Publication of Meir Ba'al Ayin and stops in Tiberias on the way to Meron."
   },
   {
    "at": 238,
-   "title": "The Kupah of Rabbi Meir Ba'al HaNess in Halab",
-   "about": "Charity collection, support for local poor and Bet Midrash books"
+   "title": "The Kupah of Rabbi Meir Ba'al Hanes in Halab",
+   "about": "Charity collection and its use for the community and Beit Midrash."
   },
   {
    "at": 285,
-   "title": "The 1954 Halachic Ruling by Halabi Rabbis",
-   "about": "Independence of the community fund and allocation to local Yeshivot"
+   "title": "Halachic Ruling of 1954",
+   "about": "Halab rabbis ruling on the independence of their charity funds after moving to Eretz Yisrael."
   }
  ],
  "unsupported": [
-  "background",
-  "made",
-  "travels"
+  "observance",
+  "behind",
+  "publication",
+  "funds"
  ],
- "summary": "Joseph Mosseri discusses the background of Pesach Sheni and its later association with Rabbi Meir Ba'al HaNess. He also explores the history of the Kupah of Rabbi Meir Ba'al HaNess and the halachic ruling made by the rabbis of Halab.",
+ "claims": [],
+ "summary": "Mr. Mosseri discusses the observance of Pesach Sheni and its later association with Rabbi Meir Ba'al Hanes on the 14th of Iyar. He explains the history behind the customs, including the publication of special prayer books and the connection of Syrian communities to the charity funds of Rabbi Meir Ba'al Hanes.",
  "subjects": [
   "Pesach Sheni",
-  "Rabbi Meir Ba'al HaNess",
+  "Korban Pesach",
+  "Rabbi Meir Ba'al Hanes",
   "Hida",
   "Rabbi Haim Palaggi",
   "Ben Ish Hai",
-  "Teveria",
+  "Tiberias",
   "Meron",
   "Lag BaOmer",
-  "Halab",
-  "Kupah of Rabbi Meir Ba'al HaNess"
+  "Kupah of Rabbi Meir Ba'al Hanes",
+  "Halab"
  ],
  "questions": [
-  "What is the origin and significance of Pesach Sheni?",
-  "How did Rabbi Meir Ba'al HaNess become associated with Pesach Sheni?",
-  "What was the Kupah of Rabbi Meir Ba'al HaNess used for in Halab?",
-  "What did the rabbis of Halab rule in 1954 regarding charity funds?"
+  "What is the origin and meaning of Pesach Sheni?",
+  "How did Rabbi Meir Ba'al Hanes become connected to the 14th of Iyar?",
+  "Did the old Sephardic communities eat matzah on Pesach Sheni?",
+  "How did the Jews of Halab use the funds collected for Rabbi Meir Ba'al Hanes?"
  ],
  "quality": "good",
  "terms": "rabbi baal meir haness people pesach tiberias chachamim halab sheni became custom day even give rabbis 14th among connection holiday iyar kupah meron sephardim though associated certain eretz holy living reading started still strong together yisrael amongst books first haim independent interesting israel kadosh known later make making money post prayers published put related ruling saintly specifically teveria trek unknown used wasnt widespread yeshivot 18th 1940s 1950s acharonim aliya another around ashkenazim associate association ayin baghdad baomer battle beautiful beit ben big book bring buying byom call called came care chacham charity city claimed collecting communities community connect date days decided defilement didnt directly divided djerba done due eating elicit ensuing especially exist existed feeling funny gathering general generations hai halachic happiness hayom hear hida history impurity increase individuals instituted ish jerusalem jews korban lag matzah may mentioned mentions midrash midrashim minhag minor mishnah monies month moving necessarily never nissan nowadays obviously old original otherwise palaggi parts pass passing piece pious poor pretty readings reasons rebuild refer sanctuary saying send sephardic seudot shalom should simchah situations special spread stop syria tachanun taking therefore theres throughout time todays tomb torah tradition tunis tunisia tzedakah tzion unable use various visit week werent world yehi yirbeh yosef youre zeh",
  "words": 852,
  "language": "",
- "speaker": "Joseph Mosseri",
+ "speaker": "",
  "made": "2026-11-20",
  "by": "gemini (video) + gemini-3.5-flash-lite"
 }
