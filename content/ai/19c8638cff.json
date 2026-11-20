@@ -1,53 +1,57 @@
 {
- "v": 7,
+ "v": 8,
  "id": "yt:YMeaiBxf18c",
  "title": "SCA Minhag of the Week 303: \"Aleppo Customs of the month of Elul\"",
  "topic": "Minhag of the Week",
  "chapters": [
   {
    "at": 6,
-   "title": "Introduction to Elul Minhagim and Selihot",
-   "about": "Shulchan Aruch and pre-dawn Selihot"
+   "title": "Introduction to Elul Minhagim",
+   "about": "Overview of Elul customs and the Shulchan Aruch"
   },
   {
    "at": 100,
-   "title": "Mahzor Aram Soba and Aleppo Selihot",
-   "about": "Old Aleppo customs and days for Selihot"
+   "title": "History of Selihot in Aleppo",
+   "about": "Mahzor Aram Soba and the 40-day period"
   },
   {
    "at": 240,
-   "title": "Blowing the Shofar during Elul",
-   "about": "Aleppo custom and Keter Shem Tob"
+   "title": "Shofar and Mizmor 27",
+   "about": "Clarifying community customs regarding shofar and Tehillim"
   },
   {
-   "at": 327,
-   "title": "Saying Tehillim Psalm 27",
-   "about": "Mishnah Berurah and communal versus private practice"
+   "at": 373,
+   "title": "Communal vs Private Practice",
+   "about": "Distinguishing between individual and communal customs"
   }
  ],
  "unsupported": [
+  "traditional",
   "historical",
-  "ruling",
-  "concerning"
+  "reciting",
+  "stance",
+  "recitation",
+  "history"
  ],
  "claims": [],
- "summary": "This class discusses various customs of the month of Elul according to the traditions of Aleppo. It explores historical practices regarding Selihot, the ruling on blowing the shofar during Elul, and the custom concerning Psalm 27 after prayers.",
+ "summary": "This class explores the traditional customs of the Aleppo community during the month of Elul. It examines the historical practice of reciting Selihot, the community's stance on blowing the shofar, and the recitation of Mizmor 27 from Tehillim.",
  "subjects": [
-  "Minhagim",
-  "Elul",
+  "Minhagim of Elul",
   "Selihot",
-  "Shulchan Aruch",
   "Mahzor Aram Soba",
+  "Shofar blowing",
   "Hakham Shem Tob Gaguine",
   "Keter Shem Tob",
+  "Mizmor 27",
   "Tehillim",
   "Mishnah Berurah",
   "Kol Ya'akob"
  ],
  "questions": [
-  "When were Selihot traditionally said according to the old customs of Aleppo?",
-  "Did the original Aleppo custom include blowing the shofar during Elul?",
-  "Is saying Psalm 27 after prayers a communal custom in the Aleppo tradition?"
+  "When did the Aleppo community traditionally recite Selihot?",
+  "Is it the custom of the Aleppo community to blow the shofar during Elul?",
+  "Should Mizmor 27 be recited communally after prayers during Elul?",
+  "What is the difference between private and communal minhagim?"
  ],
  "quality": "good",
  "terms": "selihot custom elul shofar blow mizmor people dawn day rabbi rosh communal done hodesh minhagim shabbat yom aram community customs haboker hashanah kippur minhag pre soba sunrise aleppo aruch beashmoret dont even excluding extra halab level lomar never period saying shulchan special week adonai aleinu another ashkenazim attested berurah brought days entire far hakippurim halabi hours individuals lakum ledavid leshabeah mahzor merosh minyan mishnah month nohagim old ori picked point prayers private recollection sepharadim shaharit shem tehillim teshuvah tob wanted 67th afterwards agrees ahar arbit arise arrived aseret ashmoret back beautiful beginning bekhol besheni besides bimdinoteinu blowing boker brief broke bunch came chaf changed choose class clear clearly concluding continued current definitely descent different distinguish early editions else end ends etc eventually every everybody except exiles first followed gaguine gedaliah gemar general generally giving hakham hakhamim hasidim hatara hatefillah hundreds ill immediately individually insistence instruction introduce ira italian kaddish keter kol least leshanim looking may meaning mimi minha monday mondays mustaarabi nedarim neighbors neimot newer number original page parashat past periods practice practiced printed prior privately properly psalm published quoted quoting rabot reeh regarding room section sepharadi shoftim six somebody spain spanish started stop street supposed synagogue syrian talk tavo tell testimony tetzei thats thirdly though three thursday thursdays tizku today told traditions tried true types tzom ubahamishi ubshabbatot upheld upkeep vaerev venohagim vetovot veyishi volume weeks whatsoever within wrote yaakob years yemei zayin",
@@ -55,5 +59,5 @@
  "language": "",
  "speaker": "",
  "made": "2026-11-20",
- "by": "gemini (video) + gemini-3.5-flash-lite"
+ "by": "gemini (video) + gemini-3.1-flash-lite"
 }

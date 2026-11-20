@@ -1,31 +1,28 @@
 {
- "v": 7,
+ "v": 8,
  "id": "yt:TRAtIqP1HJY",
  "title": "SCA Minhag of the Week 305: \"Reciting Yag Midot Before Taking Out the Torah on Yamim Noraim\"",
  "topic": "Minhag of the Week",
  "chapters": [
   {
    "at": 0,
-   "title": "Customs of Yud Gimmel Middot and Halab",
-   "about": "Yud Gimmel Middot before taking out the Torah and the Halabi custom according to Derech Eretz"
+   "title": "Customs of reciting Yud Gimmel Middot",
+   "about": "Yud Gimmel Middot, Sefer Torah, Rosh Hashanah, Yom Kippur, Mekubalim, Halab, Derech Eretz"
   },
   {
    "at": 47,
-   "title": "Reports from Halabi Authorities and Brazil",
-   "about": "Reports from Hachams, the 1961 incident in Brazil, and exceptions in Halabi nusah and letters"
+   "title": "Reports from Halabi community and Brazil",
+   "about": "Hacham Yitshak Zafrani, Brazil, Kenees, Hacham Yitshak Dayan, Nusah"
   },
   {
    "at": 92,
-   "title": "Conclusion on the Prevalent Custom",
-   "about": "Summary of the Halabi custom not to recite Yud Gimmel Middot and the minyan practice"
+   "title": "Conclusion on the custom in Halab",
+   "about": "Mahzor Shelom Yerushalayim, Hacham Sade Harari, minyan, tradition"
   }
  ],
- "unsupported": [
-  "authorities",
-  "contrasting"
- ],
+ "unsupported": [],
  "claims": [],
- "summary": "This class discusses whether to recite Yud Gimmel Middot before taking out the Sefer Torah on Yamim Noraim and other holidays. It examines the custom of Halab based on various reports and authorities, contrasting it with the view of the Mekubalim.",
+ "summary": "This class discusses whether to recite Yud Gimmel Middot before taking out the Sefer Torah on Rosh Hashanah and Yom Kippur. It examines the custom according to the Mekubalim and the tradition in Halab based on various Hachamim.",
  "subjects": [
   "Yud Gimmel Middot",
   "Sefer Torah",
@@ -33,14 +30,15 @@
   "Yom Kippur",
   "Mekubalim",
   "Halab",
+  "Derech Eretz",
   "Petihat HaEikhal",
   "Mahzor Shelom Yerushalayim"
  ],
  "questions": [
-  "Should Yud Gimmel Middot be recited before taking out the Sefer Torah on Rosh Hashanah and Yom Kippur?",
-  "What was the traditional custom in Halab regarding Yud Gimmel Middot at Petihat HaEikhal?",
-  "How do the Mekubalim view reciting Yud Gimmel Middot on holidays like Pesach, Shavuot, and Sukkot?",
-  "What happened in the Halabi community in Brazil in 1961 when the Hazzan started to recite Yud Gimmel Middot?"
+  "Should Yud Gimmel Middot be recited before taking out the Sefer Torah?",
+  "What was the custom in Halab regarding Yud Gimmel Middot at Petihat HaEikhal?",
+  "How did the Mekubalim view reciting Yud Gimmel Middot on holidays?",
+  "What happened in the Halabi community in Brazil in 1961?"
  ],
  "quality": "good",
  "terms": "hacham hashanah rosh kippur yom gimmel middot yud taking torah yitshak halab recited according custom recite reciting abadi zafrani adonai based dayan even haeikhal holidays mekubalim opened pesach petihat prevalent sade sefer shavuot sukkot tawil tradition yaaqob year against aleihem attributes began begin book brazil cabasso catton community daya derech eikhal eliyahu eretz find first furthermore gindi halabi harari hashalom hayim hazzan however inconsistent insisted jack kenees letter mahzor maintain mention mexico minyan mordechai mornings nessim never night nusah objected obligated official others regarding reported reports sam sasson sharayo shelom should stopped therefore traditions written yerushalayim yosef",
