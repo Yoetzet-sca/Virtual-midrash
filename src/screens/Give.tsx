@@ -49,7 +49,7 @@ export function Give({ data }: { data: AppData }) {
 
   return (
     <div className="page">
-      <div className="lockup"><img src="./brand/sca-icon-white.png" alt="" /><b>SEPHARDIC<br />COMMUNITY<br />ALLIANCE</b></div>
+      <img className="give-logo" src="./brand/sca-primary-white.png" alt="Sephardic Community Alliance" />
       <div><h1 className="big">Keep the Torah flowing</h1><p className="muted">Your gift to the SCA keeps every class on Virtual Midrash free for the whole community.</p></div>
       <div className="seg three">
         <button className={kind === 'donate' ? 'on' : ''} aria-pressed={kind === 'donate'} onClick={() => pick('donate')}>Donate</button>

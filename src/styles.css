@@ -335,3 +335,6 @@ input::placeholder { color: var(--sky); opacity: 1; }
 /* Written pieces */
 .row.doc { text-decoration: none; color: inherit; }
 .doc-mark { font-size: 12px; font-weight: 800; letter-spacing: 1px; color: var(--sky); }
+
+/* Give page: the SCA primary logo */
+.give-logo { width: min(78%, 300px); height: auto; display: block; }
