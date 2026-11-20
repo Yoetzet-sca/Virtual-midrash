@@ -40,11 +40,11 @@ export function Give({ data }: { data: AppData }) {
   const live = data.schedule.weekly.map((w) => `${w.title}${teacher(w.teacherId) ? ' — ' + teacher(w.teacherId) : ''} (${DAYS[w.day] || w.day} ${w.time})`);
   const recorded = data.teachers.filter((t) => data.classes.some((c) => c.teacherId === t.id)).map((t) => `${t.name}’s recorded classes`);
   const mail = (subject: string, lines: string[]) => `mailto:${data.links.officeEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.filter(Boolean).join('\n'))}`;
-  const contact = [`Name: ${name.trim()}`, `Phone: ${phone.trim()}`, email.trim() && `Email: ${email.trim()}`];
+  const contact = [`Name: ${name.trim()}`, `Phone: ${phone.trim()}`, `Email: ${email.trim()}`];
   const dedication = honoree.trim() ? `${honor === 'memory' ? 'In memory of' : 'In honor of'} ${honoree.trim()}` : '';
   const sponsorMail = mail('Sponsor a class', ['I’d like to sponsor a class on Virtual Midrash.', '', `Class: ${cls || 'Any class — please choose for me'}`, dedication && `Dedication: ${dedication}`, '', ...contact]);
   const pledgeMail = mail('Pledge to the SCA', ['I’d like to make a pledge to the SCA.', '', `Amount: $${amount.trim()}`, '', ...contact, '', 'Please contact me to arrange payment.']);
-  const hasContact = name.trim() && phone.trim();
+  const hasContact = name.trim() && phone.trim() && /^\S+@\S+\.\S+$/.test(email.trim());
   const pick = (k: typeof kind) => { setKind(k); setShowForm(false); };
 
   return (
@@ -92,16 +92,15 @@ export function Give({ data }: { data: AppData }) {
       {kind !== 'donate' && <>
         <div className="field"><label htmlFor="g-name">Your name</label><input id="g-name" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} /></div>
         <div className="field"><label htmlFor="g-phone">Phone</label><input id="g-phone" type="tel" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} /></div>
-        <div className="field"><label htmlFor="g-email">Email (optional)</label><input id="g-email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} /></div>
+        <div className="field"><label htmlFor="g-email">Email</label><input id="g-email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} /></div>
         {kind === 'sponsor'
           ? <a className={'btn wide' + (hasContact ? '' : ' off')} aria-disabled={!hasContact} href={hasContact ? sponsorMail : undefined}>Send sponsorship request</a>
           : <a className={'btn wide' + (hasContact && amount.trim() ? '' : ' off')} aria-disabled={!(hasContact && amount.trim())} href={hasContact && amount.trim() ? pledgeMail : undefined}>Send my pledge</a>}
-        <p className="muted small center">{hasContact ? 'Opens an email to the SCA office with these details filled in. Press send to finish.' : 'Add your name and phone so the office can reach you.'}</p>
+        <p className="muted small center">{hasContact ? 'Opens an email to the SCA office with these details filled in. Press send to finish.' : 'Add your name, phone and email so the office can reach you.'}</p>
         {kind === 'sponsor' && (showForm
           ? <GiveLivelyForm url={data.links.giveLively} />
           : <button className="btn wide ghost" onClick={() => setShowForm(true)}>Pay for it now</button>)}
       </>}
-      <p className="muted tiny center">Dedicated in loving memory of Stanley Chera A”H by his family</p>
       <p className="muted small center"><a href="#/privacy">Privacy &amp; terms</a></p>
     </div>
   );
