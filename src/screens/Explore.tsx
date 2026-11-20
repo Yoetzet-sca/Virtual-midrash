@@ -58,7 +58,7 @@ export function Explore({ data, place: startPlace, pickTopic }: { data: AppData;
   const holidayIn = sc?.holiday ? Math.round((new Date(sc.holiday.date + 'T12:00:00').getTime() - now.getTime()) / 86400000) : 0;
   const shortcuts = [
     daf && { label: 'Today’s daf', value: `${daf.tractate} ${daf.page}`, go: () => setQ(`${daf.tractate} ${daf.page}`) },
-    sc?.perasha && { label: 'This week’s perasha', value: sc.perasha.name, go: () => setQ(sc.perasha!.search[0]) },
+    sc?.perasha && { label: 'This week’s parasha', value: sc.perasha.name, go: () => setQ(sc.perasha!.search[0]) },
     sc?.holiday && { label: holidayIn <= 0 ? 'Holiday now' : `Holiday in ${holidayIn} day${holidayIn === 1 ? '' : 's'}`, value: sc.holiday.name, go: () => setQ(sc.holiday!.name) },
   ].filter(Boolean) as { label: string; value: string; go: () => void }[];
   return (

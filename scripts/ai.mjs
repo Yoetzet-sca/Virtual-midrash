@@ -94,7 +94,7 @@ async function transcribe(c) {
   form.append('model', process.env.GROQ_MODEL || 'whisper-large-v3-turbo');
   form.append('response_format', 'verbose_json');
   form.append('temperature', '0');
-  form.append('prompt', 'A Torah class from the Sephardic community of Brooklyn. Words that may come up: Perasha, Halakha, Gemara, Mishna, Rashi, Rambam, Shulhan Arukh, Berakhot, Shabbat, Bava Batra, Arakhin, Tosafot, pasuk, Hashem, misvah, tefillah, Hakhamim.');
+  form.append('prompt', 'A Torah class from the Sephardic community of Brooklyn. Words that may come up: Parasha, Halakha, Gemara, Mishna, Rashi, Rambam, Shulhan Arukh, Berakhot, Shabbat, Bava Batra, Arakhin, Tosafot, pasuk, Hashem, misvah, tefillah, Hakhamim.');
   const r = await fetch('https://api.groq.com/openai/v1/audio/transcriptions', { method: 'POST', headers: { authorization: `Bearer ${GROQ}` }, body: form, signal: AbortSignal.timeout(300000) });
   await rm(src, { force: true }); await rm(small, { force: true });
   if (r.status === 429) throw new SlowDown(`Groq rate limit: ${(await r.text()).slice(0, 200)}`);

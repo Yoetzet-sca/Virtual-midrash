@@ -22,7 +22,13 @@ const KEY = 'vm.prefs.v1';
 const empty: Prefs = { onboarded: false, topics: [], following: [], hidden: [], liked: [], saved: [], code: '', seenAt: '', visits: 0, installAsked: false, rate: 1, positions: {}, swiped: false, learned: {} };
 
 function read(): Prefs {
-  try { return { ...empty, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return empty; }
+  try {
+    const p: Prefs = { ...empty, ...JSON.parse(localStorage.getItem(KEY) || '{}') };
+    // The topic once called "Perasha" is now "Parasha": carry over what this phone picked and learned under the old name.
+    p.topics = [...new Set(p.topics.map((x) => (x === 'Perasha' ? 'Parasha' : x)))];
+    if (p.learned['k:Perasha'] != null) { const { 'k:Perasha': old, ...rest } = p.learned; p.learned = { ...rest, 'k:Parasha': (rest['k:Parasha'] || 0) + old }; }
+    return p;
+  } catch { return empty; }
 }
 let state = read();
 // Count app opens (used to time the add-to-home-screen suggestion).

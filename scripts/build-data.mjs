@@ -8,7 +8,7 @@ import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { parseFeed, applePodcastId, appleLookupUrl, feedFromAppleLookup, isSpotifyShow, spotifyShowName, appleSearchUrl, feedFromAppleSearch, feedFromPage, looksLikeFeed } from './lib/rss.mjs';
-import { topicFor, TOPICS } from './lib/topics.mjs';
+import { topicFor, TOPICS, topicName } from './lib/topics.mjs';
 import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv, resourceRows, sameName } from './lib/csv.mjs';
 import { lock } from './lib/lock.mjs';
@@ -192,7 +192,7 @@ const search = [];
     if (!a || a.quality === 'poor') continue;
     // A channel video filed under the SCA itself moves to its teacher once the video has named who is teaching.
     if (c.teacherId === 'sca' && a.speaker) { const who = whoIs(a.speaker); if (who) { c.teacherId = who; moved++; } }
-    if (!c.topic && TOPICS.includes(a.topic)) { c.topic = a.topic; topics++; }
+    if (!c.topic && TOPICS.includes(topicName(a.topic))) { c.topic = topicName(a.topic); topics++; }
     c.summary = a.summary;
     if (a.chapters?.length) c.chapters = a.chapters.map((x) => [x.at, x.title]);
     search.push({ i: sidOf(c.id), m: a.summary, s: (a.subjects || []).join('; '), q: (a.questions || []).join(' '), c: (a.chapters || []).map((x) => x.about || ''), t: a.terms || '' });
@@ -206,6 +206,7 @@ const search = [];
   if (fixed.length !== classes.length) console.log(`✓ Overrides hid ${classes.length - fixed.length} classes`);
   classes.splice(0, classes.length, ...fixed);
 }
+for (const c of classes) c.topic = topicName(c.topic);
 // A short, link-safe id for each class's share page.
 for (const c of classes) c.sid = sidOf(c.id);
 
