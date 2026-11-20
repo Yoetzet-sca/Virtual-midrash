@@ -46,6 +46,7 @@ jobs:
         run: npm run data
         env:
           COMMUNITY_CODE: ${{ secrets.COMMUNITY_CODE }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           SHEET_TEACHERS_URL: ${{ secrets.SHEET_TEACHERS_URL }}
           SHEET_OVERRIDES_URL: ${{ secrets.SHEET_OVERRIDES_URL }}
       - name: Transcribe and summarize

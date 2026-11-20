@@ -14,7 +14,7 @@ import { parseCsv, resourceRows, sameName } from './lib/csv.mjs';
 import { lock } from './lib/lock.mjs';
 import { applyOverrides } from './lib/overrides.mjs';
 import { dafFor, weekInfo } from './lib/calendar.mjs';
-import { channelIdFrom, feedUrl, parseYoutube, teacherForTitle } from './lib/youtube.mjs';
+import { channelIdFrom, feedUrl, parseYoutube, teacherForTitle, allVideos } from './lib/youtube.mjs';
 
 const FIXTURES = process.argv.includes('--fixtures');
 const root = new URL('..', import.meta.url);
@@ -106,21 +106,25 @@ for (const t of teachers) {
 // Each video is filed under the teacher named in its title; otherwise under the SCA itself.
 for (const y of settings.youtube || []) {
   try {
-    let xml;
+    let all, whole = false;
     if (FIXTURES) {
       const f = new URL('scripts/fixtures/youtube.xml', root);
       if (!existsSync(f)) continue;
-      xml = await readFile(f, 'utf8');
+      all = parseYoutube(await readFile(f, 'utf8'));
     } else {
       const channelId = y.channelId || channelIdFrom(await get(y.url));
       if (!channelId) throw new Error('could not find the channel id — set "channelId" in content/settings.json');
-      xml = await get(feedUrl(channelId));
+      // With a YouTube API key the whole channel is listed; without one (or if the API fails) the public feed's 15 newest.
+      if (process.env.YOUTUBE_API_KEY) {
+        try { all = await allVideos(channelId, process.env.YOUTUBE_API_KEY); whole = true; }
+        catch (e) { warnings.push(`YouTube ${y.url}: ${e.message} — showing only the newest videos`); }
+      }
+      if (!all) all = parseYoutube(await get(feedUrl(channelId)));
     }
-    // Videos titled in Arabic are left out for now (SCA's choice); the newest ones in other languages still fill the list.
-    const all = parseYoutube(xml);
+    // Videos titled in Arabic are left out for now (SCA's choice).
     const kept = settings.skipArabicTitles ? all.filter((v) => !/[\u0600-\u06FF\u0750-\u077F]/.test(v.title)) : all;
     if (kept.length < all.length) console.log(`  (left out ${all.length - kept.length} videos with Arabic titles)`);
-    const videos = kept.slice(0, settings.maxVideosPerChannel || 15);
+    const videos = whole ? kept : kept.slice(0, settings.maxVideosPerChannel || 15);
     for (const v of videos) {
       // A teacher's own channel files everything under that teacher; a shared channel goes by the name in the title.
       let teacherId = (y.teacherId && teachers.some((t) => t.id === y.teacherId) ? y.teacherId : null) || teacherForTitle(v.title, teachers);
@@ -128,9 +132,9 @@ for (const y of settings.youtube || []) {
         teacherId = 'sca';
         if (!teachers.some((t) => t.id === 'sca')) teachers.push({ id: 'sca', name: 'Sephardic Community Alliance', title: 'Classes and events from the SCA', bio: '', photo: '', affiliations: [], feed: '', defaultTopic: '' });
       }
-      classes.push({ id: `yt:${v.youtubeId}`, teacherId, title: v.title, date: v.date, durationSec: 0, audioUrl: '', youtubeId: v.youtubeId, image: v.image, link: v.link, topic: topicFor(v.title, null), kind: 'video', ...(y.aiSummaries ? { ai: true } : {}) });
+      classes.push({ id: `yt:${v.youtubeId}`, teacherId, title: v.title, date: v.date, durationSec: v.durationSec || 0, audioUrl: '', youtubeId: v.youtubeId, image: v.image, link: v.link, topic: topicFor(v.title, null), kind: 'video', ...(y.aiSummaries ? { ai: true } : {}) });
     }
-    console.log(`✓ YouTube ${y.url}: ${videos.length} videos` + (videos[0] ? ` — newest: "${videos[0].title.slice(0, 60)}" (${videos[0].date.slice(0, 10)})` : ''));
+    console.log(`✓ YouTube ${y.url}: ${videos.length} videos${whole ? ' (whole channel)' : ' (newest only)'}` + (videos[0] ? ` — newest: "${videos[0].title.slice(0, 60)}" (${videos[0].date.slice(0, 10)})` : ''));
   } catch (e) {
     warnings.push(`YouTube failed for ${y.url}: ${e.message}`);
     console.warn(`! YouTube ${y.url}: ${e.message}`);

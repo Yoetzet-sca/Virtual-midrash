@@ -270,3 +270,14 @@ test('the queue recognises a perasha or holiday in a title however it is spelled
   assert.ok(titleNames('Chanukah: lighting at the door', 'Hanukkah'));
   for (const title of ['Arakhin 10', 'Vayera 5787', 'The Laws of Shabbat #11', 'Bava Batra 8a (1)']) assert.ok(!titleNames(title, 'Vayesse') && !titleNames(title, 'Lekh Lekha'), title);
 });
+
+test('YouTube API: lengths, and which videos are left out', async () => {
+  const { isoSeconds, videosFromApi } = await import('./lib/youtube.mjs');
+  assert.equal(isoSeconds('PT1H2M3S'), 3723); assert.equal(isoSeconds('PT45S'), 45); assert.equal(isoSeconds('P0D'), 0); assert.equal(isoSeconds('PT12M'), 720);
+  const item = (id, title) => ({ snippet: { title, publishedAt: '2025-11-01T10:00:00Z', thumbnails: { high: { url: 'https://i.ytimg.com/vi/' + id + '/hq.jpg' } } }, contentDetails: { videoId: id, videoPublishedAt: '2025-10-30T10:00:00Z' } });
+  const detail = (id, duration, live = 'none') => ({ id, contentDetails: { duration }, snippet: { liveBroadcastContent: live } });
+  const out = videosFromApi(
+    [item('aaaaaaaaaaa', 'Perashat Lech Lecha 5786. Rabbi Uri Lati'), item('bbbbbbbbbbb', 'A short clip'), item('ccccccccccc', 'Private video'), item('ddddddddddd', 'Upcoming live class'), item('eeeeeeeeeee', 'Removed since')],
+    [detail('aaaaaaaaaaa', 'PT38M10S'), detail('bbbbbbbbbbb', 'PT40S'), detail('ccccccccccc', 'PT5M'), detail('ddddddddddd', 'P0D', 'upcoming')]);
+  assert.deepEqual(out, [{ youtubeId: 'aaaaaaaaaaa', title: 'Perashat Lech Lecha 5786. Rabbi Uri Lati', date: '2025-10-30T10:00:00.000Z', image: 'https://i.ytimg.com/vi/aaaaaaaaaaa/hq.jpg', link: 'https://www.youtube.com/watch?v=aaaaaaaaaaa', durationSec: 2290 }]);
+});

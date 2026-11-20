@@ -35,6 +35,7 @@ jobs:
         run: npm run data
         env:
           COMMUNITY_CODE: ${{ secrets.COMMUNITY_CODE }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           SHEET_TEACHERS_URL: ${{ secrets.SHEET_TEACHERS_URL }}
           SHEET_SCHEDULE_URL: ${{ secrets.SHEET_SCHEDULE_URL }}
           SHEET_NOTICES_URL: ${{ secrets.SHEET_NOTICES_URL }}
