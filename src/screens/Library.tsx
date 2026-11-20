@@ -1,12 +1,14 @@
 import type { AppData, ClassItem } from '../types';
 import { useEffect, useState } from 'react';
-import { usePrefs, setPrefs, toggleIn } from '../store';
+import { usePrefs, setPrefs, toggleIn, savePosition } from '../store';
+import { usePlayer } from '../player';
 import { Avatar, ClassRow } from '../ui';
 import { clock, newFromFollowed } from '../util';
 
 // Everything this person has set aside or is in the middle of. Stored on this phone only.
 export function Library({ data }: { data: AppData }) {
   const prefs = usePrefs();
+  const player = usePlayer();
   const [ask, setAsk] = useState(false);
   // What's new is worked out once on opening; leaving the screen marks it as seen.
   const [fresh] = useState(() => newFromFollowed(data, prefs));
@@ -18,11 +20,13 @@ export function Library({ data }: { data: AppData }) {
   const inProgress = pick(Object.entries(prefs.positions).sort((a, b) => b[1][1] - a[1][1]).map((e) => e[0]));
   const saved = pick([...prefs.saved].reverse());
   const liked = pick([...prefs.liked].reverse());
-  const Section = ({ title, list, empty, note }: { title: string; list: ClassItem[]; empty: string; note?: (c: ClassItem) => string }) => (
+  // Taking a class off a list. A class that is playing is paused first, or the player would put its place straight back.
+  const forget = (c: ClassItem) => { if (player.cls?.id === c.id) player.pause(); setTimeout(() => savePosition(c.id, null), 60); };
+  const Section = ({ title, list, empty, note, remove }: { title: string; list: ClassItem[]; empty: string; note?: (c: ClassItem) => string; remove?: (c: ClassItem) => void }) => (
     <>
       <div className="label">{title}</div>
       {list.length === 0 ? <p className="muted small">{empty}</p> : (
-        <div className="rows">{list.map((c) => <div key={c.id}>{note && <div className="muted tiny rownote">{note(c)}</div>}<ClassRow c={c} teacher={teacher(c.teacherId)} /></div>)}</div>
+        <div className="rows">{list.map((c) => <div key={c.id}>{(note || remove) && <div className="muted tiny rownote"><span>{note ? note(c) : ''}</span>{remove && <button className="row-remove" onClick={() => remove(c)} aria-label={'Remove ' + c.title + ' from this list'}>Remove</button>}</div>}<ClassRow c={c} teacher={teacher(c.teacherId)} /></div>)}</div>
       )}
     </>
   );
@@ -30,9 +34,9 @@ export function Library({ data }: { data: AppData }) {
     <div className="page">
       <div className="head"><div><h1>Your classes</h1><p className="muted">Kept on this phone</p></div><img className="sca" src="./brand/sca-icon-white.png" alt="Sephardic Community Alliance" /></div>
       {prefs.following.length > 0 && <Section title="NEW FROM TEACHERS YOU FOLLOW" list={fresh} empty="Nothing new since you last looked. New classes from teachers you follow will show here." />}
-      <Section title="CONTINUE LISTENING" list={inProgress} empty="Classes you start and don’t finish will wait for you here." note={(c) => `You’re ${clock(prefs.positions[c.id][0])} in`} />
-      <Section title="SAVED" list={saved} empty="Tap Save on a class to keep it here." />
-      <Section title="LIKED" list={liked} empty="Classes you like show up here." />
+      <Section title="CONTINUE LISTENING" list={inProgress} empty="Classes you start and don’t finish will wait for you here." note={(c) => `You’re ${clock(prefs.positions[c.id][0])} in`} remove={forget} />
+      <Section title="SAVED" list={saved} empty="Tap Save on a class to keep it here." remove={(c) => setPrefs({ saved: prefs.saved.filter((x) => x !== c.id) })} />
+      <Section title="LIKED" list={liked} empty="Classes you like show up here." remove={(c) => setPrefs({ liked: prefs.liked.filter((x) => x !== c.id) })} />
 
       <h2 className="sub">Your preferences</h2>
       <div className="label">TOPICS YOU PICKED</div>
