@@ -99,7 +99,9 @@ Your only job is to find statements in the description that the transcript does 
 - anything that reads as background knowledge added by the writer.
 Do not flag: paraphrase, an English word used for a Hebrew term, a different spelling of the same word or name, or the description leaving things out.
 
-Reply with one JSON object and nothing else: {"unsupported": [each unsupported statement, quoted from the description, with a few words saying why]}. If everything is supported, reply {"unsupported": []}.
+Judge the description's sentences and the list of parts separately. A part title is only a label for a stretch of the class: flag one only if that subject does not come up in the class at all, not because it is brief, loosely worded, or sits at a slightly different point.
+
+Reply with one JSON object and nothing else: {"unsupported": [each unsupported statement from the description's sentences, quoted, with a few words saying why], "bad_parts": [the exact title of each part whose subject is not in the class]}. If everything is supported, reply {"unsupported": [], "bad_parts": []}.
 
 Class title: ${title}
 
@@ -115,7 +117,8 @@ export function parseCheck(reply) {
   if (a < 0 || b <= a) throw new Error('the checker did not return JSON');
   const o = JSON.parse(s.slice(a, b + 1));
   if (!Array.isArray(o.unsupported)) throw new Error('the checker returned no list');
-  return o.unsupported.map((x) => String(x).trim()).filter(Boolean).slice(0, 8);
+  const list = (v, n) => (Array.isArray(v) ? v : []).map((x) => String(x).trim()).filter(Boolean).slice(0, n);
+  return { claims: list(o.unsupported, 8), badParts: list(o.bad_parts, 12) };
 }
 
 export const summaryPrompt = ({ title, teacher, minutes, transcript, redo = '', fix = [] }) => `You are helping a synagogue community organization index recorded Torah classes so people can find them.

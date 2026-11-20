@@ -16,7 +16,8 @@ import { searchTerms, parseModelJson, summaryPrompt, timedTranscript, parseTimed
 import { weekInfo } from './lib/calendar.mjs';
 import { samePerson } from './lib/youtube.mjs';
 
-const VERSION = 5; // 5: every summary passes a separate meaning check against the transcript, or is not shown
+const VERSION = 6; // 6: a part title the checker rejects is dropped; only the summary's own statements can hide a summary
+// was 5: // 5: every summary passes a separate meaning check against the transcript, or is not shown
 // was 4: // 4: only what the teacher said (checked against the transcript), and the summary names the teacher
 // was 3: // 3: the community's own names for books and people (Bereshit, not Genesis)
 // was 2: // 2 adds the topic and the parts of the class; older files are redone from the saved transcript
@@ -137,11 +138,19 @@ async function summarize(c, tx) {
     try { const again = words(await askGemini(c, tx, { redo: best.unsupported.join(', ') })); if (again.unsupported.length < best.unsupported.length) best = again; }
     catch (e) { if (e instanceof SlowDown) throw e; }
   }
-  best.claims = await checkMeaning(c, tx, best);
+  // A part the checker rejects is simply left out. Only the summary's own statements send it back for a rewrite.
+  const judge = async (ai) => {
+    const { claims, badParts } = await checkMeaning(c, tx, ai);
+    const bad = new Set(badParts.map((x) => x.toLowerCase()));
+    const kept = ai.chapters.filter((x) => !bad.has(x.title.toLowerCase()));
+    if (kept.length < ai.chapters.length) console.log(`  (left out ${ai.chapters.length - kept.length} part(s) the checker did not find in the class: ${badParts.join(' | ').slice(0, 200)})`);
+    ai.chapters = kept; ai.claims = claims;
+    return ai;
+  };
+  best = await judge(best);
   if (best.claims.length) {
     console.log(`  (meaning check found ${best.claims.length} unsupported: ${best.claims.join(' / ').slice(0, 300)}; rewriting)`);
-    const again = words(await askGemini(c, tx, { fix: best.claims }));
-    again.claims = await checkMeaning(c, tx, again);
+    const again = await judge(words(await askGemini(c, tx, { fix: best.claims })));
     if (again.claims.length <= best.claims.length) best = again;
   }
   if (best.claims.length) best.quality = 'poor'; // not shown

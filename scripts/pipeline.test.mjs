@@ -349,8 +349,8 @@ test('meaning check: prompt and reading the reply', async () => {
   const pr = checkPrompt({ title: 'T', transcript: '[0:00] hello', summary: 'Rabbi X says Y.', parts: ['Intro', 'End'] });
   assert.match(pr, /Description to check:\nRabbi X says Y\.\nParts of the class, as listed: Intro \| End/);
   assert.match(pr, /Transcript:\n\[0:00\] hello$/);
-  assert.deepEqual(parseCheck('```json\n{"unsupported": []}\n```'), []);
-  assert.deepEqual(parseCheck('{"unsupported": ["\\"cites the Rambam\\" - the Rambam is not mentioned", ""]}'), ['"cites the Rambam" - the Rambam is not mentioned']);
+  assert.deepEqual(parseCheck('```json\n{"unsupported": []}\n```'), { claims: [], badParts: [] });
+  assert.deepEqual(parseCheck('{"unsupported": ["\\"cites the Rambam\\" - the Rambam is not mentioned", ""], "bad_parts": ["Conclusion and Rental Homes"]}'), { claims: ['"cites the Rambam" - the Rambam is not mentioned'], badParts: ['Conclusion and Rental Homes'] });
   assert.throws(() => parseCheck('looks fine to me'));
   assert.throws(() => parseCheck('{"ok": true}'));
   assert.match(sp({ title: 'T', teacher: 'Rabbi A B', minutes: 5, transcript: 'x', fix: ['cites the Rambam'] }), /found these statements are not supported by it:\n- cites the Rambam\n/);
