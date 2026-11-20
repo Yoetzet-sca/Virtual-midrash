@@ -14,6 +14,7 @@ import { promisify } from 'node:util';
 import { readFileSync } from 'node:fs';
 import { searchTerms, parseModelJson, summaryPrompt, timedTranscript, parseTimedTranscript, unsupported, titleNames } from './lib/ai-text.mjs';
 import { weekInfo } from './lib/calendar.mjs';
+import { samePerson } from './lib/youtube.mjs';
 
 const VERSION = 4; // 4: only what the teacher said (checked against the transcript), and the summary names the teacher
 // was 3: // 3: the community's own names for books and people (Bereshit, not Genesis)
@@ -40,7 +41,11 @@ const aiFile = (c) => new URL(`content/ai/${c.sid}.json`, root);
 const need = (c) => (c.teacherId === 'sca' ? VERSION + 2 : VERSION);
 // Who is teaching: the teacher the class is filed under, or for an SCA-channel video the name the video itself gives.
 const speakerOf = (c, tx) => (c.teacherId === 'sca' ? tx.speaker || '' : teacherName(c.teacherId));
-const upToDate = (c) => { try { return (JSON.parse(readFileSync(aiFile(c), 'utf8')).v || 1) >= need(c); } catch { return false; } };
+// A series with known presenters (Minhag of the Week): a name the video step reports is kept only if it is one of them.
+// Anything else — a person mentioned in the class, or a mistake — is dropped, so a summary never names the wrong person.
+const seriesOf = (c) => (settings.videoSeries || []).find((s) => c.title.toLowerCase().includes(s.titleHas.toLowerCase()));
+const presenter = (c, name) => { const s = seriesOf(c); if (!s || !name) return name || ''; return s.presenters.find((p) => samePerson(p, name)) || ''; };
+const upToDate = (c) => { try { const f = JSON.parse(readFileSync(aiFile(c), 'utf8')); return (f.v || 1) >= need(c) && (f.speaker || '') === presenter(c, f.speaker); } catch { return false; } };
 const txFile = (c) => new URL(`ai-transcripts/${c.sid}.json`, root);
 
 // Take turns between teachers, newest first, so a small run covers a mix.
@@ -167,7 +172,7 @@ async function askGemini(c, tx, redo = '') {
 // itself; the summary is then made from that transcript exactly as for audio classes.
 async function transcribeVideo(c) {
   // A series with known presenters: the names and their spelling are given, but which one it is must still come from the video.
-  const series = (settings.videoSeries || []).find((s) => c.title.toLowerCase().includes(s.titleHas.toLowerCase()));
+  const series = seriesOf(c);
   const hint = series ? ` This series is always presented by one of: ${series.presenters.join(', ')}. Use that spelling. Name one of them only if the video shows or says which; if it does not, write "SPEAKER: unknown".` : '';
   const ask = `Transcribe the speech in this video word for word, in the language spoken. Do not summarize, tidy, translate or add anything; write what is said. Begin a new line about every 45 seconds, and start each line with the time in the video in square brackets, like [0:00] or [12:30]. Before the transcript, write one line: "SPEAKER: " followed by the name of the person teaching, but only if the video shows the name in writing (a title card or caption) or the name is said aloud; otherwise write "SPEAKER: unknown". Never work out who it is from how a person looks. ${hint} After that line, reply with the transcript only.`;
   // Sound is what matters here, so the picture is sampled sparsely to keep the request small.
@@ -221,7 +226,8 @@ for (const c of stoppedByGemini ? [] : videos) {
   try {
     let tx = existsSync(txFile(c)) ? JSON.parse(await readFile(txFile(c), 'utf8')) : null;
     if (tx && tx.speaker === undefined) tx = null; // made before the speaker's name was recorded
-    if (!tx) { tx = await transcribeVideo(c); await writeFile(txFile(c), JSON.stringify({ id: c.id, title: c.title, ...tx })); }
+    if (tx) tx.speaker = presenter(c, tx.speaker);
+    if (!tx) { tx = await transcribeVideo(c); tx.speaker = presenter(c, tx.speaker); await writeFile(txFile(c), JSON.stringify({ id: c.id, title: c.title, ...tx })); }
     const ai = await summarize(c, tx);
     await writeFile(aiFile(c), JSON.stringify({ v: need(c), id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, unsupported: ai.unsupported, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: '', speaker: tx.speaker || '', made: new Date().toISOString().slice(0, 10), by: `gemini (video) + ${ai.model}` }, null, 1));
     videosDone++;
