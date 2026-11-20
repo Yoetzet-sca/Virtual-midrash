@@ -4,6 +4,7 @@ import { usePrefs, getPrefs, setPrefs, toggleIn, learn } from '../store';
 import { usePlayer } from '../player';
 import { Avatar, erubLabel, go } from '../ui';
 import { classShare, clock, initials, matchesTopic, minutes, newFromFollowed, rank, shareLink, daysAgo, sized } from '../util';
+import { matches } from '../search';
 import { IHeart, IPause, IPlay, ISave, ISaved, ISearch, IShare, IInfo } from '../icons';
 
 export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData; startId?: string; topic: string; setTopic: (t: string) => void }) {
@@ -42,12 +43,29 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
     return first ? [first, ...ranked.filter((c) => c.id !== startId)] : ranked;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, startId]);
+  // Timely filters beside the topics: this week's perasha, a holiday coming within six weeks, and today's daf.
+  // They look through every year's classes by title, however the teacher spelled it.
+  const timely = useMemo(() => {
+    const now = new Date();
+    const key = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    const sc = data.shortcuts;
+    const daf = sc?.daf[key];
+    const days = sc?.holiday ? (new Date(sc.holiday.date + 'T12:00:00').getTime() - now.getTime()) / 86400000 : 99;
+    return ([
+      sc?.perasha && { id: 'wk:perasha', label: `Perasha: ${sc.perasha.name}`, test: (title: string) => sc.perasha!.search.some((n) => matches(n, title)) },
+      sc?.holiday && days <= 42 && { id: 'wk:holiday', label: sc.holiday.name, test: (title: string) => matches(sc.holiday!.name, title) },
+      daf && { id: 'wk:daf', label: `Today’s daf: ${daf.tractate} ${daf.page}`, test: (title: string) => matches(`${daf.tractate} ${daf.page}`, title) },
+    ].filter(Boolean) as { id: string; label: string; test: (title: string) => boolean }[]).filter((x) => data.classes.some((c) => x.test(c.title))); // no chip that leads nowhere
+  }, [data]);
+  const labelOf = (id: string) => timely.find((x) => x.id === id)?.label || id;
   // Hidden teachers stay out of the feed, unless someone opens one of their classes directly.
   const cards = useMemo(() => {
     const direct = startId ? order.find((c) => c.id === startId)?.teacherId : undefined;
     const shown = order.filter((c) => !prefs.hidden.includes(c.teacherId) || c.teacherId === direct);
+    const special = timely.find((x) => x.id === topic);
+    if (special) return shown.filter((c) => special.test(c.title));
     return topic === 'For You' ? shown : shown.filter((c) => matchesTopic(c.topic, topic));
-  }, [order, topic, prefs.hidden, startId]);
+  }, [order, topic, prefs.hidden, startId, timely]);
 
   // Press and hold Follow to hide a teacher from the feed.
   const [hideAsk, setHideAsk] = useState('');
@@ -85,7 +103,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
   const place = useRef(new Map<string, number>()); // teacher → index of the card last on screen
   columns.forEach((col) => { const i = col.list.findIndex((c) => c.id === active); if (i >= 0) place.current.set(col.teacherId, i); });
 
-  useEffect(() => { scroller.current?.scrollTo({ left: 0 }); setActive(''); }, [topic]);
+  useEffect(() => { place.current.clear(); scroller.current?.scrollTo({ left: 0 }); scroller.current?.querySelectorAll('.feed-col').forEach((el) => el.scrollTo({ top: 0 })); setActive(''); }, [topic]);
   // Coming back to a class (tapping the player bar, or a shared link): show that class, in any topic.
   const pending = useRef(startId);
   useEffect(() => { pending.current = startId; }, [startId]);
@@ -138,7 +156,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
   const dedication = data.schedule.notices.find((n) => n.date === todayKey && n.dedication)?.dedication;
   const fresh = newFromFollowed(data, prefs).length;
   const erubUp = data.erub.filter((e) => e.fresh && erubLabel(e).good);
-  const topics = ['For You', ...data.topics];
+  const topics = ['For You', ...timely.map((x) => x.id), ...data.topics];
   const current = p.cls && p.cls.id === active ? p : null;
 
   return (
@@ -235,7 +253,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
         {cards.length === 0 && (
           <div className="feed-empty">
             <h2>Nothing here yet</h2>
-            <p>No classes in {topic} right now. New ones appear as soon as a teacher posts.</p>
+            <p>No classes for {labelOf(topic)} right now. New ones appear as soon as a teacher posts.</p>
             <button className="btn" onClick={() => setTopic('For You')}>Back to For You</button>
           </div>
         )}
@@ -251,7 +269,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
           <a className="icon-btn" href="#/explore" aria-label="Search"><ISearch /></a>
         </div>
         <div className="chips scroll">
-          {topics.map((t) => <button key={t} className={'chip' + (t === topic ? ' on' : '')} aria-pressed={t === topic} onClick={() => setTopic(t)}>{t}</button>)}
+          {topics.map((t) => <button key={t} className={'chip' + (t === topic ? ' on' : '')} aria-pressed={t === topic} onClick={() => setTopic(t)}>{labelOf(t)}</button>)}
         </div>
         {dedication && <a className="ded" href="#/give"><span>Today’s learning is dedicated</span><b>{dedication}</b></a>}
       </header>
