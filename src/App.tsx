@@ -9,7 +9,7 @@ import { Week } from './screens/Week';
 import { Resources } from './screens/Resources';
 import { Give } from './screens/Give';
 import { Library } from './screens/Library';
-import { Splash, Welcome } from './screens/Welcome';
+import { Welcome } from './screens/Welcome';
 import { Privacy } from './screens/Privacy';
 import { ICal, IHeart, IHome, IPause, IPeople, IPlay, ISearch } from './icons';
 import { go } from './ui';
@@ -46,13 +46,11 @@ const TABS = [
 function Shell({ data }: { data: AppData }) {
   const prefs = usePrefs();
   const hash = useHash();
-  const [seenSplash, setSeenSplash] = useState(prefs.onboarded);
   const [topic, setTopic] = useState('For You');
   const [route, ...rest] = hash.split('/');
   const arg = rest.length ? decodeURIComponent(rest.join('/')) : undefined;
 
   if (!prefs.onboarded) {
-    if (!seenSplash) return <Splash onDone={() => setSeenSplash(true)} />;
     return <Welcome data={data} onDone={() => { setPrefs({ onboarded: true }); location.hash = '/'; }} />;
   }
   const isFeed = route === '' || route === 'class';

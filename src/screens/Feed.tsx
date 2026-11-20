@@ -69,16 +69,17 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
     ].filter(Boolean) as { id: string; label: string; ids: Set<string> }[]).filter((x) => x.ids.size > 0); // no chip that leads nowhere
   }, [data]);
   // A search from Explore can be opened in the feed too: its chip is 'q:' followed by what was searched.
-  const labelOf = (id: string) => (id.startsWith('q:') ? `“${id.slice(2)}”` : timely.find((x) => x.id === id)?.label || id);
+  const labelOf = (id: string) => (id === 'my:following' ? 'Following' : id.startsWith('q:') ? `“${id.slice(2)}”` : timely.find((x) => x.id === id)?.label || id);
   // Hidden teachers stay out of the feed, unless someone opens one of their classes directly.
   const cards = useMemo(() => {
     const direct = startId ? order.find((c) => c.id === startId)?.teacherId : undefined;
     const shown = order.filter((c) => !prefs.hidden.includes(c.teacherId) || c.teacherId === direct);
     if (topic.startsWith('q:')) { const hits = new Set(findClasses(data, topic.slice(2)).map((c) => c.id)); return shown.filter((c) => hits.has(c.id)); }
+    if (topic === 'my:following') return shown.filter((c) => prefs.following.includes(c.teacherId)); // only the teachers this person follows
     const special = timely.find((x) => x.id === topic);
     if (special) return shown.filter((c) => special.ids.has(c.id));
     return topic === 'For You' ? shown : shown.filter((c) => matchesTopic(c.topic, topic));
-  }, [order, topic, prefs.hidden, startId, timely]);
+  }, [order, topic, prefs.hidden, prefs.following, startId, timely]);
 
   // Press and hold Follow to hide a teacher from the feed.
   const [hideAsk, setHideAsk] = useState('');
@@ -171,7 +172,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
   const dedication = data.schedule.notices.find((n) => n.date === todayKey && n.dedication)?.dedication;
   const fresh = newFromFollowed(data, prefs).length;
   const erubUp = data.erub.filter((e) => e.fresh && erubLabel(e).good);
-  const topics = ['For You', ...(topic.startsWith('q:') ? [topic] : []), ...timely.map((x) => x.id), ...data.topics];
+  const topics = ['For You', ...(prefs.following.length ? ['my:following'] : []), ...(topic.startsWith('q:') ? [topic] : []), ...timely.map((x) => x.id), ...data.topics];
   const current = p.cls && p.cls.id === active ? p : null;
 
   return (
@@ -286,7 +287,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
         {cards.length === 0 && (
           <div className="feed-empty">
             <h2>Nothing here yet</h2>
-            <p>No classes for {labelOf(topic)} right now. New ones appear as soon as a teacher posts.</p>
+            <p>{topic === 'my:following' ? 'You are not following anyone now.' : `No classes for ${labelOf(topic)} right now. New ones appear as soon as a teacher posts.`}</p>
             <button className="btn" onClick={() => setTopic('For You')}>Back to For You</button>
           </div>
         )}
@@ -302,7 +303,11 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
           <a className="icon-btn" href="#/explore" aria-label="Search"><ISearch /></a>
         </div>
         <div className="chips scroll">
-          {topics.map((t) => <button key={t} className={'chip' + (t === topic ? ' on' : '')} aria-pressed={t === topic} onClick={() => setTopic(t)}>{labelOf(t)}</button>)}
+          {topics.flatMap((t) => [
+            <button key={t} className={'chip' + (t === topic ? ' on' : '')} aria-pressed={t === topic} onClick={() => setTopic(t)}>{labelOf(t)}</button>,
+            // While looking at only the teachers you follow, the way to change who that is sits right beside it.
+            ...(t === 'my:following' && topic === t ? [<a key="edit" className="chip outline" href="#/saved">Edit teachers</a>] : []),
+          ])}
         </div>
         {dedication && <a className="ded" href="#/give"><span>Today’s learning is dedicated</span><b>{dedication}</b></a>}
       </header>
