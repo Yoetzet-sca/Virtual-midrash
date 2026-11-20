@@ -12,7 +12,7 @@ import { existsSync } from 'node:fs';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { readFileSync } from 'node:fs';
-import { searchTerms, parseModelJson, summaryPrompt, timedTranscript, unsupported } from './lib/ai-text.mjs';
+import { searchTerms, parseModelJson, summaryPrompt, timedTranscript, parseTimedTranscript, unsupported } from './lib/ai-text.mjs';
 
 const VERSION = 4; // 4: only what the teacher said (checked against the transcript), and the summary names the teacher
 // was 3: // 3: the community's own names for books and people (Bereshit, not Genesis)
@@ -107,18 +107,18 @@ async function summarize(c, tx) {
   return best;
 }
 
-async function askGemini(c, tx, redo = '') {
-  const transcript = tx.segments?.length ? timedTranscript(tx.segments) : tx.text;
-  const body = { contents: [{ role: 'user', parts: [{ text: summaryPrompt({ title: c.title, teacher: teacherName(c.teacherId), minutes: Math.round(c.durationSec / 60), transcript: transcript.slice(0, 140000), redo }) }] }], generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } };
+// One request to Gemini, trying its models in turn. `accept` turns the reply into the result, or throws to try the next model.
+async function gemini(parts, accept, { json = true, seconds = 90, extra = {} } = {}) {
+  const body = { contents: [{ role: 'user', parts }], generationConfig: { temperature: 0.2, ...(json ? { responseMimeType: 'application/json' } : {}), ...extra } };
   let last = 'no model available';
   for (const model of [...(await geminiModels())]) {
     let r;
     try {
-      r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { method: 'POST', headers: { 'x-goog-api-key': GEMINI, 'content-type': 'application/json' }, body: JSON.stringify(body), signal: AbortSignal.timeout(90000) });
-    } catch (e) { last = `${model}: no answer in 90 seconds`; console.log(`  (${last}; trying the next model)`); drop(model); continue; }
+      r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { method: 'POST', headers: { 'x-goog-api-key': GEMINI, 'content-type': 'application/json' }, body: JSON.stringify(body), signal: AbortSignal.timeout(seconds * 1000) });
+    } catch (e) { last = `${model}: no answer in ${seconds} seconds`; console.log(`  (${last}; trying the next model)`); drop(model); continue; }
     if (r.ok) {
       const text = (await r.json()).candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('') || '';
-      try { const out = { ...parseModelJson(text, c.durationSec), model }; if (models) models = [model, ...models.filter((m) => m !== model)]; /* ask the one that answered first next time */ return out; } catch (e) { last = `${model}: ${e.message}`; console.log(`  (${last})`); continue; }
+      try { const out = accept(text, model); if (models) models = [model, ...models.filter((m) => m !== model)]; /* ask the one that answered first next time */ return out; } catch (e) { last = `${model}: ${e.message}`; console.log(`  (${last})`); continue; }
     }
     last = `${model} ${r.status}: ${(await r.text()).replace(/\s+/g, ' ').slice(0, 160)}`;
     console.log(`  (${last})`);
@@ -128,9 +128,32 @@ async function askGemini(c, tx, redo = '') {
   throw new Error(`Gemini: ${last}`);
 }
 
+const lengthOf = (c, tx) => c.durationSec || (tx.segments?.length ? tx.segments[tx.segments.length - 1].start + 60 : 0);
+
+async function askGemini(c, tx, redo = '') {
+  const transcript = tx.segments?.length ? timedTranscript(tx.segments) : tx.text;
+  const secs = lengthOf(c, tx);
+  const prompt = summaryPrompt({ title: c.title, teacher: teacherName(c.teacherId), minutes: Math.round(secs / 60), transcript: transcript.slice(0, 140000), redo });
+  return gemini([{ text: prompt }], (text, model) => ({ ...parseModelJson(text, secs || Infinity), model }));
+}
+
+// A YouTube video has no audio file to send for transcription. Gemini is given the public link and writes the transcript
+// itself; the summary is then made from that transcript exactly as for audio classes.
+async function transcribeVideo(c) {
+  const ask = `Transcribe the speech in this video word for word, in the language spoken. Do not summarize, tidy, translate or add anything; write what is said. Begin a new line about every 45 seconds, and start each line with the time in the video in square brackets, like [0:00] or [12:30]. Reply with the transcript only.`;
+  // Sound is what matters here, so the picture is sampled sparsely to keep the request small.
+  const parts = [{ fileData: { fileUri: `https://www.youtube.com/watch?v=${c.youtubeId}` }, videoMetadata: { fps: 0.1 } }, { text: ask }];
+  return gemini(parts, (text) => {
+    const segments = parseTimedTranscript(text);
+    const words = segments.reduce((n, s) => n + s.text.split(/\s+/).length, 0);
+    if (segments.length < 3 || words < 150) throw new Error(`the transcript came back too short (${words} words)`);
+    return { text: segments.map((s) => s.text).join(' '), language: '', segments, by: 'gemini' };
+  }, { json: false, seconds: 420, extra: { mediaResolution: 'MEDIA_RESOLUTION_LOW', maxOutputTokens: 60000 } });
+}
+
 const already = todoAll - todo.length;
 if (TOTAL_CAP && already >= TOTAL_CAP) { console.log(`Trial cap reached: ${already} classes have summaries (cap ${TOTAL_CAP}). Nothing to do.`); process.exit(0); }
-let done = 0, minutes = 0, failed = 0, groqResting = false;
+let done = 0, minutes = 0, failed = 0, groqResting = false, stoppedByGemini = false;
 for (const c of queue) {
   if (done >= MAX_CLASSES || minutes >= MAX_MINUTES || (TOTAL_CAP && already + done >= TOTAL_CAP)) break;
   if (groqResting && !existsSync(txFile(c))) continue; // only finish ones already transcribed
@@ -151,12 +174,36 @@ for (const c of queue) {
     console.log(`  Transcript opens: ${tx.text.slice(0, 220).replace(/\s+/g, ' ')}…`);
   } catch (e) {
     if (e instanceof SlowDown && /^Groq/.test(e.message) && !groqResting) { groqResting = true; console.log(`\n⏸ Transcription paused — ${e.message}`); continue; }
-    if (e instanceof SlowDown) { console.log(`\n⏸ Stopping for now — ${e.message}`); break; }
+    if (e instanceof SlowDown) { stoppedByGemini = true; console.log(`\n⏸ Stopping for now — ${e.message}`); break; }
     failed++;
     console.log(`\n! ${teacherName(c.teacherId)} — ${c.title}: ${e.message}`);
     if (failed >= 4) { console.log('Too many failures in a row; stopping.'); break; }
   }
 }
+// ---- Videos (YouTube channels marked "aiSummaries" in content/settings.json) --------------------
+const MAX_VIDEOS = Number(process.env.AI_MAX_VIDEOS || 3);
+const videos = data.classes.filter((c) => c.kind === 'video' && c.ai && c.youtubeId && c.sid && !upToDate(c));
+let videosDone = 0;
+if (videos.length && !stoppedByGemini) console.log(`\n${videos.length} videos waiting; this run will try up to ${MAX_VIDEOS}.`);
+for (const c of stoppedByGemini ? [] : videos) {
+  if (videosDone >= MAX_VIDEOS) break;
+  try {
+    let tx = existsSync(txFile(c)) ? JSON.parse(await readFile(txFile(c), 'utf8')) : null;
+    if (!tx) { tx = await transcribeVideo(c); await writeFile(txFile(c), JSON.stringify({ id: c.id, title: c.title, ...tx })); }
+    const ai = await summarize(c, tx);
+    await writeFile(aiFile(c), JSON.stringify({ v: VERSION, id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, unsupported: ai.unsupported, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: '', made: new Date().toISOString().slice(0, 10), by: `gemini (video) + ${ai.model}` }, null, 1));
+    videosDone++;
+    console.log(`\n✓ VIDEO ${teacherName(c.teacherId)} — ${c.title} (about ${Math.round(lengthOf(c, tx) / 60)} min, ${tx.text.split(/\s+/).length} words, ${ai.model}${ai.quality === 'poor' ? ', marked POOR' : ''})`);
+    console.log(`  Summary: ${ai.summary}`);
+    console.log(`  Words not found in the transcript: ${ai.unsupported.length ? ai.unsupported.join(', ') : 'none'}`);
+    console.log(`  Topic: ${ai.topic || 'none'} (title rules said: ${c.topic || 'none'})`);
+    console.log(`  Parts: ${ai.chapters.map((x) => `${Math.floor(x.at / 60)}:${String(x.at % 60).padStart(2, '0')} ${x.title}`).join(' | ')}`);
+    console.log(`  Transcript opens: ${tx.text.slice(0, 220).replace(/\s+/g, ' ')}…`);
+  } catch (e) {
+    console.log(`\n! VIDEO ${c.title}: ${e.message}`);
+    if (e instanceof SlowDown) break;
+  }
+}
 await rm(new URL('.ai-tmp/', root), { recursive: true, force: true });
 if (process.env.GITHUB_OUTPUT) await writeFile(process.env.GITHUB_OUTPUT, `waiting=${todo.length - done}\n`, { flag: 'a' });
-console.log(`\nDone this run: ${done} classes (${minutes} minutes transcribed). Still waiting: ${todo.length - done}.`);
+console.log(`\nDone this run: ${done} classes (${minutes} minutes transcribed) and ${videosDone} videos. Still waiting: ${todo.length - done} classes, ${videos.length - videosDone} videos.`);

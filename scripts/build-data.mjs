@@ -116,7 +116,11 @@ for (const y of settings.youtube || []) {
       if (!channelId) throw new Error('could not find the channel id — set "channelId" in content/settings.json');
       xml = await get(feedUrl(channelId));
     }
-    const videos = parseYoutube(xml).slice(0, settings.maxVideosPerChannel || 15);
+    // Videos titled in Arabic are left out for now (SCA's choice); the newest ones in other languages still fill the list.
+    const all = parseYoutube(xml);
+    const kept = settings.skipArabicTitles ? all.filter((v) => !/[\u0600-\u06FF\u0750-\u077F]/.test(v.title)) : all;
+    if (kept.length < all.length) console.log(`  (left out ${all.length - kept.length} videos with Arabic titles)`);
+    const videos = kept.slice(0, settings.maxVideosPerChannel || 15);
     for (const v of videos) {
       // A teacher's own channel files everything under that teacher; a shared channel goes by the name in the title.
       let teacherId = (y.teacherId && teachers.some((t) => t.id === y.teacherId) ? y.teacherId : null) || teacherForTitle(v.title, teachers);
@@ -124,7 +128,7 @@ for (const y of settings.youtube || []) {
         teacherId = 'sca';
         if (!teachers.some((t) => t.id === 'sca')) teachers.push({ id: 'sca', name: 'Sephardic Community Alliance', title: 'Classes and events from the SCA', bio: '', photo: '', affiliations: [], feed: '', defaultTopic: '' });
       }
-      classes.push({ id: `yt:${v.youtubeId}`, teacherId, title: v.title, date: v.date, durationSec: 0, audioUrl: '', youtubeId: v.youtubeId, image: v.image, link: v.link, topic: topicFor(v.title, null), kind: 'video' });
+      classes.push({ id: `yt:${v.youtubeId}`, teacherId, title: v.title, date: v.date, durationSec: 0, audioUrl: '', youtubeId: v.youtubeId, image: v.image, link: v.link, topic: topicFor(v.title, null), kind: 'video', ...(y.aiSummaries ? { ai: true } : {}) });
     }
     console.log(`✓ YouTube ${y.url}: ${videos.length} videos` + (videos[0] ? ` — newest: "${videos[0].title.slice(0, 60)}" (${videos[0].date.slice(0, 10)})` : ''));
   } catch (e) {

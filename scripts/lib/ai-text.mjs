@@ -27,6 +27,16 @@ export function timedTranscript(segments, every = 45) {
   return out.trim();
 }
 
+// The reverse: a transcript written with [m:ss] marks, back into timed pieces.
+export function parseTimedTranscript(text) {
+  const out = [];
+  for (const m of String(text).matchAll(/\[(\d+(?::\d+){1,2})\]\s*([^\[]*)/g)) {
+    const words = m[2].replace(/\s+/g, ' ').trim();
+    if (words) out.push({ start: seconds(m[1]), end: seconds(m[1]), text: words });
+  }
+  return out.filter((s, i) => Number.isFinite(s.start) && (i === 0 || s.start >= out[i - 1].start));
+}
+
 // Models sometimes wrap JSON in a code fence or add a stray sentence; take the outermost object.
 export function parseModelJson(reply, durationSec = Infinity) {
   const s = String(reply);

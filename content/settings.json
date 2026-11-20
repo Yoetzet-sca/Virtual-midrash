@@ -18,7 +18,8 @@
     {
       "url": "https://www.youtube.com/c/SCAUpdates",
       "channelId": "",
-      "teacherId": ""
+      "teacherId": "",
+      "aiSummaries": true
     },
     {
       "url": "https://www.youtube.com/@rabbiurilati",
@@ -85,5 +86,6 @@
       "short": "Deal",
       "url": "https://www.njerub.org/"
     }
-  ]
+  ],
+  "skipArabicTitles": true
 }

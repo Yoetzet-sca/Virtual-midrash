@@ -10,7 +10,7 @@ import { lock, normalizeCode } from './lib/lock.mjs';
 import { channelIdFrom, parseYoutube, teacherForTitle } from './lib/youtube.mjs';
 import { applyOverrides } from './lib/overrides.mjs';
 import { dafFor, weekInfo, CYCLE_DAYS } from './lib/calendar.mjs';
-import { searchTerms, parseModelJson, summaryPrompt, timedTranscript, unsupported, shortName } from './lib/ai-text.mjs';
+import { searchTerms, parseModelJson, summaryPrompt, timedTranscript, parseTimedTranscript, unsupported, shortName } from './lib/ai-text.mjs';
 import { ask, prepare } from './.ask.mjs';
 
 const fx = (n) => readFile(new URL(`fixtures/${n}`, import.meta.url), 'utf8');
@@ -257,4 +257,9 @@ test('AI summaries are checked against the transcript', () => {
   assert.match(prompt, /Begin with the teacher, as "Rabbi Soffer \.\.\."/);
   assert.match(prompt, /not found in the transcript: genesis, cosmos\./);
   assert.match(prompt, /Transcript:\nhello$/);
+});
+
+test('a transcript with time marks is read back into timed pieces', () => {
+  assert.deepEqual(parseTimedTranscript('Here it is:\n[0:00] Good morning everyone.\n[0:45] Today we begin\n a new perek.\n[1:02:10] Thank you.'),
+    [{ start: 0, end: 0, text: 'Good morning everyone.' }, { start: 45, end: 45, text: 'Today we begin a new perek.' }, { start: 3730, end: 3730, text: 'Thank you.' }]);
 });
