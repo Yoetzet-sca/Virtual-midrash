@@ -1,74 +1,99 @@
 {
- "v": 2,
+ "v": 4,
  "id": "joey-soffer:tag:soundcloud,2010:tracks/2440511022",
  "title": "Shemirat Halashon 28",
  "topic": "Halakha",
  "chapters": [
   {
    "at": 0,
-   "title": "Intending Constructive Benefit (To'elet)",
-   "about": "fifth rule of to'elet, helping victims, encouraging teshuva through social pressure"
+   "title": "Intention for Benefit",
+   "about": "Defining To'elet and the intent to help the victim"
+  },
+  {
+   "at": 98,
+   "title": "Social Pressure and Teshuvah",
+   "about": "Using information to deter others or encourage the offender to repent"
   },
   {
    "at": 190,
-   "title": "Victim's Knowledge and Rechilut",
-   "about": "distinction when victim already knows versus when harm is still unknown"
+   "title": "When the Victim is Unaware",
+   "about": "Restrictions on sharing information if the victim does not know"
   },
   {
    "at": 290,
-   "title": "Telling Unsympathetic People",
-   "about": "prohibition when listeners will not help or will cause further strife"
+   "title": "When No Benefit Exists",
+   "about": "Prohibitions against sharing with those who will cause further harm"
+  },
+  {
+   "at": 393,
+   "title": "The Role of the Victim's Request",
+   "about": "Whether the victim's permission is required for sharing"
   },
   {
    "at": 444,
-   "title": "Family Ties in Halakha",
-   "about": "misconceptions about helping relatives, equal application of lashon hara laws"
-  },
-  {
-   "at": 674,
-   "title": "Preemptive Warning to Prevent Financial Loss",
-   "about": "disclosing theft or ongoing harm to protect an unaware victim"
+   "title": "Family Members and Misconceptions",
+   "about": "Clarifying that family status does not change the laws of Lashon Hara"
   },
   {
    "at": 821,
-   "title": "Preempting a Known Gossiper",
-   "about": "warning listeners in advance to prevent kabalat lashon hara"
+   "title": "Pre-emptive Medicine",
+   "about": "Warning others about a known gossip to prevent them from accepting Lashon Hara"
   },
   {
    "at": 1070,
-   "title": "When Rebuke Is Ineffective",
-   "about": "requirement to speak in front of three people when rebuke will not work"
+   "title": "Publicizing to Three People",
+   "about": "Why and when to share information in front of three people"
   },
   {
    "at": 1475,
-   "title": "Exceptions for Fear of Retaliation",
-   "about": "modifying requirements when dealing with a dangerous or powerful offender"
+   "title": "Fear of Retaliation",
+   "about": "Exceptions when the speaker fears the person they are discussing"
   }
  ],
- "summary": "This class explores the conditions under which speaking about another person's improper behavior is permitted for a constructive purpose (to'elet) according to Sefer Shemirat Halashon. Rabbi Soffer addresses how social pressure can encourage teshuva, whether family ties change the rules of speech, and how to preemptively protect people from a habitual gossiper. The lesson also details what to do when direct rebuke will not work and how fear of retaliation affects these halakhot.",
+ "unsupported": [
+  "conditions",
+  "permitted",
+  "sake",
+  "constructive",
+  "ensuring",
+  "necessity",
+  "specific",
+  "circumstances",
+  "ensure",
+  "credibility",
+  "avoid",
+  "suspicion",
+  "victim",
+  "unaware",
+  "exists",
+  "role",
+  "request",
+  "misconceptions",
+  "retaliation"
+ ],
+ "summary": "Rabbi Soffer explains the conditions under which one is permitted to share negative information about another person for the sake of a constructive benefit. He details the requirements for ensuring the information is true, the necessity of rebuking the person first, and the specific circumstances where publicizing the information to three or more people is required to ensure credibility and avoid suspicion of dishonesty.",
  "subjects": [
   "Shemirat Halashon",
-  "Laws of Lashon Hara",
-  "Constructive purpose (to'elet)",
+  "To'elet",
   "Rechilut",
-  "Social pressure for teshuva",
-  "Family relationships in Halakha",
-  "Preempting a habitual gossiper",
-  "Requirement of tokhaha (rebuke)",
-  "Speaking in front of three people",
-  "Fear of retaliation (emah)"
+  "Teshuvah",
+  "Lo talich rakhin",
+  "Mahluket",
+  "Tochecha",
+  "Chafetz Chaim",
+  "Lashon Hara"
  ],
  "questions": [
-  "When is it permitted to share negative information for a constructive purpose?",
-  "Do the rules of lashon hara change if a family member was harmed?",
-  "Can you warn people in advance about someone who habitually spreads gossip?",
-  "What should be done if rebuking the transgressor will clearly not work?",
-  "Why does speaking in front of three people change the halakhic status of a statement?"
+  "When is it permitted to share a negative story about someone else?",
+  "Do I have to rebuke someone before I tell others about their bad behavior?",
+  "Why is it sometimes required to tell a story in front of three people instead of just one?",
+  "Can I share information if the person who was harmed does not know about it yet?",
+  "Does the fact that someone is a relative change the laws of Lashon Hara?"
  ],
  "quality": "good",
  "terms": "guy person people hes tell youre benefit dont allowed cant story saying even rebuke telling thats help talking yet lashon make away didnt able doesnt living someone sure three zeh blah criteria front happened hara knows room first scenario somebody stop theyre true whos already find friend still theres accept accepting anymore around believe brother cause family hear need reach rechilut should stories afilu alav anashim ask back care comes course detail difference face gam hadavar information involved kuf listen listening man nothing problem public social talk teshuvah time toelet truth yideh aleph authorities change chavra come coming directly eventually example give gotta guys instead intending intention ken less meaning mentioned might mitzvat mutar nitgala normal oto ploni pressure rak related sadi shu start suspect therefore times told trying whatever whats youll abadam accepted adam alken another asa asks asterisk asur atam aval bad benefits bfnei bikesh boss call careful chavrach considered couldnt dalit damaged davka decide devarim doesn earlier eat echad ehokhacha else emah embarrassed embarrassing end feel fine fix giving godel goes good gossiper haan hanidon happy haraim hard havrach hell himself huge ill ima irrelevant ish isur kach keep known kol krovo lahem law laws look maasav means meganot mehani member minute mistake normally obligation ones otherwise otto page panin please point prior publicize putting rakhin reason relatives remember sees seper shehu shiwumitkaven shonara shum shut slander speaking stay stealing stolen talich talked tells thatll tishumah vgam vigilant wont word working worried wrong yashuv yourself 18th 8th abal ability absolutely abur achanadavar achar acharim acharkach achimim adain adava adavar adayin advance afil afilo against agel ahakach aish akhar almost alo along always alzeh amara amen anigzal anybody anyone ara arayim artoaliyot ased asha asked asot assume asu ata ati atsmol aven avlatos avshelon avu avudot avur avurzeh ayyid baaleha baamecha baatzmoh barakha bariyot bchaviro bchoshvan bchot beatzmo bechapo bechozeh befanaav befani begging belav belibo believed ben beneficial beoznehem berabbim beribo besarcha bestama beteva bevaday beze bezeh bfanaav biarich biflea biggest bikshol binyanam bishra bizeh bkeshi bkhlal bnei bokr bother boy bpirzum bring brings bunch bvadai bvadain called came catch category caused chafetz chaim chapter chavatim concerned conclusions confront couldve daainu damage dava davala davar davav day dchol debe degraded degrades dehainu deissu deoch determined devarma dezei dhaainu dibed didn differently difficult dimutal direct done dorae downed downstairs dvarav dvarim ech eddavar eeshak eishak either elet embezzling emet emethu emptive ene enon enu every evil exactly explain extra eze ezukot fall falling false falter fear fifth finish fire friends ftehem full fully fun future gamke gave gdolot gemar getting given gnuta government haasub haavla habeim hachim hagiya hainu haish haishahu haishahul hakhon haki hala halav hamas hamevoelet hamishi hanigzal happens hapratima harishon harochel hashanah hashim hashonara hashoof hates haveki haynu hearing hed heim hem hemiakhu hey high hilchot holkhim honef honest house however hurt ifne ifnehim ifneim ignore ilu iman imbikesh imesapel immediate important improper imroes imu independent intend investigate inyan inyana itbarei itle itll ive izak jump kabalat kalam kam kama kasher kashhea kashir kedeshik kegon kepi kfar khabaraa khamir kimimuar kislev kivan kolak kshein kwa laav laazol labo lachim lael laemet laet lagazlan lahabba lahakor laharaimo lahim lakhlito lalshin lama lanidon latim leakeh lean least lefi legam legnai lehavero lehenot lehuzit leil leoznav lesapeh letter levne liar libam lie lies likely linyan lkaneh lomodal looks lord loto lsaper lsapera lying maaladivrayim machlokot mafioso mahluket makes making makir malshinu mamash maod matter matzui mchash mechavot medicine meet megane meganeh mehapgamahu mekabel mekaymin mem members meragil mesapera message metkaven mevesha mevoa mibaya michshedeh miderech midrachav miikaro mimele mimenu min minds misapel misaper misaperal misappel mishair mishum misipuro misitav missing misvah mitbayesh mitzvah mizeh moil moments motion mupayamim must naal naim nakon nal nechshalim negative neged never next nidei nigzal nimrod niraa nishlamu nishma nizak november obono ofena oppressed order osh otam others outcast pariah part passing pasuk peda pen peoples persons pevpata place plus poale position poskim power prat pre preempt protect push quiet raa ragil raki rakim rashiun receive rechimut regarding relative required requirements requires resha reshah retract retribution rule rules saddik saved secret service shaal shadam shalam share sheasu shechatavnu sheechad sheeinu shekemo shelo shemesaprim shhu shiakdimit shidrosh shih shilloh shim shiru shiwumitkavavav shkishishmeu shloshah shosh shumsapeleftehim shyitrachaku sibat sides sifbet sifur sifuro sin sinah sipur situation sneaker someones sometimes sopha sorry speak speaker sperad spread spreading squeal starts stature stole supposed system tadavarkin take talks tavo techavrach technically tekef teshuva tetaalim tetkabela theyll third though tiyesh tochecha today toelta toh toilet top tov town transfer transgress transgressions transmitting treat try tukhal turn type tzareich ukheshishishishma ulai ulayish unfortunately vafilu vamevayesh van vanipayesh vanizak vasad vchavra veam veaoshek vechinam vegomli veulay vissapru vitaken vkarov vlai vlo volokhiach vrsheker vryot vshalom vtekonis vtulo vyavru vye vyisapel vyitaken wait wants wbeofan weakness week whatsoever wheres whether wish without wobofen worker works yachsiru yado yagia yahashiv yavou yavu yedeh yedi yegane yep yerech yesh yichaven yicholim yikablu yikaymu yikhanes yisaped yitgala yitrae yivadala yod yoshavichunoten youd yukha zimidira zot",
  "words": 4187,
  "language": "English",
- "made": "2026-11-19",
- "by": "groq whisper + gemini-3.6-flash"
+ "made": "2026-11-20",
+ "by": "groq whisper + gemini-3.1-flash-lite"
 }

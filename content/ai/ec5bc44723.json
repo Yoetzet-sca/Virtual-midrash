@@ -1,76 +1,67 @@
 {
- "v": 2,
+ "v": 4,
  "id": "joey-soffer:tag:soundcloud,2010:tracks/2441064426",
  "title": "Arachin daf 2",
- "topic": "Gemara",
+ "topic": "Daf Yomi",
  "chapters": [
   {
    "at": 0,
-   "title": "Introduction to Masekhet Arakhin",
-   "about": "Defining Ma'arichin and Ne'arachin"
-  },
-  {
-   "at": 104,
-   "title": "Exclusions in the Mishna",
-   "about": "Cheresh, Shoteh, and Katan"
+   "title": "Introduction to Masekhet Arakhin Daf Bet",
+   "about": "Ma'arichin and ne'arachin, making and being the subject of erech and neder vows."
   },
   {
    "at": 149,
-   "title": "Analyzing the word Hakol",
-   "about": "Including Mufle Samukh Le'ish"
+   "title": "Gemara on Hakol Ma'arichin",
+   "about": "Inclusions of mufle samukh le'ish and disfigured individuals for erech vows."
   },
   {
-   "at": 244,
-   "title": "Erekh for the disfigured",
-   "about": "Including Minuval and Mukesh Chin"
+   "at": 938,
+   "title": "Tour of Hakol in Other Masektot",
+   "about": "Exploring the word hakol regarding semikha and temurah for an inheritor."
   },
   {
-   "at": 953,
-   "title": "Tour of Hakol in Shas",
-   "about": "Semikha and Temura for a Yoresh"
-  },
-  {
-   "at": 1539,
-   "title": "Mitzvot and Chinukh",
-   "about": "Sukkah, Lulav, Tzitzit, and Tefillin"
+   "at": 1538,
+   "title": "Hakol Chayavim in Mitzvot",
+   "about": "Obligations of katanim and others in sukkah, lulav, tzizit, and tefillin."
   },
   {
    "at": 1865,
-   "title": "Olat Re'iyah obligations",
-   "about": "Blindness and status of slaves"
-  },
-  {
-   "at": 2306,
-   "title": "Shofar and Megillah",
-   "about": "Obligations for children and women"
+   "title": "Olat Re'iyah and Megillah",
+   "about": "Olat re'iyah obligations for a person with a broken leg or blind eye, and megillah for women."
   }
  ],
- "summary": "This class explores the opening Mishna of Masekhet Arakhin, which discusses who is eligible to make or be the subject of a vow of valuation (Erekh). The teacher analyzes the Mishna's use of the word 'Hakol' (everyone) to determine which specific groups are included or excluded, and uses this as a springboard to examine other instances of 'Hakol' throughout the Talmud.",
+ "unsupported": [
+  "legal",
+  "inclusions",
+  "introduces",
+  "masektot",
+  "rules",
+  "laws",
+  "lulav"
+ ],
+ "summary": "Rabbi Soffer goes through the second daf of Masekhet Arakhin, focusing on the word \"Hakol\" and exploring what legal inclusions it introduces across various masektot. The class examines the rules of who can make and be the subject of a neder or erech vow, and tours through different mishnaic sources discussing laws such as semikha, temurah, sukkah, lulav, tzizit, tefillin, olat re'iyah, shofar, and megillah.",
  "subjects": [
-  "Arakhin",
-  "Nedarim",
-  "Erekh vow",
-  "Mufle Samukh Le'ish",
+  "Masekhet Arakhin",
+  "Neder and Erech",
   "Tumtum and Androginos",
-  "Cheresh, Shoteh, and Katan",
+  "Cheresh Shoteh V'Katan",
+  "Mufle Samukh Le'ish",
   "Semikha",
-  "Temura",
-  "Korbanot",
+  "Temurah",
   "Olat Re'iyah",
-  "Mitzvat Chinukh",
-  "Megillah reading"
+  "Kriat Megillah"
  ],
  "questions": [
-  "Who is eligible to make or be the subject of an Erekh vow?",
-  "Why does the Mishna use the word 'Hakol' if it immediately lists exceptions?",
-  "Can a person who is 'half-slave and half-free' fulfill the obligation of Olat Re'iyah?",
-  "Are women obligated to hear the Megillah?",
-  "How do we determine if a child is obligated in mitzvot like Sukkah or Tefillin?"
+  "Who is included when the Mishna uses the word Hakol regarding erech vows?",
+  "Can someone who is disfigured or has boils be the subject of an erech vow?",
+  "Does an inheritor have the right to perform semikha and make temurah?",
+  "Are women obligated to hear kriat megillah and why?",
+  "How does a katan get included in mitzvot like sukkah, lulav, and tefillin?"
  ],
  "quality": "good",
  "terms": "hakol make day thats vow hes include korban dont korbano erech subject value yoresh guy cant katan chayav person youre patur chart coming even everyone pasuk doesnt knows timura whos therefore theyre nedir kol neder obligated read tell come whats yamir allowed ben correct didnt hamer means mishnah need comes ebed fine hekdesh lrabot opinion someone zero anyone father half laatuye look mai ravina theres three wait word according aviv days else first free korbanot maarichin nedrin rashi smicha talking though velo answer anybody around chatsi chayavim chinuch daat end give hashem male mufle nidrin point rabbi rule saying somebody somech vau veim woman wouldnt yet yudah age already anymore chachamim chayab double echad ela eno every everybody gemara good laatuyeh larguinibitim machloket made minute neerachin olat old pator pay question rebi shofar shoteh tehillah temura times torah vows works world write yerae another baby back bhadeh bishum broken call cannot chetzio chodesh daf exceptions extra goy hashi haudel holds hovrin ishmortifilin katana language leg leish less lsmicha mitzvah nedar nether nobody nodrin obligation oved rabbanan rehuda semicha since slave smecha sofekdesh start tashlum tekdesh tov tumtum tzitzit vkatan whole women worth yehuda yom amar ashkenazim atuyeh baalei bedamim beerkecha berakha bet blind category chaya chorin clearly couldnt course criteria ebi everyones female fill fixed hai hakatan hako hayodeah hold holiday included inherited kedusha learned learning left levi mahloket makes making matter meaning megillah might mimir min minuval mishna mishum mukesh nashim pachot problem regarding regular reiah reiyah rishon samukh separate shosh still talikatan tchilat tfilin thought time today uda usually walk wants wearing yaktanilu year 13th across adam add agree aharona akin alav aliyah always androginos anyway ask asked atef atifah atuye aval avidle baale baarakhin backwards bar beginning belashon benchorin bihuda bishteenav biyom blow bmishna boils brachah bring bsisit bsukah btikiat buy byom called care chachamis chereh cheresh continue covered creating damav damim deala definitely difference disagree donation dtanya earlier eat either ene everybodys evid exactly exclusions explain eye facing fact finish frees friend gender generals gerama giving guys hachamim halakha haneerachin hayodea hayodeh hchemot hear huda ila ill inami inheritor isha isnt itztirikheleh jacob johnny kadosh kan kavim kedushah khorin kid kirebiyuda klum koanim korbanon korbanos kulan laatou laatouye laatu laatui laregel lashon lavinah learn learns leave leet leolam lepachot limmok line liraot listed literally lokeh lshem market masichet master may megila meir mepnei mibben miben mimirin mishu misov mitchilat mitzvot monetary mother multiple must naaneh nafshot nami neer new normally nothing number obviously ovrev owned partner patour people pesah places properly rabo reason reb rebihuda reiya rosh saarot sadiich samuch seed sell shaliyah shamai sheen shlamim shomer should single smichaah somewhere somkhin sop started starting status sukkah sukkot svaradim talit tefillin telling temurah tikatem todays told tour true turn udehle udilo understand veidach vila vim whatever wrapping written yacho yalla yerael yorech yoshua zakhar 19th abadim able accurate acher added adin adonai adroginos adult afil aiyem akat alach alai alanecha alashmuinan aliach aliya allah alone alright amai amen amina amro anywhere apli applies arachin arakhin arbaq argument arun ase atifa atzmam atzmo automatically available avalon avid avot avtchilat ayat ayatalehutrei bachat baliraot baruch based bashana bat bayom bchinuch beating bechachamim beezat behejaktan bekhorin beotoannes beperak bera berala berbiyuda beresh berkecha beth betilel betillel betillels betov betshamai bevaikra bihudas billion bilu bilulav bimeir bisisit biyuda bkatamazon bkomashhe blowing bodily bodkin bokr born breiya breiyah briya brought bshutafut buckle buys byoshua calculated calls cases cast cause chagir chakhamim changed chatsio chatzib chayabim chayaf chayavob check cheger chhin chidush child chin chochma chose chovarim chovre close clothes connected consent create created daamar dahabai damiv darish deakul deamar declare deen define dekai depligi derabhanan derasha determine different disagrees disfigured disgusting dithanya divrei dofe donate done doresh dot dvarav eben echa een elses emar eminyan emma empty enan enoavgad enu erh erkecha eruh eshote esisi esmicha etacherim evaluate excluded excludes explanation explicit explicitly eyes fadal familys fathers feri finished focusing following force forget forward forwards found freed friends fulfill fulfills full functions gabeh gabes gadol gedolim gema general gentile girl gives goes gotten great haam haavi habalae hadrei haflot hafuch hahovrim hainyan haisha hakhamim hakkul hakolizdeel hakom hamari hamatitin hamisha hammaarich handed haolam harishon haseh hathchalat hathim hav havent havero hayav hayodei hayu hayvim hazachar hchemashot hchemasot head healed heaven hechid hedesh heresh hey hikdish hodesh holy hovelin hundred ibaat idea iluhu intellect intend invert iou ish ishki issue item itkash joint jumping kachbaa kai kalbali kamashmala kamina kanfot karile kasha kashir kat kdveri kederach kediktani keep kef ketanim ketiv khin khunim kibrchad kibyachol kids kishirim kislev kitivei kochavim kofin kohavim koldu konin korbanaviv korbanov korbanu kukhavim kuzhukurichat laatuya lach lachin lahem lakeb latot latuye lav lchab ledamim leftovers leh lehe lehorot lehut lemanda lerabot lerabotet letatif letle levatalah leviim lfishikol likrotatam limit limitations limiting lisa listing lists litat lnaaneya lochaviro lomah lomar lonodrin love lshmor lsmok ltfilin lvatalah maa maasofenu maatzi maavidli maaytamad mabruk man mar maraiya marichim marketplace married mashuachir massah matanadz matzvizmat maya mben mdiim meant medaber medareh mehanach meina mekra melacha memer mention mentioned meparesh meriamir mess mibi mifale mika mimishnay minayu minutes mipimon mish mishechatsyo mishih mishnas mishra mishud missed mitarte mitzrayim mitzvat miutim miv mmasechet modet mozid mshayam mshiva mumigete mura mutar mvekra naaseh nadar naf nakama nakat nearachin nedarim nederim nedrim needs neerach nefesh neither nerachim nevertheless nianuim nida nidarin ninth noder nodim nodrim none nonsense noten november ola omeh omer ones opposite organs original oteh oteve others otto overhanging page pahim paimim pandafei panyoshena parasha part partners pashet pasukim patu paturah percent period pirka place plat plehan pnei pointing populated possession potentially pretty proactive puberty push put putting rabbeinu rabbo real rebihudas rechar reechat regal reh rekam reproduce reproductive respond rest rishi rishona rishonah rokach rokot safer saharot samukleish sarot satma saved seat seatbelts second semach semucha seyichim shaafen shailosh shalosh shana shas shashman shavet shavim shavish shazman shebaa shecheresh shechetsyo shechim shechin sheein sheeinon sheeinu sheeno sheeviyu sheini shekel shem shenei sheni sherema sheyat sheyeshno shib shivcha shmuel shneemar shoe shows shtar shuh shvali shyigia smichah sof someh son sorry source standalone starts stop storybook straightforward sumeh sure svata tables tachatzeh take takes talk tam tamud tamul tanah tani taregil tashlumin taught tayoresh teach teaching tells terad thank throw tikun timurah together tommy tomorrows toms took touch training trouble try tseo tugvara type tzlata tzv uchtar udikashe ula ulahakhi ulifareh ulshem uminuval umukesh use uses using usual vadai vadaim vadait vadam vaikra valid vandroginos vanekeva vchetsyo veamar veen veeno veezat vehai vehaveroh vehazru vekochavim vekotev vel vele velon venasliah veoseo verb vgamar vhem vhu vimammer vnearachin vneerachin vnetpashet vnidrin vnodrim vrabbanaan vyalif vyom wanted wear week went whatsoever whether whichever whose win words worthless wow wrap yachlifenu yado yalfina yalif yami yedok yemai yep yerakadzeh yereh yesh yeshno yidish yisrael yisraelim yitzara yivatel yodah yodea yofi yohanan yoreshs yotze youll yudbet zeh zmarah zuchur",
  "words": 6610,
  "language": "English",
- "made": "2026-11-19",
- "by": "groq whisper + gemini-3.1-flash-lite"
+ "made": "2026-11-20",
+ "by": "groq whisper + gemini-3.5-flash-lite"
 }

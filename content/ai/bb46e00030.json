@@ -1,70 +1,79 @@
 {
- "v": 2,
+ "v": 4,
  "id": "richard-hidary:64b1c732-d12e-440b-b80c-3e33a79dcf61",
  "title": "Arakhin 9 - Thirty Days Hath…Which Month?",
- "topic": "Daf Yomi",
+ "topic": "Gemara",
  "chapters": [
   {
    "at": 0,
-   "title": "Mishna: Limits on Months, Loaves, and Brit Mila",
-   "about": "Mishnaic limits on full months, Shete HaLehem, Lehem HaPanim, and Brit Mila"
+   "title": "Mishnaic limits on lunar months",
+   "about": "Calculating 29 and 30 day months"
+  },
+  {
+   "at": 190,
+   "title": "Timing for Lechem HaPanim and Shavuot",
+   "about": "Baking and eating the loaves"
+  },
+  {
+   "at": 396,
+   "title": "Brit Milah timing",
+   "about": "Calculating the eighth day for a baby born at twilight"
   },
   {
    "at": 490,
-   "title": "Gemara: Limits on Full and Deficient Months",
-   "about": "Rav Huna and Ulla debate minimum and maximum full or deficient months"
+   "title": "Rav Huna and Ula on the Mishna",
+   "about": "Interpreting the number of full and deficient months"
   },
   {
    "at": 1082,
-   "title": "Duration of the Added Leap Month",
-   "about": "Disagreement over whether the extra Adar is 29 or 30 days long"
+   "title": "Authority of the Bet Din",
+   "about": "Sanctifying the calendar and astronomical reality"
   },
   {
-   "at": 1182,
-   "title": "Aligning Pesach, Shavuot, and Rosh HaShanah",
-   "about": "Baraita on the day of the week for Shavuot and Rosh HaShanah relative to the Omer"
+   "at": 1493,
+   "title": "The opinion of Acherim",
+   "about": "Calculating the year length and Rosh Hashanah"
   },
   {
-   "at": 1692,
-   "title": "Opinion of Acherim and Calendar Calculations",
-   "about": "Acherim on fixed year lengths and calculating months without witnesses"
-  },
-  {
-   "at": 1889,
-   "title": "Shemuel on Lunar Year Duration and Nazir Vows",
-   "about": "Range of 352 to 356 days for a lunar year and vows of Nazir"
-  },
-  {
-   "at": 2085,
-   "title": "Rabbi's Nine Deficient Months",
-   "about": "Story of Rabbi Yehuda HaNasi and Rabbi Shimon resolving a calendar discrepancy"
+   "at": 2055,
+   "title": "Rabbi Yehuda HaNasi's experience",
+   "about": "Balancing the calendar after a leap year"
   }
  ],
- "summary": "This class explores Masekhet Arakhin daf 9, examining Mishnaic rules on minimum and maximum limits for full and deficient months in the Jewish calendar, as well as timing constraints for Shete HaLehem, Lehem HaPanim, and Brit Mila. It analyzes Talmudic debates between Rav Huna and Ulla regarding lunar calendar calculations, Rabbinic authority versus astronomical observation, and how leap years adjust year lengths. The Gemara also discusses the fixed year lengths according to Acherim, Shemuel's limits on a lunar year, and a story involving Rabbi Yehuda HaNasi.",
+ "unsupported": [
+  "guidelines",
+  "affect",
+  "rules",
+  "alignment",
+  "limits",
+  "yehuda",
+  "experience"
+ ],
+ "summary": "Rabbi Hidary explores the Mishnaic guidelines for the number of full and deficient months in a lunar year and how these calculations affect the timing of Rosh Hashanah. He examines the different interpretations of these rules by Rav Huna and Ula, and discusses how the calendar is adjusted to maintain alignment with the lunar cycle while balancing the authority of the Bet Din.",
  "subjects": [
   "Masekhet Arakhin",
-  "Lunar calendar and Rosh Hodesh",
-  "Full and deficient months",
-  "Shete HaLehem and Shavuot",
-  "Lehem HaPanim",
-  "Brit Mila timing",
-  "Astronomical sighting versus Bet Din authority",
-  "Debates of Rav Huna and Ulla",
-  "Opinion of Acherim on year length",
-  "Shemuel on lunar year duration",
-  "Rabbi Yehuda HaNasi and Rabbi Shimon"
+  "Rosh Hashanah",
+  "Rosh Hodesh",
+  "Bet Din",
+  "Lunar year",
+  "Lechem HaPanim",
+  "Brit Milah",
+  "Rav Huna",
+  "Ula",
+  "Rabbi Yehuda HaNasi",
+  "Halaqim"
  ],
  "questions": [
-  "How many full thirty-day months can a lunar year contain?",
-  "Why are the Shete HaLehem loaves baked before Shavuot rather than on the holiday itself?",
-  "Under what circumstances can a baby's Brit Mila be delayed past the eighth day?",
-  "How do the Hakhamim balance astronomical realities with their judicial authority to establish Rosh Hodesh?",
-  "What is the minimum and maximum possible length of a lunar year according to Shemuel?"
+  "Why are there limits on how many 30-day months can occur in a year?",
+  "How do the rabbis ensure the calendar does not drift too far from the actual new moon?",
+  "What happens if a baby is born during Ben HaShemashot regarding the timing of the Brit Milah?",
+  "Why does the calendar sometimes need to be adjusted to avoid certain holidays falling on specific days of the week?",
+  "How does the previous year's calendar affect the current year's calculations?"
  ],
  "quality": "good",
  "terms": "days day year months rosh hashanah month thats extra eight chaser next shabbat six add three week youre moon friday youll sunday make maleh seven even new added less time chodesh nine cook means pesach therefore yom long previous shavuot should ula according answer dont either every four full later omer people rabbis second sometimes still theyre years baraita cant however lunar opinion problem shana end exactly instead male rav till tov actual always another baby brit calendar come count doesnt milah mishna monday ravuna shemuel tell wednesday yater account adar adjust bake born everybody figure first good half lechem missing nazir never number question rabbi seem shemona since tuesday yet case coming course eaten length loaves matter need omed shimon theyll thursday whenever abdinan adding appropriate ben cooked counting deficient example fall falls fit five gamliel hour itself made makes may meaning meoberet meot might niree order rather summer sure telata though tisha true winter witnesses yadcha accepts amad anasi ask bet beyom biud call chased chaserim close dal different directly earlier eat echad ela fact follows haser huna language lchachamim leap making mention mishnah ninth old part place point pregnant push rabban reason rebi scenario sense shenehem shulchan situation someone telling typical use veer velo waving whats wrong 13th acharim acherim achirim adad adarbet afternoon agree allowed although ama arav around aseret astronomical ate authority average back balance beforehand big bizmano brahava braita braitah calculate calculation called came celebrating certain chala challenge chasira chodashim decide definitely dela delo difference divisible earth eighth elsewhere everybodys everyone exact far feel fine fits forget fourth gemara gets giving hachama hachamim hacharim hand hanef hanif hodesh holidays hunah important itll kegon ken kigon kimot knows last late leaber lechaser leod leor listen literally longer look malya maximum melein meshach meshachia meubarim meubarin minimum mishnas miyatera normal notice overrides pachot plus prepare proper pushed ravhunah ravina read real regarding sanctify saying seventh shaita shehayeta shelefaneha shelosh sheloshim sheteh shia shisha shows sihara similar sky sof son start sunset take takes teach teaches ten tere third thirty today ulaa upset used usually vachamishim vinra without wont yoma yome yomeh youd zimnin 29th abdina abi accordance additional adds adela adjusted adonai afterwards against akharim aleph almost already alright alternate alternating altogether amadach amar amen amud anybody anyone anyway apanim apparent appear arakhin arbaa arent asar ashe asinu asking asks assume astronomically astronomy atalashmo atol attention away ayburo ayn badaita baibur bainan bakateh baked bar baruch based bashanah bechol beduchteheh begin behadeh behadei better bigger birth bishlama bkaita blaita borrow bother bothered breads brought bsitva celebrate chachamim challenged challenges chaserin chet completely considered continuing counterbalance couple curious cycle daamar dafetet dark dates deal decides declared deen deenasheh dei delete demashkachad depending depends des desha detenya deviation didnt digit direction disgruntled dishmona disjunction divided don early easily ebaraita edad eit ele else equal essence expect explain explains extras famous fast fiction files find fluctuate follow followed geh generally gishrei guess hachaname hachanameh hadla haita hajomah hakak hakamashmalan halakhot halaqim halebanah hameobarin hamipal hamubarim hanimot hapanim happen happened happening happens harenin haseinu hashabbat hashem hashemashot hashiva hashtaname hashtanameh hasid hasii havaa hazal hazimin heres hey holiday hul hunahs iboro ibudah iburo ideal ideally iishtakad ill imken impossible inan including inconvenient interpretation interpretations inyana israel ita ithazeh ithazuyeh kaamar kadem kadim kahadyomah kamaaibur katan kedam kedama keravhunah key kimin kiminyan kippur knesset kohanim kvan laa laabdinan laacharim laadatayhu laadatin laakhe lacking lakahashiv lamp latin learn learned leave lebanah lebehadeh leen lefana legal legitimately leh lehamishim lekadesh leolam lesson leula levanaa likely lishteha lists longest looks lravada lravah lravhunada maaseh machloket machroket mai maishenat majority mala malay malev marbaa masechet mashka mashkachat mashkachatla math matkif mea mearbaa meetibeh mentioning meobedet meshachiyah mess mimachorat miniha mishemona mishenayim mishum mistake mitzvah moadeh moneh monenizirut moved must nechalin night nimol nirei nizirut normally often ola opposite options otam others otherwise ourselves panim parts pay pechuta perfect perfectly perhaps placed plain pochati pochatin possibility probably prohibited put quarters ravada ravah ravhunada reality recording regular reiya relatively remain require respect room roundabout row sabar sabre sages savar scientifically seen selosh set shata shedosh shelosha shema shena shenaim shenat sheneh shenehen shenem shivah short shorter show sighting simply single small solar soon split standard stay story street surprised system taam taama talking tamea tanaim tanakama tanakamah technically teim tekeru tenth theres tibet times tishrei together topic trust try twelfth twelve twice ulula umay uncomfortable understand unnoticeable usage usual uushtaim vaf vakatei valbaa vamen vanan vashana vav vayka veabdinan veasa vechad vehava veibor veibul vekam ven veomer veshisha vetanya vhamishayamim vim vow vrayta vshishim vyad wait ways weeks went whatever whereas whole wiggle wilgarum wonder yamim yesad yeterah yimot yisrael yudan",
  "words": 6124,
  "language": "English",
- "made": "2026-11-19",
- "by": "groq whisper + gemini-3.6-flash"
+ "made": "2026-11-20",
+ "by": "groq whisper + gemini-3.1-flash-lite"
 }

@@ -1,0 +1,74 @@
+{
+ "v": 4,
+ "id": "avi-harari:tag:soundcloud,2010:tracks/2438655951",
+ "title": "VaYesse: Living With The Tension",
+ "topic": "Perasha",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Living with life's tensions",
+   "about": "Introduction to the concept of tension in life and Bitachon"
+  },
+  {
+   "at": 101,
+   "title": "The Midrash of the stones",
+   "about": "Rashi's explanation of Ya'akov's stones at Har HaMoriah"
+  },
+  {
+   "at": 154,
+   "title": "Interpreting the Midrash",
+   "about": "Rabbi Yehuda Amital's perspective on competing values"
+  },
+  {
+   "at": 210,
+   "title": "Tensions in daily decisions",
+   "about": "Balancing family, Talmud Torah, and livelihood"
+  },
+  {
+   "at": 260,
+   "title": "Turning many into one",
+   "about": "Finding a broader perspective through Torah and Mitzvot"
+  },
+  {
+   "at": 321,
+   "title": "Accepting the mandate",
+   "about": "Leaning into tension with humility"
+  }
+ ],
+ "unsupported": [
+  "nature",
+  "drawing",
+  "experiences",
+  "pillow",
+  "serves",
+  "metaphor",
+  "pull",
+  "unity",
+  "interpreting",
+  "daily"
+ ],
+ "summary": "Rabbi Harari discusses the nature of living with tension in life, drawing on the experiences of Ya'akov Abinu in Perashat Vayeseh. He explains how the Midrash regarding the stones Ya'akov used as a pillow serves as a metaphor for the competing values and circumstances that pull at a person, and how one can find unity within these tensions through trust in Hashem.",
+ "subjects": [
+  "Perashat Vayeseh",
+  "Ya'akov Abinu",
+  "Midrash on the stones",
+  "Rashi",
+  "Rabbi Yehuda Amital",
+  "Derech Hashem",
+  "Bitachon",
+  "Competing values",
+  "Torah and Mitzvot"
+ ],
+ "questions": [
+  "How should we handle the tension between our expectations and the reality of what happens in life?",
+  "What does the Midrash about Ya'akov's stones teach us about our own daily struggles?",
+  "How can we reconcile the many different values and responsibilities we have in our lives?",
+  "Is it possible to resolve all the tensions we face, or is living with them part of the path?"
+ ],
+ "quality": "good",
+ "terms": "tension live tensions values life make rocks stones certain describes happened midrash stone theres yaakov baruch decision dedicated every head moment moments rabbis simple torah understanding another cant committed defines direction even father ideals living parashat perspective rashi realizing single situations time tug turn used vies accepting amen answer assume broader derech different difficult dont explanation family felt give hakadosh human humility instead lean leaning makom means name never often opposed predict realize regards remind sense speaking speaks tense thats times together vayikach wanted words yisrael able accept add adonai afterwards amital amongst anxiety appears ashesa assists assumed attention avinu awakens away become beginning believers ben bitachon breakfast circumstances cited class come coming commitment competing complex conscious decipher dedicate defining depth describe determine develop doubt earning easier energies entails envisioning exist explain explaining explains eyes familiar famous feat features fight fighting find full governance hamisvot hamoriah hanati happen happens har hard haressyon hashem hatorah hayim hus imagined individuals initially insurmountable interpretation jew jews kadosh knis larger leilui leodam lies lived livelihood lives maaminim made maintains mandate meavneha meraashotav merit might miraculous mitzvot mornings mountain multifaceted next nishmat nishmatos occasion ones overarching overcome part past pasuk path people persons pesukim picks piecing predictable proper protagonist protect put quarrel quarreling quotes rabbi rabitzror realization realizes reasoning receives reminded righteous sarita saying seems short shouldnt sir solution somehow someone sometimes spoke state stay story straightforward struggle suggestion taevin take takes taking talmud task telling tells terms theyre thought took trust truth tugging tugs turning understand unexpected vayeseh vayesev vayishlah veamen vying week weeks whats whereas wont world yehuda yeshivat zehut",
+ "words": 1153,
+ "language": "English",
+ "made": "2026-11-20",
+ "by": "groq whisper + gemini-3.1-flash-lite"
+}
