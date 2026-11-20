@@ -1,78 +1,83 @@
 {
- "v": 4,
+ "v": 5,
  "id": "joey-soffer:tag:soundcloud,2010:tracks/2441008887",
  "title": "Lech Lecha Rashi 6",
  "topic": "Perasha",
  "chapters": [
   {
    "at": 0,
-   "title": "Introduction to the prophecy of exile",
-   "about": "Darkness and fear falling upon Avraham"
+   "title": "Darkness and fear falling upon Avraham",
+   "about": "Hashicha gedola and the beginning of Rashi on perak tad-vav pasuk yud-bet."
   },
   {
    "at": 103,
-   "title": "Calculating the 400 years",
-   "about": "Math regarding Yitzhak, Yaakov, and Mitzrayim"
+   "title": "Rashi's math on the 400 years and Mitzrayim",
+   "about": "Calculating the years from the birth of Yitzhak, Yaakov's age, and the time in Mitzrayim."
   },
   {
    "at": 349,
-   "title": "The meaning of Eretz Lo Lahem",
-   "about": "Why the land was not yet theirs"
+   "title": "Eretz lo lahem and the suffering of the exiles",
+   "about": "Discussing the land not belonging to them yet and how Mitzrayim compressed the suffering."
   },
   {
    "at": 495,
-   "title": "The judgment of the nations",
-   "about": "Ve'gam and the four exiles"
+   "title": "Ve'gam et hagoi and the great wealth",
+   "about": "Rashi on the other galuyot, the ten makhot, and leaving Mitzrayim with big assets."
   },
   {
    "at": 587,
-   "title": "Avraham's peaceful end",
-   "about": "Tavoy el Avotecha and Yishmael's Teshuvah"
+   "title": "Avraham coming to his fathers in peace",
+   "about": "Tevoy el avotecha b'shalom, Terach, and sevah tovah."
   },
   {
    "at": 743,
-   "title": "The fourth generation",
-   "about": "Returning to the land and the sin of the Emori"
+   "title": "The fourth generation returning and the Emorim",
+   "about": "V'dor revi'i yashuvu hena and the sin of the Emorim not being complete yet."
   },
   {
    "at": 975,
-   "title": "The fiery vision and Dikduk",
-   "about": "Tanur ashan, lapid esh, and grammatical accents"
+   "title": "The sun setting and Rashi's grammatical lesson",
+   "about": "V'hi ha-shemesh ba'ah, the fiery furnace and smoke, and ta'am o le-mala for dikduk."
   }
  ],
  "unsupported": [
+  "consecutive",
+  "closely",
   "commentary",
-  "verses",
-  "prophecy",
+  "covenant",
+  "pieces",
   "calculations",
-  "period",
-  "vision",
-  "witnessed",
-  "calculating",
-  "judgment"
+  "prophecy",
+  "grammatical",
+  "analysis",
+  "near",
+  "upon"
  ],
- "summary": "Rabbi Soffer explains Rashi’s commentary on the verses in Parashat Lech Lecha regarding the prophecy of the future exiles of Bnei Yisrael. He details the calculations for the 400-year period of suffering and discusses the meaning of the fiery vision Avraham Abinu witnessed.",
+ "claims": [],
+ "summary": "Rabbi Soffer goes through several consecutive pesukim in Perashat Lech Lecha, focusing closely on Rashi's commentary on the covenant between the pieces. He explains Rashi's calculations regarding the 400-year prophecy of the exiles and the generations in Egypt, and also touches on Rashi's grammatical analysis of verb tenses near the end of the perasha.",
  "subjects": [
-  "Parashat Lech Lecha",
+  "Perashat Lech Lecha",
+  "Bereshit",
+  "Rashi",
   "Avraham Abinu",
-  "Galuyot",
-  "Mitzrayim",
   "Yitzhak",
   "Yaakov",
   "Moshe Rabbenu",
-  "Dikduk",
-  "Rashi"
+  "Galut Mitzrayim",
+  "Berit Bein HaBetarim",
+  "Dikduk"
  ],
  "questions": [
-  "How do we reconcile the 400-year prophecy with the 210 years Bnei Yisrael spent in Mitzrayim?",
-  "Why does the Torah count the 400 years starting from the birth of Yitzhak?",
-  "What does the vision of the furnace and the torch represent?",
-  "How does the placement of the accent mark on a word change its meaning in the Torah?"
+  "How does Rashi resolve the discrepancy between the 400-year exile prophecy and the 210 years Bnei Yisrael actually spent in Mitzrayim?",
+  "Why does Rashi explain that the land was not yet considered theirs during the lifetimes of Avraham, Yitzhak, and Yaakov?",
+  "How do the generations from Levi, Kehat, and Amram line up with the fourth generation returning to Eretz Yisrael?",
+  "What does Rashi explain about the fiery furnace and smoke passing between the animal parts?",
+  "How does Rashi use the cantillation marks to teach grammar and verb tenses in the pasuk about the sun setting?"
  ],
  "quality": "good",
  "terms": "years mitzrayim thats pasuk abraham baah kehat rashi yitzhak moshe yaakov yisrael baa come hes amram good hashem word age back generation youre born dark day land place shemesh time cant fourth lavo live means old question son whats count didnt eretz father fine generations hena levi lived saying starting still suffering yitzchak already assets avraham bnei came comes desert died emori esav even four ger hashicha haya impossible kenaan make meaning mercy plus revii sins terach teshuvah theyre throw vegam vhiya went yashuvu add answer avram ben buried chetsron complete difference different doesnt dwelled esh fear gets getting goyim happen hare ish kshiya lashon leave life lifetime living names nation next part peace read setting shalem shes should skipped sorry start starts take tanur tell theyll though three top vahihem vayagor vhinei yehuda yet abrahams abram agree alive amen arbaam asher avar avinu ayu baariv babokin basket beeretz beginning bsiru children counting darkness derech dont dorot double easy egypt ela ema emptied end face fire first five future gadol galut gedola great haaretz happened happening hashemesh hashi hear hukigon interpretation kigeri kilo lagur last later lecha lives long made makhot making meotchanah mibuar mitzlayim mosheh never notice obviously others overlap parts patsuk peacefully peretz promise psukim represent ribii saw sense sentence set shavah shel shen shlavo sin slide smoke stay sunrise sunset tava teaching telling tet therefore theres theyve told tova traveling tribes vai vdor vea vkhen vlapid vseva wasnt wells whole yezharakha yishmael youll yud yudbet 19th aakov abdun abitari abona accent accurately acha achare achshav actual adding addressing aharele ajit akeri alata alav alumati amin amishai amrams amran amtahat animal animals anochi anokhi answering answers arvashanah asah ashan ashhan assuming ata atatavah atatavoy avodah avon avona avotecha away baalef bag banu barakha baruch based baya bchol beeser belong berchush beretz beruchu besaasa beshalcha bet bgeinnam big bira birds bishalom bnesia bokitav brothers bseva bshalom burn byamav call cardinal caught cha chak chased chiluk choshech circle clearly coming compressed conquered correct course cup currently cut dabar dan dat dava death definitely deserts destroy destroyed dik dikduk directly dirich done doresh dorotav doubling duk duyot dwelling earlier early echen een eggs ehle either emar emorim emphasis ended enslaved entered equals eretzolahim erez esab esther evil example exiles explain extremely falls familiar far feed field fiery fill filled forefathers foreshadowing frame free galuyot gar gave geinnam gifted give giving gizarim god goodness grandson gur haarba habaah habav haemori hagoi hakadosh hala ham haoveh happens happily haq haram hashanim hashob havara hayam hayu hazot hine hinting hit hita hold imatzon imo influence inherent inside instead inuotan irish israel judge kalev kalim kam kama katon katov keat keminyan kemo kemoshe kenan ketzad kishinolad kislev kmo knock kol kovrim kripp kshatam kvar lachad lachar lahem lahim language large lavoh lavotecha least leaves lech ledat lemala lemata leretz letet levis lfi limit lkahu lmala lola look looking lootsi lord lrabot lrishtah maale madras malchuyot malkhuyot mamon marauded matayim math may mbae mea mearzo medaber meet megillah mehim meot merikim meuma miked mishaya mishenolad mishetaleach mishin mishinolad mitzlayims mitzraim morning moshehs mourners must naflal nations nazid needed neighbors neimar nekibash neva nifra ninth nopalet november offspring olaad opposed oppress oppressed otam otiyot otozmanak overcomes paid parasha parashat park paro past pasuf path peaceful penalize penalty people perek perhaps personally pertains philip places presence present problem problems prove queffather rachel ralph rambam ransacked rather redu referring regarding remember remez residents return rising round sadeh sakehim scot seata second semi separate servants seudah shakaa shakaah shakah shalim shalom sham shana shareh shashibduet shataam shav shava shayu sheafhem shease sheayashakaat shebaakbar shechai shehai shei shemishbaa shenotar shepluha shev shgadu shiasu shishim shiyiglu shkiah shkva shlosh shloshad shnei shoresh short shot show sleepy smoky started step stop story suffer taamim taamo taamolimala taamolimata tadvav taken taking talk talking tardimana tavoy tekaveh tense terivena teva thank thursday tired tishim tkavheh today together topped torah trance traveled tried troubles true tseh tseva twins type tzarich ube udan underneath unloading uproot use ushmonim vaavadum vahih vahihed vahihim valata varetz vaseh vata vav vaya vchashov vchetsron vdorah veachhar veagoi veata veavarat veinu vekimo vema venatziluit verb veretz vhamishin vimtomar vitar vkalev vkarat vritzo vultures vyayashem vyif vzeh waaimaita waayshir walk walking wanderers wandering wealthy weeks whatever work worry worth wrong yah yamin yavod yazid year yerad yeshoda yeshuva yetzuu yevimtech yezar yichud yishinolad yitzhaks yitzhaya yopi yordei yudalit yudbe yudgimu yudzayin zakef zarah zayin zaz zedina zeh zmitzrayim",
  "words": 3055,
  "language": "English",
  "made": "2026-11-20",
- "by": "groq whisper + gemini-3.1-flash-lite"
+ "by": "groq whisper + gemini-3.5-flash-lite"
 }

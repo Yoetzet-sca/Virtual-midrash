@@ -1,77 +1,76 @@
 {
- "v": 4,
+ "v": 5,
  "id": "avi-harari:tag:soundcloud,2010:tracks/2441293731",
  "title": "Parashat VaYesse - Finding Your \"Makom\" Everywhere",
  "topic": "Perasha",
  "chapters": [
   {
    "at": 0,
-   "title": "The repeated word makom in Parashat Vayeseh",
-   "about": "Yaakov leaving Be'er Shabah,repetition of makom"
+   "title": "The Repetition of Makom in Parashat Vayeseh",
+   "about": "Yaakov leaving Be'er Shabah and the repeated use of makom in the text."
   },
   {
    "at": 190,
-   "title": "Personal reflection and the Hasidic treasure story",
-   "about": "school choice memory,Hasidic dream story,desire to change reality"
+   "title": "Personal Reflections and the Hasidic Story",
+   "about": "Finding growth in your current place instead of always seeking a new environment."
   },
   {
-   "at": 541,
-   "title": "Comparing Yaakov's makom to Har HaMoriah",
-   "about": "Akedat Yitzhak,Rashi,Midrash on seeing the place"
-  },
-  {
-   "at": 835,
-   "title": "The journey in the desert and cities of refuge",
-   "about": "Bemidbar march,Ir Miklath,cities of refuge as makom"
+   "at": 591,
+   "title": "Comparing Makom in Bereshit and Bemidbar",
+   "about": "Contrasting Yaakov's discovery of Hashem with Avraham's Har HaMoriah and the desert march."
   },
   {
    "at": 1031,
-   "title": "Parashat Re'eh and finding God everywhere",
-   "about": "Devarim,shalosht regalim,finding Hashem in daily life"
+   "title": "Parashat Re'eh and Centralizing Makom",
+   "about": "The future centrality of the chosen makom and experiencing Hashem openly."
   },
   {
-   "at": 1535,
-   "title": "Rashi on the creation of Adam from the dust",
-   "about": "Bereshit creation,Rashi interpretations,belonging everywhere"
+   "at": 1342,
+   "title": "Cities of Refuge and Creation of Humanity",
+   "about": "Ir miklat, Rashi on the creation of Adam, and belonging everywhere."
   },
   {
-   "at": 2090,
-   "title": "Summary of makom and mourning expression",
-   "about": "Hamakom Yenachem Etchem,Hashem as Makom Olam,concluding lessons"
+   "at": 2057,
+   "title": "Summary and Conclusion on Finding Hashem Everywhere",
+   "about": "Final thoughts on perspective, growth, and recognizing Hashem as Makom."
   }
  ],
  "unsupported": [
-  "text",
-  "relates",
+  "recurring",
+  "realization",
   "biblical",
-  "often",
-  "possible",
-  "ideal",
-  "locations",
-  "mourning"
+  "rather",
+  "constantly",
+  "repetition"
  ],
- "summary": "Rabbi Harari goes through Parashat Vayeseh, examining the repeated word makom in the text and how Yaakov's experience of finding God in an unexpected place relates to other biblical episodes. He discusses how people often assume spiritual growth is only possible in distant or ideal locations, contrasting this with the ability to find holiness and connection in one's current environment. The class explores how opening one's eyes and heart allows a person to experience Hashem in everyday situations and moments of life.",
+ "claims": [
+  "'comparing Yaakov's realization that Hashem is present everywhere with other biblical episodes involving places like... the desert march, and the cities of refuge.' - The teacher discusses these as examples of 'Makom' (place) in the Torah, but does not compare them to Yaakov's realization in the way described; rather, he uses them to contrast different approaches to finding God in one's current situation versus seeking a new one.",
+  "'The class reflects on how to keep one's eyes and heart open to divine presence in everyday experiences.' - While the teacher mentions keeping eyes and heart open, this is a specific reflection on finding God in one's current 'Makom' (situation/place), not a general reflection on 'everyday experiences' in the way the description implies.",
+  "'Summary and Conclusion on Finding Hashem Everywhere' - The teacher's conclusion focuses on finding God within one's current 'Makom' (situation/place) and the specific lesson of Yaakov's experience, rather than a general summary of finding Hashem 'everywhere'."
+ ],
+ "summary": "Rabbi Harari discusses the recurring theme of \"makom\" (place) in Parashat Vayeseh, comparing Yaakov's realization that Hashem is present everywhere with other biblical episodes involving places like Har HaMoriah, the desert march, and the cities of refuge. He explores how a person can find spiritual growth and connection to Hashem in their current situation rather than constantly seeking a new environment. The class reflects on how to keep one's eyes and heart open to divine presence in everyday experiences.",
  "subjects": [
-  "Parashat Vayeseh",
-  "Yaakov Avinu",
-  "Avraham Avinu",
-  "Har HaMoriah",
-  "Akedat Yitzhak",
-  "Ir Miklath",
-  "Rashi",
+  "Perasha",
   "Bereshit",
   "Shemot",
   "Bemidbar",
-  "Debarim"
+  "Devarim",
+  "Yaakov Abinu",
+  "Avraham Abinu",
+  "Yitzhak",
+  "Moshe Rabbenu",
+  "Rashi",
+  "Bet HaMikdash",
+  "Ir Miklat"
  ],
  "questions": [
   "Why does the Torah repeat the word makom so many times at the beginning of Parashat Vayeseh?",
-  "How does Yaakov's discovery of Hashem in an unfamiliar place differ from Avraham's journey to the Akedah?",
-  "Can a person achieve spiritual growth where they currently are, or must they always seek a new environment?",
-  "What does Rashi teach about the dust used to create the first human being and how it connects to every place?",
-  "Why is the expression Hamakom Yenachem Etchem used when comforting mourners?"
+  "How does Yaakov's experience of finding Hashem in a foreign place differ from Avraham's journey to the Akedah?",
+  "Can a person achieve true spiritual growth without changing their physical location or community?",
+  "What do the cities of refuge (ir miklat) teach us about places of safety and stability?",
+  "How can someone find Hashem in everyday moments and unexpected places?"
  ],
- "quality": "good",
+ "quality": "poor",
  "terms": "makom place thats find theres youre yaakov pasuk god growth saying even need dont hes torah israel life story access moment parashat doesnt dream remember best parents rashi certain far first hamakom make speak words adonai back forth moshe sense yourself different distant feel point times youll always bet didnt elohim every goes grow live midrash might opportunity ourselves places significant turns whats whole word yod another avraham away cant eyes family good happened home human means message never outside person probably repeated speaking sure telling though thought time true type almost attention bamakom bereshit circumstances course distance exactly existence expression felt great guys himself imagine kavtet kenan law less look moments mother mothers needed page people perek perfect potential present put rabbis reality should starts tell theyre try trying understand used vayeseh whatever wow yitzhak yodbet able accidentally anyway arrive beginning beings bring capability connectedness dirt earth eretz everywhere father follow forward found friends grade grass har hazeh ill instead least lesson listen made manora night open perspective refuge shemot situation source speaks specific suggesting take talk talking tells terms told wakes ability accessibility achen adama afterwards aleph amazing answer ashe become believe better beyond bottom brother bus childbirth circumstance comfort connected convinced counter court desert direction discussed donkey doubt easy end environment erica exile familiar finds future getting greener greenest ground hamoriah hard hasidic heart household important interpretation itself kain kid literal literally living march mekomo men michelle miss needs new ninth opposed others rabbi real reasons redo repeating response room run set shouldnt siddam side situations six sleep someone son sorts soul specifically still summarize summer tendency together touches treasure use vayome vividly vulnerable vyi wanted water went weve within yesh yeshiva yivhara young zone 7th abraham according adam ago akedah already amongst anywhere asher autobiographically avoid awesome based basketball belong ben bmakom bmidbar bnei brought camp canaan capabilities capable catch change chumash cities city class come community continue conversations created crowded days death define denying depressed describes describing develop dust ease easiest eleich elohecha elsewhere envision envy enzeh everyone examples exiled exist experience experienced express familially fathers feels figurative fits give gone goodness greatest guard guess haadama hamidyani hand hashe hashemesh haze hear heard hit homash hopeful imagined individuals initially intents interaction ive jews kains kav kavav kibah kill killed killing kills kim known knows land last learn lecha left lolam long may meaning meavne members mikomot mind mizbah myself names naturally navanad next nobody october oftentimes olam olotecha order parasha passport pause per perak period pesukim picks position potentially purposes question quoting realize reason ree repeat repeats respond sand searching second seeking sees sefer shabah sham sheh shekol shes shoes sight significance sometimes spoke stability stumble successful supposed taalei talked teaching tenth thinking three throughout took tragic turn tzer ultimately unfortunately vayera vayese vayikach vayikra vayishkav vyira vyomar walk wide women working yaakob yaakovs yadaati yisrael younger zayin absolute absolutely accentuating accessible accessing across actual add adjacent adunai adventure advice afar afaro agree ahead ahu akedat alive alright altar amaloha amar anachnu anger anokhi anokhilo anonai anytime appraising appreciate approach aram aravi article artificial artificially asheyanu ashkenazim ask asked aspiring assumed assuming atmosphere atoned avel avi avot avots backward backwards balance ball baltimore baruch bchom beapav beatrice becoming bedroom beer begins beit beno betel betelum beth bmidvar bnai books borea breathing bridge burial buried call called calls came careful carefully castle caught cause center central certainly chaya chose choten chovav cites clear clearly click clicked clicks cloud comes comfortable coming communally concept conclude confident confines confused connecting connection consolation context contrast contrasts conversation cool count counters craftsmanship crazy creation current cynical daunting dchak dealing decided deciding decipher deciphering deep defined demeanor deny detail details determining devarim diber die differently dig digging dining directional directions discomfort discover discovered discovers disillusioned don draw duecha earlier easily east educated educationally effectively ekim elav elcha else embedded encounters encouraging endeavor enough enter environments enze episode equidistant eretzkenan erez escape especially establish etchem eten ever evolved exceptionally exciting exclamation excuse excusing expected experiences explain expresses expressing extent fact failures familial famous faraway feeling feelings festivals financial finding fire following force foreign forget forgot four friend funny furthest futile gathered gav gave gimau gimel gives giving gods greater green group guy haadam haahu hachamim hachemetchem hahu haim hakadosh hamikdash hammakom hamoriya hamoro hang happen happiness hara haramoria haran harana hardest harrowing hashamayim hashemim hazek head healthy hearing heck help hidden high hisham homashim honest hopefully hot hoten however humanity humble idea imagery indeed individual inna interesting interpretations interviews invest involved isav isavs issues itanu jolted journey juncture kadashecha kaf kanaan kavchet kedushah keep kiim killer kiyum knesset knew kol korbanot lach lachem lar late leave leaves leaving lechovav leem lefne lehavdil lehovav lehovdil lichtenstein lifetimes likvura limitations lines lives liyado loalenu loasada loosely lost love makeish makes makon man manifestation manipulate manorah manufactured marching matter matters mbeer mealbaru meant meeting mentioned meraashotav midbar mikdash miklath mikol milashon million min mindset minute minutes mishinato mishpatim mission moladeti moledet moriah mot moved must mysterious mystique name nation national nature nefesh nervous niarim nice nights nishmat nomad none nonsense normal normally north noseim nothing notice objectively obviously ode onset onto opening opinion opportunities origin origins oto overarching overcome overtones part pass passage past pasukim path pay pen perceive perfectly perk permitted physical physically placeless playing plays pointed positioning positions possibility predict pregnant prepare preparing presence privy problems pronounced proper punishment purposefully pursuing push pushing putting quite quote quoted raashotav rabbinically raises rak rama reading realistic receive redoing reeh refer reference referring reflect regalim regards regretful rejoicing religiously remembers reminded reminds rene renee reoel responds restart retold returns reuel rights rip ripe rock role sacrifice saddest salveitchik satisfying saturday savar scenery schism seated secret security sedom seem seems sefaria sefe self serious serve setting settles seven shalosh shama shamtehe shar sheamut shear sheibhara shem shivatecha shnena short sidon sights simcha similarities social soil solid somehow sorrowful sorry sounds south spiritual spiritually spit spot stable stage start starting state stay step stops streaming strong strongest stuck stumbled stumbles subsided succeed suggest suggestion summing support taaseh taasehli taking tato tear tease thank themselves therell theyll thinks thoughts timeline tireh tisa tochelenu today tora tour tov tove track traditional translating transparently travel tread treating truly twelve ubaata unaffiliated uncomfortable undarecha underneath understood undertones unprecedented unpredictable unquote unreal using vaasher vachad vachai vaifgaba vaifka vaikrat vamet vantage vayaleen vayalinsham vayasem vayasim vayelech vayeseb vayifka vayomer veanokhi veel vehaeluhim versus vesamtii vetavnu vivid vsham vyachavoshet vyakom vyelich vyikachet vyikatz vyipach vyivakaa vyomer vze vzeh waiting walked walking wander wanderer wasnt watering weeks werent west whoever whos without wives woke wondered wondering wont world worth wouldnt wrote yadati yana years yenachem yet yitzchaks yiudlecha yodchet yotet yumat zayim zeola zichron",
  "words": 7232,
  "language": "English",
