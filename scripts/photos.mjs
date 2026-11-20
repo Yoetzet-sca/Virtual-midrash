@@ -13,7 +13,7 @@ const data = JSON.parse(await readFile(file, 'utf8'));
 const dir = new URL('public/people/', root);
 await mkdir(dir, { recursive: true });
 // Square, cropped around the most face-like part of the picture rather than its dead centre.
-const square = (bytes, px) => sharp(bytes, { animated: false }).rotate().resize(px, px, { fit: 'cover', position: sharp.strategy.attention }).jpeg({ quality: 78, mozjpeg: true }).toBuffer();
+const square = (bytes, px) => sharp(bytes, { animated: false, failOn: 'none' }).rotate().resize(px, px, { fit: 'cover', position: sharp.strategy.attention }).jpeg({ quality: 78, mozjpeg: true }).toBuffer();
 let made = 0, reused = 0, failed = 0;
 const todo = data.teachers.filter((t) => /^https:\/\/sca-platform\.s3\.amazonaws\.com\//.test(t.photo));
 await Promise.all(Array.from({ length: 6 }, async () => {
