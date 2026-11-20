@@ -4,7 +4,7 @@ import { usePrefs, getPrefs, setPrefs, toggleIn, learn } from '../store';
 import { usePlayer } from '../player';
 import { Avatar, erubLabel, go } from '../ui';
 import { classShare, clock, initials, matchesTopic, minutes, newFromFollowed, rank, shareLink, daysAgo, sized } from '../util';
-import { matches } from '../search';
+import { matches, namesIt } from '../search';
 import { IHeart, IPause, IPlay, ISave, ISaved, ISearch, IShare, IInfo } from '../icons';
 
 export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData; startId?: string; topic: string; setTopic: (t: string) => void }) {
@@ -62,8 +62,8 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
     const daf = sc?.daf[key];
     const days = sc?.holiday ? (new Date(sc.holiday.date + 'T12:00:00').getTime() - now.getTime()) / 86400000 : 99;
     return ([
-      sc?.perasha && { id: 'wk:perasha', label: `Perasha: ${sc.perasha.name}`, test: (title: string) => sc.perasha!.search.some((n) => matches(n, title)) },
-      sc?.holiday && days <= 42 && { id: 'wk:holiday', label: sc.holiday.name, test: (title: string) => matches(sc.holiday!.name, title) },
+      sc?.perasha && { id: 'wk:perasha', label: `Perasha: ${sc.perasha.name}`, test: (title: string) => sc.perasha!.search.some((n) => namesIt(n, title)) },
+      sc?.holiday && days <= 42 && { id: 'wk:holiday', label: sc.holiday.name, test: (title: string) => namesIt(sc.holiday!.name, title) },
       daf && { id: 'wk:daf', label: `Today’s daf: ${daf.tractate} ${daf.page}`, test: (title: string) => matches(`${daf.tractate} ${daf.page}`, title) },
     ].filter(Boolean) as { id: string; label: string; test: (title: string) => boolean }[]).filter((x) => data.classes.some((c) => x.test(c.title))); // no chip that leads nowhere
   }, [data]);

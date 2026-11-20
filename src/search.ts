@@ -20,17 +20,30 @@ export function skeleton(word: string) {
   return t[0] + t.slice(1).replace(/[aeiou]/g, '');
 }
 
+// Two spellings of one word: the same consonants, the same opening sound and about the same length.
+// Consonants alone are not enough: "Vayesse" and "Buys" share theirs.
+const opening = (w: string) => (WORDS[w] || w).replace(/^(ch|kh)/, 'h').replace(/^(tz|ts)/, 's')[0];
+export const sameWord = (a: string, b: string) => a === b || (skeleton(a) === skeleton(b) && skeleton(a).length >= 2 && opening(a) === opening(b) && Math.abs((WORDS[a] || a).length - (WORDS[b] || b).length) <= 3);
+
 export function matches(query: string, text: string) {
   const q = fold(query).split(' ').filter(Boolean);
   if (!q.length) return false;
   const plain = fold(text);
   const words = plain.split(' ');
-  const skels = words.map(skeleton);
   return q.every((token) => {
     // A number must be that page, not part of a longer number: "8" finds "8" and "8a" but not "18" or "80".
     if (/^\d/.test(token)) return words.some((w) => w === token || (w.startsWith(token) && /^[ab]$/.test(w.slice(token.length))));
     if (plain.includes(token)) return true;
     const sk = skeleton(token);
-    return sk.length >= 2 && skels.some((s) => s === sk || (sk.length >= 3 && s.startsWith(sk)));
+    // Another spelling of the word, or the start of a longer word while it is still being typed.
+    return words.some((w) => sameWord(token, w) || (sk.length >= 3 && w.length > token.length && opening(token) === opening(w) && [-1, 0, 1, 2].some((d) => skeleton(w.slice(0, token.length + d)) === sk)));
   });
+}
+
+// Stricter, for names the app looks up by itself (this week's perasha, a holiday): every word of the name must be in the
+// title as a whole word, in some spelling. No part-words: "Vayesse" must not find "Vayishlah".
+export function namesIt(name: string, title: string) {
+  const want = fold(name).split(' ').filter(Boolean);
+  const have = fold(title).split(' ').filter(Boolean);
+  return want.length > 0 && want.every((n) => have.some((w) => sameWord(n, w)));
 }

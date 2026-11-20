@@ -330,3 +330,16 @@ test('videos are filed only under the person the title really names (checked aga
   assert.ok(samePerson('Mr. Joseph Mosseri', 'Mr. Joey Mosseri') && samePerson('Mr. Joey Harari', 'Mr. Joseph Harari'));
   assert.ok(!samePerson('Rabbi Avi Harari', 'Mr. Joseph Harari') && !samePerson('Rabbi Nathan Dweck', 'Rabbi Joseph Dweck'));
 });
+
+test('the perasha filter finds the perasha and nothing else', async () => {
+  const { namesIt, matches } = await import('./.search.mjs');
+  for (const title of ['Vayetze 2025', 'VaYesse: Living With The Tension', 'Parashat VaYesse - Finding Your "Makom"', 'Perashat Vayesse 5786. Rabbi Uri Lati', 'Vayeitzei: the ladder', 'Vayetzei 2023']) assert.ok(namesIt('Vayesse', title), title);
+  for (const title of ['Baba Batra 98 - Who Buys the House for the Newlyweds?', 'Vayishlach 2025', 'Vayelech 2025', 'Vayeshev: the pit', 'Vayera 5787', 'Voices of the community', 'Vows and Oaths']) {
+    assert.ok(!namesIt('Vayesse', title), title);
+    assert.ok(!matches('Vayesse', title), 'search: ' + title);
+    assert.ok(!titleNames(title, 'Vayesse'), 'queue: ' + title);
+  }
+  for (const title of ['Chanukah: lighting at the door', 'Hanukah 5785', 'Hanukkah Class by Rabbi Joseph Dweck']) assert.ok(namesIt('Hanukkah', title), title);
+  assert.ok(namesIt('Lekh Lekha', 'Lech Lecha Rashi 5') && namesIt('Vayishlah', 'Vayishlach 2025') && !namesIt('Vayishlah', 'Vayetze 2025'));
+  assert.ok(matches('bava basra 8', 'Bava Batra 8a (1)') && matches('vayes', 'Perashat Vayesse')); // ordinary search is unchanged: other spellings, and part of a word while typing
+});

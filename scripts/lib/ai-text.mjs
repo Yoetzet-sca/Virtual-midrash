@@ -67,9 +67,10 @@ const wordsOf = (text) => String(text).split(/[\s\-–—/]+/).map(foldWord).fil
 
 // Does a class title name this perasha or holiday, however it is spelled? ("Vayetze 2026", "Parashat VaYesse" ↔ "Vayesse")
 export function titleNames(title, name) {
-  const have = new Set(wordsOf(title).map(bones));
-  const want = wordsOf(name).map(bones).filter(Boolean);
-  return want.length > 0 && want.every((w) => have.has(w));
+  const opening = (w) => w.replace(/^(ch|kh)/, 'h').replace(/^(tz|ts)/, 's')[0];
+  const same = (a, b) => a === b || (bones(a) === bones(b) && opening(a) === opening(b) && Math.abs(a.length - b.length) <= 3); // not consonants alone: "Vayesse" is not "Buys"
+  const have = wordsOf(title), want = wordsOf(name);
+  return want.length > 0 && want.every((n) => have.some((w) => same(n, w)));
 }
 
 // The meaningful words in `written` that cannot be found in the transcript (or the class title / teacher's name).
