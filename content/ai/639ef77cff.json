@@ -1,79 +1,81 @@
 {
- "v": 5,
+ "v": 6,
  "id": "avi-harari:tag:soundcloud,2010:tracks/2441054208",
  "title": "Wearing the Shoes of Someone Who Passed Away",
  "topic": "Halakha",
  "chapters": [
   {
    "at": 0,
-   "title": "The Question of Wearing a Deceased Person's Shoes",
-   "about": "Introduction to the question of what to do with the clothing and shoes of a niftar, referencing Sefer Hasidim."
+   "title": "Introduction and Sefer Hasidim",
+   "about": "Questions about using or giving away clothing and shoes of a deceased person and reference to Sefer Hasidim."
   },
   {
    "at": 52,
-   "title": "Sefer Hasidim and Early Sources",
-   "about": "Examining the statement in Sefer Hasidim by Rabbi Uda Hasid and practices mentioned in the books of Chesedek."
+   "title": "Sefer Hasidim on Dangerous Sedaka",
+   "about": "Rabbi Uda Hasid's statement about not giving items of danger as Sedaka."
   },
   {
-   "at": 208,
-   "title": "Rabbi Chaim Kanievsky's Remez from Devarim",
-   "about": "Looking at a pasuk in Sefer Devarim regarding clothing in the plural versus shoes in the singular."
+   "at": 147,
+   "title": "Customs in Baghdad and Remez in Debarim",
+   "about": "Customs cited by the Ben Ish Hai, Hacham Ovadia Yosef, and a textual hint in Debarim noted by Rabbi Chaim Kanievsky."
   },
   {
    "at": 260,
-   "title": "The Gemara in Masechet Hulina and Rationales",
-   "about": "Connecting the topic to a Gemara in Masechet Hulina concerning animal hides and potential danger."
+   "title": "Gemara in Masekhet Hullin",
+   "about": "Talmudic passage in Masekhet Hullin 94a concerning leather from an unslaughtered dead animal."
   },
   {
    "at": 412,
-   "title": "Rabbi Moshe Feinstein's View on Contagious Disease",
-   "about": "Analyzing Rabbi Moshe Feinstein's explanation regarding potential contagious diseases and sanitizing items."
+   "title": "Rabbi Moshe Feinstein on Contagious Disease",
+   "about": "Explanation linking the concern to contagious disease and whether sanitizing or timing of wear affects the ruling."
   },
   {
    "at": 569,
-   "title": "Dreams and Other Interpretations",
-   "about": "Discussing a Gemara in Masechet Berakhot about dreams involving shoes and whether it serves as a rational basis for the halakha."
+   "title": "Gemara in Masekhet Berachot on Dreams",
+   "about": "Talmudic discussion in Masekhet Berachot 57b regarding dreams of a deceased person taking shoes."
   },
   {
    "at": 669,
-   "title": "Leather Shoes, Slippers, and Conclusion",
-   "about": "Distinguishing leather shoes from other footwear, and concluding on whether items can be given as sedaka."
+   "title": "Leather Shoes, Slippers, and Giving Sedaka",
+   "about": "Distinctions for non-leather shoes and slippers according to Rabbi Moshe Sternbach and practical guidance on giving items as Sedaka."
   }
  ],
  "unsupported": [
-  "applications",
-  "illnesses",
-  "items",
-  "deceased",
-  "early"
+  "custom",
+  "halakhic",
+  "textual",
+  "hint",
+  "talmudic",
+  "passages",
+  "offered",
+  "footwear",
+  "customs"
  ],
- "claims": [],
- "summary": "Rabbi Harari goes through the minhag and halakhot concerning whether a person can wear or give away the clothing and shoes of someone who passed away. He explores the source in Sefer Hasidim, the discussions among poskim including Rabbi Moshe Feinstein and Hacham Ovadia Yosef, and the practical applications regarding leather shoes, contagious illnesses, and giving items to sedakah.",
+ "claims": [
+  "“Rabbi Moshe Sternbach regarding contagious disease and non-leather footwear” - Rabbi Sternbach is only cited regarding non-leather footwear and slippers, not contagious disease."
+ ],
+ "summary": "Rabbi Harari examines the custom and halakhic discussions concerning whether one may wear or give away the clothing and shoes of someone who passed away. He reviews sources beginning with Sefer Hasidim, a textual hint in Debarim noted by Rabbi Chaim Kanievsky, and Talmudic passages in Masekhet Hullin and Masekhet Berachot. He also addresses explanations offered by Rabbi Moshe Feinstein, Hacham Ovadia Yosef, and Rabbi Moshe Sternbach regarding contagious disease and non-leather footwear.",
  "subjects": [
-  "Sefer Hasidim",
-  "Rabbi Uda Hasid",
-  "Hasideh Ashkenaz",
-  "Hacham Ovadia Yosef",
-  "Rabbi Chaim Kanievsky",
-  "Rabbi Moshe Feinstein",
-  "Rabbi Tzvi Pesach Frank",
-  "Rabbi Moshe Sternbach",
-  "Masechet Hulina",
-  "Masechet Berakhot",
-  "Igrot Moshe",
-  "Yabia Omer"
+  "Sefer Hasidim of Rabbi Uda Hasid",
+  "Shoes and clothing of a deceased person",
+  "Remez in Debarim on clothing versus shoes",
+  "Masekhet Hullin 94a on shoes from a dead animal",
+  "Contagious disease explanation of Rabbi Moshe Feinstein",
+  "Rulings of Hacham Ovadia Yosef",
+  "Masekhet Berachot 57b on dreams about shoes",
+  "Leather shoes and slippers in Halakha"
  ],
  "questions": [
-  "What should be done with the clothing and shoes of someone who passed away?",
-  "Does the prohibition in Sefer Hasidim apply to all shoes or only to leather shoes?",
-  "Can shoes of a niftar be given to sedaka or to family members?",
-  "What is the underlying reason behind the custom not to wear a deceased person's shoes?",
-  "Does the concern about a deceased person's shoes apply if they were not worn during a contagious illness?"
+  "What is the source in Sefer Hasidim regarding the shoes of a deceased person?",
+  "What textual hint in Debarim does Rabbi Chaim Kanievsky point to regarding clothing and shoes?",
+  "How does a passage in Masekhet Hullin about leather from a dead animal relate to this topic?",
+  "Why does Rabbi Moshe Feinstein suggest that concern over shoes relates to contagious disease?",
+  "Does the custom regarding shoes of a deceased person apply to non-leather footwear or slippers?"
  ],
- "quality": "good",
+ "quality": "poor",
  "terms": "shoes person clothing away rabbi dont leather passed theres hasidim sefer should wearing animal contagious individual thats youre bad disease regards theyre dangerous give moshe time wear gemara rationale apply came certain dream even feinstein killed logic pasuk practice reason shouldnt words book cant died family make meant mentioned nervous omen others people probably shoe simlotekhem situation whats yosef afterwards alternatively careful cleaned comes connected death explains fear given halakha heard hes home likewise means might misleading niftar ovadia plural poison potential problem question sakana sell set sick siman situations statement still suggestion talks whatsoever writes 12th allowed already amen applicable associated baghdad baruch called century certainly chaim circumstances conversation course dalet danger day dead different dikra double embedded entirely example following forth forward found friend getting gimau great hacham hard interpretation issue jews kanievsky knowing life long longer matter mealechem members met minhag nonetheless opposed owned page papa part passing permitted pesach point poskim purposefully put quite raglecha rashi rav referring remez reminds scrupulous sedaka sense slaughtered slippers sourcing specifically suggest suggested taf taking tell tidings toshibot try turn type tzedakah use vadya whether without wore wouldnt written wrote 13th according achirin adam adherence adhering adonai ahelik alayim alf alluding almost among amru another anyone anyway apparently applies approach appropriate arbaim argue argues around ashkenaz asimandalid asked asking assumption attempted authorities avelut aware baalta bahem baleta balu bamidbar baolech bar based bedavar beireinu believe ben beraita berakhot bezei bnai books breakfast bring brings brought bsakin buy cannot carefully caused chabah check chesedek chet chilakav circumstance class clear comfortable coming concern conclude consensus contrast cut dafsa daphnun deal dedicated depths describes desert destroy devarim didnt difference discussed diseases distinguish diverges doesn dom dust earlier else enashim end endeavoring esh essence etchem everyone expansive explained extend eyes famous father feature feel feet felt forbidden frank future gemaad general generations german germany gesher gifting gimal giving good grandson haayim hachayim hadei hagimal hakadosh halakhot hale halik hamutbet hanati hand haomech hasandal hasid hasideh hazon head held helek hilchot holding hook hospital hulina human igrot ill ilui imparted importantly individuals inherit inheriting instead irrespective isnt ive jewish kabbalah kafav kalif kama kamocha katan kedeh kippur kitanot known kofiod koflamit last lastly latetotam laundered leabedam leani least leechad leodam lhatichot listen loalenu locked look lost love lreakha luck maaseh made mainstay maseche masechet masoret matters may meal mealraglecha meaning member mention metah min minan minhagen mipiash moments mornings move movement mystic mystical mysticism naalechem nagot name nation natural nature need neilat never news next niore nishmat nishmatos nitenu nizharim nobody notify number nundal omer opinion ovadian pass passes peedalit perek period pesachim pevav pieces pious place pointed points poor pose preceded presumption prominent provided putting quote rabbis rabit raglechem rationalize real reality reasoning reasons recorded related rid righteous saif samech sandal sanitize saw secondly sedaqah segment segulan selling settles shana share sheasu shel shelo shemua shi shin sickness significant significantly simon singular small smile snake specific sror started sternbach story stronger suggests table tah take talk talking tavshin therefore theyve though thought times torah tragic trickery tries truth tshelot tzvi uda ulechotram understand unfortunate used vah veahavta veamen vlo vnaalcha voodoo vrasa walking wanted wash wasnt ways weaker weve whatever widely withhold within world worn wrap write wrong yaasea yabi yabia years yikashilu yisrael yom yorede yourself zayin zefer",
  "words": 2592,
  "language": "English",
  "made": "2026-11-20",
- "by": "groq whisper + gemini-3.5-flash-lite"
+ "by": "groq whisper + gemini-3.5-flash"
 }
