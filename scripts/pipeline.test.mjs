@@ -413,3 +413,17 @@ test('old archive: the same recording is recognised, and Minhag episodes by thei
   assert.ok(!pairs.has(old[3]));
   assert.ok(playable(old[3]) && !playable({ ...old[3], file: 'a.ogg' }) && !playable({ ...old[3], active: false }) && !playable({ ...old[3], type: 'document', file: 'a.pdf' }));
 });
+
+test('split: newest classes open first, every teacher keeps a class, nothing is lost', async () => {
+  const { split } = await import('./split.mjs');
+  const classes = [];
+  for (let i = 0; i < 900; i++) classes.push({ id: 'n' + i, teacherId: 'busy', date: String(9000 - i) });
+  classes.push({ id: 'q1', teacherId: 'quiet', date: '0003' }, { id: 'q2', teacherId: 'quiet', date: '0002' }, { id: 'q3', teacherId: 'quiet', date: '0001' });
+  const { app, older } = split({ classes, docs: [{ id: 'd' }], topics: ['x'] });
+  assert.equal(app.classes.length, 502);
+  assert.equal(app.older, 401);
+  assert.deepEqual(app.classes.slice(-2).map((c) => c.id), ['q1', 'q2']);
+  assert.equal(app.classes.length + older.classes.length, classes.length);
+  assert.equal(older.docs.length, 1);
+  assert.equal(split({ classes: classes.slice(0, 10), docs: [] }).older, null);
+});

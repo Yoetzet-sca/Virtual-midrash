@@ -60,6 +60,7 @@ export function TeacherPage({ data, id }: { data: AppData; id: string }) {
         {classes.length === 0 ? <p className="muted">No recorded classes yet.</p> : <>
           {topics.length > 2 && <Chips items={topics.map((k) => ({ id: k, label: k }))} value={topic} onPick={setTopic} />}
           <div className="rows">{shown.slice(0, count).map((c) => <ClassRow key={c.id} c={c} showTeacher={false} />)}</div>
+          {!!data.older && <p className="muted small">Loading older classes…</p>}
           {shown.length > count && <button className="btn wide ghost" style={{ marginTop: 12 }} onClick={() => setCount(count + 60)}>Show older classes ({shown.length - count} more)</button>}
         </>}
       </div>

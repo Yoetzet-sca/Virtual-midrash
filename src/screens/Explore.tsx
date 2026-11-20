@@ -79,7 +79,8 @@ export function Explore({ data, place: startPlace, pickTopic }: { data: AppData;
           </>}
           <div className="rows">{found.map((c) => <ClassRow key={c.id} c={c} teacher={teacher(c.teacherId)} />)}</div>
           {foundDocs.length > 0 && <><div className="label">TO READ</div><div className="rows">{foundDocs.map((d) => <DocRow key={d.id} d={d} teacher={teacher(d.teacherId)} />)}</div></>}
-          {found.length + foundTeachers.length + answers.length + foundDocs.length === 0 && <p className="muted">No classes found for “{q}” yet.</p>}
+          {found.length + foundTeachers.length + answers.length + foundDocs.length === 0 && !data.older && <p className="muted">No classes found for “{q}” yet.</p>}
+          {!!data.older && <p className="muted small">Still loading older classes — more may turn up in a moment.</p>}
           <button className="chip" onClick={() => setQ('')}>Clear search</button>
         </>
       ) : (

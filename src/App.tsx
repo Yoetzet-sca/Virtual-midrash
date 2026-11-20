@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import type { AppData } from './types';
-import { usePrefs, setPrefs } from './store';
+import type { AppData, ClassItem } from './types';
+import { usePrefs, setPrefs, getPrefs } from './store';
 import { PlayerProvider, usePlayer } from './player';
 import { Feed } from './screens/Feed';
 import { TeacherPage } from './screens/Teacher';
@@ -79,8 +79,23 @@ function Shell({ data }: { data: AppData }) {
 export function App() {
   const [data, setData] = useState<AppData | null>(null);
   const [failed, setFailed] = useState(false);
-  useEffect(() => { fetch('./data/app.json', { cache: 'no-cache' }).then((r) => r.json()).then((d: AppData) => { startAnalytics(d.analytics?.goatcounter); setData(d); }).catch(() => setFailed(true)); }, []);
+  useEffect(() => {
+    fetch('./data/app.json', { cache: 'no-cache' }).then((r) => r.json()).then((d: AppData) => {
+      startAnalytics(d.analytics?.goatcounter);
+      setData(d);
+      if (!d.older) return;
+      // The newest classes are on screen; the rest of the archive follows. Three tries, then carry on with what there is.
+      const rest = (tries: number): Promise<void> => fetch('./data/older.json', { cache: 'no-cache' }).then((r) => r.json())
+        .then((o: { classes: ClassItem[]; docs: AppData['docs'] }) => setData({ ...d, classes: [...d.classes, ...o.classes].sort((a, b) => b.date.localeCompare(a.date)), docs: o.docs, older: 0 }))
+        .catch(() => (tries > 1 ? new Promise<void>((ok) => setTimeout(ok, 4000)).then(() => rest(tries - 1)) : setData({ ...d, older: 0 })));
+      rest(3);
+    }).catch(() => setFailed(true));
+  }, []);
   if (failed) return <div className="state"><h1>Can’t load classes right now</h1><p>Check your connection and try again.</p><button className="btn" onClick={() => location.reload()}>Try again</button></div>;
-  if (!data) return <div className="state"><img src="./brand/sca-icon-white.png" alt="" width={96} /></div>;
+  // Someone arriving at one particular class (a shared link, or the class they were in the middle of) waits the extra
+  // moment for the archive when that class is in it, so the feed opens on the right card.
+  const wanted = data?.older ? [(location.hash.match(/^#\/class\/(.+)/) || [])[1], Object.entries(getPrefs().positions).sort((a, b) => b[1][1] - a[1][1])[0]?.[0]].filter(Boolean).map((x) => { try { return decodeURIComponent(x as string); } catch { return x; } }) : [];
+  const waiting = wanted.some((id) => !data!.classes.some((c) => c.id === id));
+  if (!data || waiting) return <div className="state"><img src="./brand/sca-icon-white.png" alt="" width={96} /></div>;
   return <PlayerProvider teachers={data.teachers} classes={data.classes}><Shell data={data} /></PlayerProvider>;
 }

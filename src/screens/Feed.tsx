@@ -46,11 +46,16 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
   }, []);
 
   // The order is fixed when the feed opens so cards don't jump around while someone is swiping.
+  const settled = useRef<{ startId?: string; list: ClassItem[] }>();
   const order = useMemo(() => {
     const ranked = rank(data, prefs);
-    if (!startId) return ranked;
-    const first = ranked.find((c) => c.id === startId);
-    return first ? [first, ...ranked.filter((c) => c.id !== startId)] : ranked;
+    const first = startId ? ranked.find((c) => c.id === startId) : undefined;
+    let list = first ? [first, ...ranked.filter((c) => c.id !== startId)] : ranked;
+    // When the older classes arrive a moment after opening, they go after the cards already there.
+    const was = settled.current;
+    if (was && was.startId === startId && was.list.length < list.length) { const had = new Set(was.list.map((c) => c.id)); list = [...was.list, ...list.filter((c) => !had.has(c.id))]; }
+    settled.current = { startId, list };
+    return list;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, startId]);
   // Timely filters beside the topics: this week's perasha, a holiday coming within six weeks, and today's daf.

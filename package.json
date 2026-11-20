@@ -7,7 +7,7 @@
     "dev": "vite",
     "data": "node scripts/build-data.mjs",
     "data:sample": "node scripts/build-data.mjs --fixtures",
-    "build": "tsc --noEmit && vite build && node scripts/share-pages.mjs",
+    "build": "tsc --noEmit && vite build && node scripts/share-pages.mjs && node scripts/split.mjs",
     "test": "esbuild src/search.ts --format=esm --log-level=warning --outfile=scripts/.search.mjs && esbuild src/ask.ts --bundle --format=esm --log-level=warning --outfile=scripts/.ask.mjs && node --test scripts/pipeline.test.mjs"
   },
   "dependencies": {

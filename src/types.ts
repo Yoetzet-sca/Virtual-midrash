@@ -9,6 +9,7 @@ export type Resource = { category: string; name: string; area: string; note: str
 export type Shortcuts = { daf: Record<string, { tractate: string; page: number }>; perasha: { name: string; search: string[]; shabbat: string } | null; holiday: { name: string; date: string; search?: string[] } | null };
 export type Doc = { id: string; teacherId: string; title: string; date: string; url: string };
 export type AppData = {
+  older?: number; // classes still on their way: the newest arrive first, the archive follows in the background
   docs?: Doc[];
   shortcuts?: Shortcuts;
   generatedAt: string; topics: string[]; teachers: Teacher[]; classes: ClassItem[];
