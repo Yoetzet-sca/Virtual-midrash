@@ -1,5 +1,5 @@
 {
- "v": 5,
+ "v": 6,
  "id": "avi-harari:tag:soundcloud,2010:tracks/2423886372",
  "title": "Talmud Torah vs. Berit Milah",
  "topic": "Halakha",
@@ -7,60 +7,61 @@
   {
    "at": 0,
    "title": "Introduction to the question",
-   "about": "Berit Milah and Torah study"
+   "about": "Berit Milah, Talmud Torah, interrupting study"
   },
   {
    "at": 52,
    "title": "The principle of HaOsek BaMitzvah",
-   "about": "Exemption from mitzvot while engaged in another"
+   "about": "Gemara, Mishna, exemption from other mitzvot"
   },
   {
    "at": 108,
-   "title": "Talmud Torah qualifications",
-   "about": "When Torah study can be interrupted"
+   "title": "Talmud Torah vs other mitzvot",
+   "about": "Rambam, Hilchot Talmud Torah, performance by others"
   },
   {
-   "at": 199,
-   "title": "Status of Berit Milah",
-   "about": "Presence at burial and marriage vs Berit Milah"
+   "at": 153,
+   "title": "Is attending a Berit Milah a mitzvah?",
+   "about": "Shiltei Giborim, status of Berit Milah"
   },
   {
    "at": 246,
    "title": "Severity of missing a Se'udah",
-   "about": "Gemara in Masekhet Pesahim"
+   "about": "Masekhet Pesahim, Se'udah Shel Mitzvah, excommunication"
   },
   {
    "at": 382,
-   "title": "Tosafot and Bnei Adam Mehuganim",
-   "about": "Conditions for attending a meal"
+   "title": "The role of Bnei Adam Mehuganim",
+   "about": "Tosafot, Yerushalmi, defining appropriate company"
   },
   {
    "at": 492,
    "title": "Hacham Ovadia Yosef's ruling",
-   "about": "Yabiyah Omer and practical considerations"
+   "about": "Yabia Omer, Yoreh De'ah, Talmid Hacham"
   },
   {
    "at": 797,
-   "title": "Shevet HaLevi and conclusion",
-   "about": "Final guidance for students and individuals"
+   "title": "Shevet HaLevi and final conclusions",
+   "about": "Yeshiva students, Tinok Shel Bet Rabban, practical advice"
   }
  ],
  "unsupported": [
   "interrupt",
   "attend",
   "associated",
-  "patur",
-  "ultimately",
-  "truly",
   "ovadia",
+  "evaluate",
+  "required",
+  "attending",
+  "role",
   "ruling"
  ],
  "claims": [],
- "summary": "Rabbi Harari examines whether one should interrupt their Torah study to attend a Berit Milah or its associated Se'udah. He discusses the principle of HaOsek BaMitzvah Patur Min HaMitzvah and the specific status of Talmud Torah, ultimately suggesting that one should assess whether their presence is truly expected or if they can fulfill the mitzvah in other ways.",
+ "summary": "Rabbi Harari discusses whether one should interrupt their Torah study to attend a Berit Milah or its associated Se'udah. He examines the principle of HaOsek BaMitzvah Pato Min HaMitzvah and the specific status of Talmud Torah, citing authorities like Hacham Ovadia Yosef and Shevet HaLevi to help listeners evaluate when their presence is required.",
  "subjects": [
   "Talmud Torah",
   "Berit Milah",
-  "HaOsek BaMitzvah Patur Min HaMitzvah",
+  "HaOsek BaMitzvah Pato Min HaMitzvah",
   "Se'udah Shel Mitzvah",
   "Hacham Ovadia Yosef",
   "Shevet HaLevi",
@@ -73,8 +74,8 @@
   "Is it permitted to stop studying Torah to attend a Berit Milah?",
   "Does the principle of being exempt from other mitzvot while performing one apply to Torah study?",
   "What does it mean to be a Ben Adam Mehugan in the context of attending a celebration?",
-  "Is it considered a failure to miss a Se'udah Shel Mitzvah?",
-  "How should a student or a working person decide if their presence at a simcha is required?"
+  "Does the severity of missing a Se'udah Shel Mitzvah apply if there is already a minyan present?",
+  "How should a student or a Talmid Hacham balance their study schedule with social invitations?"
  ],
  "quality": "good",
  "terms": "mitzvah youre berit torah dont mila present gemara milah adam even study presence talmud thats might order perform angle should stop theres bnei class means mehuganim words another doesnt find first hacham involved mitzvot people person principle seudah shel situation speak yourself bet define foremost need never others reason specifically theyre time whats writes appropriate bamitzvah based case crowd engaged fact give hes kulano mihuganim minyan per question rabban simcha someone students though turn wont yeshiva yod able absence assess clear come comes dedicated eating elliot every felt giborim instead invited lashamayim listen masech masechet matter mehugan mentioned mesev mevatel mishnah old opportunity performed pesachim quotes rabbi referring several siman simple stopping studying talking theyd tinok together tosafot understand understanding vadya whether wouldnt yesh abraham achirim aleph amen angles attribute avinu baal beginning ben bnai cant certainly chacham claim cohen context day detail details determine easily elimud else entirely excommunicated exempted expected folk forth furthermore gathering generally greatest habura hachamim halakha halevi hamet hamitzvah haosek haoseq helik help high honest hotsaat individual irrespective kabod kala known later limudah loophole make makes marriage min minudeh miss mohel morning mukhraq nisuin noticed objectively opening orhot parashat part performance performing pesukim piecing poskim proof quoted rabbis rashi refers reshet result room sandak schedule seems sehid self set shamayim shav sheeenam sheelot sheenam shevet sheylo short son statement status still suggests support surrounded take talk tell told unless upon whos without wonderful years yoche yoreh yosef youll accepted according across actual add address addressed addresses adds adonai afkof agada aidea alike alimodo almost already although amit amongst amud amudal analyze annulled answer appears applies apply appreciate asherenu ashil asks asot assist authorities avalim avko avoid aware away baalim babies badah baruch basing basis batkohen bayit begins beraita bhabura bilado birayta biraytot birit bishluho bitzror bni book breakfast bring brings btalmid burial bzman call called calls came camp care caterer certain chalkenu change charge chasidim chavrutah child cites clean close comments community complicated conclude conclusion conflating constantly continues contradictory conversation cross dafkof daily david davka davkafeh davteta deas deasiman decide dedicate defeating depending depends derasha derech derives determinations didnt different differently directions discussed don eat effectively efshar either elie emerge emissaries enhance eno enough entering equal event everyone exempt explains extended extent eyes family famously far father filchot final following formative foundation friend fulfilling fundamentally fyot gemaah general gets getting gimah gimal gimala goes great grounds hachamin haidea haknasat hamadat handle happiness har harambam hard harsh haseba hashakut hasukah hayim hazeh heaven heavens hed helikdalid hell heres heret het himself hung ignoring ill immersed impossible including incumbent initially inviting involve ironically irrelevant ish issue iterate itself itsukhand jerk jerusalem kabot katan katana kav kavhe kegon kids knew knis knowledgeable kolel kotchil kshen kulam laasot lahakpit lalev layperson leaning leasot lech lecha leche left lehazmin lehimana lehosif leniency leodam leseudat lhosat lifamim limud lives lkohen look lord lseodat lumping maintained major makbit making man manamitzvah mar masseich masyachet matop matters meal meaning megila megillah meiri meleven member men menam menat mentions mentor message mezev michale midst mind mindset minudela minudinhen mishteh mishum misses moed morit mornings mshtatef mudvet musa mutbet mvatel mvatelim nashim necessarily necessity needs neglecting nicety nishmatam noah nonetheless number obligation olech omer omrim oseudat otherwise outcome palachi paper parenthetically participating paths pato patu patum pause pen perek phone places play pneach praying pretty probably pturin qualifications qualify quote rammah rather reality rebuke refined reggie reiterate related relationship relevant resh resolve respect respectful sadiq samecheh saying school seder seen send seodah seriously serura setting seven severe severity shakud shaltei sham sheen sheevshaleh shemayim shen sheoveret sheshakud sheshokit sheyavoh shii shilteh shiluhoi shiva shiyish show shter shura simply sitting sometimes sorts sounded sounds sources speaking speaks spite state stay staying stringency strong subway suggest suggestion suggestions sukkah susan table taking talks talmid talmide tavarampam teh tehi tells terms tet text therefore thought times tino top toshbot toshibot try trying type tzadik tzadikim tzukan udeh ulakhnasat vadeh vajah vamen varetz vdafka veenom veod vhu vision volume vyesh wanted ways wedding weeds weekly weeks went werent weve whatever whereas whole word working write wrong yabiyah yaffe yakol yavoh year yemenudeh yermin yerushalmi yeshlamah yiddish yitzhak yodalad yotet zayif zimnam zman",

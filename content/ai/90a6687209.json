@@ -1,81 +1,66 @@
 {
- "v": 5,
+ "v": 6,
  "id": "avi-harari:tag:soundcloud,2010:tracks/2440515357",
  "title": "\"Shnayim Mikra...\" - The Haftarah",
  "topic": "Halakha",
  "chapters": [
   {
    "at": 0,
-   "title": "Introduction to Shnayim Mikra and the Haftarah",
-   "about": "Definition of Shnayim Mikra and the question of Haftarah"
+   "title": "Introduction to Haftarah and Shnayim Mikra",
+   "about": "Introduction to the halakhot of Shnayim Mikra and the question of Haftarah."
   },
   {
    "at": 47,
-   "title": "Sources in the Rama and Mordechi",
-   "about": "Rama's view and the Mordechi's position"
-  },
-  {
-   "at": 97,
-   "title": "Shulhan Arukh and Holiday Readings",
-   "about": "Comparing weekly parasha to holiday readings"
+   "title": "Sources in Shulchan Aruch and Rama",
+   "about": "Examining Shulchan Aruch's silence on Haftarah and Rama citing the Mordechai and Terumat HaDeshen."
   },
   {
    "at": 155,
-   "title": "The Rationale of Rabbeinu Simcha and Rabbeinu Hananel",
-   "about": "Two approaches to the purpose of Shnayim Mikra"
-  },
-  {
-   "at": 297,
-   "title": "Applying the Rationale to Haftarah",
-   "about": "Connecting the dispute to the practice of reading Haftarah"
-  },
-  {
-   "at": 343,
-   "title": "The Magen Abraham and Modern Practice",
-   "about": "The role of the Maftir and current knis customs"
+   "title": "Rabbeinu Simcha and Rabbeinu Hananel",
+   "about": "Explaining the two approaches to Shnayim Mikra through Hagahot Maimoni and Hagahot Ashiri."
   },
   {
    "at": 447,
-   "title": "Conclusion on Halakha",
-   "about": "Final summary of the obligation and personal practice"
+   "title": "Current Practice and Rabbi Yosef Shalom Elyashiv",
+   "about": "Concluding halakhic status and Rabbi Elyashiv's ruling for contemporary times."
   }
  ],
  "unsupported": [
-  "differing",
-  "provided",
-  "require",
-  "current",
-  "make",
-  "applying",
-  "modern"
+  "requirement",
+  "custom",
+  "underlying",
+  "strict",
+  "halakhic",
+  "current"
  ],
- "claims": [],
- "summary": "Rabbi Harari discusses whether the practice of Shnayim Mikra ve'echad Targum includes reading the Haftarah. He examines the differing rationales provided by early authorities and explains why the Shulhan Arukh does not require it, noting that current practices in the knis often make the preparation unnecessary.",
+ "claims": [
+  "\"He explores the different underlying rationales of Rabbeinu Simcha and Rabbeinu Hananel regarding the purpose of the weekly reading.\" - The transcript attributes these rationales to the Gemara/early authorities via Hagahot Maimonie/Ashiri, not as the teacher's own exploration of the weekly reading's purpose in general, but specifically in the context of the Shulchan Aruch's ruling on holiday readings."
+ ],
+ "summary": "Rabbi Harari discusses whether there is a requirement or custom to read the Haftarah as part of Shnayim Mikra ve-Echad Targum, examining the sources in the Shulchan Aruch, Rama, and commentaries. He explores the different underlying rationales of Rabbeinu Simcha and Rabbeinu Hananel regarding the purpose of the weekly reading. He concludes that there is no strict halakhic obligation to read the Haftarah, though some have a custom to do so.",
  "subjects": [
-  "Shnayim Mikra ve'echad Targum",
-  "Shulhan Arukh",
+  "Shnayim Mikra ve-Echad Targum",
+  "Haftarah",
+  "Shulchan Aruch",
   "Rama",
-  "Mordechi",
   "Terumat HaDeshen",
+  "Mordechai",
   "Rabbeinu Simcha",
   "Rabbeinu Hananel",
-  "Magen Abraham",
-  "Rabbi Yosef Shalom Eliashiv",
-  "Haftarah",
-  "Maftir",
-  "Minhag"
+  "Magen Avraham",
+  "Rabbi Yosef Shalom Elyashiv",
+  "Minhat Hinukh"
  ],
  "questions": [
-  "Is it mandatory to read the Haftarah as part of Shnayim Mikra?",
-  "Why does the Shulhan Arukh not mention reading the Haftarah?",
-  "What is the difference between the approaches of Rabbeinu Simcha and Rabbeinu Hananel?",
-  "Does the practice of reading the Haftarah change if someone else is reading it in the knis?",
-  "Should I read the Haftarah even if it is not required?"
+  "Is there an obligation to read the Haftarah as part of Shnayim Mikra ve-Echad Targum?",
+  "What do the Shulchan Aruch and Rama say about reading the Haftarah?",
+  "How do the views of Rabbeinu Simcha and Rabbeinu Hananel differ regarding the purpose of Shnayim Mikra?",
+  "Does Magen Avraham require preparing the Haftarah for holidays and Shabbat?",
+  "What is the ruling of Rabbi Yosef Shalom Elyashiv regarding reading the Haftarah in modern times?"
  ],
- "quality": "good",
+ "quality": "poor",
  "terms": "reading haftarah read rabbeinu practice regards targum arukh holidays prepare according simcha dont should torah need parashat shohan whole abraham magin prepared shanaim whos mention part purpose thats cites even first haftarot mikra mikrave minhag preparation rama shabbat whats words congregation echad forth hananel holiday knis likrot means mikravei reason shanai shulchan understand youre age approach argument aruch book day end engaged foremost gemara hagahot hananil hatargum hes matter mordechi person rationale sefer shnai siman terumat theres todays upon writes yosef amen asked authority baal backward beautiful best beyond coming commentary contrast different distinguish excuse fact find finish following great hadesh haftara haish halakha halakhot hand hasibur hopefully individual knowledge known koreh language large lhashlim maftir maimonie necessary nod normal people pesukim portion preparing prior quoting rabbi ramah rav resh shulhan someone step theyre though time tob translate understanding uphold week weekly widespread year yom youll zarich accepted adhering adonai agrees aliyah aliyat always answer approaches appropriate arent argues ashare ashiri ashkenazic ashrei authorities back baer baruch based basing basis bears became begin beginning beit bera berakhot bet bir bishvil bizmanenu breakfast bring case certainly check chensarich chiyuv cited class come commentators continues contradiction conversation daasrichu daphhet david days dealing decide dedicated disagree discrepancy discussed dispute don dust early echa elf eliashiv emoor ended entirely entirety every everyone explained explaining explains explicitly far faraj fashion finishing firstly follows friend fundamentally generation german goes good hacham hadeshon hahavtara hahftarot hakadosh hakol hamishach hananei hanhagot hard hayinu hazan hear helik heres hetev himself hinei homsheh idea ikar important interestingly jive kapkimal kedesh key kimo kiriata kness kola kole korei kris kula laashlim late later leatzmo leave leaves leodam lkrot logic made mahader mandatory masech matzibor medieval mehader mentioned merosh might mikraf mikrah minhaag minhat minutes mishna mitzvah moments mornings naim navi necessity never news next nishma nonetheless notes nyisrael obligation often omission order otvav ourselves parasha parashiotav parashiyotav parashiyotavim parashot passages pehe peheh pekol perik pesach pesakim points properly rabbanan rabbinically reality recent ree referring regular relevant remember repeat result rishonim run saif sarich scholars search second separate set sets settles several shalah shalom shana shanae shanaimikra shashaliyah sheosin sibur simple situation smooth sof sounds special statement suggestion suggests sukkot take taking talked talmud tarkum tatur tavar terms throughout times tov transfers translation trusty truth turn understands vayeseh vayishlach vchen veamen veatzof veechad walk weeks weve whether without word wouldnt write yashif yashiv yikra yod zayin",
  "words": 1849,
  "language": "English",
  "made": "2026-11-20",
- "by": "groq whisper + gemini-3.1-flash-lite"
+ "by": "groq whisper + gemini-3.5-flash-lite"
 }

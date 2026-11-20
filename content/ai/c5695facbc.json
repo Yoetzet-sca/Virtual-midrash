@@ -1,68 +1,71 @@
 {
- "v": 7,
+ "v": 8,
  "id": "yt:VBOFInbqJU8",
  "title": "SCA Minhag of the Week 308: \"Why Tehilim 67 is in the Shape of a Menorah\"",
  "topic": "Minhag of the Week",
  "chapters": [
   {
    "at": 6,
-   "title": "Introduction to the Menorah Tehillim",
-   "about": "Finding the menorah image in Siddurim and synagogue walls"
+   "title": "Introduction to the Menorah image",
+   "about": "Siddurim and synagogue wall displays"
   },
   {
    "at": 53,
-   "title": "Structure of Psalm 67",
-   "about": "Word count, verses, and the header pasuk"
+   "title": "Structure of Tehillim 67",
+   "about": "Verses, word count, and menorah format"
   },
   {
    "at": 99,
-   "title": "David HaMelekh and the Tradition",
-   "about": "How David HaMelekh used it on his shield in battle"
+   "title": "David HaMelekh and the shield",
+   "about": "Historical origin and battle protection"
   },
   {
    "at": 200,
-   "title": "The Connection to Bet HaMikdash",
-   "about": "Abudraham on reciting the Mizmor like lighting the menorah"
+   "title": "The Abudraham and the Bet HaMikdash",
+   "about": "Recitation as lighting the menorah"
   },
   {
    "at": 249,
-   "title": "Proper Way to Read It",
-   "about": "Holding the menorah upright without turning it"
+   "title": "Proper reading technique",
+   "about": "Keeping the image upright"
   },
   {
    "at": 297,
-   "title": "Protection and Concentration",
-   "about": "Views of Hakhamim, Chida, and Ben Ish Hai on protection"
+   "title": "Protection and Hakhamim",
+   "about": "Views of Chida and Ben Ish Hai"
   }
  ],
  "unsupported": [
-  "history",
+  "significance",
+  "practice",
+  "found",
+  "historical",
+  "position",
   "role",
-  "prevalence",
-  "structure"
+  "spiritual",
+  "structure",
+  "technique"
  ],
  "claims": [],
- "summary": "This class explores the custom of reciting Tehillim chapter 67 in the shape of a menorah before Baruch Shemar. It discusses the history of this tradition from David HaMelekh and Abudraham, its role as a form of protection, and its prevalence in Sephardic communities.",
+ "summary": "This class explores the significance of reciting Tehillim 67 in the shape of a menorah, a practice found in many Siddurim and synagogues. It examines the historical connection to David HaMelekh, the importance of reading it in an upright position, and its role as a source of protection and spiritual focus within Sephardic tradition.",
  "subjects": [
-  "Tehillim",
-  "Menorah",
+  "Tehillim 67",
+  "Menorah shape",
   "David HaMelekh",
   "Abudraham",
   "Bet HaMikdash",
-  "Hakhamim",
+  "Baruch Shemar",
   "Chida",
   "Ben Ish Hai",
   "Shevet Musar",
   "Rabbi Eliyahu Cohen",
-  "Rabbi Yitzhak Cohen",
-  "Sephardic synagogue"
+  "Sephardic tradition"
  ],
  "questions": [
-  "Why is Tehillim chapter 67 printed in the shape of a menorah?",
-  "How does reciting this Mizmor connect to the Bet HaMikdash?",
-  "What is the proper way to hold and read the menorah text?",
-  "How did David HaMelekh use this Psalm?",
-  "How was this custom practiced in Aleppo and other Sephardic communities?"
+  "Why is Tehillim 67 written in the shape of a menorah?",
+  "How should one properly hold the menorah image while reciting the Mizmor?",
+  "What is the spiritual significance of reciting this Mizmor?",
+  "Is this practice considered a legitimate Sephardic custom?"
  ],
  "quality": "good",
  "terms": "menorah mizmor synagogue david format hamelekh sephardic words hashem people properly psalm read seven tradition upright youre bet book concentrate hakhamim importance musar person therefore whether abudraham according back baruch battles bunch called cohen custom day envisioned even four hamikdash imbued lighting main pesukim proper protects rabbi reciting shape shemar shevet siddurim spain sunrise syria talks thats top used went whats win within youll 14th able adab aleppo ancient arabic around arranged aseha ashkenazi automatically battle beautiful became become beginning beloved ben bottom candelabra care century chapter chida classrooms communities concentration connection continued definitely difference different distinguish dont early egypt eliyahu ethics every extinguishing extra fighting flipping focus form give goes greater greece hai hanging hashems header held help helped hes hocus image including iraq ish israel issue itself izmir keep knew knise lands large learn lebanon lights looking made make merit midrash morning name nonsense number oil open others page paper parchment places pocus possibly praying prior problem protected protection pull reading real reason recites sanctuary saw saying set shield showed shows siddur slowly smaller spilling staff stand success superstitions take taking talking tehilim tell theyll throughout time times translated turkey turn verses walk walking wall walls ways whatever wonderful writes written wrote yitzhak בנגינות לנצח מזמור פסוק",
@@ -70,5 +73,5 @@
  "language": "",
  "speaker": "",
  "made": "2026-11-20",
- "by": "gemini (video) + gemini-3.5-flash-lite"
+ "by": "gemini (video) + gemini-3.1-flash-lite"
 }

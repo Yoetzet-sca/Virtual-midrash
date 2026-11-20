@@ -1,81 +1,69 @@
 {
- "v": 5,
+ "v": 6,
  "id": "avi-harari:tag:soundcloud,2010:tracks/2438655951",
  "title": "VaYesse: Living With The Tension",
  "topic": "Parasha",
  "chapters": [
   {
    "at": 0,
-   "title": "Living with life's tensions",
-   "about": "Accepting the unexpected and the governance of Hashem"
+   "title": "Living with life's tensions and unexpected events",
+   "about": "tension, HaKadosh Baruch Hu, unexpected events, trust"
   },
   {
    "at": 50,
-   "title": "The name Yisrael and the struggle",
-   "about": "Defining Jewish identity through struggle and Bitachon"
+   "title": "The name Yisrael and human struggle",
+   "about": "Parashat Vayese, Parashat Vayishlah, Yisrael, bitachon, Derech Hashem"
   },
   {
    "at": 101,
-   "title": "The Midrash of the stones",
-   "about": "Rashi on Ya'akov's stones at Har HaMoriah"
+   "title": "The Midrash of the stones at Har HaMoriah",
+   "about": "Midrash, Rashi, Har HaMoriah, Yaakov Avinu, stones"
   },
   {
    "at": 154,
-   "title": "Competing values and ideals",
-   "about": "Rabbi Yehuda Amital's perspective on life's tugs"
-  },
-  {
-   "at": 210,
-   "title": "Decision making and complexity",
-   "about": "Balancing family, livelihood, and Talmud Torah"
+   "title": "Rabbi Yehuda Amital's teaching on competing values",
+   "about": "Rabbi Yehuda Amital, Yeshivat HaRessyon, values, family, Talmud Torah, livelihood"
   },
   {
    "at": 260,
-   "title": "Unifying the stones",
-   "about": "Turning competing values into a single path"
-  },
-  {
-   "at": 321,
-   "title": "Leaning into the tension",
-   "about": "Humility and accepting the inability to explain everything"
+   "title": "Turning competing values into a unified Torah life",
+   "about": "Torah misvot, multifaceted Jew, overarching perspective"
   }
  ],
  "unsupported": [
-  "concept",
-  "drawing",
-  "experiences",
-  "placed",
-  "illustrate",
-  "unified",
-  "making",
-  "unifying"
+  "events",
+  "connecting",
+  "applied",
+  "ultimately",
+  "unified"
  ],
- "claims": [
-  "drawing from the experiences of Ya'akov Avinu in Parashat Vayesse - The teacher explicitly states the Midrash is from the beginning of Parashat Vayesev, not Vayesse.",
-  "a commitment to the Torah - The transcript mentions trust in Hashem and living of Derech HaTorah, but does not state that competing values are unified through a commitment to the Torah."
- ],
- "summary": "Rabbi Harari discusses the concept of living with tension in life, drawing from the experiences of Ya'akov Avinu in Parashat Vayesse. He explores a Midrash regarding the stones Ya'akov placed under his head to illustrate how competing values and life circumstances can be unified through trust in Hashem and a commitment to the Torah.",
+ "claims": [],
+ "summary": "Rabbi Harari explains that Jews live with the tension of unexpected events and unanswered questions, connecting this to the name Yisrael and to Yaakov Avinu at Har HaMoriah. He discusses a Midrash quoted by Rashi about stones fighting over Yaakov Avinu's head, explaining how Rabbi Yehuda Amital applied this to the competing values and decisions in human life. Ultimately, living with tension means leaning into it with trust in Hashem and an overarching commitment to Torah and misvot.",
  "subjects": [
-  "Parashat Vayesse",
-  "Ya'akov Avinu",
-  "Midrash",
-  "Rashi",
-  "Har HaMoriah",
-  "Bitachon",
+  "Parashat Vayese",
+  "Parashat Vayishlah",
+  "Yisrael",
+  "HaKadosh Baruch Hu",
   "Derech Hashem",
+  "Bitachon",
+  "Derech HaTorah",
+  "Har HaMoriah",
+  "Rashi",
   "Rabbi Yehuda Amital",
-  "Torah Mitzvot"
+  "Yeshivat HaRessyon",
+  "Yaakov Avinu"
  ],
  "questions": [
-  "How should we handle the tension between our expectations and reality?",
-  "What does the Midrash about Ya'akov's stones teach us about life's challenges?",
-  "How can we balance competing values like family, work, and Torah study?",
-  "Why is tension considered a natural part of being a Jew?"
+  "How should a Jew deal with unexpected events and lack of answers in life?",
+  "What is the connection between the name Yisrael and living with tension?",
+  "How does Rashi explain the stones at Har HaMoriah when Yaakov Avinu rests his head?",
+  "How did Rabbi Yehuda Amital explain the Midrash of the quarreling stones?",
+  "How do competing values like family, community, Talmud Torah, and livelihood create tension in daily life?"
  ],
- "quality": "poor",
+ "quality": "good",
  "terms": "tension live tensions values life make rocks stones certain describes happened midrash stone theres yaakov baruch decision dedicated every head moment moments rabbis simple torah understanding another cant committed defines direction even father ideals living parashat perspective rashi realizing single situations time tug turn used vies accepting amen answer assume broader derech different difficult dont explanation family felt give hakadosh human humility instead lean leaning makom means name never often opposed predict realize regards remind sense speaking speaks tense thats times together vayikach wanted words yisrael able accept add adonai afterwards amital amongst anxiety appears ashesa assists assumed attention avinu awakens away become beginning believers ben bitachon breakfast circumstances cited class come coming commitment competing complex conscious decipher dedicate defining depth describe determine develop doubt earning easier energies entails envisioning exist explain explaining explains eyes familiar famous feat features fight fighting find full governance hamisvot hamoriah hanati happen happens har hard haressyon hashem hatorah hayim hus imagined individuals initially insurmountable interpretation jew jews kadosh knis larger leilui leodam lies lived livelihood lives maaminim made maintains mandate meavneha meraashotav merit might miraculous mitzvot mornings mountain multifaceted next nishmat nishmatos occasion ones overarching overcome part past pasuk path people persons pesukim picks piecing predictable proper protagonist protect put quarrel quarreling quotes rabbi rabitzror realization realizes reasoning receives reminded righteous sarita saying seems short shouldnt sir solution somehow someone sometimes spoke state stay story straightforward struggle suggestion taevin take takes taking talmud task telling tells terms theyre thought took trust truth tugging tugs turning understand unexpected vayeseh vayesev vayishlah veamen vying week weeks whats whereas wont world yehuda yeshivat zehut",
  "words": 1153,
  "language": "English",
  "made": "2026-11-20",
- "by": "groq whisper + gemini-3.1-flash-lite"
+ "by": "groq whisper + gemini-3.5-flash-lite"
 }

@@ -1,69 +1,74 @@
 {
- "v": 7,
+ "v": 8,
  "id": "yt:YfyAY4YIL6E",
  "title": "SCA Minhag of the Week 309: \"The Arayat\"",
  "topic": "Minhag of the Week",
  "chapters": [
   {
    "at": 6,
-   "title": "Torah study during Shiva by Hahamim",
-   "about": "Shiva Torah study, Hahamim, stipend, Qiraya, Zohar, Tehillim"
+   "title": "The practice of Qirayat during Shiva",
+   "about": "Hiring Hahamim to read Zohar and Tehillim for the Neshama"
   },
   {
    "at": 81,
-   "title": "Books of the Idra and Tehillim",
-   "about": "Idra Rabba, Idra Zuta, Hadrat Zekenim, Yerushalayim"
+   "title": "Historical books and texts used",
+   "about": "Idra Rabba, Idra Zuta, and historical editions of Zohar and Tehillim"
   },
   {
    "at": 152,
-   "title": "The end of the week Qirayat and Beit Evel",
-   "about": "Qirayat, Minha, Arbit, Derushim, meat dinner, Beit Evel"
+   "title": "The conclusion of the week",
+   "about": "Gatherings with Minha, Arbit, Derashot, and meals in the Beit Evel"
   },
   {
    "at": 221,
-   "title": "Transition to Tehillim and focus on Divre Torah",
-   "about": "Tehillim, Zohar, old timers, Divre Torah"
+   "title": "Evolution of the custom",
+   "about": "Transition from Zohar to Tehillim and the focus on Divre Torah"
   },
   {
    "at": 285,
-   "title": "Speeches by Hahamim and elevating the soul",
-   "about": "Divre Musar, Torah and Mitzvot, elevating the soul"
+   "title": "Purpose of the speeches",
+   "about": "Divre Musar and encouraging Torah and Mitzvot"
   },
   {
    "at": 348,
-   "title": "Timing of the final gathering and conclusion",
-   "about": "Friday, Shabbat, Thursday, 11 months, Tenuhamu min hashamayim"
+   "title": "Timing and scheduling",
+   "about": "When the Qirayat and Derushim occur during the mourning period"
   }
  ],
  "unsupported": [
+  "traditional",
+  "hired",
   "daily",
-  "known",
-  "transition",
+  "meals",
+  "practice",
+  "evolved",
+  "historical",
+  "texts",
+  "evolution",
+  "purpose",
   "timing",
-  "gathering"
+  "scheduling"
  ],
  "claims": [],
- "summary": "This class explains the custom of having impoverished Hahamim study Zohar and Tehillim during the Shiva to elevate the Neshama of the deceased. It covers the daily reading, known as Qiraya or Qirayat, the final day of the week with speeches and a meat dinner in the Beit Evel, and the transition over time to reading Tehillim.",
+ "summary": "This class explains the traditional custom of Qirayat, where Hahamim were hired to read the Zohar or Tehillim in the house of mourners during the Shiva period to elevate the soul of the deceased. It details how these daily readings concluded at the end of the week with Divre Torah and meals, and how the practice has evolved over time.",
  "subjects": [
   "Shiva",
+  "Qirayat",
   "Hahamim",
   "Zohar",
   "Tehillim",
-  "Idra",
   "Idra Rabba",
   "Idra Zuta",
-  "Hadrat Zekenim",
-  "Minha",
-  "Arbit",
-  "Beit Evel",
-  "Divre Torah"
+  "Divre Torah",
+  "Divre Musar",
+  "Neshama"
  ],
  "questions": [
-  "Who studied Torah in the house of the mourners during the Shiva?",
-  "What books were traditionally read during the Shiva?",
-  "What happened at the culmination of each day's Qiraya at the end of the week?",
-  "Why did Tehillim eventually replace the Zohar in many circles?",
-  "When was the final day's gathering held if the sixth day fell on Shabbat?"
+  "What is the meaning of Qirayat in the context of mourning?",
+  "Why were Hahamim hired to read in the house of mourners?",
+  "What texts were traditionally read during the Shiva period?",
+  "How did the practice of Qirayat conclude at the end of the week?",
+  "Why did the custom shift from reading the Zohar to reading Tehillim?"
  ],
  "quality": "good",
  "terms": "day reading done end torah come hahamim people read books qirayat tehillim divre idra week zohar elevate mourners neshama old shabbat back deceased house knew later plural qiraya shiva sixth soul speeches still studying timers understood wasnt werent words 1900s actual always arabic around bringing couldnt derushim didnt donated early factor family give given happen help helping lunch make mitzvot month mourning niftar outside period published thats themselves together unless usually 12th 1800s 1930s 40s 67th accessible anymore arbit arent attend attending attributes available basis became beezrat begin beit breakfast bring busy carefully centuries circles comeback comfort coming commonly conclude congregate console continue conveniences cook culminates culmination custom days derashot derush difference diligently dinner earlier easily elapsed emulate encourage evel faithfully far fell find followed friday generally giving grandfather grandmother great hadrat hall hand hang haniftar happy hashamayim hashem heart hebrew imagine impoverished information insist instead involved job kenis keriah knowing learn leaving leilui lifestyles light listen loved main mainly major meaning meat members min minha months motzaei mourner moved musar need nifteret nishmat norm normal occasions others otherwise point positive practically prior pronounce properly pushed qirayas rabba raise rather readily refer remember rising sake seven seventh shaare since sometimes start stipend street studied talk tenuhamu throughout thursday time timely understand understanding upper use used welcomed wide work wouldnt year yerushalayim youd zekenim zion zuta",
@@ -71,5 +76,5 @@
  "language": "",
  "speaker": "",
  "made": "2026-11-20",
- "by": "gemini (video) + gemini-3.5-flash-lite"
+ "by": "gemini (video) + gemini-3.1-flash-lite"
 }

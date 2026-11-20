@@ -1,83 +1,85 @@
 {
- "v": 5,
+ "v": 6,
  "id": "richard-hidary:8b68d106-e204-47d5-afa3-406d613b305f",
  "title": "Arakhin 8 - Seven Eleven: Counting Niddah and Zavah Periods",
- "topic": "Mishna",
+ "topic": "Gemara",
  "chapters": [
   {
    "at": 0,
-   "title": "Payment of multiple valuation vows",
-   "about": "Rami Me'ed and Hachamim on paying valuation vows with limited funds"
+   "title": "Fulfilling multiple valuation vows",
+   "about": "Rami Me'ed, Hachamim, paying vows with limited funds"
   },
   {
-   "at": 388,
+   "at": 397,
    "title": "Simultaneous valuation vows",
-   "about": "Rav Adha Barahava's question on simultaneous vows"
+   "about": "Rav Adha Barahava, simultaneous vows, unanswered question"
   },
   {
    "at": 443,
-   "title": "Limits of valuation payments",
-   "about": "Clarifying the minimum and maximum payment amounts"
+   "title": "Minimum and maximum payments",
+   "about": "Mishna repetition, Halakha like Hachamim"
   },
   {
    "at": 495,
-   "title": "Niddah and Zavah cycles",
-   "about": "Biblical laws of Niddah and Zavah and their stringencies"
+   "title": "Nida and Zavah periods",
+   "about": "Biblical law, Nida, Zavah, clean days"
   },
   {
    "at": 884,
-   "title": "Uncertainty in counting cycles",
-   "about": "Calculating the reset period for a woman unsure of her status"
+   "title": "Uncertainty in counting days",
+   "about": "Resetting the count, worst-case scenarios, 17 days"
+  },
+  {
+   "at": 1588,
+   "title": "Refining the counting process",
+   "about": "Rav Adab Arava, Rabah, waiting seven clean days"
   },
   {
    "at": 1685,
    "title": "Korban requirements for uncertain status",
-   "about": "When a woman must bring a Korban for uncertain Zavah status"
+   "about": "Zavah Gedolah, bringing a Korban, eating the Korban"
   },
   {
-   "at": 1987,
-   "title": "Quarantine periods for sara'at",
-   "about": "Minimum and maximum quarantine times for skin and house afflictions"
+   "at": 1973,
+   "title": "Quarantine periods for leprous marks",
+   "about": "Sada'at, house, clothing, skin, one to three weeks"
   },
   {
    "at": 2072,
-   "title": "Midrash on Tehillim",
-   "about": "Interpretation of Hashem's judgment and benevolence"
+   "title": "Interpreting Tehilim on judgment and mercy",
+   "about": "Raba, Rav Yehuda, 13 middot rachamim, scales of judgment"
   }
  ],
  "unsupported": [
-  "limited",
-  "funds",
-  "rules",
+  "specific",
+  "timeframes",
   "determining",
+  "halakhic",
   "multiple",
-  "limits"
+  "refining"
  ],
- "claims": [
-  "'The class concludes by examining the minimum and maximum quarantine periods for sara'at afflictions' - The transcript does not mention 'quarantine' periods, but rather refers to the time a Kohen takes to decide if something is Tameh or Tahor.",
-  "'explores a Midrashic interpretation of a verse from Tehillim regarding Hashem's judgment and benevolence' - The transcript identifies the verse as being from Tehillim, but the teacher explicitly states that the interpretation is a 'Midrash' and then discusses the 'Peshat' (plain meaning) and the debate between Raba and Rav Yehuda regarding the verse's meaning, rather than just exploring a single Midrashic interpretation."
- ],
- "summary": "Rabbi Hidary discusses the Mishnaic laws regarding the payment of valuation vows when a person has limited funds, as well as the rules for determining the status of a woman who is unsure of her Niddah or Zavah cycle. The class concludes by examining the minimum and maximum quarantine periods for sara'at afflictions and explores a Midrashic interpretation of a verse from Tehillim regarding Hashem's judgment and benevolence.",
+ "claims": [],
+ "summary": "Rabbi Hidary examines the Mishnaic laws regarding the valuation of vows and the specific timeframes for determining Nida and Zavah status. He also explores the halakhic quarantine periods for leprous marks and concludes with a discussion on the interpretation of Tehilim regarding Hashem's judgment and mercy.",
  "subjects": [
   "Arakhin",
   "Erech vows",
-  "Niddah",
+  "Nida",
   "Zavah",
-  "Sara'at",
-  "Bet HaMikdash",
+  "Zavah Gedolah",
   "Korban",
-  "Tehillim",
-  "Middot Rachamim",
-  "Halakha"
+  "Leprous marks",
+  "Sada'at",
+  "Tehilim",
+  "13 middot rachamim"
  ],
  "questions": [
-  "If a person makes multiple valuation vows but cannot afford to pay them all, how should the payments be prioritized?",
-  "How does a woman determine her status if she has lost track of her Niddah and Zavah cycles?",
-  "Why does the Mishna repeat the minimum and maximum payment amounts for valuation vows?",
-  "What are the minimum and maximum quarantine periods for different types of sara'at?",
-  "How do the different opinions in the Gemara explain the relationship between Hashem's judgment and His benevolence?"
+  "How does one fulfill multiple valuation vows when one has limited funds?",
+  "How does a woman determine her status when she is unsure if she is in a Nida or Zavah period?",
+  "Why does the Mishna repeat the minimum and maximum payment amounts?",
+  "What are the minimum and maximum quarantine periods for leprous marks?",
+  "How do the different interpretations of Hashem's judgment and mercy relate to the 13 middot rachamim?"
  ],
- "quality": "poor",
+ "quality": "good",
  "terms": "days zavah day nida seven blood thats first saw vow three wait case clean period row second eleven shes sees five time worst doesnt four next therefore even sure nidah end scenario bring fulfill hashem means pay still gedolah korban money woman gives however kolban person selah theres till waiting whatever altogether deep gave left rabbi weeks back goes less nine order rav since sins twelve become bleeds cases eaten fulfills gets give high maximum might mishnah scale tameh week zavot benevolence bleeding cannot cycle eight great husband judgment leaves matter obligation pachot pitcha should true waits zava according afford away becomes better dont either elazar gemara good house knows kol last least long make makes may mikveh nothing permitted rebi shed six tahor tamer ten whether within words yater ziva amar asad benevolent braita definitely figure hachamim leniency mishna need pays quarantine raba shell shivah skin someone stops stringency takes teaches technically thirteen upon women yamim zavai alright always amount another arki asar banan brings calendar certain coins come count different ends entire example except explains hair half hand hanina help hes iti judgments language lean lifts marks meaning meed merciful mibiot mistake mountain mountains normal obligated pasuk persons pitra possibly previous punishment question rabah raiti rami rebim regarding sadaat saying scenarios seeing sela shemona side split start stringencies tahod take tamera today took towards unlike unsure velo whats whole yehuda yoseb achat adab adha advantage affliction afterwards alay although arava asara ask asks assume ataot azad backwards bad barahava beginning best bidana bleed borrowed categories chamisha chamishim chayseid coin comes confused consider correlate cycles decide deleka demerits didnt difference diyaheb echad eirech eleventh embedded equal erech every everybody exactly fact falga fifth finishes forgot full furthermore gedola haiti halakha happened happens hator hayu heavy hopefully ika important kinds kohen ladishona laws leave lehai leniencies merits midrash mipitcha neechal needs never nigraei nowadays number obviously opinion opinions papa parallel passed paying payment people petach plain plus point possibility problem process pushes rather repeats reset rest seraim seventh shavuot shem shisha similar sixth status stay strict sufficient tarteo tehorah tell test themselves theyre thinking third though throwing total try upitcha valuation vau veneechal vows wants went whereas wouldnt yet youre zero 10th 11th 12th 9th able actions adabar adam adap adav adds adonai afflictions against ages ahai ahat ahava ahead alai albaayamim amal amale amarav amen amim amod amraba analyzing anida answer application apply arakhin arguing around assuming attaches atu automatically avad avyudah azar baalakhin baalhov baasar bae bah balashiniyya bannegaim baruch batim batoah bdiribi bebat begins bet biblical bidi biot bmay bmayketiv borrower borrowers bracket call called came cant certainly chachamim chamesh chazar checks chet chutz chuz circumstances claims clarify clarifying clearly clothing complicated conclusion confusing considered couldnt court daf dam definitively deitmar deolam depending deserves designates dikra directions disagrees discharge disease distinguish doctor doesn dola don done eat echa eel ela elazav elu enu equivalent esit everyone exact explain explained external extract far fifteen figured fills find finding finished follow following follows fourteen fulfilled gaba gender gerdola given glance gods gone haatu hadadeh halakhot hamesh hamikdash harshly hashems hatot havyudah hayater healing helps heres herself hides highest human ida idea imal including inside interpret interpretation interprets invalid isnt judge kamashmalan kamipalge kamrinan kareel katecha keep kehar ker ketana key kivandevat knew knowing kohanim lama lamali lashiniya later law lead leant leaving lefne leletakuna lender leprosy leprous lifting likul logical look looks low lrishonayasa machloket made mahu making male man mark masechet mashegaba mbiot meir menstruates meuchad middot minimum misafik miselah mishaabad mishavua mishpatecha mispatechet misselah mistaken misvah mitigating mix mpilcha myself nadar name necessarily nedir nehda nervous nevenechal nice nigeibatim nigeieadam numbers old opposed opposite opposites originally outstanding overlap paid part parts pass past pattern payments pchus periods pertach peshat peshatet pitah pitchar poor possessions prefer prohibited punished pure purification pushing rab rabanan rabbanan rabbinans rachamim rapas ready reason rebih rebimeir recognizes refer referring rely remember repaid require requires restart result rule saraat seem seems sele sense separates serious seventeen shaasar shalim shall shamedah shavua shayamim shebiot shekadam shelo sheloshah shene shenei sheva shiba shibha shilo shilosha shiloshah shitehen shiva shivaa short shorter shusing sidkat simply simultaneous simultaneously single situation somehow sometimes somewhere started stayed step stop straight stringent subcategory submit summarized surely tafsan taking talking tamay tamed tamei taod teach tehilim tehom tenodah tenor tenorah thereby thoughts throws times timneshi tipping tishaah toah together tot tried tudetle twice type tzedek ufitra unanswered understand unpacking ustama valid valuations value vamash vamen various vechad veeno vegaba veno vnatan vnonechal vtishtereh waited wall wanted weve whenever win without withstand wondering worlds worry wrong yadu yahev year yedeh yom yuchal zavad zavagir zivah",
  "words": 7063,
  "language": "English",
