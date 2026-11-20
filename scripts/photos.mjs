@@ -12,14 +12,20 @@ const file = new URL('public/data/app.json', root);
 const data = JSON.parse(await readFile(file, 'utf8'));
 const dir = new URL('public/people/', root);
 await mkdir(dir, { recursive: true });
-// Square, cropped around the most face-like part of the picture rather than its dead centre.
-const square = (bytes, px) => sharp(bytes, { animated: false, failOn: 'none' }).rotate().resize(px, px, { fit: 'cover', position: sharp.strategy.attention }).jpeg({ quality: 78, mozjpeg: true }).toBuffer();
+// Square. A tall picture keeps its top, where the head is; a wide one keeps its middle. (An automatic "find the
+// interesting part" crop was tried first and too often chose a shirt or a tie over the face.)
+async function square(bytes, px) {
+  const img = sharp(bytes, { animated: false, failOn: 'none' }).rotate();
+  const { width = 1, height = 1, orientation = 1 } = await sharp(bytes, { failOn: 'none' }).metadata();
+  const tall = orientation >= 5 ? width > height : height > width; // a sideways-stored photo has its sides swapped
+  return img.resize(px, px, { fit: 'cover', position: tall ? 'top' : 'centre' }).jpeg({ quality: 78, mozjpeg: true }).toBuffer();
+}
 let made = 0, reused = 0, failed = 0;
 const todo = data.teachers.filter((t) => /^https:\/\/sca-platform\.s3\.amazonaws\.com\//.test(t.photo));
 await Promise.all(Array.from({ length: 6 }, async () => {
   for (let t; (t = todo.pop());) {
     const key = createHash('sha1').update(t.photo).digest('hex').slice(0, 12);
-    const small = new URL(`${key}-s.jpg`, dir), medium = new URL(`${key}-m.jpg`, dir);
+    const small = new URL(`${key}-s2.jpg`, dir), medium = new URL(`${key}-m2.jpg`, dir);
     try {
       if (!existsSync(small) || !existsSync(medium)) {
         const res = await fetch(t.photo, { signal: AbortSignal.timeout(30000) });
@@ -29,7 +35,7 @@ await Promise.all(Array.from({ length: 6 }, async () => {
         await writeFile(small, await square(bytes, 160));
         made++;
       } else reused++;
-      t.photo = `./people/${key}-m.jpg`; t.photoSmall = `./people/${key}-s.jpg`;
+      t.photo = `./people/${key}-m2.jpg`; t.photoSmall = `./people/${key}-s2.jpg`;
     } catch (e) { failed++; console.log(`  ! photo for ${t.name}: ${e.message.split('\n')[0]}`); }
   }
 }));
