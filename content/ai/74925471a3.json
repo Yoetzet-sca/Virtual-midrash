@@ -1,69 +1,70 @@
 {
- "v": 7,
+ "v": 8,
  "id": "yt:rzLqdmZzPfs",
  "title": "SCA Minhag of the Week 307: \"How Many Haqafot on Simhat Torah\"",
  "topic": "Minhag of the Week",
  "chapters": [
   {
    "at": 6,
-   "title": "Overview of Hakafot and Historical Origins",
-   "about": "number of hakafot, dancing with the Sefer Torah, and Mekubalim from Safed"
+   "title": "Introduction to Hakafot and World Customs",
+   "about": "Simhat Torah hakafot, dancing around the tebah, and different community customs around the world."
   },
   {
    "at": 91,
-   "title": "Transmission to Aleppo",
-   "about": "Ari, Rabbi Chaim Vital, and Rabbi Chaim Cohen"
+   "title": "Origins and the Aleppo Transmission",
+   "about": "Mekubalim of Safed, Rabbi Chaim Vital, and Rabbi Chaim Cohen of Aram Soba."
   },
   {
    "at": 144,
-   "title": "The Aleppo Minhag and Kneset Kbirah",
-   "about": "seven sets of seven hakafot, Shemini Atzeret, and Kneset Kbirah in Halab"
+   "title": "The Aleppo Minhag of Seven Sets",
+   "about": "Seven sets of seven hakafot, Kneset Kbirah in Aleppo, and the schedule across Shemini Atzeret and Simhat Torah."
   },
   {
    "at": 238,
-   "title": "Bet Nasi and Brooklyn Customs",
-   "about": "Bet Nasi synagogue and notes of Hacham Moshe Ashar in Brooklyn"
+   "title": "Bet Nasi and Brooklyn Vestiges",
+   "about": "Bet Nasi synagogue customs and Hacham Moshe Ashar's notes in Brooklyn."
   },
   {
    "at": 284,
-   "title": "Modern Practice in Local Synagogues",
-   "about": "Shaare Zion, Bet Torah, and timing of hakafot today"
+   "title": "Modern Practice in Community Synagogues",
+   "about": "Practices in Shaare Zion, Bet Torah, and early minyanim today."
+  },
+  {
+   "at": 334,
+   "title": "Conclusion",
+   "about": "Summary of Aleppo's unique seven sets compared to other communities."
   }
  ],
  "unsupported": [
   "history",
   "practice",
-  "unique",
+  "particular",
   "performing",
-  "speaker",
-  "local",
-  "divided",
-  "across",
-  "historical",
   "origins",
+  "local",
+  "conducted",
   "modern"
  ],
  "claims": [],
- "summary": "This class explores the history and practice of hakafot on Simchat Torah, focusing specifically on the unique custom in Aleppo of performing seven sets of seven hakafot. The speaker details how different communities and local synagogues, including the old synagogue in Halab and Bet Nasi, divided these joyous circles across the days of Shemini Atzeret and Simchat Torah.",
+ "summary": "This class explores the history and practice of hakafot on Simhat Torah, focusing in particular on the traditional custom in Aleppo of performing seven sets of hakafot. It discusses the origins of hakafot from the Mekubalim of Safed, the transmission of the custom through Rabbi Chaim Vital and Rabbi Chaim Cohen, and how various communities and local synagogues conducted these circles.",
  "subjects": [
-  "Simchat Torah",
+  "Simhat Torah",
   "Shemini Atzeret",
+  "Hakafot",
   "Sefer Torah",
-  "Mekubalim of Safed",
+  "Mekubalim",
+  "Ari",
   "Rabbi Chaim Vital",
   "Rabbi Chaim Cohen",
-  "Tur Bareket",
   "Kneset Kbirah",
-  "Yoab ben Seruya",
-  "Hacham Moshe Ashar",
-  "Shaare Zion",
-  "Bet Torah"
+  "Bet Nasi",
+  "Hacham Moshe Ashar"
  ],
  "questions": [
-  "How many hakafot are normally done on Simchat Torah?",
-  "Where did the custom of hakafot originate?",
-  "How many sets of hakafot were traditionally done in Aleppo?",
-  "Which synagogues in Brooklyn still maintain customs from Aleppo for hakafot?"
+  "How many times do different communities perform hakafot on Simhat Torah?",
+  "Where did the custom of hakafot originally come from?",
+  "How did the community in Aleppo perform seven sets of hakafot?",
+  "Which synagogues in Aleppo and Brooklyn preserved these specific customs?"
  ],
  "quality": "good",
  "terms": "torah simchat hakafot seven day morning night sefer times atzeret even shemini aleppo chaim days mincha rabbi around done first holiday musaf sets shacharit still today arbit became cohen communities community considered custom dance end halab known look tebah time total according afternoon aram bet dancing example growing hacham least main mainly mekubalim minhag old others prayed prayers regarding soba synagogue synagogues thats three twice vital writings 16th ajam already ari ashar back bahsita bareket began beginning ben better big brooklyn cairo came century circling clearly customs damascus definitely didnt different easily egypt embraced encircle enjoyed entire ever everybody exactly except exist existed five focus four generally germany halabi happiness hardly hechal historians holidays hundreds important incorporated instead joyousness kbirah kneset lemitzvot major make may means minhagim minyans moshe musae nasi neimot normally notes nothing order originally participates placed poland possible pray prayer prior provence put rejoiced remember safed season section seruya set shaare showing sing sometimes spain specifically student students surprise take taking talk theyll though till tishmeru tishrei tizku tovot tradition transmission tur utovot vestiges went world years yoab youre zion",

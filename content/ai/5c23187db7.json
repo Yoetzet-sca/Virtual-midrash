@@ -1,78 +1,77 @@
 {
- "v": 5,
+ "v": 6,
  "id": "avi-harari:tag:soundcloud,2010:tracks/2441730633",
- "title": "VaYesse: Turning Back Befote Facing Forward",
+ "title": "VaYesse: Turning Back Before Facing Forward",
  "topic": "Parasha",
  "chapters": [
   {
    "at": 0,
-   "title": "Rachel's crisis and Rashi's interpretation",
-   "about": "Rachel's barrenness and her challenging Yaakov to act like Yitzhak"
+   "title": "Rachel's crisis and Rashi's insight",
+   "about": "Rachel's struggle with barrenness and her challenge to Ya'akov"
   },
   {
    "at": 97,
-   "title": "Looking to the past in times of crisis",
-   "about": "Rachel's decision to bring Bilha and the importance of Masoret"
+   "title": "Learning from the past",
+   "about": "Rachel's decision-making process and looking to Sarah Imenu"
+  },
+  {
+   "at": 150,
+   "title": "The importance of Masoret",
+   "about": "Overcoming the tendency to view crises as unprecedented"
   },
   {
    "at": 200,
-   "title": "Moshe Rabbenu's instruction in Sefer Debarim",
-   "about": "Zechori Yemot Olam and asking parents for guidance"
+   "title": "Moshe's command in Sefer Debarim",
+   "about": "The instruction to ask parents and elders for guidance"
   },
   {
    "at": 295,
-   "title": "The nature of Torah study and transmission",
-   "about": "Learning as a received tradition rather than a vacuum"
+   "title": "The nature of Torah study",
+   "about": "Receiving and passing down tradition rather than learning in a vacuum"
   },
   {
    "at": 344,
-   "title": "Applying the lesson of Rachel to our lives",
-   "about": "Turning backward to parents and tradition before moving forward"
+   "title": "Applying the lesson",
+   "about": "Using Masoret to govern our decision-making in difficult times"
   }
  ],
  "unsupported": [
   "imenu",
   "navigated",
-  "predecessors",
-  "examples",
+  "personal",
+  "prioritize",
+  "wisdom",
   "rather",
   "entirely",
   "emphasizes",
   "importance",
-  "guidance",
-  "fundamental",
-  "approach",
-  "times",
-  "rabbenu",
-  "instruction",
-  "transmission",
-  "applying",
-  "lives"
+  "moving",
+  "insight",
+  "command",
+  "applying"
  ],
- "claims": [
-  "Moshe Rabbenu's instruction in Sefer Debarim - Moshe is mentioned speaking at the end of Sefer Devarim, but the transcript does not mention him giving instructions or instructions in Sefer Debarim beyond quoting verses"
- ],
- "summary": "Rabbi Harari explores how Rachel Imenu navigated her crisis of barrenness by looking to the past actions of her predecessors. He explains that in moments of difficulty, we should look to our Masoret and the examples of our parents rather than assuming our situations are entirely unique. The class emphasizes the importance of seeking guidance from previous generations as a fundamental approach to decision-making.",
+ "claims": [],
+ "summary": "Rabbi Harari explores how Rachel Imenu navigated her personal crisis by looking to the past and the actions of previous generations. He explains that in moments of difficulty, we should prioritize our Masoret and the wisdom of our ancestors rather than assuming our situations are entirely unprecedented. The class emphasizes the importance of turning backward to our family traditions before moving forward with our own decisions.",
  "subjects": [
   "Parashat Vayesse",
   "Rachel Imenu",
-  "Yaakov Abinu",
+  "Ya'akov Abinu",
   "Yitzhak Abinu",
+  "Rivka Imenu",
   "Sarah Imenu",
-  "Rashi",
   "Masoret",
+  "Rashi",
   "Sefer Debarim",
-  "Moshe Rabbenu",
-  "She'al Abicha"
+  "Moshe Rabbenu"
  ],
  "questions": [
-  "How did Rachel Imenu respond to the crisis of being barren?",
-  "Why does Rashi suggest Rachel was pointing Yaakov toward his parents' history?",
-  "What does it mean to look backward before facing forward in decision-making?",
-  "How does the Torah instruct us to learn from previous generations?",
-  "Why is it a mistake to assume our current crises are entirely unique?"
+  "How did Rachel Imenu handle her struggle with being barren?",
+  "Why does Rashi suggest Rachel was looking to Yitzhak and Rivka's past?",
+  "How should we approach decision-making during a personal crisis?",
+  "What does it mean to turn backward before facing forward?",
+  "How does the Torah view the transmission of wisdom from one generation to the next?"
  ],
- "quality": "poor",
+ "quality": "good",
  "terms": "rachel torah rashi yaakov look situation should based decision sarah children moments parents turns avicha crisis decide decisions moment speak yaakob amen bilha circumstances course determined didnt fact father immediately make masoret need never past pointedly references thats tradition abraham always analysis anxious arise audacious barren beyond crises deal decided describes determine dont envision explains family forward general generation hamishach hava humsheh instead instinct interpretation language lea learn libanecha libanim moshe pasuk people peshat practice rivka second sees sheal shes speaks statement study tells told truth unfortunately unique unprecedented vision writes yitzhak youll youre able actions adjust adonai advice akara aleha analyze ancestors anokhi anxiety asa ask assessing assume avot baachota backward barrenness baruch ben better binu birth birthed bitzror bnecha book books breakfast bring bringing call carefully certain challenge class coming communal context count current daunting dealt dedicated derive description descriptions determining devarim die difficulty earlier elu end envisioned even ever every everyones explicit eyes face faced facing fascinatingly finger first forebearer foremost generations gentlemen give glean goes govern grandfather grandmother grandparents grown hachamim hachayim hagar hakhamim hanati hand hands happened harambam hasnt hinting history hitpalel hold husband ignored ilui initiative instructing instructs ive kach kiss knee known later leading led leemecha lesson listen looking made maidservant maintained makes making marriage meeting memories mention mentioned mentions met meta might mind misvot mode mornings mother motion must myself nature neglected new next nishmat nishmatos nobodys nothing notion olam oor open opening otam parashat pass pause per pesukim picking pointing praying previous prism put rachels rahel react realize received referred remembrances reminds respond response responsibility retrospective retrospectively seeing seek seen sefer sense several sheinot silent similar simple sirurah sister situations sometimes speaking stage state strong students subtle tadapasuk talmidecha teaches tendency text tragedy true turn ultimately uncertain vacuum vador vagita vateri vatikane vatomer vayeseh vchi veagedcha veamen veimecha veodam veomerulach vhalo vimayin wasnt werent weve whatever wont word words yaleda yemot yisrael yitzchak yomam zechori zekenecha",
  "words": 1155,
  "language": "English",
