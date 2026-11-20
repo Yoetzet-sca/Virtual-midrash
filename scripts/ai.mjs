@@ -43,10 +43,11 @@ const aiFile = (c) => new URL(`content/ai/${c.sid}.json`, root);
 const need = (c) => (c.teacherId === 'sca' ? VERSION + 2 : VERSION);
 // Who is teaching: the teacher the class is filed under, or for an SCA-channel video the name the video itself gives.
 const speakerOf = (c, tx) => (c.teacherId === 'sca' ? tx.speaker || '' : teacherName(c.teacherId));
-// A series with known presenters (Minhag of the Week): a name the video step reports is kept only if it is one of them.
-// Anything else — a person mentioned in the class, or a mistake — is dropped, so a summary never names the wrong person.
+// A series with several presenters (Minhag of the Week): the video step's guess at which of them is speaking was wrong
+// about half the time when checked against the old site's records, so it is never used. The presenter comes from the
+// old site or from staff; until then the class stays under the SCA and its summary names no one.
 const seriesOf = (c) => (settings.videoSeries || []).find((s) => c.title.toLowerCase().includes(s.titleHas.toLowerCase()));
-const presenter = (c, name) => { const s = seriesOf(c); if (!s || !name) return name || ''; return s.presenters.find((p) => samePerson(p, name)) || ''; };
+const presenter = (c, name) => (seriesOf(c) ? '' : name || '');
 const upToDate = (c) => { try { const f = JSON.parse(readFileSync(aiFile(c), 'utf8')); return (f.v || 1) >= need(c) && (f.speaker || '') === presenter(c, f.speaker); } catch { return false; } };
 const txFile = (c) => new URL(`ai-transcripts/${c.sid}.json`, root);
 
@@ -199,7 +200,7 @@ async function askGemini(c, tx, { redo = '', fix = [] } = {}) {
 async function transcribeVideo(c) {
   // A series with known presenters: the names and their spelling are given, but which one it is must still come from the video.
   const series = seriesOf(c);
-  const hint = series ? ` This series is always presented by one of: ${series.presenters.join(', ')}. Use that spelling. Name one of them only if the video shows or says which; if it does not, write "SPEAKER: unknown".` : '';
+  const hint = series ? ' For this video, write "SPEAKER: unknown".' : '';
   const ask = `Transcribe the speech in this video word for word, in the language spoken. Do not summarize, tidy, translate or add anything; write what is said. Begin a new line about every 45 seconds, and start each line with the time in the video in square brackets, like [0:00] or [12:30]. Before the transcript, write one line: "SPEAKER: " followed by the name of the person teaching, but only if the video shows the name in writing (a title card or caption) or the name is said aloud; otherwise write "SPEAKER: unknown". Never work out who it is from how a person looks. ${hint} After that line, reply with the transcript only.`;
   // Sound is what matters here, so the picture is sampled sparsely to keep the request small.
   const parts = [{ fileData: { fileUri: `https://www.youtube.com/watch?v=${c.youtubeId}` }, videoMetadata: { fps: 0.1 } }, { text: ask }];

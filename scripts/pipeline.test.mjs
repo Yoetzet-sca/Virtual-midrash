@@ -459,3 +459,16 @@ test('staff fixes: a class can be moved to the right teacher, and a fix that mat
   assert.equal(out.moved, 1);
   assert.equal(out.problems.length, 2);
 });
+
+test('old archive: a video whose title names its speaker is not paired with someone else\'s talk of the same series', async () => {
+  const { pairUp, namesSomeoneElse } = await import('./lib/archive.mjs');
+  const classes = [
+    { id: 'a', title: 'SCA "I Remember" Yom Yerushalayim 2020: Mr. Harry Catton', date: '2020-05-21T12:00:00Z' },
+    { id: 'b', title: 'SCA "I Remember" Yom Yerushalayim 2020: Rabbi Moshe Shamah', date: '2020-05-22T12:00:00Z' },
+  ];
+  const old = [{ id: 3840, title: 'Yom Yerushalayim: I Remember', date: '2020-05-22', by: 'Rabbi Moshe Shamah' }];
+  assert.equal(pairUp(old, classes).get(old[0]).id, 'b');
+  assert.equal(pairUp(old, classes.slice(0, 1)).size, 0);
+  assert.equal(namesSomeoneElse('Hilkhot Shabbat: Class 4', 'Rabbi Moshe Shamah'), false);
+  assert.equal(namesSomeoneElse('Remembering Rabbi Dr. Ezra Labaton', 'Dr. Sara Labaton'), true);
+});

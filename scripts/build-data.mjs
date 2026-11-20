@@ -240,7 +240,11 @@ const search = [];
     const a = ai.get(sidOf(c.id));
     if (!a || a.quality === 'poor') continue;
     // A channel video filed under the SCA itself moves to its teacher once the video has named who is teaching.
-    if (c.teacherId === 'sca' && a.speaker) { const who = whoIs(a.speaker); if (who) { c.teacherId = who; moved++; } }
+    // (Never for a series with several presenters: there the video's guess is not reliable, and a summary written around
+    // a guessed name is held back until it has been redone.)
+    const series = (settings.videoSeries || []).some((s) => c.title.toLowerCase().includes(s.titleHas.toLowerCase()));
+    if (series && a.speaker) { if (!samePerson(a.speaker, teachers.find((t) => t.id === c.teacherId)?.name || '')) continue; }
+    else if (c.teacherId === 'sca' && a.speaker) { const who = whoIs(a.speaker); if (who) { c.teacherId = who; moved++; } }
     if (!c.topic && TOPICS.includes(topicName(a.topic))) { c.topic = topicName(a.topic); topics++; }
     c.summary = a.summary;
     if (a.chapters?.length) c.chapters = a.chapters.map((x) => [x.at, x.title]);

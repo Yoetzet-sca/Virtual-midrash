@@ -2,12 +2,22 @@
 // from SCA's export of 2026-11-20, with the teacher of each class read from the old back end). Two uses:
 //   • telling who gave a class that the new app already has from YouTube but could not attribute from its title;
 //   • listing the classes that exist nowhere else, played from the old system's storage exactly as the old site plays them.
+import { samePerson } from './youtube.mjs';
+
 export const STORAGE = 'https://sca-platform.s3.amazonaws.com/uploads/content/media_content/';
 const norm = (s) => String(s).toLowerCase().replace(/\(class #?\d+\)/g, ' ').replace(/\bsca\b/g, ' ').replace(/[^a-z0-9֐-׿]+/g, ' ').trim();
 const words = (s) => new Set(norm(s).split(' ').filter((w) => w.length > 2));
 // "SCA Minhag of the week #302: ..." → 302
 export const minhagNumber = (title) => { const m = /minhag of the week\D{0,4}(\d{1,3})\b/i.exec(title); return m ? Number(m[1]) : null; };
 export const youtubeIdOf = (link) => (/[?&]v=([\w-]{11})/.exec(link || '') || /youtu\.be\/([\w-]{11})/.exec(link || '') || [])[1] || null;
+
+// "SCA 'I Remember' Yom Yerushalayim 2020: Mr. Harry Catton" names its speaker. An old item by someone else with a
+// similar title ("Yom Yerushalayim: I Remember", Rabbi Moshe Shamah) is a different talk in the same series, not this one.
+const NAMED = /\b(?:Rabbi|Hacham|Mr\.|Mrs\.|Ms\.|Dr\.)(?:\s+Dr\.)?((?:\s+[A-Z][\w’'-]+){2,3})/g;
+export const namesSomeoneElse = (title, by) => {
+  const found = [...String(title).matchAll(NAMED)].map((m) => m[0]);
+  return found.length > 0 && (!by || !found.some((n) => samePerson(n, by)));
+};
 
 // Pairs each old item with the class in `classes` that is the same recording, if there is one.
 export function pairUp(old, classes) {
@@ -23,7 +33,7 @@ export function pairUp(old, classes) {
     const mine = words(o.title); if (mine.size < 2) return null;
     for (let k = -3; k <= 3; k++) {
       const d = new Date(Date.parse(o.date + 'T12:00:00Z') + k * 86400000).toISOString().slice(0, 10);
-      for (const c of byDay.get(d) || []) { const w = words(c.title); const both = [...mine].filter((x) => w.has(x)).length; if (both / Math.min(mine.size, w.size) >= 0.75) return c; }
+      for (const c of byDay.get(d) || []) { if (namesSomeoneElse(c.title, o.by)) continue; const w = words(c.title); const both = [...mine].filter((x) => w.has(x)).length; if (both / Math.min(mine.size, w.size) >= 0.75) return c; }
     }
     return null;
   };
