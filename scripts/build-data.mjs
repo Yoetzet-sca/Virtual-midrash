@@ -185,6 +185,9 @@ for (const url of FIXTURES ? [] : settings.probe || []) {
 const docs = [];
 {
   const old = await json('content/old-archive.json').catch(() => []);
+  // The old site filed a few classes under the wrong teacher. Each correction is listed with its reason.
+  const fixes = new Map((await json('content/archive-fixes.json').catch(() => [])).map((f) => [f.id, f.by]));
+  for (const o of old) if (fixes.has(o.id)) o.by = fixes.get(o.id);
   const sca = () => { if (!teachers.some((x) => x.id === 'sca')) teachers.push({ id: 'sca', name: 'Sephardic Community Alliance', title: 'Classes and events from the SCA', bio: '', photo: '', affiliations: [], feed: '', defaultTopic: '' }); return 'sca'; };
   const pairs = pairUp(old, classes);
   // 1. A video the app already has but could not attribute: the old site knows who gave it.
