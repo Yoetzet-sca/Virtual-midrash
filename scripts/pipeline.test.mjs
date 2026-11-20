@@ -291,3 +291,16 @@ test('two teachers with one family name', async () => {
   assert.equal(teacherForTitle('Harari family dinner', teachers), null);
   assert.equal(teacherForTitle('Joseph Mosseri', teachers), 'joseph-mosseri');
 });
+
+test('a family name does not claim someone else with that name', async () => {
+  const { teacherForTitle } = await import('./lib/youtube.mjs');
+  const one = [{ id: 'nathan-dweck', name: 'Rabbi Nathan Dweck' }, { id: 'vivien-hidary', name: 'Mrs. Vivien Hidary' }, { id: 'richard-hidary', name: 'Rabbi Dr. Richard Hidary' }];
+  assert.equal(teacherForTitle('"The Light in Being Jewish Right Now" Hanukkah Class by Rabbi Joseph Dweck', one), null);
+  assert.equal(teacherForTitle('Hanukkah Class by Rabbi Dweck', one), 'nathan-dweck');
+  assert.equal(teacherForTitle('Rabbi Nathan Dweck: Perasha Gems', one), 'nathan-dweck');
+  assert.equal(teacherForTitle('Mrs. Vivien Hidary – Vayelech & the "Song"', one), 'vivien-hidary');
+  assert.equal(teacherForTitle('Rabbi Dr. Richard Hidary on Purim', one), 'richard-hidary');
+  const two = [...one, { id: 'joseph-dweck', name: 'Rabbi Joseph Dweck' }];
+  assert.equal(teacherForTitle('"The Light in Being Jewish Right Now" Hanukkah Class by Rabbi Joseph Dweck', two), 'joseph-dweck');
+  assert.equal(teacherForTitle('An evening with Rabbi Dweck', two), null);
+});

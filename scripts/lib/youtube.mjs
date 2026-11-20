@@ -21,18 +21,36 @@ export function parseYoutube(xml) {
 }
 
 // A channel video belongs to a teacher when the title names them ("Mrs. Vivien Hidary – Vayelech").
+// A family name by itself counts ("Rabbi Dweck on ..."), but not when the title gives someone else's first name
+// with it: "Class by Rabbi Joseph Dweck" is not Rabbi Nathan Dweck.
+const HONORIFIC = new Set(['rabbi', 'rav', 'hacham', 'haham', 'mrs', 'ms', 'mr', 'dr', 'hazzan', 'professor', 'prof']);
+const LINKING = new Set(['by', 'with', 'from', 'and', 'the', 'of', 'to', 'class', 'shiur', 'featuring', 'feat', 'guest', 'speaker', 'presents', 'presented', 'in', 'on', 'for', 'at']);
 export function teacherForTitle(title, teachers) {
-  const t = ' ' + title.toLowerCase().replace(/[^a-z\s]/g, ' ').replace(/\s+/g, ' ') + ' ';
-  const parts = (name) => name.toLowerCase().replace(/^(rabbi|mrs\.?|ms\.?|mr\.?|hacham)\s+/, '').replace(/^dr\.?\s+/, '').replace(/[^a-z\s]/g, '').split(/\s+/).filter(Boolean);
-  const has = (w) => t.includes(' ' + w + ' ');
-  const byLast = teachers.filter((x) => { const p = parts(x.name); return p.length && has(p[p.length - 1]); });
-  if (byLast.length === 1) return byLast[0].id;
-  const byBoth = byLast.filter((x) => has(parts(x.name)[0]));
-  if (byBoth.length === 1) return byBoth[0].id;
+  const words = title.toLowerCase().replace(/[^a-z\s]/g, ' ').split(/\s+/).filter(Boolean);
+  const parts = (name) => name.toLowerCase().replace(/[^a-z\s]/g, ' ').split(/\s+/).filter((w) => w && !HONORIFIC.has(w));
+  const named = (x) => {
+    const p = parts(x.name);
+    if (!p.length) return 0;
+    const last = p[p.length - 1], first = p[0];
+    let best = 0;
+    words.forEach((w, i) => {
+      if (w !== last) return;
+      const before = words[i - 1];
+      if (p.length > 1 && before === first) best = Math.max(best, 2);                       // first and family name together
+      else if (!before || HONORIFIC.has(before) || LINKING.has(before)) best = Math.max(best, 1); // family name by itself
+      // otherwise the word before is someone else's first name: not this teacher
+    });
+    return best;
+  };
+  const scored = teachers.map((x) => ({ x, n: named(x) })).filter((s) => s.n > 0);
+  const full = scored.filter((s) => s.n === 2);
+  if (full.length === 1) return full[0].x.id;
+  if (full.length > 1) return null;
+  if (scored.length === 1) return scored[0].x.id;
   // Two teachers share the family name and the title gives no first name: "Rabbi Harari" is the one who is a rabbi.
   const rabbi = (x) => /^(rabbi|hacham)\b/i.test(x.name);
-  const byTitle = has('rabbi') || has('hacham') ? byLast.filter(rabbi) : [];
-  return byTitle.length === 1 ? byTitle[0].id : null;
+  const byTitle = words.includes('rabbi') || words.includes('hacham') ? scored.filter((s) => rabbi(s.x)) : [];
+  return byTitle.length === 1 ? byTitle[0].x.id : null;
 }
 
 // ---- The whole channel, through YouTube's own Data API (needs a free API key) -------------------
