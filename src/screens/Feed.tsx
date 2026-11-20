@@ -73,7 +73,9 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
       const sorted = [...list].sort((a, b) => b.date.localeCompare(a.date));
       // A shared link opens on that exact class.
       const first = startId ? sorted.find((c) => c.id === startId) : undefined;
-      return { teacherId, list: first ? [first, ...sorted.filter((c) => c !== first)] : sorted };
+      // The feed is for what is new: each teacher's column holds their newest 60. Everything older is in search, topics
+      // and the teacher's page, and still opens here when someone taps or shares it.
+      return { teacherId, list: (first ? [first, ...sorted.filter((c) => c !== first)] : sorted).slice(0, 60) };
     });
   }, [cards, startId]);
   const activeCol = Math.max(0, columns.findIndex((col) => col.list.some((c) => c.id === active)));

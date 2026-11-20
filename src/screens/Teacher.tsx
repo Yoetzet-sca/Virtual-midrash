@@ -8,6 +8,7 @@ import { IBack, IShare } from '../icons';
 export function TeacherPage({ data, id }: { data: AppData; id: string }) {
   const prefs = usePrefs();
   const [topic, setTopic] = useState('All');
+  const [count, setCount] = useState(40); // classes shown; a teacher can have thousands
   const t = data.teachers.find((x) => x.id === id);
   if (!t) return <div className="page"><h1>Teacher not found</h1><a className="btn" href="#/explore">Browse teachers</a></div>;
   const classes = data.classes.filter((c) => c.teacherId === id);
@@ -50,7 +51,8 @@ export function TeacherPage({ data, id }: { data: AppData; id: string }) {
         <div className="label">RECORDED CLASSES</div>
         {classes.length === 0 ? <p className="muted">No recorded classes yet.</p> : <>
           {topics.length > 2 && <Chips items={topics.map((k) => ({ id: k, label: k }))} value={topic} onPick={setTopic} />}
-          <div className="rows">{shown.map((c) => <ClassRow key={c.id} c={c} showTeacher={false} />)}</div>
+          <div className="rows">{shown.slice(0, count).map((c) => <ClassRow key={c.id} c={c} showTeacher={false} />)}</div>
+          {shown.length > count && <button className="btn wide ghost" style={{ marginTop: 12 }} onClick={() => setCount(count + 60)}>Show older classes ({shown.length - count} more)</button>}
         </>}
       </div>
     </div>

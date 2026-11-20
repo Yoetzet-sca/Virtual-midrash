@@ -88,7 +88,7 @@ for (const t of teachers) {
     const feed = parseFeed(xml);
     // Headshot supplied by SCA wins; otherwise fall back to the feed's profile picture.
     if (!t.photo) t.photo = feed.image;
-    for (const it of feed.items.slice(0, settings.maxClassesPerTeacher)) {
+    for (const it of feed.items.slice(0, settings.maxClassesPerTeacher || Infinity)) {
       classes.push({
         id: `${t.id}:${it.guid}`, teacherId: t.id, title: it.title, date: it.date, durationSec: it.durationSec,
         audioUrl: it.audioUrl, image: it.image && it.image !== feed.image ? it.image : '', link: it.link,
