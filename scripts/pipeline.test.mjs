@@ -343,3 +343,16 @@ test('the perasha filter finds the perasha and nothing else', async () => {
   assert.ok(namesIt('Lekh Lekha', 'Lech Lecha Rashi 5') && namesIt('Vayishlah', 'Vayishlach 2025') && !namesIt('Vayishlah', 'Vayetze 2025'));
   assert.ok(matches('bava basra 8', 'Bava Batra 8a (1)') && matches('vayes', 'Perashat Vayesse')); // ordinary search is unchanged: other spellings, and part of a word while typing
 });
+
+test('meaning check: prompt and reading the reply', async () => {
+  const { checkPrompt, parseCheck, summaryPrompt: sp, unsupported: un } = await import('./lib/ai-text.mjs');
+  const pr = checkPrompt({ title: 'T', transcript: '[0:00] hello', summary: 'Rabbi X says Y.', parts: ['Intro', 'End'] });
+  assert.match(pr, /Description to check:\nRabbi X says Y\.\nParts of the class, as listed: Intro \| End/);
+  assert.match(pr, /Transcript:\n\[0:00\] hello$/);
+  assert.deepEqual(parseCheck('```json\n{"unsupported": []}\n```'), []);
+  assert.deepEqual(parseCheck('{"unsupported": ["\\"cites the Rambam\\" - the Rambam is not mentioned", ""]}'), ['"cites the Rambam" - the Rambam is not mentioned']);
+  assert.throws(() => parseCheck('looks fine to me'));
+  assert.throws(() => parseCheck('{"ok": true}'));
+  assert.match(sp({ title: 'T', teacher: 'Rabbi A B', minutes: 5, transcript: 'x', fix: ['cites the Rambam'] }), /found these statements are not supported by it:\n- cites the Rambam\n/);
+  assert.deepEqual(un('Rabbi Yehuda and Rabbi Yehoshua on the Sidurim', 'so rabbi yehudah says, and rabbi yehoshuah, look in the siddurim'), []); // Hebrew spelled by ear
+});

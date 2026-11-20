@@ -12,11 +12,12 @@ import { existsSync } from 'node:fs';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { readFileSync } from 'node:fs';
-import { searchTerms, parseModelJson, summaryPrompt, timedTranscript, parseTimedTranscript, unsupported, titleNames } from './lib/ai-text.mjs';
+import { searchTerms, parseModelJson, summaryPrompt, timedTranscript, parseTimedTranscript, unsupported, titleNames, checkPrompt, parseCheck } from './lib/ai-text.mjs';
 import { weekInfo } from './lib/calendar.mjs';
 import { samePerson } from './lib/youtube.mjs';
 
-const VERSION = 4; // 4: only what the teacher said (checked against the transcript), and the summary names the teacher
+const VERSION = 5; // 5: every summary passes a separate meaning check against the transcript, or is not shown
+// was 4: // 4: only what the teacher said (checked against the transcript), and the summary names the teacher
 // was 3: // 3: the community's own names for books and people (Bereshit, not Genesis)
 // was 2: // 2 adds the topic and the parts of the class; older files are redone from the saved transcript
 
@@ -120,29 +121,45 @@ async function geminiModels() {
 
 const drop = (model) => { if (models) models = models.filter((m) => m !== model); };
 
-// Ask for the summary, check every meaningful word of it against the transcript, and if it used words the teacher
-// never said, ask once more naming those words. The attempt with the fewest such words is kept, and they are recorded.
+// Writing a summary, in three steps:
+//   1. Ask for it. Check every meaningful word against the transcript; if it used words the teacher never said,
+//      ask once more naming those words, and keep the attempt with fewer of them. (This keeps it in the teacher's terms.)
+//   2. A separate request checks the meaning: does the transcript support every statement? (A different model, if there is one.)
+//   3. If the checker lists anything, the summary is rewritten once with that list and checked again. If it still fails,
+//      it is saved as not fit to show, and the app shows no summary for that class.
 async function summarize(c, tx) {
   const shown = (ai) => [ai.summary, ...ai.chapters.map((x) => x.title)].join(' ');
   const allowed = `${c.title} ${teacherName(c.teacherId)} ${tx.speaker || ''}`;
-  let best = await askGemini(c, tx);
-  best.unsupported = unsupported(shown(best), tx.text, allowed);
+  const words = (ai) => { ai.unsupported = unsupported(shown(ai), tx.text, allowed); return ai; };
+  let best = words(await askGemini(c, tx));
   if (best.unsupported.length) {
     console.log(`  (first attempt used words not in the transcript: ${best.unsupported.join(', ')}; asking again)`);
-    try {
-      const again = await askGemini(c, tx, best.unsupported.join(', '));
-      again.unsupported = unsupported(shown(again), tx.text, allowed);
-      if (again.unsupported.length < best.unsupported.length) best = again;
-    } catch (e) { if (e instanceof SlowDown) throw e; }
+    try { const again = words(await askGemini(c, tx, { redo: best.unsupported.join(', ') })); if (again.unsupported.length < best.unsupported.length) best = again; }
+    catch (e) { if (e instanceof SlowDown) throw e; }
   }
+  best.claims = await checkMeaning(c, tx, best);
+  if (best.claims.length) {
+    console.log(`  (meaning check found ${best.claims.length} unsupported: ${best.claims.join(' / ').slice(0, 300)}; rewriting)`);
+    const again = words(await askGemini(c, tx, { fix: best.claims }));
+    again.claims = await checkMeaning(c, tx, again);
+    if (again.claims.length <= best.claims.length) best = again;
+  }
+  if (best.claims.length) best.quality = 'poor'; // not shown
   return best;
 }
 
+async function checkMeaning(c, tx, ai) {
+  const transcript = (tx.segments?.length ? timedTranscript(tx.segments) : tx.text).slice(0, 140000);
+  return gemini([{ text: checkPrompt({ title: c.title, transcript, summary: ai.summary, parts: ai.chapters.map((x) => x.title) }) }], (text) => parseCheck(text), { notFirst: ai.model });
+}
+
 // One request to Gemini, trying its models in turn. `accept` turns the reply into the result, or throws to try the next model.
-async function gemini(parts, accept, { json = true, seconds = 90, extra = {} } = {}) {
+async function gemini(parts, accept, { json = true, seconds = 90, extra = {}, notFirst = '' } = {}) {
   const body = { contents: [{ role: 'user', parts }], generationConfig: { temperature: 0.2, ...(json ? { responseMimeType: 'application/json' } : {}), ...extra } };
   let last = 'no model available';
-  for (const model of [...(await geminiModels())]) {
+  const order = [...(await geminiModels())];
+  if (notFirst && order.length > 1 && order[0] === notFirst) order.push(order.shift()); // a checker should not be the writer when another model is on hand
+  for (const model of order) {
     let r;
     try {
       r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { method: 'POST', headers: { 'x-goog-api-key': GEMINI, 'content-type': 'application/json' }, body: JSON.stringify(body), signal: AbortSignal.timeout(seconds * 1000) });
@@ -161,10 +178,10 @@ async function gemini(parts, accept, { json = true, seconds = 90, extra = {} } =
 
 const lengthOf = (c, tx) => c.durationSec || (tx.segments?.length ? tx.segments[tx.segments.length - 1].start + 60 : 0);
 
-async function askGemini(c, tx, redo = '') {
+async function askGemini(c, tx, { redo = '', fix = [] } = {}) {
   const transcript = tx.segments?.length ? timedTranscript(tx.segments) : tx.text;
   const secs = lengthOf(c, tx);
-  const prompt = summaryPrompt({ title: c.title, teacher: speakerOf(c, tx), minutes: Math.round(secs / 60), transcript: transcript.slice(0, 140000), redo });
+  const prompt = summaryPrompt({ title: c.title, teacher: speakerOf(c, tx), minutes: Math.round(secs / 60), transcript: transcript.slice(0, 140000), redo, fix });
   return gemini([{ text: prompt }], (text, model) => ({ ...parseModelJson(text, secs || Infinity), model }));
 }
 
@@ -198,12 +215,13 @@ for (const c of queue) {
     let tx = existsSync(txFile(c)) ? JSON.parse(await readFile(txFile(c), 'utf8')) : null; // already transcribed on an earlier run
     if (!tx) { tx = await transcribe(c); await writeFile(txFile(c), JSON.stringify({ id: c.id, title: c.title, ...tx })); minutes += mins; }
     const ai = await summarize(c, tx);
-    await writeFile(aiFile(c), JSON.stringify({ v: need(c), id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, unsupported: ai.unsupported, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: tx.language, made: new Date().toISOString().slice(0, 10), by: `groq whisper + ${ai.model}` }, null, 1));
+    await writeFile(aiFile(c), JSON.stringify({ v: need(c), id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, unsupported: ai.unsupported, claims: ai.claims, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: tx.language, made: new Date().toISOString().slice(0, 10), by: `groq whisper + ${ai.model}` }, null, 1));
     done++;
     console.log(`\n✓ ${teacherName(c.teacherId)} — ${c.title} (${mins} min, ${tx.text.split(/\s+/).length} words${tx.sentMb ? ', sent ' + tx.sentMb + ' MB' : ''}, ${ai.model}${ai.quality === 'poor' ? ', marked POOR' : ''})`);
     console.log(`  Summary: ${ai.summary}`);
     console.log(`  Subjects: ${ai.subjects.join('; ')}`);
     console.log(`  Questions: ${ai.questions.join(' | ')}`);
+    console.log(`  Meaning check: ${ai.claims.length ? 'FAILED, summary will not be shown — ' + ai.claims.join(' / ') : 'passed'}`);
     console.log(`  Words not found in the transcript: ${ai.unsupported.length ? ai.unsupported.join(', ') : 'none'}`);
     console.log(`  Topic: ${ai.topic || 'none'} (title rules said: ${c.topic || 'none'})`);
     console.log(`  Parts: ${ai.chapters.map((x) => `${Math.floor(x.at / 60)}:${String(x.at % 60).padStart(2, '0')} ${x.title}`).join(' | ')}`);
@@ -229,10 +247,11 @@ for (const c of stoppedByGemini ? [] : videos) {
     if (tx) tx.speaker = presenter(c, tx.speaker);
     if (!tx) { tx = await transcribeVideo(c); tx.speaker = presenter(c, tx.speaker); await writeFile(txFile(c), JSON.stringify({ id: c.id, title: c.title, ...tx })); }
     const ai = await summarize(c, tx);
-    await writeFile(aiFile(c), JSON.stringify({ v: need(c), id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, unsupported: ai.unsupported, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: '', speaker: tx.speaker || '', made: new Date().toISOString().slice(0, 10), by: `gemini (video) + ${ai.model}` }, null, 1));
+    await writeFile(aiFile(c), JSON.stringify({ v: need(c), id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, unsupported: ai.unsupported, claims: ai.claims, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: '', speaker: tx.speaker || '', made: new Date().toISOString().slice(0, 10), by: `gemini (video) + ${ai.model}` }, null, 1));
     videosDone++;
     console.log(`\n✓ VIDEO ${speakerOf(c, tx) || 'speaker not named'} — ${c.title} (about ${Math.round(lengthOf(c, tx) / 60)} min, ${tx.text.split(/\s+/).length} words, ${ai.model}${ai.quality === 'poor' ? ', marked POOR' : ''})`);
     console.log(`  Summary: ${ai.summary}`);
+    console.log(`  Meaning check: ${ai.claims.length ? 'FAILED, summary will not be shown — ' + ai.claims.join(' / ') : 'passed'}`);
     console.log(`  Words not found in the transcript: ${ai.unsupported.length ? ai.unsupported.join(', ') : 'none'}`);
     console.log(`  Topic: ${ai.topic || 'none'} (title rules said: ${c.topic || 'none'})`);
     console.log(`  Parts: ${ai.chapters.map((x) => `${Math.floor(x.at / 60)}:${String(x.at % 60).padStart(2, '0')} ${x.title}`).join(' | ')}`);

@@ -62,7 +62,7 @@ const FRAME = new Set('class classes lesson teacher rabbi explains explain expla
 const foldWord = (w) => w.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’'`]s?$/, '').replace(/[^a-z0-9\u0590-\u05ff]/g, '');
 const stemWord = (w) => (w.length > 4 ? w.replace(/(ing|ied|ies|es|ed|ly|s|e|y)$/, '') : w);
 // Speech recognition spells Hebrew by ear ("Masichet", "D'af"), so words are also compared by their consonants.
-const bones = (w) => w.replace(/ch|kh/g, 'h').replace(/tz|ts|ss|z/g, 's').replace(/ph/g, 'f').replace(/ck|q|c/g, 'k').replace(/w|b/g, 'v').replace(/(.)\1+/g, '$1').replace(/(?!^)[aeiouy]/g, '');
+const bones = (w) => w.replace(/h$/, '').replace(/ch|kh/g, 'h').replace(/tz|ts|ss|z/g, 's').replace(/ph/g, 'f').replace(/ck|q|c/g, 'k').replace(/w|b/g, 'v').replace(/(.)\1+/g, '$1').replace(/(?!^)[aeiouy]/g, '');
 const wordsOf = (text) => String(text).split(/[\s\-–—/]+/).map(foldWord).filter(Boolean);
 
 // Does a class title name this perasha or holiday, however it is spelled? ("Vayetze 2026", "Parashat VaYesse" ↔ "Vayesse")
@@ -88,7 +88,37 @@ export function unsupported(written, transcript, alsoAllowed = '') {
   return [...missing];
 }
 
-export const summaryPrompt = ({ title, teacher, minutes, transcript, redo = '' }) => `You are helping a synagogue community organization index recorded Torah classes so people can find them.
+// ---- The meaning check ----------------------------------------------------------------------------
+// A second, separate request: given the transcript and what was written about it, list anything written that the
+// transcript does not support. Wording is not its business (the word check above handles that); substance is.
+export const checkPrompt = ({ title, transcript, summary, parts }) => `You are checking a short description of a recorded Torah class against the transcript of that class. The transcript was made by speech-recognition software, so Hebrew words and names are often misspelled.
+
+Your only job is to find statements in the description that the transcript does not support. Flag:
+- a person, book, source, law, custom, story, date or number that does not come up in the transcript;
+- a statement that says something different from what the teacher said, or attributes to the teacher a view or conclusion the teacher did not give;
+- anything that reads as background knowledge added by the writer.
+Do not flag: paraphrase, an English word used for a Hebrew term, a different spelling of the same word or name, or the description leaving things out.
+
+Reply with one JSON object and nothing else: {"unsupported": [each unsupported statement, quoted from the description, with a few words saying why]}. If everything is supported, reply {"unsupported": []}.
+
+Class title: ${title}
+
+Description to check:
+${summary}
+${parts.length ? `Parts of the class, as listed: ${parts.join(' | ')}` : ''}
+
+Transcript:
+${transcript}`;
+
+export function parseCheck(reply) {
+  const s = String(reply), a = s.indexOf('{'), b = s.lastIndexOf('}');
+  if (a < 0 || b <= a) throw new Error('the checker did not return JSON');
+  const o = JSON.parse(s.slice(a, b + 1));
+  if (!Array.isArray(o.unsupported)) throw new Error('the checker returned no list');
+  return o.unsupported.map((x) => String(x).trim()).filter(Boolean).slice(0, 8);
+}
+
+export const summaryPrompt = ({ title, teacher, minutes, transcript, redo = '', fix = [] }) => `You are helping a synagogue community organization index recorded Torah classes so people can find them.
 
 Below is an automatic transcript of a class, with time marks in square brackets like [12:30] (minutes:seconds from the start). It was made by speech-recognition software, so Hebrew and Aramaic words, names of rabbis and names of books are often misspelled or garbled. Use the title and context to work out what was meant.
 
@@ -99,7 +129,7 @@ Length: about ${minutes} minutes
 Wording, for everything you write: use the names this community uses, which are the ones the teacher uses in the class. The books of the Torah are Bereshit, Shemot, Vayikra, Bemidbar and Debarim, never Genesis, Exodus, Leviticus, Numbers or Deuteronomy; likewise Tehillim, Mishle, Yeshayahu, Yehoshua and so on rather than Psalms, Proverbs, Isaiah, Joshua. Say Hashem, Perasha, Bet HaMikdash, Berit. Call people what the teacher calls them (Abraham Abinu or Avraham Avinu, Moshe Rabbenu). Do not introduce English or academic terms the teacher did not use.
 
 The most important rule: report only what is said in this transcript. Every source, person, book, chapter, law, story and idea you mention must be one the teacher actually speaks about in the recording, named with the teacher's own word for it. Do not add background, context, explanations, sources or conclusions from your own knowledge, even if they are correct and even if they would make the summary clearer. Do not guess at what a garbled passage "probably" covers; leave it out. A shorter summary that is entirely from the transcript is better than a fuller one that is not.
-${redo ? `\nYour previous attempt used these words, which are not found in the transcript: ${redo}. Write it again without anything the teacher did not say.\n` : ''}
+${redo ? `\nYour previous attempt used these words, which are not found in the transcript: ${redo}. Write it again without anything the teacher did not say.\n` : ''}${fix.length ? `\nA reviewer compared your previous attempt with the transcript and found these statements are not supported by it:\n${fix.map((x) => '- ' + x).join('\n')}\nWrite it again with those removed or corrected, and add nothing new in their place.\n` : ''}
 Reply with one JSON object and nothing else, with these keys:
 - "summary": 2 to 3 plain sentences (same spelling rules as below) saying what this class covers, written for someone deciding whether to listen. ${teacher ? `Begin with the teacher, as "${shortName(teacher)} ..." (for example "${shortName(teacher)} goes through ...").` : `Begin with the speaker's name if the title or the recording itself says who is teaching (for example "Rabbi Cohen goes through ..."); if it does not, begin "This class ...". Never begin with the name of the organization.`} Describe the topics; do not give halakhic rulings or conclusions as fact.
 - "subjects": 6 to 12 short phrases naming the specific subjects, sources, people, laws or stories discussed. Spell Hebrew words the way the Sephardic community of Brooklyn does: "h" not "ch" for het (Hodesh, Hakhamim, Hinukh, Hasidim, Hasosrot), "t" not "s" for tav (Shabbat, Berakhot, Bet Din), "s" not "tz" for sadi (Misva, Sedaka), and Perasha, Halakha, Mishna, Masekhet, Bet HaMikdash. Keep the usual English spelling of people's names (Rabbi Chaim Kanievsky).
