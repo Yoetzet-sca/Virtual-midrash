@@ -238,6 +238,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
               </div>
               {!isVideo && (
                 <div className={'scrub' + (mine ? '' : ' idle')}>
+                  {!mine && <button className="scrub-cover" aria-label="Play" onClick={tap} />}
                   <button disabled={!mine} onClick={() => p.skip(-15)} aria-label="Back 15 seconds">−15</button>
                   <span className="scrub-time">{clock(mine ? p.time : prefs.positions[c.id]?.[0] || 0)}</span>
                   <input type="range" disabled={!mine} aria-label="Position in class" min={0} max={Math.max(1, Math.floor((mine && p.duration) || c.durationSec))} value={Math.floor(mine ? p.time : prefs.positions[c.id]?.[0] || 0)} onChange={(e) => p.seek(Number(e.target.value))} />
@@ -252,6 +253,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
                 const length = (open && vDur) || c.durationSec;
                 return (
                   <div className={'scrub' + (open ? '' : ' idle')}>
+                    {!open && <button className="scrub-cover" aria-label="Play" onClick={tap} />}
                     <button disabled={!open} onClick={() => vSeek(vTime - 15)} aria-label="Back 15 seconds">−15</button>
                     <span className="scrub-time">{clock(open ? vTime : 0)}</span>
                     <input type="range" disabled={!open} aria-label="Position in video" min={0} max={Math.max(1, Math.floor(length))} value={Math.floor(open ? vTime : 0)} onChange={(e) => vSeek(Number(e.target.value))} />
