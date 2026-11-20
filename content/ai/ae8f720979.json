@@ -2,68 +2,63 @@
  "v": 6,
  "id": "yt:WSVxysneq-Y",
  "title": "SCA Minhag of the Week 280: \"Eating Nuts on Rosh Hashanah\"",
- "topic": "Minhag of the Week",
+ "topic": "Holidays",
  "chapters": [
   {
    "at": 6,
-   "title": "The Muram and the custom of walnuts",
-   "about": "Shulchan Aruch, Muram, and the custom of not eating walnuts"
+   "title": "Eating nuts on Rosh Hashanah in Shulchan Aruch",
+   "about": "Shulchan Aruch and Muram on walnuts"
   },
   {
    "at": 53,
-   "title": "The source of the Maharil",
-   "about": "Maharil, phlegm, mucus, and shofar blowing"
+   "title": "The source of the custom in Maharil",
+   "about": "Maharil and the concern about phlegm and coughing"
   },
   {
    "at": 146,
-   "title": "Scientific and Gematria perspectives",
-   "about": "Walnuts, mucus, Gematria of egoz and chet"
+   "title": "Scientific facts and the Gematria of egoz",
+   "about": "Walnuts, mucus, and Gematria of egoz and chet"
   },
   {
    "at": 193,
-   "title": "The Chida and the Midrash",
-   "about": "Chida, Sefer HaChasidim, and Midrash on egoz"
+   "title": "Chida and Sefer HaChasidim",
+   "about": "Chida, Sefer HaChasidim, and comparing Am Yisrael to a walnut"
   },
   {
-   "at": 292,
-   "title": "Seder V'Tashlich and Sephardic Minhagim",
-   "about": "Seder V'Tashlich, sins, and Sephardic community customs"
+   "at": 347,
+   "title": "Sephardic community customs and conclusion",
+   "about": "Sephardic minhagim and enjoying the holiday"
   }
  ],
  "unsupported": [
-  "provided",
-  "clarifies",
-  "laws",
-  "references",
-  "issue",
-  "perspectives"
+  "permissible",
+  "origins",
+  "practice"
  ],
- "summary": "Joseph Tawil discusses the custom of not eating walnuts on Rosh Hashanah as mentioned by the Muram in his glosses to the Shulchan Aruch. He explains the reasons provided by the Maharil regarding mucus and the Gematria of the word egoz, and clarifies that these are not laws or customs for the Sephardic community. He also references the Chida and the Midrash to show that there is no issue with eating nuts on the holiday.",
+ "summary": "This class discusses whether it is permissible to eat nuts on Rosh Hashanah, examining the origins of the custom not to eat walnuts and the reasons behind it. It reviews the sources in Shulchan Aruch, Maharil, and Chida, and explains the Sephardic community practice regarding eating nuts.",
  "subjects": [
-  "Rosh Hashanah",
   "Shulchan Aruch",
-  "Maran Rabbi Yosef Karo",
-  "Muram Rabbi Moshe Isserles",
+  "Rabbi Yosef Karo",
+  "Rabbi Moshe Isserles",
   "Maharil",
-  "Chida Rabbi Chaim Yosef David Azulai",
-  "Egoz",
   "Gematria",
-  "Chet",
-  "Seder V'Tashlich",
-  "Midrash"
+  "Chida",
+  "Sefer HaChasidim",
+  "Am Yisrael",
+  "Seder V'Tashlich"
  ],
  "questions": [
-  "Is it forbidden to eat nuts on Rosh Hashanah?",
-  "Why did some people avoid eating walnuts on Rosh Hashanah?",
-  "Does the word egoz have the same numerical value as the word chet?",
-  "What does the Chida say about eating nuts on Rosh Hashanah?",
-  "Is there a Sephardic custom to avoid eating nuts on Rosh Hashanah?"
+  "Can we eat nuts on Rosh Hashanah?",
+  "Where does the custom not to eat walnuts come from?",
+  "Does eating walnuts cause extra mucus or coughing during shofar blowing?",
+  "What is the numerical value of 'egoz' compared to 'chet'?",
+  "Do Sephardic communities have a custom of not eating walnuts on Rosh Hashanah?"
  ],
  "quality": "good",
  "terms": "hashanah eat egoz foods walnuts eating person rosh word cause nuts sins chet custom good nothing number point rabbi shira yisrael able aruch blowing books clearing dont due equals leechol mucus muram shofar shulchan thats throat vtashlich walnut writes attaching brosh come constantly cough coughing different eaten egozim either enjoy excess explain glosses hagahot kol law maharil mentions ourselves pasuk phlegm properly reason seder source talks technically throwing torah tov wash wrong wrote yesh yosef 14th 17th 18th abuse added adversaries afterwards against aleph allergy almonds aspect aspects asur attached avoid avonot away azulai behind bimtzulot blow brings careful causes centuries century chacham chaim chatotam chida clearly close commentary communities community comparing completely concept concern connecting course dark davar david definitely depths dmarbim episode equivalent etc even every extensively extra fact following forbidden gematria germany ginat great hachasidim hamavi hard hatkiot hear hes holiday incorrect interrupting isserles karo kicha kodem laba later leechut lemony list listening lived look looking lshanim maran medakdekim media mentioned midrash minhag minhagim mishum mitzvot moshe need neimot neither next night nizharim nowadays numerical obviously outer overly paragraph people pistachios plain praying problem putting rabot reaction realize resilient salty saying sca scientifically scrupulous sea section sefer sephardi sephardic shell shelo showing silent simple sin social sour spicy spiritual statement supposed symbolic take tell therefore theres though throughout tizku traveled types umitaam unless untrue value vinegary vnia vtovot week wetness whats whatsoever world yam yaradti",
  "words": 848,
  "language": "",
- "speaker": "Joseph Tawil",
+ "speaker": "",
  "made": "2026-11-20",
- "by": "gemini (video) + gemini-3.1-flash-lite"
+ "by": "gemini (video) + gemini-3.5-flash-lite"
 }
