@@ -62,6 +62,7 @@ export function Library({ data }: { data: AppData }) {
         ? <div className="notice"><p>Reset everything on this phone? This clears your topics, follows, hidden teachers, likes, saved classes and your place in each class. It can’t be undone.</p>
             <div className="two" style={{ marginTop: 10 }}><button className="btn small" onClick={() => { setPrefs({ topics: [], following: [], hidden: [], liked: [], saved: [], positions: {}, learned: {}, onboarded: false }); setAsk(false); }}>Yes, reset</button><button className="btn small ghost" onClick={() => setAsk(false)}>Cancel</button></div></div>
         : <button className="textlink" onClick={() => setAsk(true)}>Reset everything</button>}
+      <p className="muted small" style={{ marginTop: 18 }}><a href="#/privacy">Privacy &amp; terms</a></p>
     </div>
   );
 }

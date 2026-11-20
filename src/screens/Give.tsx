@@ -102,6 +102,7 @@ export function Give({ data }: { data: AppData }) {
           : <button className="btn wide ghost" onClick={() => setShowForm(true)}>Pay for it now</button>)}
       </>}
       <p className="muted tiny center">Dedicated in loving memory of Stanley Chera A”H by his family</p>
+      <p className="muted small center"><a href="#/privacy">Privacy &amp; terms</a></p>
     </div>
   );
 }
