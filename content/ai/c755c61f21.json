@@ -2,51 +2,64 @@
  "v": 6,
  "id": "yt:8SKl3jIx-I0",
  "title": "SCA Minhag of the Week 283: \"Wearing a Talet Qatan”",
- "topic": "Minhag of the Week",
+ "topic": "Halakha",
  "chapters": [
   {
    "at": 0,
-   "title": "Sources from Rambam and Maran",
-   "about": "Talit cotan, Rambam, Shulchan Aruch, Maran"
+   "title": "Obligation and the Rambam",
+   "about": "Four-cornered garments and Rambam's view on the mitzvah"
+  },
+  {
+   "at": 46,
+   "title": "Shulchan Aruch and the talit cotan",
+   "about": "Maran's recommendation to wear a talit cotan all day"
   },
   {
    "at": 93,
-   "title": "Customs of Halab",
-   "about": "Rabbis of Halab, blessings, sleeping with talit cotan"
+   "title": "Customs of the rabbis of Halab",
+   "about": "19th and 20th-century discussions on blessings and customs"
   },
   {
    "at": 186,
-   "title": "Wearing under clothing and loops",
-   "about": "Garments under clothing, loops, tzitzit"
+   "title": "Placement and loop counts",
+   "about": "Wearing garments under clothing and the number of loops"
   }
  ],
  "unsupported": [
   "practice",
-  "associated"
+  "tracing",
+  "traditions",
+  "recitation",
+  "placement",
+  "number",
+  "used",
+  "obligation"
  ],
- "summary": "Joey Harari explores the practice of wearing a talit cotan and the customs associated with it. He reviews sources including Mishne Torah, Shulchan Aruch, and the rabbis of Halab regarding blessings, wearing garments under clothing, and wrapping loops.",
+ "claims": [],
+ "summary": "The teacher discusses the practice of wearing a talit cotan, tracing the concept from the Rambam and the Shulchan Aruch to the customs of the rabbis of Halab. He reviews various traditions regarding the recitation of blessings, the placement of the garment, and the number of loops used for the tzitziot.",
  "subjects": [
   "Talit cotan",
   "Talit gadol",
-  "Tzitziot",
-  "Mishne Torah",
+  "Araba kanfot",
   "Rambam",
   "Shulchan Aruch",
-  "Maran",
-  "Halab",
-  "Araba kanfot"
+  "Rabbis of Halab",
+  "Blessings on tzitziot",
+  "Tzitziot loops",
+  "Customs of Aleppo"
  ],
  "questions": [
-  "What do Rambam and Maran say about wearing a talit cotan?",
-  "When should a blessing be recited on a talit cotan according to the customs of Halab?",
-  "Should a talit cotan be worn under or on top of clothing?",
-  "How many loops should be wrapped on the tzitzit of a talit gadol and a talit cotan?"
+  "Is one obligated to wear a four-cornered garment?",
+  "What does the Shulchan Aruch say about wearing a talit cotan all day?",
+  "How do we fulfill the blessing requirement for the talit cotan?",
+  "What is the difference between the 39-loop and 26-loop customs?",
+  "Should the talit cotan be worn over or under one's clothing?"
  ],
  "quality": "good",
  "terms": "talit loops cotan wear section wrote custom day blessing gadol garment maran seat wearing clothing gets halab aruch book careful corner everyone first praying rambam recite should shulchan still tzitziot wrapped 19th araba based community cornered cover customary discussions even every four fourth heh however kanfot later least mind mitzvah obligated ones order rabbis referred referring second stated third tzitzit various worn wrapping 1920s 20th according aleppo already always among argentina away call centuries century clear commonly concept concluded course developed dont effort encouraged evening except final following friday fulfill furthermore good grandfather halabi january knots letter maintain make mention mentioned minute mishne morning name never night noteworthy others passed person pious playing posek prevalent previously prominent proper put questions quoted reciting recommending recorded refers regarding remember requires sefardi similarly sleep sleynli specifically suggests synagogue take though today told top torah type vav wind wrap writes writings yod",
  "words": 702,
  "language": "",
- "speaker": "Joey Harari",
+ "speaker": "",
  "made": "2026-11-20",
- "by": "gemini (video) + gemini-3.5-flash-lite"
+ "by": "gemini (video) + gemini-3.1-flash-lite"
 }

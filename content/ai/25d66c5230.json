@@ -1,99 +1,100 @@
 {
- "v": 6,
+ "v": 8,
  "id": "yt:iHwNYYSeZG8",
  "title": "SCA Bound by Loss: Stories of Love, Grief and Unbreakable Strength",
- "topic": null,
+ "topic": "Holidays",
  "chapters": [
   {
    "at": 0,
-   "title": "Introduction to the Class and Speakers",
-   "about": "Opening remarks connecting Tisha B'Av and the pain of October 7 to the sacrifice of soldiers."
+   "title": "Introduction to the speakers",
+   "about": "Introduction of Miriam and Zahava and the context of Tisha B'Ab"
   },
   {
    "at": 91,
-   "title": "Miriam and Zahava Introduce Themselves",
-   "about": "Miriam Dictstein and Zahava Diner share their backgrounds, aliyah, and how their grief united them."
+   "title": "Personal backgrounds and meeting",
+   "about": "Miriam and Zahava introduce themselves and how they became friends"
   },
   {
    "at": 184,
-   "title": "Hillel Diner's Dedication to His Friends",
-   "about": "Zahava shares stories of Hillel's leadership, his basic training hike, and his service in the Kfir brigade."
+   "title": "Hillel Diner's service and character",
+   "about": "Zahava shares stories of Hillel's dedication to his soldiers"
+  },
+  {
+   "at": 322,
+   "title": "The loss of Hillel",
+   "about": "Zahava recounts the events of December 23rd and the news of Hillel's death"
   },
   {
    "at": 461,
-   "title": "Ivri Dictstein's Service and Final Days",
-   "about": "Miriam recalls her husband Ivri, a combat officer in Golani, their last Shabbat, and his commitment to the war."
+   "title": "Ivri's final days",
+   "about": "Miriam shares her last Shabbat with Ivri and his commitment to the mission"
   },
   {
-   "at": 692,
-   "title": "Ivri's Final Delivery and Letter",
-   "about": "Miriam receives flowers and a letter sent by Ivri from his base during his service."
+   "at": 646,
+   "title": "Receiving the news of Ivri",
+   "about": "Miriam describes the funeral and a final sign of love from Ivri"
   },
   {
    "at": 891,
-   "title": "Hillel's Upbringing and Community Work",
-   "about": "Details of Hillel's childhood in Talmon, his involvement in Bnei Akiva and Nachshon, and his family."
+   "title": "Childhood values and upbringing",
+   "about": "The upbringing of Hillel and Ivri in their respective communities"
   },
   {
-   "at": 1054,
-   "title": "Ivri's Background and Writings",
-   "about": "Ivri's upbringing in Eli, his family background, and the pre-October 7 letter he wrote about unity and the IDF."
+   "at": 1146,
+   "title": "Ivri's letter to the nation",
+   "about": "Miriam reads a letter written by Ivri about unity and the IDF"
   },
   {
    "at": 1469,
-   "title": "Experiencing Tisha B'Av Through Loss",
-   "about": "Connecting the destruction of the Bet HaMikdash to personal grief, sitting shiva, and praying for the Geulah."
+   "title": "Reflections on Tisha B'Ab",
+   "about": "Connecting the Hurban to their personal experiences of loss"
   },
   {
    "at": 1710,
-   "title": "Building a Support Network for Young Widows",
-   "about": "Creating a group and pairing widows together to support each other through their journey."
-  },
-  {
-   "at": 2112,
-   "title": "Spreading Stories and Continuing the Mission",
-   "about": "The speakers discuss traveling to share their husbands' stories and their continued commitment to the IDF and Israel."
+   "title": "Supporting other widows",
+   "about": "The initiative to create a support group for young widows"
   }
  ],
  "unsupported": [
-  "features",
+  "experiences",
   "fell",
+  "began",
+  "commitment",
+  "shaped",
   "backgrounds",
-  "introduce",
-  "themselves",
+  "meeting",
+  "character",
+  "receiving",
+  "news",
   "upbringing",
-  "background",
-  "writings",
-  "experiencing",
-  "building",
-  "support",
-  "network"
+  "reflections",
+  "supporting"
  ],
- "summary": "This class features personal presentations by Miriam Dictstein and Zahava Diner, two young women who lost their husbands, Ivri and Hillel, who fell as soldiers defending Am Yisrael. They share their husbands' backgrounds, letters and values, and connect the personal loss and the pain of Tisha B'Av and the destruction of the Bet HaMikdash to the ongoing war and the strength of the IDF.",
+ "claims": [
+  "Hillel believed this so much that two years before the war started, he told me that he had a gut feeling that he would die in battle."
+ ],
+ "summary": "Miriam Dictstein and Zahava Diner share their personal experiences as young widows of soldiers who fell during the war that began on October 7th. They discuss the values their husbands lived by, their own commitment to the IDF, and how their personal loss has shaped their understanding of Tisha B'Ab.",
  "subjects": [
-  "Am Yisrael",
-  "Eretz Yisrael",
-  "Bet HaMikdash",
-  "Tisha B'Av",
-  "Golani Brigade",
-  "Kfir Brigade",
-  "Bnei Akiva",
-  "Nachshon",
-  "IDF",
-  "Geulah"
+  "Tisha B'Ab",
+  "IDF service",
+  "Am Israel",
+  "Eretz Israel",
+  "Shiva",
+  "Support for widows",
+  "Sacrifice for the country",
+  "Values of fallen soldiers"
  ],
  "questions": [
-  "How do the personal losses of soldiers connect to the themes of Tisha B'Av?",
-  "What kind of values and upbringing did Hillel and Ivri have?",
-  "How did Hillel support his fellow soldiers during their service?",
-  "What message did Ivri leave behind in his writings before October 7?",
-  "How are the widows supporting each other after their losses?"
+  "How do these women find strength after losing their husbands in the war?",
+  "What role does the IDF play in the lives of these young couples?",
+  "How has the experience of personal loss changed the way they observe Tisha B'Ab?",
+  "What is the importance of unity among the people of Israel during wartime?"
  ],
- "quality": "good",
+ "quality": "poor",
  "terms": "hillel ivri israel army home back come war letter told hurban always country decided every friend looked officers shabbat zahava days dont live made make today base called choose commander even five life look miriam name officer soldier understand widow amazing becoming behind brigade feeling funeral give group head hillels husbands killed left lives october remember shiva short started time video year years young air bav born brothers community eli family feelings flower friends game honor kids land later love married months mountain moved old parents read sending siblings sisters spoke still story tisha took training week 7th able another around ask believed better bus casualty close course cry decisions defense dream eretz fighting final force forwards good grandfather happened hard hashmonaim hear hope hostages idf jerusalem jewish knew last means mission moment new office ourselves photo play please relationship sentence sitting solider standing start sticker talk talmon together truly wasnt without write wrote activist afternoon aliyah alone answered basic became big bouquet brother came cant childhood children chocolate choice citizens coast continue couple dad day defend demand didnt different diner doesnt drafted drove enemies everyone father feel finished four getting golani grief habait hadnt half hamikdash har help hey hours house incident inside involved ivery jersey jobs journey kfir leave lebanon lost moreover mother nearby never outside pain peace people present privilege protect ranging rav recalled relevant saw serve share shlichut sign smile soldiers speaking special stay sure thank theyre thinking thought trip trouble trust walk walking weeks whether wife win within women worried yeshiva yourself 23rd accompanied acknowledge activities add addition address adult affer age agency ago akiva alive aliya anymore anyway arguments arms arrangements artist asked asking august barely battalion battle beautiful become beginning behalf beit belief believe belong best bet blocked bnei body bottom broke bubble bunch burning canada certain certainly chairs change chase circle citizen civil climbing colonel color combat communities confirm connect continuing conversation cost couldnt crashing critical crushing crying cup december dedicating dedication delivery destiny destruction dictstein die died digest division double dreams drive duty easy eat eating educational emergencies emergency encounter end ended enemy enlist entirely equal especially families far fast fierce fight fine first fitting flags flowers followed following forces forever forget forward france friday fulfill full future gave gaza gender geulah giving goes grandson great greater grew grow growing gut happen hatmar headlines hearing hearts held helped helping helps heroes heroic herself hertzl high highland hike hold holding homework hospital hotel hour hug huge huppah hurry husband importance job joined keep knowing lake laugh learned letters lieutenant lived looking losing loving low making mandatory march matter may media medical mile mind ministry minute mishnah mom month monticello moving mutual myself nachshon named nation near necessary need needs next night nine nurse ori pair park past personal place planning playing point political pray prevail private projects promised protecting proud push pushing put putting raised rank regular reminds reservation residence roads room roots routine sacrifice sacrifices sad school scream senior sense september service shani shifts shoes shortly should show showed shows sides simple situation six skin slowly small soliders son sons soon south souvenir speak spreading stance state steps stickers stomach stop stopped stories stranger strength strip strong stuck survivors syria take talking teams tell telling ten terrorists tests text thankfully though three throughout thursday tiberius till toronto town tried truth trying tunnel uncle unit used utter value values visit volunteered volunteering waited waiting wanted waves weddings wednesday welcome whats widows window winds wont word works world written york zion",
  "words": 3307,
  "language": "",
  "speaker": "",
  "made": "2026-11-20",
- "by": "gemini (video) + gemini-3.5-flash-lite"
+ "by": "gemini (video) + gemini-3.1-flash-lite"
 }

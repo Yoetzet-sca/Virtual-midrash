@@ -6,59 +6,60 @@
  "chapters": [
   {
    "at": 6,
-   "title": "Introduction to Melabes and Berakhot",
-   "about": "Berakhah on Melabes or Jordan almonds"
+   "title": "Berakhot and minhag on Melabes",
+   "about": "Jordan almonds coated in sugar and questions on their berakha"
   },
   {
    "at": 53,
-   "title": "Binyan Hai and Baghdad Minhag",
-   "about": "Customs in Baghdad and Rabbi Yosef Chaim"
+   "title": "Binyan Hai on the Baghdad custom",
+   "about": "Rabbi Yosef Chaim, separating sugar from almond, and Shehakol"
   },
   {
    "at": 144,
-   "title": "Peri Saddiq and Aleppo Minhagim",
-   "about": "Hacham Shaul Kassin and Peri Saddiq"
+   "title": "Peri Saddiq by Hakham Shaul Kassin",
+   "about": "Shekedim mechupeem bi-sugar and rulings from Aleppo scholars"
   },
   {
    "at": 237,
-   "title": "Shulchan Aruch by Hacham Shmuel Laniado",
-   "about": "Shulchan Aruch and berakhah of ha-etz"
+   "title": "Hakham Shmuel Laniado on Melabes",
+   "about": "Early Halabi ruling of mevarech ha-etz"
   },
   {
    "at": 282,
-   "title": "Royne Aman and Conclusion for Aleppo",
-   "about": "Hacham Yitzchak Shehebar and final minhag"
+   "title": "Royne Aman and final conclusion",
+   "about": "Hakham Yitzchak Shehebar and the established Halabi minhag of ha-etz"
   }
  ],
  "unsupported": [
-  "differing",
-  "determine"
+  "proper",
+  "recorded",
+  "found",
+  "recite"
  ],
- "summary": "Joseph Mosseri discusses the berakhah on Melabes, known as Jordan almonds, examining differing opinions and customs. He looks at sources including Binyan Hai, Peri Saddiq, Shulchan Aruch, and Royne Aman to determine the minhag of Aleppo.",
+ "claims": [
+  "\"as well as the Halabi minhag found in Peri Saddiq\" - Peri Saddiq is by Hakham Shaul Kassin, not a Halabi minhag source discussed as such; the text attributes the book to him and mentions opinions heard in Jerusalem, but the part title says 'Peri Saddiq by Hakham Shaul Kassin'."
+ ],
+ "summary": "Mr. Mosseri examines the proper berakha for eating Melabes (sugar-coated almonds) according to various communities and rabbinic sources. He discusses the custom of Baghdad recorded in Binyan Hai by Rabbi Yosef Chaim, as well as the Halabi minhag found in Peri Saddiq, the writings of Hakham Shmuel Laniado, and Royne Aman by Hakham Yitzchak Shehebar. The class explores whether one should recite Ha-Etz, Shehakol, or separate the sugar coating from the almond.",
  "subjects": [
-  "Melabes",
-  "Binyan Hai",
-  "Rabbi Yosef Chaim of Baghdad",
-  "Peri Saddiq",
-  "Hacham Shaul Kassin",
-  "Rabbi Jacob S. Kassin",
-  "Shulchan Aruch",
-  "Hacham Shmuel Laniado",
-  "Royne Aman",
-  "Hacham Yitzchak Shehebar",
-  "Sephardic Heritage Museum"
+  "Berakhot on Melabes",
+  "Minhag of Baghdad versus Halab",
+  "Binyan Hai by Rabbi Yosef Chaim of Baghdad",
+  "Peri Saddiq by Hakham Shaul Kassin",
+  "Hakham Shmuel Laniado",
+  "Royne Aman by Hakham Yitzchak Shehebar",
+  "Reciting Ha-Etz versus Shehakol"
  ],
  "questions": [
-  "What is the correct berakhah on Melabes?",
-  "What was the custom in Baghdad regarding sugar-coated almonds?",
-  "What does Hacham Shaul Kassin write in Peri Saddiq about Melabes?",
-  "What is the minhag of Aleppo for Melabes according to the sources discussed?"
+  "What berakha is recited on Melabes according to the minhag of Halab?",
+  "How did the father of Rabbi Yosef Chaim (author of Binyan Hai) eat sugar-coated almonds?",
+  "What was the minhag in Baghdad regarding the berakha on Melabes?",
+  "Which Halabi books and Hakhamim address the berakha for Melabes?"
  ],
- "quality": "good",
+ "quality": "poor",
  "terms": "beracha etz separate shehakol book hacham minhag melabes writes aleppo berachot almonds people sugar baghdad father kassin make published rabbi shaul thats away binyan custom even heard hes jerusalem opinion passed sources almond aman argentina aruch back called chief city coated different food hai halacha known left obviously particular royne shulchan son talked thinks wasnt whole wrote 18th already arabic arguing ashkenazi asked bookshelf born bottom brooklyn brought call candy caravan case centuries century chaim clear comes commonly community couple covered creates definition discussing dont doubt early east eating except explicitly famous first foods footnotes generally gives gone hachamim hais halab heritage ill interaction introduction issue issues item items jacob jordan laniado leave lived living long makes mechupeem mevarech middle miles minhagim museum nothing often old opposed original peri person play pri publishing pulled question quotes read recent recently regarding region route saddiq saying seen sephardic shehebar shekedim shmuel should states subject talking tells theyre though time todays translation united unsure usually went witnessed writings written yitzchak yosef",
  "words": 750,
  "language": "",
- "speaker": "Joseph Mosseri",
+ "speaker": "",
  "made": "2026-11-20",
- "by": "gemini (video) + gemini-3.5-flash-lite"
+ "by": "gemini (video) + gemini-3.5-flash"
 }
