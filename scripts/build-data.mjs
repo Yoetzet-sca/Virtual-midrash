@@ -158,15 +158,18 @@ const search = [];
   for (const f of await readdir(new URL('content/ai/', root)).catch(() => [])) {
     if (f.endsWith('.json')) try { ai.set(f.slice(0, -5), JSON.parse(await readFile(new URL('content/ai/' + f, root), 'utf8'))); } catch { warnings.push(`Could not read content/ai/${f}`); }
   }
-  let topics = 0;
+  let topics = 0, moved = 0;
   for (const c of classes) {
     const a = ai.get(sidOf(c.id));
     if (!a || a.quality === 'poor') continue;
+    // A channel video filed under the SCA itself moves to its teacher once the video has named who is teaching.
+    if (c.teacherId === 'sca' && a.speaker) { const who = teacherForTitle(a.speaker, teachers.filter((x) => x.id !== 'sca')); if (who) { c.teacherId = who; moved++; } }
     if (!c.topic && TOPICS.includes(a.topic)) { c.topic = a.topic; topics++; }
     c.summary = a.summary;
     if (a.chapters?.length) c.chapters = a.chapters.map((x) => [x.at, x.title]);
     search.push({ i: sidOf(c.id), m: a.summary, s: (a.subjects || []).join('; '), q: (a.questions || []).join(' '), c: (a.chapters || []).map((x) => x.about || ''), t: a.terms || '' });
   }
+  if (moved) console.log(`✓ ${moved} SCA-channel videos filed under the teacher named in the video`);
   if (ai.size) console.log(`✓ AI summaries: ${search.length} classes searchable by what was said; ${topics} given a topic the title did not show`);
 }
 // Staff corrections: fix a topic or hide a class.

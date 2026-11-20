@@ -36,7 +36,9 @@ await mkdir(new URL('.ai-tmp/', root), { recursive: true });
 const teacherName = (id) => data.teachers.find((t) => t.id === id)?.name || id;
 const aiFile = (c) => new URL(`content/ai/${c.sid}.json`, root);
 // Videos filed under the SCA itself (no teacher matched) are redone once more so the summary names the speaker, not the organization.
-const need = (c) => (c.teacherId === 'sca' ? VERSION + 1 : VERSION);
+const need = (c) => (c.teacherId === 'sca' ? VERSION + 2 : VERSION);
+// Who is teaching: the teacher the class is filed under, or for an SCA-channel video the name the video itself gives.
+const speakerOf = (c, tx) => (c.teacherId === 'sca' ? tx.speaker || '' : teacherName(c.teacherId));
 const upToDate = (c) => { try { return (JSON.parse(readFileSync(aiFile(c), 'utf8')).v || 1) >= need(c); } catch { return false; } };
 const txFile = (c) => new URL(`ai-transcripts/${c.sid}.json`, root);
 
@@ -116,7 +118,7 @@ const drop = (model) => { if (models) models = models.filter((m) => m !== model)
 // never said, ask once more naming those words. The attempt with the fewest such words is kept, and they are recorded.
 async function summarize(c, tx) {
   const shown = (ai) => [ai.summary, ...ai.chapters.map((x) => x.title)].join(' ');
-  const allowed = `${c.title} ${teacherName(c.teacherId)}`;
+  const allowed = `${c.title} ${teacherName(c.teacherId)} ${tx.speaker || ''}`;
   let best = await askGemini(c, tx);
   best.unsupported = unsupported(shown(best), tx.text, allowed);
   if (best.unsupported.length) {
@@ -156,21 +158,23 @@ const lengthOf = (c, tx) => c.durationSec || (tx.segments?.length ? tx.segments[
 async function askGemini(c, tx, redo = '') {
   const transcript = tx.segments?.length ? timedTranscript(tx.segments) : tx.text;
   const secs = lengthOf(c, tx);
-  const prompt = summaryPrompt({ title: c.title, teacher: c.teacherId === 'sca' ? '' : teacherName(c.teacherId), minutes: Math.round(secs / 60), transcript: transcript.slice(0, 140000), redo });
+  const prompt = summaryPrompt({ title: c.title, teacher: speakerOf(c, tx), minutes: Math.round(secs / 60), transcript: transcript.slice(0, 140000), redo });
   return gemini([{ text: prompt }], (text, model) => ({ ...parseModelJson(text, secs || Infinity), model }));
 }
 
 // A YouTube video has no audio file to send for transcription. Gemini is given the public link and writes the transcript
 // itself; the summary is then made from that transcript exactly as for audio classes.
 async function transcribeVideo(c) {
-  const ask = `Transcribe the speech in this video word for word, in the language spoken. Do not summarize, tidy, translate or add anything; write what is said. Begin a new line about every 45 seconds, and start each line with the time in the video in square brackets, like [0:00] or [12:30]. Reply with the transcript only.`;
+  const ask = `Transcribe the speech in this video word for word, in the language spoken. Do not summarize, tidy, translate or add anything; write what is said. Begin a new line about every 45 seconds, and start each line with the time in the video in square brackets, like [0:00] or [12:30]. Before the transcript, write one line: "SPEAKER: " followed by the name of the person teaching, but only if the video shows the name in writing (a title card or caption) or the name is said aloud; otherwise write "SPEAKER: unknown". Never work out who it is from how a person looks. After that line, reply with the transcript only.`;
   // Sound is what matters here, so the picture is sampled sparsely to keep the request small.
   const parts = [{ fileData: { fileUri: `https://www.youtube.com/watch?v=${c.youtubeId}` }, videoMetadata: { fps: 0.1 } }, { text: ask }];
   return gemini(parts, (text) => {
     const segments = parseTimedTranscript(text);
     const words = segments.reduce((n, s) => n + s.text.split(/\s+/).length, 0);
     if (segments.length < 3 || words < 150) throw new Error(`the transcript came back too short (${words} words)`);
-    return { text: segments.map((s) => s.text).join(' '), language: '', segments, by: 'gemini' };
+    const named = (text.match(/^\s*SPEAKER:\s*(.+)$/m)?.[1] || '').trim();
+    const speaker = /^unknown\b|^n\/?a$|^none$/i.test(named) ? '' : named.slice(0, 60);
+    return { text: segments.map((s) => s.text).join(' '), language: '', segments, by: 'gemini', speaker };
   }, { json: false, seconds: 420, extra: { mediaResolution: 'MEDIA_RESOLUTION_LOW', maxOutputTokens: 60000 } });
 }
 
@@ -212,11 +216,12 @@ for (const c of stoppedByGemini ? [] : videos) {
   if (videosDone >= MAX_VIDEOS) break;
   try {
     let tx = existsSync(txFile(c)) ? JSON.parse(await readFile(txFile(c), 'utf8')) : null;
+    if (tx && tx.speaker === undefined) tx = null; // made before the speaker's name was recorded
     if (!tx) { tx = await transcribeVideo(c); await writeFile(txFile(c), JSON.stringify({ id: c.id, title: c.title, ...tx })); }
     const ai = await summarize(c, tx);
-    await writeFile(aiFile(c), JSON.stringify({ v: need(c), id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, unsupported: ai.unsupported, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: '', made: new Date().toISOString().slice(0, 10), by: `gemini (video) + ${ai.model}` }, null, 1));
+    await writeFile(aiFile(c), JSON.stringify({ v: need(c), id: c.id, title: c.title, topic: ai.topic, chapters: ai.chapters, unsupported: ai.unsupported, summary: ai.summary, subjects: ai.subjects, questions: ai.questions, quality: ai.quality, terms: searchTerms(tx.text).join(' '), words: tx.text.split(/\s+/).length, language: '', speaker: tx.speaker || '', made: new Date().toISOString().slice(0, 10), by: `gemini (video) + ${ai.model}` }, null, 1));
     videosDone++;
-    console.log(`\n✓ VIDEO ${teacherName(c.teacherId)} — ${c.title} (about ${Math.round(lengthOf(c, tx) / 60)} min, ${tx.text.split(/\s+/).length} words, ${ai.model}${ai.quality === 'poor' ? ', marked POOR' : ''})`);
+    console.log(`\n✓ VIDEO ${speakerOf(c, tx) || 'speaker not named'} — ${c.title} (about ${Math.round(lengthOf(c, tx) / 60)} min, ${tx.text.split(/\s+/).length} words, ${ai.model}${ai.quality === 'poor' ? ', marked POOR' : ''})`);
     console.log(`  Summary: ${ai.summary}`);
     console.log(`  Words not found in the transcript: ${ai.unsupported.length ? ai.unsupported.join(', ') : 'none'}`);
     console.log(`  Topic: ${ai.topic || 'none'} (title rules said: ${c.topic || 'none'})`);
