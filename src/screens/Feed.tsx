@@ -111,7 +111,9 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
   useEffect(() => { pending.current = startId; }, [startId]);
   useEffect(() => {
     if (!pending.current) return;
-    if (!cards.some((c) => c.id === pending.current)) { if (topic !== 'For You') setTopic('For You'); else pending.current = undefined; return; }
+    // Only a class someone asked for by link pulls the feed back to For You. The class they were last in the middle of
+    // must not: it used to undo a filter chosen from Explore before it could show.
+    if (!cards.some((c) => c.id === pending.current)) { if (topic !== 'For You' && linkId && pending.current === linkId) setTopic('For You'); else pending.current = undefined; return; }
     pending.current = undefined;
     // Wait for the list to settle, then go to the top-left, where that class now sits.
     const id = requestAnimationFrame(() => requestAnimationFrame(() => {
