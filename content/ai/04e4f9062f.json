@@ -6,49 +6,52 @@
  "chapters": [
   {
    "at": 6,
-   "title": "Introduction to Birkat Kohanim on Tisha B'Ab",
-   "about": "Shahrit, Tisha B'Ab, custom"
+   "title": "Birkat Kohanim on Tish'a BeAb Morning",
+   "about": "Introduction to the minhag not to do Birkat Kohanim in Shahrit."
   },
   {
    "at": 51,
-   "title": "Community custom and Yerushalayim",
-   "about": "Sephardic community, Yerushalayim, Hahamim, minyanim"
+   "title": "Influence from Yerushalayim",
+   "about": "The difference in minhag in Yerushalayim and recent changes in minyanim."
   },
   {
    "at": 98,
-   "title": "The reason behind the custom",
-   "about": "Mourner, house of mourning, shalom, beraha"
+   "title": "Reasoning Behind Our Minhag",
+   "about": "Likening the community to a mourner and the lack of shalom."
   },
   {
    "at": 191,
-   "title": "Sources from Hahamim",
-   "about": "Shulchan Aruch, Tanya Bati, David Abudraham, Haham Chaim Ber Benisti"
+   "title": "Sources Among the Hakhamim",
+   "about": "Shulchan Aruch, Tanya Bati, David Abudraham, and Haham Chaim Ber Benisti."
   },
   {
-   "at": 249,
-   "title": "The pesuk from Yeshayahu",
-   "about": "Yeshayahu, sins, sinat chinam, hands"
+   "at": 236,
+   "title": "Pesukim and Sinat Chinam",
+   "about": "The pesuk in Yeshayahu and the issue of sinat chinam."
   },
   {
    "at": 328,
-   "title": "Evidence from prayer books",
-   "about": "Prayer books, Syrian community, Argentina, Egypt, Ben Ish Hai"
+   "title": "Community Prayer Books and Ben Ish Hai",
+   "about": "Evidence from various community prayer books and the ruling of Ben Ish Hai."
   }
  ],
  "unsupported": [
-  "recited",
-  "traditional",
-  "referencing",
-  "behind",
-  "evidence"
+  "given",
+  "against",
+  "support",
+  "maintaining",
+  "influence",
+  "reasoning",
+  "behind"
  ],
- "summary": "Joey Harari explores whether Birkat Kohanim should be recited during Shahrit on Tisha B'Ab. He explains the traditional community custom not to do so, comparing it to a mourner in a house of mourning and referencing various Hahamim and community prayer books.",
+ "claims": [],
+ "summary": "Mr. Mosseri explains the community custom regarding Birkat Kohanim during Shahrit on Tish'a BeAb. He reviews the reasons given by various Hakhamim against doing it in the morning and notes that community prayer books support maintaining this custom.",
  "subjects": [
   "Birkat Kohanim",
-  "Shahrit",
-  "Tisha B'Ab",
-  "Minha",
-  "Hahamim",
+  "Tish'a BeAb",
+  "Shaharit",
+  "Mincha",
+  "Hakhamim",
   "Shulchan Aruch",
   "David Abudraham",
   "Haham Chaim Ber Benisti",
@@ -56,17 +59,17 @@
   "Ben Ish Hai"
  ],
  "questions": [
-  "Do we do Birkat Kohanim on Tisha B'Ab morning in Shahrit?",
-  "What is the custom of Sephardic communities regarding Birkat Kohanim on Tisha B'Ab morning?",
-  "Why do some Hahamim liken Tisha B'Ab morning to a mourner in a house of mourning?",
-  "What does the pesuk in Yeshayahu teach us about spreading hands during times of sinat chinam?",
-  "What do community prayer books from Syria, Argentina, and Egypt indicate about Birkat Kohanim on Tisha B'Ab?"
+  "Do we do Birkat Kohanim on Tish'a BeAb morning?",
+  "Why do some minyanim in our community do Birkat Kohanim on Tish'a BeAb Shaharit?",
+  "What is the reasoning behind not doing Birkat Kohanim on Tish'a BeAb morning?",
+  "What do community prayer books indicate about Birkat Kohanim on Tish'a BeAb?",
+  "What did the Ben Ish Hai rule regarding Birkat Kohanim on Tish'a BeAb?"
  ],
  "quality": "good",
  "terms": "birkat kohanim bav tisha custom community morning minhag mourning shalom hahamim kohen mourner pesuk question yerushalayim bless cannot come house mourners people put shaharit words youre among another based ben big blood book chari clearly concept connection day different doesnt even explain eyes hai hands hopefully ish issue jerusalem mincha peace person point rather sad seems sephardic sorrowful syrian talk three turkey uphold upon verge write written yeshayahu yisrael abudraham accept algeria almost answer argentina arms aruch away back baghdad bati befitting benisti ber beraha books bring bringing brooklyn bulgaria centuries chaim change changed chinam churban clear concludes david dealt decade definitely detailed done dont dorah due earlier egypt egyptian embarrassed end ending entire every fact fast fellow first fit forth frame frequent full god goes greece haham hakodesh hashem hear hide himself humiliated indicate instituted iraq istanbul italy jewish known last later lebanon levi libya lift likened man matter members mind minyanim morocco mournful murderer nation necessarily need nice number nutshell otherwise ourselves parashat places play prayer prayers publications rabbi rabbis ramim real rectify repeat shed shiurim should shulchan simple sinat since sins sion sources spain spread state still syria talking tanya teach teachings teba tetzaveh theres though throughout time tunisia turning understand unfamiliar usurp versions visit wanted wants week weve whats whether whos writings yom young yourself",
  "words": 976,
  "language": "",
- "speaker": "Joey Harari",
+ "speaker": "",
  "made": "2026-11-20",
  "by": "gemini (video) + gemini-3.5-flash-lite"
 }

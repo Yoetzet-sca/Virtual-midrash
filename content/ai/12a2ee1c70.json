@@ -1,64 +1,69 @@
 {
- "v": 6,
+ "v": 8,
  "id": "yt:yViqW9zqZiQ",
  "title": "SCA Minhag of the Week 278: \"Hakham Matloub Abadi’s Responsum on Prayers for the 9th of Ab- Part 3\"",
- "topic": "Minhag of the Week",
+ "topic": "Halakha",
  "chapters": [
   {
    "at": 0,
-   "title": "Introduction to Haham Obadiah's responsum",
-   "about": "Haham Obadiah, Magin Be'av, Tisha B'av, fourth question"
+   "title": "Introduction to the Responsum",
+   "about": "Haham Matloub Abadi's responsa on Tisha BeAb prayers"
   },
   {
    "at": 45,
-   "title": "The custom of Egypt and Kaddish before Haftara",
-   "about": "Rabbi Raphael Aaron Ben Shimon, Nahar Mizrayim, interruption"
+   "title": "The Custom of Egypt",
+   "about": "Nahar Mizrayim and the timing of Kaddish"
   },
   {
    "at": 90,
-   "title": "Haham Obadiah's sources and arguments",
-   "about": "Kafaheim Sofer, Olim, Yaskil Abdi, Haham Ovadia Hadaya"
+   "title": "Arguments Regarding Interruption",
+   "about": "Yaskil Abdi and the definition of interruption"
   },
   {
    "at": 135,
-   "title": "Binah Noshel Shelomo and Halab customs",
-   "about": "Binah Noshel Shelomo, Rabbi Raphael Shlomo Laniado, Minha Yom Kippur, Maftir"
+   "title": "Authorities and Minhag",
+   "about": "Binah Noshel Shelomo and the custom of Halab"
   },
   {
    "at": 180,
-   "title": "Conclusion and summary of customs",
-   "about": "Minhag Kadum, Arvit, Kaddish, Minha"
+   "title": "Conclusion on Tisha BeAb Customs",
+   "about": "Summary of instructions for Tisha BeAb"
   }
  ],
- "unsupported": [],
- "summary": "This class discusses Haham Obadiah's responsum on whether the third ole recites Kaddish before or after the Haftara in Shacharit of Tisha B'av. It reviews customs from Halab, Egypt, and other sources cited by Haham Obadiah regarding Kaddish as an interruption.",
+ "unsupported": [
+  "placement",
+  "service",
+  "beab",
+  "established"
+ ],
+ "claims": [
+  "This class examines a responsum by Haham Matloub Abadi regarding the placement of Kaddish during the Shacharit service on Tisha BeAb. - The speaker repeatedly mentions Haham Obadiah, not Haham Matloub Abadi."
+ ],
+ "summary": "This class examines a responsum by Haham Matloub Abadi regarding the placement of Kaddish during the Shacharit service on Tisha BeAb. It explores whether the third ole should recite Kaddish before or after the Haftara by comparing the custom of Egypt with the established customs of Halab.",
  "subjects": [
-  "Haham Obadiah",
-  "Magin Be'av",
-  "Tisha B'av",
-  "Arvit",
-  "Haftara",
+  "Tisha BeAb",
+  "Shacharit",
   "Kaddish",
-  "Rabbi Raphael Aaron Ben Shimon",
+  "Haftara",
   "Nahar Mizrayim",
-  "Kafaheim Sofer",
-  "Yaskil Abdi",
+  "Haham Matloub Abadi",
+  "Rabbi Raphael Aaron Ben Shimon",
   "Haham Ovadia Hadaya",
+  "Yaskil Abdi",
   "Binah Noshel Shelomo",
-  "Rabbi Raphael Shlomo Laniado",
-  "Halab"
+  "Minhag"
  ],
  "questions": [
-  "Does the third ole recite Kaddish before or after the Haftara in Shacharit of Tisha B'av?",
+  "Should the third ole recite Kaddish before or after the Haftara on Tisha BeAb?",
   "Is Kaddish considered an interruption between the Torah reading and the Haftara?",
-  "What was the custom in Egypt regarding Kaddish during Shacharit of Tisha B'av?",
-  "How does Haham Obadiah support the practice of reciting Kaddish before the Haftara?"
+  "What was the custom of Egypt regarding Kaddish on Tisha BeAb?",
+  "How does the custom of Halab compare to other practices regarding Kaddish on Tisha BeAb?"
  ],
- "quality": "good",
+ "quality": "poor",
  "terms": "kaddish haham haftara reading bav tisha obadiah torah recite custom olim reciting shacharit book rabbi third customs discussed egypt episode hadaya halab interruption minha obadiahs ole ovadia quoted raphael read supported aaron argument authorities ben kafaheim meaning night original prayers question recited responsa sefer shimon since sofer written wrote 18th abdi accordance according addressed amen amount arbit argued arvit based beav benhamat beyamenu bimhera binah binyan briefly called century chief cited combine community concluded considered correct day disagreed discuss earlier end even final found fourth furthermore holidays however instead instructed instruction instructions itkabal kadum kippur laniado lastly law maftir magin maintain minhag minimum mizrayim nahar noshel petkaddish places posed position practice praying previous quoting recites recorded required responsum second sending sent several shabbatot shelomo shlomo should special specified summarize though titkabal towards tzchudot videos went yaskil yerushalayim yom zion",
  "words": 573,
  "language": "",
  "speaker": "",
  "made": "2026-11-20",
- "by": "gemini (video) + gemini-3.5-flash-lite"
+ "by": "gemini (video) + gemini-3.1-flash-lite"
 }

@@ -1,68 +1,71 @@
 {
- "v": 6,
+ "v": 8,
  "id": "yt:RbQBpUi491U",
  "title": "SCA Tribute to Rabbi Dr. Raymond Harari A\"H by Mrs. Vicky Harari",
- "topic": null,
+ "topic": "Holidays",
  "chapters": [
   {
    "at": 4,
-   "title": "Introduction and Opening Quote",
-   "about": "Victor Frankel quote and tears of remembrance for Tish'a B'av"
+   "title": "Victor Frankl Quote on Tears",
+   "about": "courage to suffer and memory"
+  },
+  {
+   "at": 49,
+   "title": "Destruction of the Second Temple",
+   "about": "senseless hate between fellow Jews"
   },
   {
    "at": 94,
-   "title": "Introduction of Six Traits",
-   "about": "Listing the six attributes and the teaching of Rabbi Aaron Lichtenstein"
+   "title": "Work and Gratitude",
+   "about": "hard work in character refinement and expressing thanks"
   },
   {
-   "at": 186,
-   "title": "Gratitude",
-   "about": "Simchat Torah in Allenhurst and thanking the community"
+   "at": 279,
+   "title": "Forgiveness and Teshuva",
+   "about": "forgetting wrongs and seeking forgiveness"
   },
   {
-   "at": 289,
-   "title": "Forgiveness",
-   "about": "Letting go of wrongs and asking forgiveness"
+   "at": 373,
+   "title": "Inclusion of Women in Halakha",
+   "about": "Talmud study for women and synagogue inclusion"
   },
   {
-   "at": 388,
-   "title": "Inclusion of Women in Halachic Judaism",
-   "about": "Teaching Talmud to women and synagogue seating"
-  },
-  {
-   "at": 549,
-   "title": "Patience",
-   "about": "Patience at home, in the classroom, and with everyone"
+   "at": 563,
+   "title": "Practicing Patience",
+   "about": "giving time and attention to everyone"
   },
   {
    "at": 702,
-   "title": "Focusing on Family over Public Opinion",
-   "about": "Prioritizing children coming home for Shabbat over what people think"
+   "title": "Focusing on Family",
+   "about": "caring for children over public opinion"
   }
  ],
  "unsupported": [
-  "opening"
+  "practiced",
+  "commitment",
+  "exercising",
+  "destruction",
+  "practicing"
  ],
- "summary": "This class is a tribute by Mrs. Vicky Harari to her late husband, Rabbi Dr. Raymond Harari. She shares six attributes that he worked on throughout his life, including gratitude, forgiveness, the inclusion of women in Halakha, patience, focusing on family and priorities, and not worrying about what others think.",
+ "claims": [],
+ "summary": "Mrs. Vicky Harari shares six character traits practiced by her late husband, Rabbi Raymond Harari. She describes his commitment to daily Avoda, showing gratitude, forgiving others, including women within Halakha, exercising patience, and focusing on family over the opinions of others.",
  "subjects": [
-  "Rabbi Dr. Raymond Harari",
-  "Bet HaMikdash",
-  "Tish'a B'av",
+  "Rabbi Raymond Harari",
   "Rabbi Aaron Lichtenstein",
-  "Yeshivat Har Etzion",
-  "Simchat Torah",
+  "Victor Frankl",
+  "Destruction of the Bet HaMikdash",
+  "Hakarat HaTob",
+  "Forgiveness and Teshuva",
+  "Inclusion of women in Halakha",
   "Michelle Cohen Farber",
-  "Daf Yomi",
-  "Mikdash Eliyahu",
-  "Halakha",
-  "Hashem"
+  "Patience in teaching",
+  "Family and Shabbat"
  ],
  "questions": [
-  "What are the six character traits that Rabbi Raymond Harari focused on during his life?",
-  "How did Rabbi Harari demonstrate gratitude during his final Simchat Torah?",
-  "In what ways did Rabbi Harari advance the inclusion of women in Halachic Judaism?",
-  "How did Rabbi Harari handle conflicts and people who wronged him?",
-  "What did Rabbi Harari prioritize regarding his family versus community opinions?"
+  "Why was the second Bet HaMikdash destroyed?",
+  "What character traits did Rabbi Raymond Harari work on throughout his life?",
+  "How did Rabbi Raymond Harari approach forgiveness?",
+  "What was Rabbi Raymond Harari's view on including women in Halakhic study and prayer?"
  ],
  "quality": "good",
  "terms": "husband home women coming others shabbat children man patience work ask class community daily men president adam family forgiveness gratitude last recall students upon wanted always asked child classes courage day entering hafot halachic judaism learn legacy life love memory often people question rabbi read saying school service sure teach tears thank time together tomwood torah yud anger ashamed attended away back believed beta call called came care character come conversation destroyed didnt dont ended even everyone fellow first focusing forgive framework friday funeral god great grow hard hashem husbands improving inclusion individual issues late lived make minion mother need night part phone place priorities quick remember room safer second senseless serve shiva simchat situation six speaker speaking student summer taught temple thought toil took went woman wronged years aaron accepts across action against alan allenhurst allowing although amnesia another answer anyone anyway appearances area areas attends attention attributes author avoda backyard bav become begin beings believe believes better blessed boardroom book bore born bring canceled capable carry cautioned choose chose city classroom clear clothing cohen colleges comes completely complicated conclusion congregants content continue conversations couples course credits cry daf daughter daughters deserve deserved devoted disagreeing disturbing done door dorm early educators effort eliyahu embarrassed end energy entered entire etzion evening every example exited express expressing expression farber favorite fear feet felt find finished five flapush forget forward frail frankel freely frivolous gave gift good grandchildren greatest grew grief halacha haltingly happiness har harari hate hatred havent head heart help helped herse high holding holocaust hope houses human hundreds hurt imperative importance include inclusive inspired insulted intention interrupt jewish jews judeaic judgment kill knew knowing knows laimall lamal lastly law learned lichtenstein lied live lives long longer lose luimal lying makes making may meaning meet members michelle might mikdash motivated must napsack neighbor neighbors never new next normative obvious old ongoing online overheard particular passed patient patio perhaps prayer praying privately prized probably problems professor psychoanalyst publicly questions quote quoted quoting rabbis raced rain rather raymond realized reflect regret replied reply reported required resentment responsible result return roof rose rule sages saint schools search section sectioned seeing sensitive share shared show sianam simple sins sole somewhere speak spending stand standing start stood story stuck studies subway suffer survivor synagogue synagogues take takes talk taller tauel teacher teaches teaching teshuvah theyre though throughout thursday times tisha today told towards trailblazer traits treat truth turned turning uncomfortable understood unpack upright used vicky victor virtue waiting walking wants watching waved week whenever whether whispered within without witness womens wonderful words worked worthwhile wrong yeshiva yeshivat yet yomi york young youve",
@@ -70,5 +73,5 @@
  "language": "",
  "speaker": "",
  "made": "2026-11-20",
- "by": "gemini (video) + gemini-3.5-flash-lite"
+ "by": "gemini (video) + gemini-3.6-flash"
 }
