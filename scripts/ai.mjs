@@ -30,6 +30,7 @@ console.log(`Keys present — Groq: ${GROQ ? 'yes' : 'NO'}, Gemini: ${GEMINI ? '
 if (!GROQ || !GEMINI) { console.error('Both GROQ_API_KEY and GEMINI_API_KEY must be set as repository secrets.'); process.exit(1); }
 
 const data = JSON.parse(await readFile(new URL('public/data/app.json', root), 'utf8'));
+const settings = JSON.parse(await readFile(new URL('content/settings.json', root), 'utf8'));
 await mkdir(new URL('content/ai/', root), { recursive: true });
 await mkdir(new URL('ai-transcripts/', root), { recursive: true });
 await mkdir(new URL('.ai-tmp/', root), { recursive: true });
@@ -165,7 +166,10 @@ async function askGemini(c, tx, redo = '') {
 // A YouTube video has no audio file to send for transcription. Gemini is given the public link and writes the transcript
 // itself; the summary is then made from that transcript exactly as for audio classes.
 async function transcribeVideo(c) {
-  const ask = `Transcribe the speech in this video word for word, in the language spoken. Do not summarize, tidy, translate or add anything; write what is said. Begin a new line about every 45 seconds, and start each line with the time in the video in square brackets, like [0:00] or [12:30]. Before the transcript, write one line: "SPEAKER: " followed by the name of the person teaching, but only if the video shows the name in writing (a title card or caption) or the name is said aloud; otherwise write "SPEAKER: unknown". Never work out who it is from how a person looks. After that line, reply with the transcript only.`;
+  // A series with known presenters: the names and their spelling are given, but which one it is must still come from the video.
+  const series = (settings.videoSeries || []).find((s) => c.title.toLowerCase().includes(s.titleHas.toLowerCase()));
+  const hint = series ? ` This series is always presented by one of: ${series.presenters.join(', ')}. Use that spelling. Name one of them only if the video shows or says which; if it does not, write "SPEAKER: unknown".` : '';
+  const ask = `Transcribe the speech in this video word for word, in the language spoken. Do not summarize, tidy, translate or add anything; write what is said. Begin a new line about every 45 seconds, and start each line with the time in the video in square brackets, like [0:00] or [12:30]. Before the transcript, write one line: "SPEAKER: " followed by the name of the person teaching, but only if the video shows the name in writing (a title card or caption) or the name is said aloud; otherwise write "SPEAKER: unknown". Never work out who it is from how a person looks. ${hint} After that line, reply with the transcript only.`;
   // Sound is what matters here, so the picture is sampled sparsely to keep the request small.
   const parts = [{ fileData: { fileUri: `https://www.youtube.com/watch?v=${c.youtubeId}` }, videoMetadata: { fps: 0.1 } }, { text: ask }];
   return gemini(parts, (text) => {

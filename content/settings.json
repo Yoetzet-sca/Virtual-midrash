@@ -87,5 +87,15 @@
       "url": "https://www.njerub.org/"
     }
   ],
-  "skipArabicTitles": true
+  "skipArabicTitles": true,
+  "videoSeries": [
+    {
+      "titleHas": "Minhag of the Week",
+      "presenters": [
+        "Joseph Mosseri",
+        "Morris Arking",
+        "Joey Harari"
+      ]
+    }
+  ]
 }

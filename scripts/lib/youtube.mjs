@@ -28,7 +28,11 @@ export function teacherForTitle(title, teachers) {
   const byLast = teachers.filter((x) => { const p = parts(x.name); return p.length && has(p[p.length - 1]); });
   if (byLast.length === 1) return byLast[0].id;
   const byBoth = byLast.filter((x) => has(parts(x.name)[0]));
-  return byBoth.length === 1 ? byBoth[0].id : null;
+  if (byBoth.length === 1) return byBoth[0].id;
+  // Two teachers share the family name and the title gives no first name: "Rabbi Harari" is the one who is a rabbi.
+  const rabbi = (x) => /^(rabbi|hacham)\b/i.test(x.name);
+  const byTitle = has('rabbi') || has('hacham') ? byLast.filter(rabbi) : [];
+  return byTitle.length === 1 ? byTitle[0].id : null;
 }
 
 // ---- The whole channel, through YouTube's own Data API (needs a free API key) -------------------

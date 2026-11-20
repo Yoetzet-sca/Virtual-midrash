@@ -123,5 +123,35 @@
     "affiliations": [],
     "feed": "",
     "defaultTopic": ""
+  },
+  {
+    "id": "joseph-mosseri",
+    "name": "Joseph Mosseri",
+    "title": "Minhag of the Week",
+    "bio": "Presents Minhag of the Week, the SCA’s weekly video series on the customs of our Syrian and Middle Eastern communities.",
+    "photo": "",
+    "affiliations": [],
+    "feed": "",
+    "defaultTopic": "Minhag of the Week"
+  },
+  {
+    "id": "morris-arking",
+    "name": "Morris Arking",
+    "title": "Minhag of the Week",
+    "bio": "Presents Minhag of the Week, the SCA’s weekly video series on the customs of our Syrian and Middle Eastern communities.",
+    "photo": "",
+    "affiliations": [],
+    "feed": "",
+    "defaultTopic": "Minhag of the Week"
+  },
+  {
+    "id": "joey-harari",
+    "name": "Joey Harari",
+    "title": "Minhag of the Week",
+    "bio": "Presents Minhag of the Week, the SCA’s weekly video series on the customs of our Syrian and Middle Eastern communities.",
+    "photo": "",
+    "affiliations": [],
+    "feed": "",
+    "defaultTopic": "Minhag of the Week"
   }
 ]

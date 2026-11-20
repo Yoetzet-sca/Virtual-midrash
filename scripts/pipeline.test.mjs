@@ -281,3 +281,13 @@ test('YouTube API: lengths, and which videos are left out', async () => {
     [detail('aaaaaaaaaaa', 'PT38M10S'), detail('bbbbbbbbbbb', 'PT40S'), detail('ccccccccccc', 'PT5M'), detail('ddddddddddd', 'P0D', 'upcoming')]);
   assert.deepEqual(out, [{ youtubeId: 'aaaaaaaaaaa', title: 'Perashat Lech Lecha 5786. Rabbi Uri Lati', date: '2025-10-30T10:00:00.000Z', image: 'https://i.ytimg.com/vi/aaaaaaaaaaa/hq.jpg', link: 'https://www.youtube.com/watch?v=aaaaaaaaaaa', durationSec: 2290 }]);
 });
+
+test('two teachers with one family name', async () => {
+  const { teacherForTitle } = await import('./lib/youtube.mjs');
+  const teachers = [{ id: 'avi-harari', name: 'Rabbi Avi Harari' }, { id: 'joey-harari', name: 'Joey Harari' }, { id: 'joseph-mosseri', name: 'Joseph Mosseri' }];
+  assert.equal(teacherForTitle('Rabbi Harari on the Haftarah', teachers), 'avi-harari');
+  assert.equal(teacherForTitle('Joey Harari', teachers), 'joey-harari');
+  assert.equal(teacherForTitle('Rabbi Avi Harari - Vayesse', teachers), 'avi-harari');
+  assert.equal(teacherForTitle('Harari family dinner', teachers), null);
+  assert.equal(teacherForTitle('Joseph Mosseri', teachers), 'joseph-mosseri');
+});
