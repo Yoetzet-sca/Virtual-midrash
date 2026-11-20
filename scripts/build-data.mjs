@@ -9,6 +9,7 @@ import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { parseFeed, applePodcastId, appleLookupUrl, feedFromAppleLookup, isSpotifyShow, spotifyShowName, appleSearchUrl, feedFromAppleSearch, feedFromPage, looksLikeFeed } from './lib/rss.mjs';
 import { topicFor, TOPICS, topicName } from './lib/topics.mjs';
+import { pairUp, playable, STORAGE } from './lib/archive.mjs';
 import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv, resourceRows, sameName } from './lib/csv.mjs';
 import { lock } from './lib/lock.mjs';
@@ -58,11 +59,14 @@ for (const r of roster) {
   people.push({ id, name: r.name }); waiting.set(id, r);
 }
 // Names a title or a video gives → the teacher's id, adding that person to the app if this is their first class.
-function whoIs(text) {
-  const id = teacherForTitle(text, people);
+// Someone on the SCA list gets their page in the app the first time one of their classes turns up.
+function welcome(id) {
   if (id && waiting.has(id)) { const r = waiting.get(id); waiting.delete(id); teachers.push({ id, name: r.name, title: r.title, bio: '', photo: r.photo, affiliations: [], feed: '', podcastName: '', defaultTopic: '' }); }
   return id;
 }
+const whoIs = (text) => welcome(teacherForTitle(text, people));
+// A full name exactly as the old site has it ("Mr. Joey Mosseri") → that person. Group names ("Panel Discussion") match nobody.
+const whoNamed = (name) => welcome((people.find((x) => x.name === name) || people.find((x) => samePerson(x.name, name)))?.id || null);
 
 // ---- Classes from each teacher's feed ---------------------------------------
 const classes = [];
@@ -176,6 +180,27 @@ for (const url of FIXTURES ? [] : settings.probe || []) {
     const f = parseFeed(text);
     console.log(`? Probe ${url} → ${feedUrl} — "${f.title}", ${f.items.length} classes, newest "${f.items[0]?.title}" (${f.items[0]?.date.slice(0, 10)})`);
   } catch (e) { console.log(`? Probe ${url} failed: ${e.message}`); }
+}
+// ---- The old site's own archive ---------------------------------------------------------------------
+{
+  const old = await json('content/old-archive.json').catch(() => []);
+  const sca = () => { if (!teachers.some((x) => x.id === 'sca')) teachers.push({ id: 'sca', name: 'Sephardic Community Alliance', title: 'Classes and events from the SCA', bio: '', photo: '', affiliations: [], feed: '', defaultTopic: '' }); return 'sca'; };
+  const pairs = pairUp(old, classes);
+  // 1. A video the app already has but could not attribute: the old site knows who gave it.
+  let named = 0;
+  for (const [o, c] of pairs) if (c.teacherId === 'sca' && o.by) { const id = whoNamed(o.by); if (id) { c.teacherId = id; named++; } }
+  // 2. Classes that exist only on the old system, played from its storage.
+  let added = 0, skipped = 0;
+  for (const o of old) {
+    if (pairs.has(o)) continue;
+    if (!playable(o)) { skipped++; continue; }
+    const flag = o.minhag ? 'Minhag of the Week' : o.israel ? 'Land of Israel' : o.when === 'daf_yomi' ? 'Daf Yomi' : o.when === 'perashat_hashabua' ? 'Parasha' : null;
+    classes.push({ id: `old:${o.id}`, teacherId: whoNamed(o.by) || sca(), title: o.title, date: `${o.date || '1990-01-01'}T12:00:00.000Z`, durationSec: o.sec || 0,
+      audioUrl: STORAGE + o.file, image: '', link: '', topic: topicFor(o.title, null) || flag, kind: 'audio', ...(o.type === 'video' ? { film: true } : {}) });
+    added++;
+  }
+  if (old.length) console.log(`✓ Old site's archive: ${old.length} uploaded items — ${pairs.size} already here from YouTube or a feed (${named} of them now filed under their teacher), ${added} added from the old storage, ${skipped} not added (documents, inactive, or a format phones cannot play)`);
+  console.log(`  Still filed under the SCA itself: ${classes.filter((c) => c.teacherId === 'sca').length} classes`);
 }
 classes.sort((a, b) => b.date.localeCompare(a.date));
 // AI summaries (made by scripts/ai.mjs): a topic where the title gave none, the parts of the class, and the search index.

@@ -217,6 +217,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
                   {!mine && prefs.positions[c.id] && <span className="tag new">CONTINUE · {clock(prefs.positions[c.id][0])}</span>}
                   {daysAgo(c.date) <= 0 && <span className="tag new">NEW TODAY</span>}
                   {isVideo && <span className="tag">VIDEO</span>}
+                  {c.film && <span className="tag">SOUND ONLY</span>}
                   {c.topic && <span className="tag">{c.topic.toUpperCase()}</span>}
                   {c.durationSec > 0 && <span className="tag">{(c.durationSec < 660 ? 'QUICK · ' : '') + minutes(c.durationSec).toUpperCase()}</span>}
                 </div>

@@ -43,8 +43,6 @@ jobs:
           SHEET_OVERRIDES_URL: ${{ secrets.SHEET_OVERRIDES_URL }}
       # Phone-sized copies of the teachers' headshots. Made once from the original, then kept in the repository
       # (content/people), so they no longer depend on the old Virtual Midrash site or its storage.
-      - name: Compare with the old site's archive (report only)
-        run: node scripts/compare-archive.mjs || true
       - name: Make phone-sized headshots
         run: node scripts/photos.mjs
       - name: Save new headshots

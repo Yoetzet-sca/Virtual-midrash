@@ -50,8 +50,8 @@ const upToDate = (c) => { try { const f = JSON.parse(readFileSync(aiFile(c), 'ut
 const txFile = (c) => new URL(`ai-transcripts/${c.sid}.json`, root);
 
 // Take turns between teachers, newest first, so a small run covers a mix.
-const todo = data.classes.filter((c) => c.kind === 'audio' && c.sid && c.audioUrl && !upToDate(c) && c.durationSec > 120 && c.durationSec <= ONLY_UNDER_MIN * 60);
-const todoAll = data.classes.filter((c) => c.kind === 'audio' && c.sid && c.audioUrl && c.durationSec > 120 && c.durationSec <= ONLY_UNDER_MIN * 60).length;
+const todo = data.classes.filter((c) => c.kind === 'audio' && !c.film && c.sid && c.audioUrl && !upToDate(c) && c.durationSec > 120 && c.durationSec <= ONLY_UNDER_MIN * 60);
+const todoAll = data.classes.filter((c) => c.kind === 'audio' && !c.film && c.sid && c.audioUrl && c.durationSec > 120 && c.durationSec <= ONLY_UNDER_MIN * 60).length;
 // The order classes are done in. The free transcription allowance is small next to the whole archive, so it goes first
 // to what people are about to look for:
 //   0. classes already transcribed on an earlier run (only the summary is left to write)

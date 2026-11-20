@@ -38,7 +38,7 @@ export function ClassRow({ c, teacher, showTeacher = true, brief = true }: { c: 
       <span className="row-play">{active ? <IPause size={18} /> : <IPlay size={18} />}</span>
       <span className="row-text">
         <span className="row-title">{c.title}</span>
-        <span className="row-meta">{[showTeacher && teacher?.name, c.kind === 'video' && 'Video', c.topic, when(c.date), minutes(c.durationSec)].filter(Boolean).join(' · ')}</span>
+        <span className="row-meta">{[showTeacher && teacher?.name, c.kind === 'video' && 'Video', c.film && 'Sound only', c.topic, when(c.date), minutes(c.durationSec)].filter(Boolean).join(' · ')}</span>
       </span>
     </button>
   );

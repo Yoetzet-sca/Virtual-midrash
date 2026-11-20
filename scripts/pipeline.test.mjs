@@ -389,3 +389,27 @@ test('the old site\'s spellings are what the app shows, and they still find howe
   assert.equal(hol.name, "Lag La'Omer"); assert.ok(hol.search.includes('Lag BaOmer'));
   assert.equal(weekInfo('2026-12-13').holiday.name, 'Asarah BeTebet');
 });
+
+test('old archive: the same recording is recognised, and Minhag episodes by their number', async () => {
+  const { pairUp, playable, minhagNumber, youtubeIdOf } = await import('./lib/archive.mjs');
+  assert.equal(minhagNumber('SCA Minhag of the week #302: "Hinukh Habit: The Reading".'), 302);
+  assert.equal(minhagNumber('SCA Minhag of the Week 309: "The Arayat"'), 309);
+  assert.equal(minhagNumber('Minhag of the Week- Introduction Video'), null);
+  assert.equal(youtubeIdOf('https://www.youtube.com/watch?v=jxgvwksK7mI&list=PL'), 'jxgvwksK7mI');
+  const classes = [
+    { id: 'yt:a', youtubeId: 'aaaaaaaaaaa', title: 'SCA Minhag of the Week 297: "Tiqun Leil Shabuot"', date: '2026-05-21T10:00:00.000Z' },
+    { id: 'yt:b', youtubeId: 'bbbbbbbbbbb', title: 'Tish’a Be’Ab', date: '2023-07-27T10:00:00.000Z' },
+    { id: 'yt:c', youtubeId: 'ccccccccccc', title: 'Rabbi David Tawil: Bava Kama 77 (daf yomi)', date: '2024-01-19T10:00:00.000Z' },
+  ];
+  const old = [
+    { id: 1, title: 'SCA Minhag of the Week 297: "Tiqun Leil Shabuot"', date: '2026-05-20', minhag: true, by: 'Mr. Joey Mosseri', link: '', file: '' },
+    { id: 2, title: 'Tish’a Be’Ab', date: '2023-07-27', by: 'Rabbi Joseph Beyda', link: '', file: 'x.mp4' },
+    { id: 3, title: 'Bava Kama 77', date: '2024-01-18', by: 'Rabbi David Tawil', link: '', file: 'y.mp4' },
+    { id: 4, title: 'Bava Kama 32', date: '2023-12-04', by: 'Rabbi David Tawil', link: '', file: 'z.mp4', type: 'video', active: true },
+    { id: 5, title: 'Something else entirely', date: '2021-01-01', by: 'Rabbi A', link: 'https://www.youtube.com/watch?v=ccccccccccc', file: '' },
+  ];
+  const pairs = pairUp(old, classes);
+  assert.equal(pairs.get(old[0]).id, 'yt:a'); assert.equal(pairs.get(old[1]).id, 'yt:b'); assert.equal(pairs.get(old[2]).id, 'yt:c'); assert.equal(pairs.get(old[4]).id, 'yt:c');
+  assert.ok(!pairs.has(old[3]));
+  assert.ok(playable(old[3]) && !playable({ ...old[3], file: 'a.ogg' }) && !playable({ ...old[3], active: false }) && !playable({ ...old[3], type: 'document', file: 'a.pdf' }));
+});
