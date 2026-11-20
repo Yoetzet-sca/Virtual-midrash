@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import type { AppData } from '../types';
 import { usePrefs, setPrefs, toggleIn } from '../store';
-import { Avatar, Chips, ClassRow } from '../ui';
+import { Avatar, Chips, ClassRow, DocRow } from '../ui';
 import { matchesTopic, shareLink } from '../util';
 import { IBack, IShare } from '../icons';
 
 export function TeacherPage({ data, id }: { data: AppData; id: string }) {
   const prefs = usePrefs();
   const [topic, setTopic] = useState('All');
+  const [allDocs, setAllDocs] = useState(false);
+  const docs = (data.docs || []).filter((d) => d.teacherId === id);
   const [count, setCount] = useState(40); // classes shown; a teacher can have thousands
   const t = data.teachers.find((x) => x.id === id);
   if (!t) return <div className="page"><h1>Teacher not found</h1><a className="btn" href="#/explore">Browse teachers</a></div>;
@@ -46,6 +48,12 @@ export function TeacherPage({ data, id }: { data: AppData; id: string }) {
               <span className="pill">Details</span>
             </a>
           ))}
+        </>}
+
+        {docs.length > 0 && <>
+          <div className="label">WRITTEN TORAH · {docs.length}</div>
+          <div className="rows">{docs.slice(0, allDocs ? docs.length : 4).map((d) => <DocRow key={d.id} d={d} />)}</div>
+          {!allDocs && docs.length > 4 && <button className="btn wide ghost" style={{ marginTop: 12 }} onClick={() => setAllDocs(true)}>Show all {docs.length}</button>}
         </>}
 
         <div className="label">RECORDED CLASSES</div>

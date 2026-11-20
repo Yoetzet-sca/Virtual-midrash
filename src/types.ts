@@ -7,7 +7,9 @@ export type Notice = { date: string; text: string; dedication: string };
 export type Erub = { id: string; name: string; short: string; url: string; status: 'up' | 'down' | 'checked' | 'unknown'; date: string | null; fresh: boolean };
 export type Resource = { category: string; name: string; area: string; note: string; open?: boolean; phone?: string; email?: string; lockedPhone: string; lockedEmail?: string };
 export type Shortcuts = { daf: Record<string, { tractate: string; page: number }>; perasha: { name: string; search: string[]; shabbat: string } | null; holiday: { name: string; date: string; search?: string[] } | null };
+export type Doc = { id: string; teacherId: string; title: string; date: string; url: string };
 export type AppData = {
+  docs?: Doc[];
   shortcuts?: Shortcuts;
   generatedAt: string; topics: string[]; teachers: Teacher[]; classes: ClassItem[];
   schedule: { weekly: WeeklyClass[]; notices: Notice[] };

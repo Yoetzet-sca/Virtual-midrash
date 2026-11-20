@@ -182,6 +182,7 @@ for (const url of FIXTURES ? [] : settings.probe || []) {
   } catch (e) { console.log(`? Probe ${url} failed: ${e.message}`); }
 }
 // ---- The old site's own archive ---------------------------------------------------------------------
+const docs = [];
 {
   const old = await json('content/old-archive.json').catch(() => []);
   const sca = () => { if (!teachers.some((x) => x.id === 'sca')) teachers.push({ id: 'sca', name: 'Sephardic Community Alliance', title: 'Classes and events from the SCA', bio: '', photo: '', affiliations: [], feed: '', defaultTopic: '' }); return 'sca'; };
@@ -189,6 +190,9 @@ for (const url of FIXTURES ? [] : settings.probe || []) {
   // 1. A video the app already has but could not attribute: the old site knows who gave it.
   let named = 0;
   for (const [o, c] of pairs) if (c.teacherId === 'sca' && o.by) { const id = whoNamed(o.by); if (id) { c.teacherId = id; named++; } }
+  // 3 (below, after 2). Written pieces: the old site's PDFs, listed with their teacher and opened from the old storage.
+  for (const o of old) if (o.type === 'document' && o.active && /\.pdf$/i.test(o.file || '')) docs.push({ id: `old:${o.id}`, teacherId: whoNamed(o.by) || sca(), title: o.title, date: o.date || '', url: STORAGE + o.file });
+  docs.sort((a, b) => b.date.localeCompare(a.date));
   // 2. Classes that exist only on the old system, played from its storage.
   let added = 0, skipped = 0;
   for (const o of old) {
@@ -199,7 +203,7 @@ for (const url of FIXTURES ? [] : settings.probe || []) {
       audioUrl: STORAGE + o.file, image: '', link: '', topic: topicFor(o.title, null) || flag, kind: 'audio', ...(o.type === 'video' ? { film: true } : {}) });
     added++;
   }
-  if (old.length) console.log(`✓ Old site's archive: ${old.length} uploaded items — ${pairs.size} already here from YouTube or a feed (${named} of them now filed under their teacher), ${added} added from the old storage, ${skipped} not added (documents, inactive, or a format phones cannot play)`);
+  if (old.length) console.log(`✓ Old site's archive: ${old.length} uploaded items — ${pairs.size} already here from YouTube or a feed (${named} of them now filed under their teacher), ${added} added from the old storage, ${skipped} not added as classes (inactive, a format phones cannot play, or a document); ${docs.length} written pieces listed`);
   console.log(`  Still filed under the SCA itself: ${classes.filter((c) => c.teacherId === 'sca').length} classes`);
 }
 classes.sort((a, b) => b.date.localeCompare(a.date));
@@ -324,7 +328,7 @@ for (const t of teachers) if (!t.affiliations.length && t.title) t.affiliations 
 
 const out = {
   shortcuts,
-  generatedAt: now.toISOString(), topics: TOPICS, teachers, classes, schedule, resources, erub,
+  generatedAt: now.toISOString(), topics: TOPICS, teachers, classes, docs, schedule, resources, erub,
   resourceCategories: settings.resourceCategories,
   analytics: settings.analytics || null,
   links: { giveLively: settings.giveLivelyUrl, officeEmail: settings.officeEmail, newsletter: settings.newsletterUrl, addressContact: settings.addressContact || null, connect: settings.connect || [] },

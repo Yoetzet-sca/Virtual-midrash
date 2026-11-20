@@ -331,3 +331,7 @@ input::placeholder { color: var(--sky); opacity: 1; }
 .legal ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
 .legal a { color: var(--sky); text-decoration: underline; }
 .legal .head { gap: 12px; }
+
+/* Written pieces */
+.row.doc { text-decoration: none; color: inherit; }
+.doc-mark { font-size: 12px; font-weight: 800; letter-spacing: 1px; color: var(--sky); }

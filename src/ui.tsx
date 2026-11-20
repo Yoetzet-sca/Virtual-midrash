@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { AppData, ClassItem, Erub, Teacher } from './types';
+import type { AppData, ClassItem, Erub, Teacher, Doc } from './types';
 import { usePrefs, setPrefs } from './store';
 import { unlock } from './lock';
 import { usePlayer } from './player';
@@ -116,5 +116,15 @@ export function ErubCard({ erub, compact = false }: { erub: Erub[]; compact?: bo
       </div>
       <div className="muted tiny">In severe weather do not rely on the erub. Tap to confirm on the erub’s own site.</div>
     </div>
+  );
+}
+
+// A written piece (PDF). Opens in the phone's own PDF viewer.
+export function DocRow({ d, teacher }: { d: Doc; teacher?: Teacher }) {
+  return (
+    <a className="row doc" href={d.url} target="_blank" rel="noreferrer">
+      <span className="row-play doc-mark">PDF</span>
+      <span className="row-text"><span className="row-title">{d.title}</span><span className="row-meta">{[teacher?.name, 'To read', d.date && when(d.date + 'T12:00:00Z')].filter(Boolean).join(' · ')}</span></span>
+    </a>
   );
 }

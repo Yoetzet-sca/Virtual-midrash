@@ -1,6 +1,6 @@
 import { useDeferredValue, useEffect, useMemo, useState } from 'react';
 import type { AppData, ClassItem, SearchEntry, Teacher } from '../types';
-import { Avatar, ClassRow } from '../ui';
+import { Avatar, ClassRow, DocRow } from '../ui';
 import { ISearch } from '../icons';
 import { matches } from '../search';
 import { findClasses } from '../util';
@@ -49,6 +49,7 @@ export function Explore({ data, place: startPlace, pickTopic }: { data: AppData;
   // Results follow the typing a beat behind, so the keyboard never waits on the search.
   const allFound = useMemo(() => (slow ? findClasses(data, slow) : []), [data, slow]);
   const found = allFound.filter((c) => !answered.has(c.sid || '')).slice(0, 60);
+  const foundDocs = useMemo(() => (slow ? (data.docs || []).filter((d) => matches(slow, d.title + ' ' + (teacher(d.teacherId)?.name || ''))).slice(0, 12) : []), [data, slow]);
   const foundTeachers = useMemo(() => (slow ? data.teachers.filter((t) => matches(slow, t.name)) : []), [data, slow]);
   // This week's shortcuts
   const now = new Date();
@@ -77,7 +78,8 @@ export function Explore({ data, place: startPlace, pickTopic }: { data: AppData;
             {found.length > 0 && <div className="label">ALSO BY TITLE</div>}
           </>}
           <div className="rows">{found.map((c) => <ClassRow key={c.id} c={c} teacher={teacher(c.teacherId)} />)}</div>
-          {found.length + foundTeachers.length + answers.length === 0 && <p className="muted">No classes found for “{q}” yet.</p>}
+          {foundDocs.length > 0 && <><div className="label">TO READ</div><div className="rows">{foundDocs.map((d) => <DocRow key={d.id} d={d} teacher={teacher(d.teacherId)} />)}</div></>}
+          {found.length + foundTeachers.length + answers.length + foundDocs.length === 0 && <p className="muted">No classes found for “{q}” yet.</p>}
           <button className="chip" onClick={() => setQ('')}>Clear search</button>
         </>
       ) : (
