@@ -427,3 +427,35 @@ test('split: newest classes open first, every teacher keeps a class, nothing is 
   assert.equal(older.docs.length, 1);
   assert.equal(split({ classes: classes.slice(0, 10), docs: [] }).older, null);
 });
+
+test('staff sheet: tabs are read by their headings, and another tab is never mistaken for one', async () => {
+  const { staffRows, applyTeacherEdits, isoDate, modeOf, dayOf } = await import('./lib/staff.mjs');
+  const csv = '"How to use this tab: one row per fix","","","","",""\n"Class title contains","Only for this teacher","Hide","Change topic to","Move to teacher","Note"\n"Kidushin 44","Rabbi Labaton","","","Rabbi Dr. Richard Hidary","wrong name"\n"Sample class","","yes","","","Example - delete me"\n"Test upload","","yes","","",""\n';
+  const rows = staffRows(csv, 'fixes');
+  assert.equal(rows.length, 2); // the example row is ignored
+  assert.equal(rows[0].moveTo, 'Rabbi Dr. Richard Hidary');
+  assert.equal(staffRows('"Category","Name","Phone","Email"\n"Mohel","Someone","1","a@b.c"\n', 'fixes'), null);
+  assert.equal(staffRows('"Category","Name","Phone","Email"\n"Mohel","Someone","1","a@b.c"\n', 'teachers'), null);
+  assert.equal(isoDate('12/5/26'), '2026-12-05');
+  assert.equal(isoDate('2026-12-05'), '2026-12-05');
+  assert.equal(modeOf('In person'), 'inperson');
+  assert.equal(modeOf('Zoom'), 'zoom');
+  assert.equal(dayOf('Wednesday'), 'Wed');
+  const teachers = [{ id: 'a-b', name: 'Rabbi A B', title: 'Old', bio: '', photo: '', feed: 'f' }, { id: 'c-d', name: 'Mrs. C D', title: '', bio: '', photo: '', feed: '' }];
+  const same = (x, y) => x.replace(/^\S+ /, '') === y.replace(/^\S+ /, '');
+  const hidden = applyTeacherEdits(teachers, [{ name: 'Rabbi A B', title: 'New', feed: '' }, { name: 'Mrs. C D', hide: 'yes' }, { name: 'Rabbi E F', feed: 'https://x/feed' }], same, (n) => n.toLowerCase().replace(/[^a-z]+/g, '-'));
+  assert.equal(teachers[0].title, 'New');
+  assert.equal(teachers[0].feed, 'f'); // a blank cell changes nothing
+  assert.deepEqual(hidden, ['Mrs. C D']);
+  assert.equal(teachers[2].feed, 'https://x/feed');
+});
+
+test('staff fixes: a class can be moved to the right teacher, and a fix that matches nothing is reported', () => {
+  const classes = [{ id: '1', teacherId: 'labaton', title: 'Kidushin 44' }, { id: '2', teacherId: 'hidary', title: 'Kidushin 44' }, { id: '3', teacherId: 'labaton', title: 'Lonely Man of Faith' }];
+  const names = { labaton: 'Rabbi Labaton', hidary: 'Rabbi Hidary' };
+  const out = applyOverrides(classes, [{ match: 'kidushin 44', teacher: 'Rabbi Labaton', moveTo: 'Rabbi Hidary' }, { match: 'nothing like this', hide: 'yes' }, { match: 'Lonely', moveTo: 'Rabbi Nobody' }],
+    (n) => Object.keys(names).find((k) => names[k] === n) || null, (a, b) => a === b, (id) => names[id]);
+  assert.deepEqual(out.map((c) => c.teacherId), ['hidary', 'hidary', 'labaton']);
+  assert.equal(out.moved, 1);
+  assert.equal(out.problems.length, 2);
+});

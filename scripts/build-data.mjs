@@ -14,6 +14,7 @@ import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv, resourceRows, sameName } from './lib/csv.mjs';
 import { lock } from './lib/lock.mjs';
 import { applyOverrides } from './lib/overrides.mjs';
+import { STAFF_TABS, staffRows, applyTeacherEdits, isoDate, modeOf, dayOf } from './lib/staff.mjs';
 import { dafFor, weekInfo } from './lib/calendar.mjs';
 import { channelIdFrom, feedUrl, parseYoutube, teacherForTitle, allVideos, samePerson } from './lib/youtube.mjs';
 
@@ -39,10 +40,26 @@ async function sheetOr(envName, fallback) {
 const settings = await json('content/settings.json');
 const warnings = [];
 
+// The staff tabs live in the same Google Sheet as the community resources. A tab that is missing or unreadable is
+// simply skipped (null), and the files in content/ are used as before.
+const sheetId = FIXTURES ? null : (process.env.SHEET_RESOURCES_URL || '').match(/\/spreadsheets\/d\/([\w-]+)/)?.[1];
+async function staffTab(kind) {
+  if (!sheetId) return null;
+  try {
+    const rows = staffRows(await get(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&headers=0&sheet=${encodeURIComponent(STAFF_TABS[kind].tab)}`), kind);
+    console.log(rows ? `✓ Sheet tab "${STAFF_TABS[kind].tab}": ${rows.length} rows` : `· Sheet tab "${STAFF_TABS[kind].tab}" not there yet`);
+    return rows;
+  } catch (e) { warnings.push(`Sheet tab "${STAFF_TABS[kind].tab}" could not be read: ${e.message.replace(sheetId, '…')}`); return null; }
+}
+
 // ---- Teachers -------------------------------------------------------------
 const teachers = (await sheetOr('SHEET_TEACHERS_URL', await json('content/teachers.json')))
   .filter((t) => t.id && t.name)
   .map((t) => ({ id: t.id, name: t.name, title: t.title || '', bio: t.bio || '', photo: t.photo || '', affiliations: list(t.affiliations), feed: t.feed || '', podcastName: t.podcastName || '', defaultTopic: t.defaultTopic || '' }));
+
+// Staff edits from the sheet: a new teacher, a changed title, bio, photo or podcast, or a teacher to hide.
+const slugName = (name) => name.toLowerCase().replace(/\b(rabbi|mrs|ms|mr|dr)\b\.?/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const hiddenTeachers = applyTeacherEdits(teachers, await staffTab('teachers'), samePerson, slugName);
 
 // ---- The SCA's full list of rabbis and teachers (content/roster.json, from virtualmidrash.com) --------------------
 // Used for two things: headshots and titles for the teachers above, and knowing exactly who a video's title names.
@@ -234,9 +251,21 @@ const search = [];
 }
 // Staff corrections: fix a topic or hide a class.
 {
-  const fixed = applyOverrides(classes, await sheetOr('SHEET_OVERRIDES_URL', await json('content/overrides.json')));
-  if (fixed.length !== classes.length) console.log(`✓ Overrides hid ${classes.length - fixed.length} classes`);
+  const rows = [...(await sheetOr('SHEET_OVERRIDES_URL', await json('content/overrides.json'))), ...((await staffTab('fixes')) || [])];
+  const fixed = applyOverrides(classes, rows, whoNamed, samePerson, (id) => teachers.find((t) => t.id === id)?.name || '');
+  const moved = fixed.moved;
+  if (fixed.length !== classes.length || moved) console.log(`✓ Staff fixes: ${classes.length - fixed.length} classes hidden${moved ? `, ${moved} moved to another teacher` : ''}`);
+  fixed.problems.forEach((m) => warnings.push('Fix a class — ' + m));
   classes.splice(0, classes.length, ...fixed);
+  // Teachers staff chose to hide leave the app along with their classes.
+  const gone = new Set(teachers.filter((t) => hiddenTeachers.some((n) => samePerson(t.name, n))).map((t) => t.id));
+  if (gone.size) {
+    const kept = classes.filter((c) => !gone.has(c.teacherId));
+    console.log(`✓ Hidden by staff: ${gone.size} teachers and their ${classes.length - kept.length} classes`);
+    classes.splice(0, classes.length, ...kept);
+    teachers.splice(0, teachers.length, ...teachers.filter((t) => !gone.has(t.id)));
+    for (let i = docs.length - 1; i >= 0; i--) if (gone.has(docs[i].teacherId)) docs.splice(i, 1);
+  }
 }
 for (const c of classes) c.topic = topicName(c.topic);
 // A short, link-safe id for each class's share page.
@@ -245,8 +274,14 @@ for (const c of classes) c.sid = sidOf(c.id);
 // ---- Weekly schedule --------------------------------------------------------
 const code = process.env.COMMUNITY_CODE || '';
 const sched = await json('content/schedule.json');
-const weeklyRows = await sheetOr('SHEET_SCHEDULE_URL', sched.weekly);
-const noticeRows = await sheetOr('SHEET_NOTICES_URL', sched.notices);
+// The sheet's "This Week" tab, once it has rows, is the schedule; teachers are written by name there.
+const weekTab = ((await staffTab('week')) || []).filter((r) => dayOf(r.day) && r.title).map((r) => {
+  const t = r.teacher ? teachers.find((x) => samePerson(x.name, r.teacher)) : null;
+  return { day: dayOf(r.day), time: r.time, teacherId: t?.id || '', teacherName: t ? '' : r.teacher, title: r.title, mode: modeOf(r.mode), location: r.location };
+});
+const noticeTab = ((await staffTab('notices')) || []).map((n) => ({ date: isoDate(n.date), text: n.text, dedication: n.dedication }));
+const weeklyRows = weekTab.length ? weekTab : await sheetOr('SHEET_SCHEDULE_URL', sched.weekly);
+const noticeRows = noticeTab.length ? noticeTab : await sheetOr('SHEET_NOTICES_URL', sched.notices);
 const secret = (v) => {
   if (!v) return '';
   if (!code) { warnings.push('A private address or Zoom link was left out because COMMUNITY_CODE is not set.'); return ''; }
