@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write # to save new headshot copies into the repository
   pages: write
   id-token: write
 
@@ -41,14 +41,19 @@ jobs:
           SHEET_NOTICES_URL: ${{ secrets.SHEET_NOTICES_URL }}
           SHEET_RESOURCES_URL: ${{ secrets.SHEET_RESOURCES_URL }}
           SHEET_OVERRIDES_URL: ${{ secrets.SHEET_OVERRIDES_URL }}
-      # Phone-sized copies of the teachers' headshots, kept between runs so each is only made once.
-      - uses: actions/cache@v4
-        with:
-          path: public/people
-          key: people-${{ hashFiles('content/roster.json') }}
-          restore-keys: people-
+      # Phone-sized copies of the teachers' headshots. Made once from the original, then kept in the repository
+      # (content/people), so they no longer depend on the old Virtual Midrash site or its storage.
       - name: Make phone-sized headshots
         run: node scripts/photos.mjs
+      - name: Save new headshots
+        run: |
+          git config user.name "Virtual Midrash bot"
+          git config user.email "noreply@github.com"
+          git add content/people
+          if git diff --cached --quiet; then echo "No new headshots."; exit 0; fi
+          git commit -q -m "Headshots: $(git diff --cached --name-only | wc -l) files"
+          git pull -q --rebase || true
+          git push -q || echo "Could not save headshots this time; the next update will try again."
       - run: npm run build
         env:
           SITE_URL: ${{ vars.SITE_URL }}

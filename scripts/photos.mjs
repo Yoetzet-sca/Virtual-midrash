@@ -2,7 +2,7 @@
 // the first-open page slow. This makes two small square copies of each (for the round avatars and for the feed card)
 // and points the app at those. It also means the photos no longer depend on the old site staying up.
 // A photo that cannot be fetched or converted is left as it was.
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, readdir, copyFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
@@ -10,8 +10,12 @@ import sharp from 'sharp';
 const root = new URL('..', import.meta.url);
 const file = new URL('public/data/app.json', root);
 const data = JSON.parse(await readFile(file, 'utf8'));
-const dir = new URL('public/people/', root);
+// The small copies are kept in the repository (content/people) so they survive the old site being switched off,
+// and copied into the published site from there.
+const dir = new URL('content/people/', root);
+const pub = new URL('public/people/', root);
 await mkdir(dir, { recursive: true });
+await mkdir(pub, { recursive: true });
 // Square. A tall picture keeps its top, where the head is; a wide one keeps its middle. (An automatic "find the
 // interesting part" crop was tried first and too often chose a shirt or a tie over the face.)
 async function square(bytes, px) {
@@ -39,5 +43,6 @@ await Promise.all(Array.from({ length: 6 }, async () => {
     } catch (e) { failed++; console.log(`  ! photo for ${t.name}: ${e.message.split('\n')[0]}`); }
   }
 }));
+for (const f of await readdir(dir)) if (f.endsWith('.jpg')) await copyFile(new URL(f, dir), new URL(f, pub));
 await writeFile(file, JSON.stringify(data));
 console.log(`✓ Photos: ${made} made, ${reused} already here${failed ? `, ${failed} left as the original` : ''}.`);
