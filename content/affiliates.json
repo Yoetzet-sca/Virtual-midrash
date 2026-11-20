@@ -1,0 +1,310 @@
+[
+ {
+  "name": "Abraham's Legacy",
+  "address": "King David Street 19, Jerusalem, Israel",
+  "website": "www.abrahamslegacy.com",
+  "phone": "917-748-8032",
+  "email": "info@abrahamslegacy.com"
+ },
+ {
+  "name": "Ahaba Ve Ahva",
+  "address": "1744 Ocean Parkway, Brooklyn, NY 11223",
+  "website": "http://ahaba.org/",
+  "phone": "347.702.6207",
+  "email": "info@ahaba.org"
+ },
+ {
+  "name": "Ahi Ezer Yeshivah",
+  "address": "1885 Ocean Pkwy, Brooklyn, NY 11223",
+  "website": "",
+  "phone": "",
+  "email": ""
+ },
+ {
+  "name": "Allegra Franco Bet Midrash & Career Fellowship",
+  "address": "",
+  "website": "https://www.allegrafranco.org/",
+  "phone": "",
+  "email": "info@allegrafranco.org"
+ },
+ {
+  "name": "Ave N Sephardic Congregation",
+  "address": "321 Avenue N, Brooklyn, NY 11230",
+  "website": "",
+  "phone": "",
+  "email": "avencong@gmail.com"
+ },
+ {
+  "name": "Barkai Yeshivah",
+  "address": "5302 21st Avenue, Brooklyn NY 11204",
+  "website": "https://www.barkaiyeshivah.org/",
+  "phone": "718.998.7473",
+  "email": "mail@barkaiyeshivah.org"
+ },
+ {
+  "name": "Bet Rachel",
+  "address": "48 Larchwood Ave",
+  "website": "http://larchwoodminyan.com/",
+  "phone": "",
+  "email": "larchwoodminyan@aol.com"
+ },
+ {
+  "name": "Beth Torah",
+  "address": "1061 Ocean Parkway Brooklyn, NY 11230",
+  "website": "http://www.beth-torah.com/",
+  "phone": "718-252-9840",
+  "email": "Bethtorah1061@gmail.com"
+ },
+ {
+  "name": "Bnei Yitzhak",
+  "address": "730 Ave S, Brooklyn, NY 11223",
+  "website": "http://www.bneiyitzhakweb.org/",
+  "phone": "718-382-6688",
+  "email": "bneiyitzhak@gmail.com"
+ },
+ {
+  "name": "Community Mikveh",
+  "address": "583 Kings Hwy, Brooklyn, NY 11223",
+  "website": "",
+  "phone": "(718) 375-6660",
+  "email": "rronbarry@gmail.com"
+ },
+ {
+  "name": "Congregation Beit Edmond",
+  "address": "11 East 63rd Street, New York, NY, 10065",
+  "website": "https://www.ejsny.org/",
+  "phone": "212.754.9555",
+  "email": "info@ejsny.org"
+ },
+ {
+  "name": "Congregation Ohel Yosef of Oakhurst",
+  "address": "140 Ampere Avenue, Oakhurst, NJ 07755",
+  "website": "",
+  "phone": "",
+  "email": "ohelyosef2618@gmail.com"
+ },
+ {
+  "name": "Edmond J. Safra Synagogue of Deal",
+  "address": "75 Hathaway Avenue, Deal, NJ 07723",
+  "website": "https://safrashulnj.org/",
+  "phone": "(732) 517-1155",
+  "email": "safrashulnj@gmail.com"
+ },
+ {
+  "name": "Edmond J. Safra Synagogue of Turnberry",
+  "address": "19275 Mystic Pointe Drive Aventura, Florida 33180",
+  "website": "https://www.ejsfl.com/",
+  "phone": "305-931-4313 Ext 4",
+  "email": "staff@ejsfl.com"
+ },
+ {
+  "name": "Eshel Sephardic Midrasha",
+  "address": "Israel 'address', 54 Misgav Ledach St.Old City, Jerusalem Israel 97500 U.S.A. 'address American Friends of Eshel 1345 East 28th Street, Brooklyn, NY 11210",
+  "website": "http://sephardicseminary.org/",
+  "phone": "718-376-0717",
+  "email": "office@midresheteshel.org"
+ },
+ {
+  "name": "Hillel Yeshivah",
+  "address": "1025 Deal Road Ocean, NJ 07712",
+  "website": "http://www.hillelyeshiva.org/",
+  "phone": "(732) 493-9300",
+  "email": "bkrady@hillelyeshiva.org"
+ },
+ {
+  "name": "ILEAD",
+  "address": "1901 Ocean Parkway, Brooklyn, NY 11223",
+  "website": "https://www.ileadexperience.org/",
+  "phone": "",
+  "email": ""
+ },
+ {
+  "name": "Jersey Shore Erub",
+  "address": "Magen David of West Deal, C/O NJ Erub 395 Deal Rd Ocean, NJ 07712",
+  "website": "http://www.njerub.org/",
+  "phone": "",
+  "email": ""
+ },
+ {
+  "name": "KJ Sephardic",
+  "address": "125 East 85th St, New York, NY 10028",
+  "website": "https://www.ckj.org/sephardicminyan",
+  "phone": "212-774-5640",
+  "email": "RML@CKJ.org"
+ },
+ {
+  "name": "Kol Israel Congregation",
+  "address": "3211 Bedford Avenue, Brooklyn, NY 11210",
+  "website": "http://www.kolisrael.org/",
+  "phone": "(718) 951-1417",
+  "email": "info@kolisrael.org"
+ },
+ {
+  "name": "Magen David of Belle Harbour",
+  "address": "138-05 Rockaway Beach Blvd, Far Rockaway, NY 11694",
+  "website": "",
+  "phone": "",
+  "email": "rabbiazriel@gmail.com"
+ },
+ {
+  "name": "Magen David of Manhattan",
+  "address": "177 Sullivan St. New York, NY 10012",
+  "website": "https://www.magendavidny.org/",
+  "phone": "(212) 673-0333",
+  "email": "info@magendavidny.org"
+ },
+ {
+  "name": "Magen David of West Deal",
+  "address": "395 Deal Rd, Ocean Township, NJ 07712",
+  "website": "http://www.westdealshul.org/",
+  "phone": "732-531-3220",
+  "email": "info@magendavid.net"
+ },
+ {
+  "name": "Magen David Synagogue",
+  "address": "2130 Mcdonald Ave, Brooklyn, NY 11223",
+  "website": "http://www.magendavidsynagogue.com/",
+  "phone": "(718) 676-0215",
+  "email": "info@magendavidsynagogue.org"
+ },
+ {
+  "name": "Magen David Yeshivah",
+  "address": "2130 McDonald Ave, Brooklyn, NY 11223",
+  "website": "http://www.magendavidyeshivah.org/",
+  "phone": "718.676.0215",
+  "email": "businessoffice@mdyschool.org"
+ },
+ {
+  "name": "Manhattan Beach Mikveh",
+  "address": "94 Amherst St, Brooklyn, NY 11235",
+  "website": "",
+  "phone": "(718) 646-0560",
+  "email": ""
+ },
+ {
+  "name": "Manhattan East Synagogue- Congregation Shaare Mizrah",
+  "address": "5 East 62nd Street.NY, NY 10021",
+  "website": "http://mesny.org/rah",
+  "phone": "212-568-0011",
+  "email": "Office@mesny.org"
+ },
+ {
+  "name": "Mikdash Eliyahu",
+  "address": "400 Avenue U (Entrance on East 2nd Street), Brooklyn, NY 11223",
+  "website": "http://mikdasheliyahu.org/",
+  "phone": "",
+  "email": ""
+ },
+ {
+  "name": "Ohel David and Shlomo Congregation of Manhattan Beach",
+  "address": "710 Shore Blvd, Manhattan Beach, Brooklyn, NY 11235",
+  "website": "http://www.ohelds.com/",
+  "phone": "(718) 648-0100",
+  "email": "info@ohelds.com"
+ },
+ {
+  "name": "Ohel Yishak of Allenhurst",
+  "address": "108 Allen Ave, Allenhurst, NJ 07711",
+  "website": "",
+  "phone": "(732) 660-0380",
+  "email": "MShamah@aol.com"
+ },
+ {
+  "name": "Project Education",
+  "address": "",
+  "website": "http://projectedu.org/",
+  "phone": "",
+  "email": ""
+ },
+ {
+  "name": "Sabra Institute",
+  "address": "34 West 33rd St 11th Floor NY, NY 10001",
+  "website": "http://www.sabrainstitute.org/",
+  "phone": "",
+  "email": "contact@sabrainstitute.org"
+ },
+ {
+  "name": "Sephardic Academy of Manhattan",
+  "address": "1274 Second Avenue, New York, NY 10065",
+  "website": "http://www.sephardicacademy.org/",
+  "phone": "212.249.6391",
+  "email": "Admin@thesamschool.org"
+ },
+ {
+  "name": "Sephardic Brooklyn Community Erub",
+  "address": "583 Kings Highway, Brooklyn, NY 11223",
+  "website": "http://www.erub.org/",
+  "phone": "718.998.8171",
+  "email": ""
+ },
+ {
+  "name": "Sephardic Educational Center (SEC)",
+  "address": "Batey Machasse #1, P.O. Box 14326, Old City, Jerusalem, 91142, Israel",
+  "website": "http://sephardiceducationalcenter.org/",
+  "phone": "(972) 2-628-2344",
+  "email": "israel@secjerusalem.org"
+ },
+ {
+  "name": "Sephardic Heritage Foundation",
+  "address": "",
+  "website": "https://www.sephardicheritage.com/",
+  "phone": "",
+  "email": "Dcatton@sephardicheritage.com"
+ },
+ {
+  "name": "Sephardic Heritage Project",
+  "address": "3603 Quentin Road, Brooklyn, NY 11234",
+  "website": "https://sephardicheritageproject.org/",
+  "phone": "(347) 434-3973",
+  "email": "sarina@roffe.com"
+ },
+ {
+  "name": "Sephardic Rabbinical College",
+  "address": "730 Ave. S, Brooklyn, NY 11223",
+  "website": "",
+  "phone": "(718) 376-0930",
+  "email": "SRCkollel@gmail.com"
+ },
+ {
+  "name": "Sephardic Synagogue",
+  "address": "511 Avenue R, Brooklyn, NY 11223",
+  "website": "http://www.sephardicsynagogue.org/",
+  "phone": "(718) 375-3263",
+  "email": "rronbarry@gmail.com"
+ },
+ {
+  "name": "Sephardic Synagogue of Elberon",
+  "address": "180 Lincoln Ave, Long Branch, NJ 07740",
+  "website": "",
+  "phone": "(718) 375-3264",
+  "email": "rronbarry@gmail.com"
+ },
+ {
+  "name": "Shaare Shalom",
+  "address": "2021 AVENUE S, Brooklyn, NY 11229",
+  "website": "http://shaareshalom.com/",
+  "phone": "(718) 376-6756",
+  "email": "info@shaareshalom.com"
+ },
+ {
+  "name": "Tanach Study",
+  "address": "2031 East 21st Street, Brooklyn, NY, 11229",
+  "website": "https://tanachstudy.com/",
+  "phone": "",
+  "email": "info@tanachstudy.com"
+ },
+ {
+  "name": "Tebah Educational Services",
+  "address": "34 West 33rd, 2nd Floor, New York, NY 10001",
+  "website": "http://www.tebahpublishing.com/",
+  "phone": "",
+  "email": "info@tebah.org"
+ },
+ {
+  "name": "Yeshivat Moreshet Yerushalayim",
+  "address": "RABBI HAROLD SUTTON C/O CONG. HOCHMA U'MUSSAR 718 AVE. S, BROOKLYN, NY 11223 USA",
+  "website": "http://www.moreshetyerushalayim.com/",
+  "phone": "917 -693- 0163",
+  "email": "ymyisraeloffice@gmail.com"
+ }
+]

@@ -281,6 +281,21 @@ try {
   console.log(`✓ Shortcuts: daf ${shortcuts.daf[nyDate(0)].tractate} ${shortcuts.daf[nyDate(0)].page}, perasha ${shortcuts.perasha?.name}, next holiday ${shortcuts.holiday?.name} (${shortcuts.holiday?.date})`);
 } catch (e) { warnings.push(`Shortcuts failed: ${e.message}`); }
 
+// ---- Schools and shuls -----------------------------------------------------------------------------
+// A teacher with no affiliations listed gets them from their title ("Rabbi, Congregation Beth Torah"), named the way
+// the old site's affiliates list names them. Yeshivah of Flatbush is not an SCA affiliate but is where many teach.
+const AFFILIATION = [
+  [/beth torah/i, 'Beth Torah'], [/mikdash eliyahu/i, 'Mikdash Eliyahu'], [/barkai/i, 'Barkai Yeshivah'], [/kol israel/i, 'Kol Israel Congregation'],
+  [/b[e]?nei yitz?c?hak/i, 'Bnei Yitzhak'], [/ahaba ve ahva/i, 'Ahaba Ve Ahva'], [/moreshet yerushalayim/i, 'Yeshivat Moreshet Yerushalayim'],
+  [/sephardic rabbinical college/i, 'Sephardic Rabbinical College'], [/sephardic synagogue(?! of elberon)/i, 'Sephardic Synagogue'], [/hillel yeshiva/i, 'Hillel Yeshivah'],
+  [/magen david yeshiva/i, 'Magen David Yeshivah'], [/magen david,? (of )?west deal/i, 'Magen David of West Deal'], [/magen david of manhattan/i, 'Magen David of Manhattan'],
+  [/safra synagogue of nj/i, 'Edmond J. Safra Synagogue of Deal'], [/edmond j\.? safra synagogue nyc/i, 'Congregation Beit Edmond'], [/midreshet eshel/i, 'Eshel Sephardic Midrasha'],
+  [/allegra franco/i, 'Allegra Franco Bet Midrash & Career Fellowship'], [/ohel (shlomo and david|david and shlomo)/i, 'Ohel David and Shlomo Congregation of Manhattan Beach'],
+  [/bet rachel/i, 'Bet Rachel'], [/tanach study/i, 'Tanach Study'], [/sam school|sephardic academy of manhattan/i, 'Sephardic Academy of Manhattan'],
+  [/yeshivah? of flatbush|flatbush (high school|hs|es|middle)/i, 'Yeshivah of Flatbush'],
+];
+for (const t of teachers) if (!t.affiliations.length && t.title) t.affiliations = [...new Set(AFFILIATION.filter(([re]) => re.test(t.title)).map((x) => x[1]))];
+
 const out = {
   shortcuts,
   generatedAt: now.toISOString(), topics: TOPICS, teachers, classes, schedule, resources, erub,

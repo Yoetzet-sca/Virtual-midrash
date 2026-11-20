@@ -7,6 +7,7 @@ const WORDS: Record<string, string> = {
   gemora: 'gemara', gemarah: 'gemara', talmud: 'gemara', mishnah: 'mishna', mishnayot: 'mishna',
   chanukah: 'hanukkah', chanuka: 'hanukkah', hanukah: 'hanukkah', hanuka: 'hanukkah', pesach: 'pesah', passover: 'pesah',
   basra: 'batra', kesubos: 'ketubot', kesubot: 'ketubot', taanis: 'taanit', bereishis: 'bereshit', breishis: 'bereshit', megilla: 'megillah', megila: 'megillah', sukka: 'sukkah',
+  erubim: 'eruvin', erubin: 'eruvin', eiruvin: 'eruvin', beisah: 'betzah', beitzah: 'betzah', besah: 'betzah', beitza: 'betzah',
   shavuot: 'shabuot', shavuos: 'shabuot', succot: 'sukkot', sukkos: 'sukkot', succos: 'sukkot', succah: 'sukkah', tanach: 'tanakh',
 };
 
@@ -23,7 +24,9 @@ export function skeleton(word: string) {
 // Two spellings of one word: the same consonants, the same opening sound and about the same length.
 // Consonants alone are not enough: "Vayesse" and "Buys" share theirs.
 const opening = (w: string) => (WORDS[w] || w).replace(/^(ch|kh)/, 'h').replace(/^(tz|ts)/, 's')[0];
-export const sameWord = (a: string, b: string) => a === b || (skeleton(a) === skeleton(b) && skeleton(a).length >= 2 && opening(a) === opening(b) && Math.abs((WORDS[a] || a).length - (WORDS[b] || b).length) <= 3);
+// A final h comes and goes (Sara / Sarah, Teruma / Terumah, Vayishlah / Vayishlach), so it is ignored here.
+const ends = (w: string) => { const s = skeleton(w); return s.length > 2 ? s.replace(/h$/, '') : s; };
+export const sameWord = (a: string, b: string) => a === b || (ends(a) === ends(b) && ends(a).length >= 2 && opening(a) === opening(b) && Math.abs((WORDS[a] || a).length - (WORDS[b] || b).length) <= 3);
 
 export function matches(query: string, text: string) {
   const q = fold(query).split(' ').filter(Boolean);

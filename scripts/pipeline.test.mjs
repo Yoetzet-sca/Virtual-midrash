@@ -173,11 +173,11 @@ test('finding a feed inside a podcast web page', () => {
 
 test('daf yomi follows the real cycle', () => {
   assert.equal(CYCLE_DAYS, 2711);
-  assert.deepEqual(dafFor('2020-01-05'), { tractate: 'Berakhot', page: 2 }); // start of the 14th cycle
-  assert.deepEqual(dafFor('2026-11-18'), { tractate: 'Bekhorot', page: 61 }); // matches the old site that day
-  assert.deepEqual(dafFor('2026-11-19'), { tractate: 'Arakhin', page: 2 });
+  assert.deepEqual(dafFor('2020-01-05'), { tractate: 'Berachot', page: 2 }); // start of the 14th cycle
+  assert.deepEqual(dafFor('2026-11-18'), { tractate: 'Bechorot', page: 61 }); // matches the old site that day
+  assert.deepEqual(dafFor('2026-11-19'), { tractate: 'Arachin', page: 2 });
   assert.deepEqual(dafFor('2027-06-07'), { tractate: 'Niddah', page: 73 }); // siyum of the cycle
-  assert.deepEqual(dafFor('2027-06-08'), { tractate: 'Berakhot', page: 2 });
+  assert.deepEqual(dafFor('2027-06-08'), { tractate: 'Berachot', page: 2 });
 });
 
 test('this week\'s perasha and the next holiday', () => {
@@ -186,8 +186,8 @@ test('this week\'s perasha and the next holiday', () => {
   assert.equal(w.perasha.shabbat, '2026-11-21');
   assert.equal(w.holiday.name, 'Hanukkah');
   assert.match(w.holiday.date, /^2026-12-0[45]$/);
-  assert.equal(weekInfo('2026-03-09').perasha.name, 'Vayakhel – Pekude'); // a double portion
-  assert.equal(weekInfo('2026-10-19').perasha.name, 'Lekh Lekha'); // a hyphenated single name is not split
+  assert.equal(weekInfo('2026-03-09').perasha.name, 'Vayakhel – Pekudei'); // a double portion
+  assert.equal(weekInfo('2026-10-19').perasha.name, 'Lech Lecha'); // a hyphenated single name is not split
 });
 
 test('search forgives spelling', async () => {
@@ -370,4 +370,22 @@ test('the fast search gives the same answers as the simple one, quickly', async 
   const t1 = performance.now(); texts.filter((x) => matches('vayesse', x)); const slow = performance.now() - t1;
   console.log(`    search of 6,000 classes: ${fast.toFixed(1)} ms per keystroke with the index, ${slow.toFixed(0)} ms the old way`);
   assert.ok(fast < 40, `too slow: ${fast}`);
+});
+
+test('the old site\'s spellings are what the app shows, and they still find however a teacher spelled it', async () => {
+  const { namesIt, matches } = await import('./.search.mjs');
+  const { PERASHIYOT, MASEKHTOT } = await import('./lib/names.mjs');
+  // every perasha the calendar can return is spelled the old site's way
+  const seen = new Set();
+  for (let d = new Date(Date.UTC(2026, 8, 1)); d < new Date(Date.UTC(2028, 9, 1)); d = new Date(d.getTime() + 7 * 86400000)) for (const n of weekInfo(d.toISOString().slice(0, 10)).perasha?.search || []) seen.add(n);
+  for (const n of seen) assert.ok(PERASHIYOT.includes(n), `not the old site's spelling: ${n}`);
+  assert.ok(seen.size >= 50);
+  // the daf cycle uses the old site's tractate names
+  for (const day of ['2020-01-05', '2021-06-01', '2023-03-03', '2025-08-08', '2026-11-20']) assert.ok(MASEKHTOT.includes(dafFor(day).tractate), dafFor(day).tractate);
+  // and those spellings find the usual ones in titles
+  for (const [name, title] of [['Hayei Sara', 'Chayei Sarah 2025'], ['Hayei Sara', 'Haye Sarah: the cave'], ['Teruma', 'Perashat Terumah'], ['Tessave', 'Tetzaveh 5785'], ['Aharei Mot', 'Acharei Mot - Kedoshim'], ['Behaalotekha', "Beha'alotcha 2024"], ['Vayelech', 'Vayelekh 2025'], ['Shemini Aseret', 'Shemini Atzeret and the rain'], ["Tish'a BeAb", "Tisha B'Av: Kinot"], ["Tu B'Shbat", 'Tu Bishvat seder'], ['Asarah BeTebet', "Asara B'Tevet"], ['Som Gedaliah', 'Tzom Gedalia'], ['Yom Haasmaut', "Yom HaAtzmaut 5785"]]) assert.ok(namesIt(name, title), `${name} / ${title}`);
+  for (const [q, title] of [['Erubim 12', 'Eruvin 12 - Lehi'], ['Beisah 5', 'Beitzah 5'], ['Baba Kamma 30', 'Bava Kamma 30a'], ['Zebahim 2', 'Zevachim 2'], ['Abodah Zarah 10', 'Avodah Zarah 10'], ['Bechorot 8', 'Bekhorot 8 - The Wise Men of Athens'], ['Arachin 2', 'Arakhin 2'], ['Yebamot 4', 'Yevamot 4'], ['Berachot 12', 'Berakhot 12']]) assert.ok(matches(q, title), `${q} / ${title}`);
+  const hol = weekInfo('2027-05-20').holiday; // just before Lag La'Omer
+  assert.equal(hol.name, "Lag La'Omer"); assert.ok(hol.search.includes('Lag BaOmer'));
+  assert.equal(weekInfo('2026-12-13').holiday.name, 'Asarah BeTebet');
 });

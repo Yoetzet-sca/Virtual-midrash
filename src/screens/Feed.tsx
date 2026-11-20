@@ -64,7 +64,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
     const ids = (list: ClassItem[]) => new Set(list.map((c) => c.id));
     return ([
       sc?.perasha && { id: 'wk:perasha', label: `Perasha: ${sc.perasha.name}`, ids: ids(sc.perasha.search.flatMap((n) => classesNaming(data, n))) },
-      sc?.holiday && days <= 42 && { id: 'wk:holiday', label: sc.holiday.name, ids: ids(classesNaming(data, sc.holiday.name)) },
+      sc?.holiday && days <= 42 && { id: 'wk:holiday', label: sc.holiday.name, ids: ids((sc.holiday.search || [sc.holiday.name]).flatMap((n) => classesNaming(data, n))) },
       daf && { id: 'wk:daf', label: `Today’s daf: ${daf.tractate} ${daf.page}`, ids: ids(findClasses(data, `${daf.tractate} ${daf.page}`).filter((c) => matches(`${daf.tractate} ${daf.page}`, c.title))) },
     ].filter(Boolean) as { id: string; label: string; ids: Set<string> }[]).filter((x) => x.ids.size > 0); // no chip that leads nowhere
   }, [data]);
