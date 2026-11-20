@@ -285,7 +285,7 @@ test('YouTube API: lengths, and which videos are left out', async () => {
 test('two teachers with one family name', async () => {
   const { teacherForTitle } = await import('./lib/youtube.mjs');
   const teachers = [{ id: 'avi-harari', name: 'Rabbi Avi Harari' }, { id: 'joey-harari', name: 'Joey Harari' }, { id: 'joseph-mosseri', name: 'Joseph Mosseri' }];
-  assert.equal(teacherForTitle('Rabbi Harari on the Haftarah', teachers), 'avi-harari');
+  assert.equal(teacherForTitle('Rabbi Harari on the Haftarah', teachers), null); // two people named Harari: never guess
   assert.equal(teacherForTitle('Joey Harari', teachers), 'joey-harari');
   assert.equal(teacherForTitle('Rabbi Avi Harari - Vayesse', teachers), 'avi-harari');
   assert.equal(teacherForTitle('Harari family dinner', teachers), null);
@@ -303,4 +303,30 @@ test('a family name does not claim someone else with that name', async () => {
   const two = [...one, { id: 'joseph-dweck', name: 'Rabbi Joseph Dweck' }];
   assert.equal(teacherForTitle('"The Light in Being Jewish Right Now" Hanukkah Class by Rabbi Joseph Dweck', two), 'joseph-dweck');
   assert.equal(teacherForTitle('An evening with Rabbi Dweck', two), null);
+});
+
+test('videos are filed only under the person the title really names (checked against the SCA roster)', async () => {
+  const { teacherForTitle, samePerson } = await import('./lib/youtube.mjs');
+  const { readFileSync } = await import('node:fs');
+  const roster = JSON.parse(readFileSync(new URL('../content/roster.json', import.meta.url), 'utf8')).map((r) => ({ id: r.name, name: r.name }));
+  const who = (title) => teacherForTitle(title, roster);
+  assert.equal(who('"The Light in Being Jewish Right Now" Hanukkah Class by Rabbi Joseph Dweck'), 'Rabbi Joseph Dweck');
+  assert.equal(who('Rabbi Joey Dweck: Hanukkah'), 'Rabbi Joseph Dweck');
+  assert.equal(who('Perasha Gems - Rabbi Nathan Dweck'), 'Rabbi Nathan Dweck');
+  assert.equal(who('An evening with Rabbi Dweck'), null);            // four people named Dweck
+  assert.equal(who('Rabbi Tawil on Shabbat'), null);                 // several rabbis named Tawil
+  assert.equal(who('Rabbi Harari - Hilkhot Shabbat'), null);
+  assert.equal(who('Rabbi Hidary: Purim'), null);                    // also Mrs. Esther, Simone and Vivien Hidary
+  assert.equal(who('Mrs. Vivien Hidary – Vayelech & the "Song"'), 'Mrs. Vivien Hidary');
+  assert.equal(who('Rabbi Ricky Hidary on the Megillah'), 'Rabbi Dr. Richard Hidary');
+  assert.equal(who('Rabbi Lati - Perashat Noah'), 'Rabbi Uri Lati');  // the only Lati, and the title says Rabbi
+  assert.equal(who('Mrs. Lati - a class'), null);                    // wrong title for him
+  assert.equal(who('Lati Family Dinner'), null);                     // a bare family name is never enough
+  assert.equal(who('Class by Mrs. Victoria Chabot Berman'), 'Mrs. Victoria Chabot Berman');
+  assert.equal(who('Rabbi Ronnie Hasson: Tehillim'), 'Rabbi Dr. Henry (Ronnie) Hasson');
+  assert.equal(who('Joseph Mosseri on the Arayat'), 'Mr. Joey Mosseri');
+  assert.equal(who('SCA Minhag of the Week 309: "The Arayat"'), null);
+  assert.equal(who('Rabbi Joseph Beyda and Rabbi Joseph Dweck in conversation'), null); // two people named: left with the SCA
+  assert.ok(samePerson('Mr. Joseph Mosseri', 'Mr. Joey Mosseri') && samePerson('Mr. Joey Harari', 'Mr. Joseph Harari'));
+  assert.ok(!samePerson('Rabbi Avi Harari', 'Mr. Joseph Harari') && !samePerson('Rabbi Nathan Dweck', 'Rabbi Joseph Dweck'));
 });

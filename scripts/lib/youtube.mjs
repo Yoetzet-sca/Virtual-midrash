@@ -20,37 +20,54 @@ export function parseYoutube(xml) {
   }).filter((v) => /^[\w-]{11}$/.test(v.youtubeId) && v.title);
 }
 
-// A channel video belongs to a teacher when the title names them ("Mrs. Vivien Hidary – Vayelech").
-// A family name by itself counts ("Rabbi Dweck on ..."), but not when the title gives someone else's first name
-// with it: "Class by Rabbi Joseph Dweck" is not Rabbi Nathan Dweck.
-const HONORIFIC = new Set(['rabbi', 'rav', 'hacham', 'haham', 'mrs', 'ms', 'mr', 'dr', 'hazzan', 'professor', 'prof']);
-const LINKING = new Set(['by', 'with', 'from', 'and', 'the', 'of', 'to', 'class', 'shiur', 'featuring', 'feat', 'guest', 'speaker', 'presents', 'presented', 'in', 'on', 'for', 'at']);
-export function teacherForTitle(title, teachers) {
-  const words = title.toLowerCase().replace(/[^a-z\s]/g, ' ').split(/\s+/).filter(Boolean);
-  const parts = (name) => name.toLowerCase().replace(/[^a-z\s]/g, ' ').split(/\s+/).filter((w) => w && !HONORIFIC.has(w));
-  const named = (x) => {
-    const p = parts(x.name);
-    if (!p.length) return 0;
-    const last = p[p.length - 1], first = p[0];
-    let best = 0;
-    words.forEach((w, i) => {
-      if (w !== last) return;
+// ---- Whose class is it? ------------------------------------------------------------------------
+// A channel video is filed under a person only when its title names that person. Getting this wrong puts a class under
+// the wrong rabbi, so the rule is strict:
+//   • first name and family name together always count ("by Rabbi Joseph Dweck"), allowing for everyday forms of a
+//     first name (Joey / Joseph) and for middle names (Victoria Chabot Berman);
+//   • a family name alone counts only straight after a title ("Rabbi Lati"), only if that title fits the person, and
+//     only if nobody else on the whole SCA list of rabbis and teachers has that family name;
+//   • anything else is left under the SCA itself.
+const HONORIFIC = new Set(['rabbi', 'rav', 'hacham', 'haham', 'mrs', 'ms', 'mr', 'dr', 'hazzan', 'professor', 'prof', 'capt', 'idf']);
+const SAME_FIRST = [['joey', 'joe', 'joseph'], ['ike', 'ikey', 'isaac'], ['ricky', 'richard'], ['abe', 'abraham', 'avraham'], ['moey', 'moe', 'moses']];
+const sameFirst = (a, b) => a === b || SAME_FIRST.some((g) => g.includes(a) && g.includes(b));
+const clean = (s) => s.toLowerCase().replace(/\ba"?h\b|r\.n\.|m\.s\./g, ' ').replace(/[^a-z\s()]/g, ' ');
+// "Rabbi Dr. Henry (Ronnie) Hasson" → firsts [henry, ronnie], rest [], last hasson, titles [rabbi, dr]
+export function nameParts(name) {
+  const all = clean(name).replace(/[()]/g, ' ').split(/\s+/).filter(Boolean);
+  const nick = (clean(name).match(/\(([^)]+)\)/)?.[1] || '').trim().split(/\s+/).filter(Boolean);
+  const titles = all.filter((w) => HONORIFIC.has(w));
+  const p = all.filter((w) => !HONORIFIC.has(w) && !nick.includes(w));
+  if (!p.length) return null;
+  return { firsts: p.length > 1 ? [p[0], ...nick] : nick, middle: p.slice(1, -1), last: p[p.length - 1], titles };
+}
+export const samePerson = (a, b) => {
+  const x = nameParts(a), y = nameParts(b);
+  return !!x && !!y && x.last === y.last && x.firsts.some((f) => y.firsts.some((g) => sameFirst(f, g)));
+};
+const fits = (said, titles) => (said === 'rabbi' || said === 'rav' || said === 'hacham' || said === 'haham' ? titles.some((t) => ['rabbi', 'rav', 'hacham', 'haham'].includes(t))
+  : said === 'mrs' || said === 'ms' ? titles.some((t) => t === 'mrs' || t === 'ms')
+  : said === 'mr' ? titles.includes('mr') || !titles.length
+  : said === 'dr' ? titles.includes('dr') : true);
+
+export function teacherForTitle(title, people) {
+  const words = clean(title).replace(/[()]/g, ' ').split(/\s+/).filter(Boolean);
+  const known = people.map((x) => ({ x, n: nameParts(x.name) })).filter((k) => k.n);
+  const full = new Set(), alone = new Set();
+  words.forEach((w, i) => {
+    for (const k of known) {
+      if (w !== k.n.last) continue;
       const before = words[i - 1];
-      if (p.length > 1 && before === first) best = Math.max(best, 2);                       // first and family name together
-      else if (!before || HONORIFIC.has(before) || LINKING.has(before)) best = Math.max(best, 1); // family name by itself
-      // otherwise the word before is someone else's first name: not this teacher
-    });
-    return best;
-  };
-  const scored = teachers.map((x) => ({ x, n: named(x) })).filter((s) => s.n > 0);
-  const full = scored.filter((s) => s.n === 2);
-  if (full.length === 1) return full[0].x.id;
-  if (full.length > 1) return null;
-  if (scored.length === 1) return scored[0].x.id;
-  // Two teachers share the family name and the title gives no first name: "Rabbi Harari" is the one who is a rabbi.
-  const rabbi = (x) => /^(rabbi|hacham)\b/i.test(x.name);
-  const byTitle = words.includes('rabbi') || words.includes('hacham') ? scored.filter((s) => rabbi(s.x)) : [];
-  return byTitle.length === 1 ? byTitle[0].x.id : null;
+      const withMiddle = k.n.middle.length && k.n.middle.every((m, j) => words[i - k.n.middle.length + j] === m) ? words[i - k.n.middle.length - 1] : undefined;
+      if ([before, withMiddle].some((f) => f && k.n.firsts.some((g) => sameFirst(f, g)))) full.add(k.x.id);
+      else if (before && HONORIFIC.has(before) && fits(before, k.n.titles)) alone.add(k.x.id);
+    }
+  });
+  if (full.size === 1) return [...full][0];
+  if (full.size > 1) return null;
+  if (alone.size !== 1) return null;
+  const id = [...alone][0], last = known.find((k) => k.x.id === id).n.last;
+  return known.filter((k) => k.n.last === last).length === 1 ? id : null; // someone else shares the family name: do not guess
 }
 
 // ---- The whole channel, through YouTube's own Data API (needs a free API key) -------------------

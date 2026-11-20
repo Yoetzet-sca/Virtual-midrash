@@ -14,7 +14,7 @@ import { parseCsv, resourceRows, sameName } from './lib/csv.mjs';
 import { lock } from './lib/lock.mjs';
 import { applyOverrides } from './lib/overrides.mjs';
 import { dafFor, weekInfo } from './lib/calendar.mjs';
-import { channelIdFrom, feedUrl, parseYoutube, teacherForTitle, allVideos } from './lib/youtube.mjs';
+import { channelIdFrom, feedUrl, parseYoutube, teacherForTitle, allVideos, samePerson } from './lib/youtube.mjs';
 
 const FIXTURES = process.argv.includes('--fixtures');
 const root = new URL('..', import.meta.url);
@@ -42,6 +42,27 @@ const warnings = [];
 const teachers = (await sheetOr('SHEET_TEACHERS_URL', await json('content/teachers.json')))
   .filter((t) => t.id && t.name)
   .map((t) => ({ id: t.id, name: t.name, title: t.title || '', bio: t.bio || '', photo: t.photo || '', affiliations: list(t.affiliations), feed: t.feed || '', podcastName: t.podcastName || '', defaultTopic: t.defaultTopic || '' }));
+
+// ---- The SCA's full list of rabbis and teachers (content/roster.json, from virtualmidrash.com) --------------------
+// Used for two things: headshots and titles for the teachers above, and knowing exactly who a video's title names.
+// Someone on the list who is not a teacher in the app yet gets a page the first time one of their classes turns up.
+const roster = await json('content/roster.json').catch(() => []);
+const slug = (name) => name.toLowerCase().replace(/\b(rabbi|mrs|ms|mr|dr)\b\.?/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const people = teachers.map((t) => ({ id: t.id, name: t.name }));
+const waiting = new Map(); // id → roster entry, for people not in the app yet
+for (const r of roster) {
+  const t = teachers.find((x) => samePerson(x.name, r.name));
+  if (t) { if (!t.photo) t.photo = r.photo; if (!t.title) t.title = r.title; continue; }
+  const id = slug(r.name);
+  if (!id || people.some((x) => x.id === id)) continue;
+  people.push({ id, name: r.name }); waiting.set(id, r);
+}
+// Names a title or a video gives → the teacher's id, adding that person to the app if this is their first class.
+function whoIs(text) {
+  const id = teacherForTitle(text, people);
+  if (id && waiting.has(id)) { const r = waiting.get(id); waiting.delete(id); teachers.push({ id, name: r.name, title: r.title, bio: '', photo: r.photo, affiliations: [], feed: '', podcastName: '', defaultTopic: '' }); }
+  return id;
+}
 
 // ---- Classes from each teacher's feed ---------------------------------------
 const classes = [];
@@ -127,12 +148,19 @@ for (const y of settings.youtube || []) {
     const videos = whole ? kept : kept.slice(0, settings.maxVideosPerChannel || 15);
     for (const v of videos) {
       // A teacher's own channel files everything under that teacher; a shared channel goes by the name in the title.
-      let teacherId = (y.teacherId && teachers.some((t) => t.id === y.teacherId) ? y.teacherId : null) || teacherForTitle(v.title, teachers);
+      let teacherId = (y.teacherId && teachers.some((t) => t.id === y.teacherId) ? y.teacherId : null) || whoIs(v.title);
       if (!teacherId) {
         teacherId = 'sca';
         if (!teachers.some((t) => t.id === 'sca')) teachers.push({ id: 'sca', name: 'Sephardic Community Alliance', title: 'Classes and events from the SCA', bio: '', photo: '', affiliations: [], feed: '', defaultTopic: '' });
       }
       classes.push({ id: `yt:${v.youtubeId}`, teacherId, title: v.title, date: v.date, durationSec: v.durationSec || 0, audioUrl: '', youtubeId: v.youtubeId, image: v.image, link: v.link, topic: topicFor(v.title, null), kind: 'video', ...(y.aiSummaries ? { ai: true } : {}) });
+    }
+    if (!y.teacherId) {
+      const mine = classes.filter((c) => c.kind === 'video' && videos.some((v) => `yt:${v.youtubeId}` === c.id));
+      const by = new Map(); for (const c of mine) by.set(c.teacherId, (by.get(c.teacherId) || 0) + 1);
+      const named = [...by.entries()].filter(([id]) => id !== 'sca').sort((a, b) => b[1] - a[1]);
+      console.log(`  Filed by the name in the title: ${mine.length - (by.get('sca') || 0)} videos under ${named.length} people; ${by.get('sca') || 0} left with the SCA (no single name in the title).`);
+      console.log(`  ${named.map(([id, n]) => `${teachers.find((x) => x.id === id)?.name} ${n}`).join(' · ')}`);
     }
     console.log(`✓ YouTube ${y.url}: ${videos.length} videos${whole ? ' (whole channel)' : ' (newest only)'}` + (videos[0] ? ` — newest: "${videos[0].title.slice(0, 60)}" (${videos[0].date.slice(0, 10)})` : ''));
   } catch (e) {
@@ -163,7 +191,7 @@ const search = [];
     const a = ai.get(sidOf(c.id));
     if (!a || a.quality === 'poor') continue;
     // A channel video filed under the SCA itself moves to its teacher once the video has named who is teaching.
-    if (c.teacherId === 'sca' && a.speaker) { const who = teacherForTitle(a.speaker, teachers.filter((x) => x.id !== 'sca')); if (who) { c.teacherId = who; moved++; } }
+    if (c.teacherId === 'sca' && a.speaker) { const who = whoIs(a.speaker); if (who) { c.teacherId = who; moved++; } }
     if (!c.topic && TOPICS.includes(a.topic)) { c.topic = a.topic; topics++; }
     c.summary = a.summary;
     if (a.chapters?.length) c.chapters = a.chapters.map((x) => [x.at, x.title]);
