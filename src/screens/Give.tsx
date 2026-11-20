@@ -57,9 +57,7 @@ export function Give({ data }: { data: AppData }) {
         <button className={kind === 'pledge' ? 'on' : ''} aria-pressed={kind === 'pledge'} onClick={() => pick('pledge')}>Pledge</button>
       </div>
 
-      {kind === 'donate' && (showForm
-        ? <GiveLivelyForm url={data.links.giveLively} />
-        : <><button className="btn wide" onClick={() => setShowForm(true)}>Donate Now</button><p className="muted small center">Card, Apple Pay or Google Pay · Tax receipt by email</p></>)}
+      {kind === 'donate' && <><GiveLivelyForm url={data.links.giveLively} /><p className="muted small center">Card, Apple Pay or Google Pay · Tax receipt by email</p></>}
 
       {kind === 'sponsor' && <>
         <p className="muted">Dedicate a class in memory or in honor of someone. Your dedication is shown with the class.</p>
