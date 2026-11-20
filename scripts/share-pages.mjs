@@ -17,7 +17,8 @@ export function sharePage(c, teacher, siteUrl) {
   // WhatsApp and iMessage show about two lines: the summary of the class if there is one, then who and where.
   const short = c.summary && (c.summary.length > 180 ? c.summary.slice(0, 180).replace(/\s+\S*$/, '') + '…' : c.summary);
   const about = short ? `${short} — ${teacher?.name || 'Virtual Midrash'}` : by;
-  const image = c.image || teacher?.photo || siteUrl + 'brand/icon-512.png';
+  const own = teacher?.photo?.startsWith('./') ? siteUrl + teacher.photo.slice(2) : teacher?.photo; // a link preview needs a full address
+  const image = c.image || own || siteUrl + 'brand/icon-512.png';
   const target = '../#/class/' + encodeURIComponent(c.id);
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>

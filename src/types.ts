@@ -1,4 +1,4 @@
-export type Teacher = { id: string; name: string; title: string; bio: string; photo: string; affiliations: string[]; feed: string };
+export type Teacher = { id: string; name: string; title: string; bio: string; photo: string; photoSmall?: string; affiliations: string[]; feed: string };
 export type ClassItem = { id: string; sid?: string; teacherId: string; title: string; date: string; durationSec: number; audioUrl: string; youtubeId?: string; image: string; link: string; topic: string | null; kind: 'audio' | 'video'; chapters?: [number, string][]; summary?: string };
 // What the AI step wrote for a class: m summary, s subjects, q questions it answers, c key words for each part, t words said.
 export type SearchEntry = { i: string; m: string; s: string; q: string; c: string[]; t: string };

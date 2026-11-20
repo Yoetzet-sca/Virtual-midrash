@@ -14,7 +14,7 @@ export function Avatar({ t, size = 68, ring = false }: { t?: Teacher; size?: num
   return (
     <span className={'avatar' + (ring ? ' ring' : '')} style={style}>
       {initials(t?.name || '?')}
-      {t?.photo && !bad && <img src={sized(t.photo, 200)} alt="" loading="lazy" decoding="async" onError={() => setBad(true)} />}
+      {t?.photo && !bad && <img src={size <= 80 && t.photoSmall ? t.photoSmall : sized(t.photo, 200)} alt="" loading="lazy" decoding="async" onError={() => setBad(true)} />}
     </span>
   );
 }
