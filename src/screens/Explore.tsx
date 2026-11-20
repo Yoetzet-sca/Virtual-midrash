@@ -3,6 +3,7 @@ import type { AppData, ClassItem, SearchEntry, Teacher } from '../types';
 import { Avatar, ClassRow } from '../ui';
 import { ISearch } from '../icons';
 import { matches } from '../search';
+import { findClasses } from '../util';
 import { ask, prepare, type Answer } from '../ask';
 import { usePlayer } from '../player';
 import { IPlay } from '../icons';
@@ -32,6 +33,7 @@ export function Explore({ data, place: startPlace, pickTopic }: { data: AppData;
   const teachers = data.teachers.filter((t) => place === 'All' || t.affiliations.includes(place));
   const teacher = (id: string) => data.teachers.find((t) => t.id === id);
   const needle = q.trim();
+  const slow = useDeferredValue(needle);
   // The AI search index is only fetched once someone starts typing.
   const [index, setIndex] = useState<SearchEntry[] | null>(null);
   useEffect(() => {
@@ -42,12 +44,12 @@ export function Explore({ data, place: startPlace, pickTopic }: { data: AppData;
   }, [needle, index]);
   const bySid = useMemo(() => new Map(data.classes.map((c) => [c.sid, c])), [data]);
   const ready = useMemo(() => prepare((index || []).filter((e) => bySid.has(e.i)), (sid) => bySid.get(sid)?.title || ''), [index, bySid]);
-  const slow = useDeferredValue(needle);
   const answers = useMemo(() => (slow.length >= 3 ? ask(slow, ready) : []), [slow, ready]);
   const answered = new Set(answers.map((a) => a.sid));
-  const allFound = needle ? data.classes.filter((c) => matches(needle, c.title + ' ' + (teacher(c.teacherId)?.name || '') + ' ' + (c.topic || ''))) : [];
+  // Results follow the typing a beat behind, so the keyboard never waits on the search.
+  const allFound = useMemo(() => (slow ? findClasses(data, slow) : []), [data, slow]);
   const found = allFound.filter((c) => !answered.has(c.sid || '')).slice(0, 60);
-  const foundTeachers = needle ? data.teachers.filter((t) => matches(needle, t.name)) : [];
+  const foundTeachers = useMemo(() => (slow ? data.teachers.filter((t) => matches(slow, t.name)) : []), [data, slow]);
   // This week's shortcuts
   const now = new Date();
   const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;

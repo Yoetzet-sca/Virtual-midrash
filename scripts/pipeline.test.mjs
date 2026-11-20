@@ -356,3 +356,18 @@ test('meaning check: prompt and reading the reply', async () => {
   assert.match(sp({ title: 'T', teacher: 'Rabbi A B', minutes: 5, transcript: 'x', fix: ['cites the Rambam'] }), /found these statements are not supported by it:\n- cites the Rambam\n/);
   assert.deepEqual(un('Rabbi Yehuda and Rabbi Yehoshua on the Sidurim', 'so rabbi yehudah says, and rabbi yehoshuah, look in the siddurim'), []); // Hebrew spelled by ear
 });
+
+test('the fast search gives the same answers as the simple one, quickly', async () => {
+  const { matches, namesIt, buildIndex, searchIndex } = await import('./.search.mjs');
+  const base = ['Bava Batra 8a (1)', 'Baba Batra 98 - Who Buys the House for the Newlyweds?', 'Vayetze 2025', 'Vayishlach 2025', 'VaYesse: Living With The Tension', 'Perashat Lech Lecha 5786. Rabbi Uri Lati', 'Arachin daf 2', 'Arakhin 10 - Why Not Sing Hallel on Purim', 'Chanukah: lighting at the door', 'The Laws of Shabbat #11', 'Shemirat Halashon 28', 'Bekhorot 27 - Terumah Outside of Israel', 'Hullin 122 - The Kindest Babylonian'];
+  const texts = Array.from({ length: 6000 }, (_, i) => `${base[i % base.length]} ${i % 7 === 0 ? 'Rabbi Avi Harari' : 'Mrs. Vivien Hidary'} part ${i}`);
+  const ix = buildIndex(texts);
+  for (const q of ['vayesse', 'bava basra 8', 'lech lecha', 'arakhin 2', 'hanukkah', 'israel', 'harari', 'shabbos laws', 'vayes', 'zzz']) {
+    assert.deepEqual(searchIndex(ix, q), texts.map((x, i) => (matches(q, x) ? i : -1)).filter((i) => i >= 0), q);
+  }
+  for (const n of ['Vayesse', 'Hanukkah', 'Lekh Lekha']) assert.deepEqual(searchIndex(ix, n, true), texts.map((x, i) => (namesIt(n, x) ? i : -1)).filter((i) => i >= 0), n);
+  const t0 = performance.now(); for (const q of ['v', 'va', 'vay', 'vaye', 'vayes', 'vayess', 'vayesse']) searchIndex(ix, q); const fast = (performance.now() - t0) / 7;
+  const t1 = performance.now(); texts.filter((x) => matches('vayesse', x)); const slow = performance.now() - t1;
+  console.log(`    search of 6,000 classes: ${fast.toFixed(1)} ms per keystroke with the index, ${slow.toFixed(0)} ms the old way`);
+  assert.ok(fast < 40, `too slow: ${fast}`);
+});

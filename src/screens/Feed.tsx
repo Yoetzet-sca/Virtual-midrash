@@ -3,8 +3,8 @@ import type { AppData, ClassItem } from '../types';
 import { usePrefs, getPrefs, setPrefs, toggleIn, learn } from '../store';
 import { usePlayer } from '../player';
 import { Avatar, erubLabel, go } from '../ui';
-import { classShare, clock, initials, matchesTopic, minutes, newFromFollowed, rank, shareLink, daysAgo, sized } from '../util';
-import { matches, namesIt } from '../search';
+import { classShare, clock, initials, matchesTopic, minutes, newFromFollowed, rank, shareLink, daysAgo, sized, findClasses, classesNaming } from '../util';
+import { matches } from '../search';
 import { IHeart, IPause, IPlay, ISave, ISaved, ISearch, IShare, IInfo } from '../icons';
 
 export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData; startId?: string; topic: string; setTopic: (t: string) => void }) {
@@ -61,11 +61,12 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
     const sc = data.shortcuts;
     const daf = sc?.daf[key];
     const days = sc?.holiday ? (new Date(sc.holiday.date + 'T12:00:00').getTime() - now.getTime()) / 86400000 : 99;
+    const ids = (list: ClassItem[]) => new Set(list.map((c) => c.id));
     return ([
-      sc?.perasha && { id: 'wk:perasha', label: `Perasha: ${sc.perasha.name}`, test: (title: string) => sc.perasha!.search.some((n) => namesIt(n, title)) },
-      sc?.holiday && days <= 42 && { id: 'wk:holiday', label: sc.holiday.name, test: (title: string) => namesIt(sc.holiday!.name, title) },
-      daf && { id: 'wk:daf', label: `Today’s daf: ${daf.tractate} ${daf.page}`, test: (title: string) => matches(`${daf.tractate} ${daf.page}`, title) },
-    ].filter(Boolean) as { id: string; label: string; test: (title: string) => boolean }[]).filter((x) => data.classes.some((c) => x.test(c.title))); // no chip that leads nowhere
+      sc?.perasha && { id: 'wk:perasha', label: `Perasha: ${sc.perasha.name}`, ids: ids(sc.perasha.search.flatMap((n) => classesNaming(data, n))) },
+      sc?.holiday && days <= 42 && { id: 'wk:holiday', label: sc.holiday.name, ids: ids(classesNaming(data, sc.holiday.name)) },
+      daf && { id: 'wk:daf', label: `Today’s daf: ${daf.tractate} ${daf.page}`, ids: ids(findClasses(data, `${daf.tractate} ${daf.page}`).filter((c) => matches(`${daf.tractate} ${daf.page}`, c.title))) },
+    ].filter(Boolean) as { id: string; label: string; ids: Set<string> }[]).filter((x) => x.ids.size > 0); // no chip that leads nowhere
   }, [data]);
   // A search from Explore can be opened in the feed too: its chip is 'q:' followed by what was searched.
   const labelOf = (id: string) => (id.startsWith('q:') ? `“${id.slice(2)}”` : timely.find((x) => x.id === id)?.label || id);
@@ -73,9 +74,9 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
   const cards = useMemo(() => {
     const direct = startId ? order.find((c) => c.id === startId)?.teacherId : undefined;
     const shown = order.filter((c) => !prefs.hidden.includes(c.teacherId) || c.teacherId === direct);
-    if (topic.startsWith('q:')) { const q = topic.slice(2); return shown.filter((c) => matches(q, c.title + ' ' + (data.teachers.find((t) => t.id === c.teacherId)?.name || '') + ' ' + (c.topic || ''))); }
+    if (topic.startsWith('q:')) { const hits = new Set(findClasses(data, topic.slice(2)).map((c) => c.id)); return shown.filter((c) => hits.has(c.id)); }
     const special = timely.find((x) => x.id === topic);
-    if (special) return shown.filter((c) => special.test(c.title));
+    if (special) return shown.filter((c) => special.ids.has(c.id));
     return topic === 'For You' ? shown : shown.filter((c) => matchesTopic(c.topic, topic));
   }, [order, topic, prefs.hidden, startId, timely]);
 

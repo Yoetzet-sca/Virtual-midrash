@@ -1,5 +1,6 @@
 import type { AppData, ClassItem } from './types';
 import type { Prefs } from './store';
+import { buildIndex, searchIndex, type Index } from './search';
 
 export const matchesTopic = (classTopic: string | null, chosen: string) => classTopic === chosen || (chosen === 'Gemara' && classTopic === 'Daf Yomi');
 
@@ -64,3 +65,19 @@ export function newFromFollowed(data: AppData, prefs: Prefs) {
 // so ask SoundCloud's image server for a size that fits the screen.
 export const sized = (url: string | undefined, px: 200 | 500) =>
   url ? url.replace(/(sndcdn\.com\/.*)-(?:original|large|crop|t\d+x\d+)\.(jpe?g|png)/i, `$1-t${px}x${px}.$2`) : url;
+
+// One search index per class list, built the first time it is needed and reused by Explore and the feed.
+const indexes = new WeakMap<object, { full: Index; titles: Index }>();
+function indexFor(data: AppData) {
+  let ix = indexes.get(data.classes);
+  if (!ix) {
+    const name = new Map(data.teachers.map((t) => [t.id, t.name]));
+    ix = { full: buildIndex(data.classes.map((c) => `${c.title} ${name.get(c.teacherId) || ''} ${c.topic || ''}`)), titles: buildIndex(data.classes.map((c) => c.title)) };
+    indexes.set(data.classes, ix);
+  }
+  return ix;
+}
+// Classes matching what someone typed (title, teacher or topic, any spelling), in the app's order.
+export const findClasses = (data: AppData, query: string) => searchIndex(indexFor(data).full, query).map((i) => data.classes[i]);
+// Classes whose title names this perasha or holiday as a whole word.
+export const classesNaming = (data: AppData, name: string) => searchIndex(indexFor(data).titles, name, true).map((i) => data.classes[i]);

@@ -47,3 +47,31 @@ export function namesIt(name: string, title: string) {
   const have = fold(title).split(' ').filter(Boolean);
   return want.length > 0 && want.every((n) => have.some((w) => sameWord(n, w)));
 }
+
+// ---- Searching thousands of classes quickly -------------------------------------------------------
+// Comparing every search word with every word of every title on each keystroke was slow once the app held the whole
+// archive. Titles reuse a few thousand distinct words, so each search word is compared once with that vocabulary,
+// and each class is then only asked "do you contain one of these words?".
+export type Index = { docs: string[][]; vocab: string[] };
+export function buildIndex(texts: string[]): Index {
+  const docs = texts.map((x) => fold(x).split(' ').filter(Boolean));
+  return { docs, vocab: [...new Set(docs.flat())] };
+}
+const typed = (token: string, w: string) => {
+  if (w.includes(token) || sameWord(token, w)) return true;
+  const sk = skeleton(token);
+  return sk.length >= 3 && w.length > token.length && opening(token) === opening(w) && [-1, 0, 1, 2].some((d) => skeleton(w.slice(0, token.length + d)) === sk);
+};
+// The positions of the texts that match. `whole` is the strict rule used for names the app looks up itself (namesIt).
+export function searchIndex(ix: Index, query: string, whole = false): number[] {
+  const tokens = fold(query).split(' ').filter(Boolean);
+  if (!tokens.length) return [];
+  const tests = tokens.map((token) => {
+    if (!whole && /^\d/.test(token)) return (words: string[]) => words.some((w) => w === token || (w.startsWith(token) && /^[ab]$/.test(w.slice(token.length))));
+    const hits = new Set(ix.vocab.filter((w) => (whole ? sameWord(token, w) : typed(token, w))));
+    return (words: string[]) => words.some((w) => hits.has(w));
+  });
+  const out: number[] = [];
+  ix.docs.forEach((words, i) => { if (tests.every((f) => f(words))) out.push(i); });
+  return out;
+}
