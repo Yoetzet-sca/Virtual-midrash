@@ -1,57 +1,58 @@
 {
- "v": 6,
+ "v": 7,
  "id": "yt:gLzvlIEi-fw",
  "title": "SCA Minhag of the Week 301: \"The Final Meal Before the Fast of the 9th of Ab\"",
- "topic": "Minhag of the Week",
+ "topic": "Halakha",
  "chapters": [
   {
    "at": 0,
-   "title": "One Cooked Dish and Customs for the Final Meal",
-   "about": "Tisha B'Av on Tuesday or Thursday, Aleppo customs, Shulchan Aruch, and Rambam in Mishneh Torah."
+   "title": "Laws of the final meal",
+   "about": "One cooked dish, Aleppo custom, Rambam's practice"
   },
   {
    "at": 63,
-   "title": "The Ashkenazic Custom and Objections",
-   "about": "Eating a larger meal before Mincha, Maharam, Rabbi Shlomo Luria in Poland, and Kaf HaChaim Sofer."
+   "title": "Ashkenazic customs and objections",
+   "about": "Multiple meals, Rabbi Shlomo Luria, Kaf HaChaim Sofer"
   },
   {
    "at": 124,
-   "title": "Sephardic Custom and Additional Foods",
-   "about": "Sephardic practice, quantity of the cooked dish, bread, crackers, fruits, and vegetables."
+   "title": "Sephardic practice and food allowances",
+   "about": "Sephardic custom, bread, raw fruits and vegetables"
   },
   {
    "at": 188,
-   "title": "Bayit Chadash and Timing the Larger Meal",
-   "about": "Bayit Chadash from Poland, timing before halachic midday, and our custom."
+   "title": "Timing of the final meal",
+   "about": "Bayit Chadash, halachic midday, maintaining customs"
   }
  ],
  "unsupported": [
-  "rule",
+  "beab",
+  "single",
   "practices",
-  "recorded",
+  "practice",
+  "allowances",
   "timing"
  ],
- "summary": "This class discusses the laws and customs of the final meal before the fast of Tisha B'Av, including the rule regarding one cooked dish when the fast falls on a Tuesday or Thursday. It covers opinions and practices recorded by Rabbi Shlomo Laniado, Maran in Shulchan Aruch, Rambam in Mishneh Torah, Maharam, Rabbi Shlomo Luria, Kaf HaChaim Sofer, and Bayit Chadash.",
+ "claims": [],
+ "summary": "This class discusses the laws and customs regarding the final meal before Tish'a BeAb. It examines the requirement for a single cooked dish, the practices of various communities, and the views of authorities like Rambam and the Shulchan Aruch.",
  "subjects": [
-  "Tisha B'Av",
-  "Beit HaMikdash",
-  "Rabbi Shlomo Laniado",
+  "Tish'a BeAb",
+  "Seudat Hamafseket",
   "Shulchan Aruch",
-  "Maran",
   "Mishneh Torah",
   "Rambam",
-  "Maharam",
+  "Rabbi Shlomo Laniado",
   "Rabbi Shlomo Luria",
+  "Bayit Chadash",
   "Kaf HaChaim Sofer",
-  "Seudat Hamafseket",
-  "Bayit Chadash"
+  "Bet HaMikdash"
  ],
  "questions": [
-  "What is the rule about cooked dishes for the final meal before Tisha B'Av when it falls on a Tuesday or Thursday?",
-  "What did people in Aleppo eat for their final meal before Tisha B'Av?",
-  "How did Rambam describe the practice of the pious and wise people regarding the final meal?",
-  "What was the Ashkenazic custom regarding a larger meal before Mincha and how did authorities view it?",
-  "What foods can be eaten in addition to the one cooked dish during the final meal?"
+  "What is the rule for cooked dishes at the final meal before Tish'a BeAb?",
+  "Did Rambam eat a cooked dish before the fast?",
+  "What is the difference between Sephardic and Ashkenazic customs regarding the final meal?",
+  "Can you eat bread or raw vegetables with the one cooked dish?",
+  "Is it permitted to eat a large meal before the final meal?"
  ],
  "quality": "good",
  "terms": "meal eat cooked dish bav final tisha day fast custom wrote limited ashkenazic ate larger mincha another eating large need several 16th afterwards always authorities bread dip dishes even foods lentils maintain may never normally people poland rabbi rambam salt shlomo should since technically water weekday 17th able according added addition aleppo allowed although among aruch ashkenazim authority baked based bayit begins beit boiled casually category centuries century chadash chapter close conforms crackers customary dangerous delicacies destruction developed drink earlier eaten egg end enough falls fasts fifth floor food found fried fruits furthermore hachaim halachic hamafseket hamikdash hard himself however including items itself kaf laniado late later law laws long luria maharam maran meaning mejadra midday mind mishneh mourning note objected objection official others part pious pleasurable quantity quoted rabbis raw requirements rice sephardim seudat shulchan sign sitting small sofer stale still stomach sunset therefore thursday torah tuesday vegetables wicked wise wont",
@@ -59,5 +60,5 @@
  "language": "",
  "speaker": "",
  "made": "2026-11-20",
- "by": "gemini (video) + gemini-3.5-flash-lite"
+ "by": "gemini (video) + gemini-3.1-flash-lite"
 }

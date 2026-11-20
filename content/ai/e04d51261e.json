@@ -1,66 +1,85 @@
 {
- "v": 6,
+ "v": 7,
  "id": "yt:z9fcHjI6Q5E",
  "title": "SCA Minhag of the Week 302: \"Hinukh Habayit: The Reading\"",
- "topic": "Minhag of the Week",
+ "topic": "Halakha",
  "chapters": [
   {
    "at": 6,
-   "title": "Order of reading for Hanukat HaBayit",
-   "about": "Difference from Berit Milah reading and preliminary Pesukim"
+   "title": "Introduction and Preliminary Prayers",
+   "about": "Hanukat HaBayit order, Tehillim, and Anna BeChoach"
   },
   {
    "at": 59,
-   "title": "Reading Masechtot of Mishna",
-   "about": "Masechet Berakhot, Masechet Yom Tov, Masechet Tamid spelling Bayit"
+   "title": "Reading the Mishnayot",
+   "about": "Berachot, Beitzah, and Tamid"
+  },
+  {
+   "at": 113,
+   "title": "Method of Reading",
+   "about": "Clockwise rotation and group participation"
   },
   {
    "at": 171,
-   "title": "Sections of Zohar, Gemara, and Rambam",
-   "about": "Reading Zohar, Gemara, Hilkhot De'ot, and Hilkhot Bet HaBechirah"
+   "title": "Zohar, Gemara, and Rambam",
+   "about": "Additional study sections and Hilchot De'ot"
   },
   {
    "at": 223,
-   "title": "Affixing Mezuza and saying Shehecheyanu",
-   "about": "Berakha of Likboa Mezuza, Shehecheyanu, Shulchan Aruch rules"
+   "title": "Affixing the Mezuza",
+   "about": "Beracha of Likboa Mezuza and Shehecheyanu"
+  },
+  {
+   "at": 287,
+   "title": "Customs for Shehecheyanu",
+   "about": "New clothing and Shulchan Aruch"
   },
   {
    "at": 344,
-   "title": "Pizmonim, meal, and rented apartments",
-   "about": "Al Bayit Zeh VeYoshevehu, Se'udah, Hakham Yitzchak Alfiah reading"
+   "title": "Conclusion and Rental Homes",
+   "about": "Pizmonim, Se'udut, and readings for renters"
   }
  ],
  "unsupported": [
-  "clarifies",
+  "outlines",
+  "clarifying",
   "differs",
-  "text",
-  "recited"
+  "sequence",
+  "customs",
+  "method",
+  "rental",
+  "homes"
  ],
- "summary": "This class explains the order of reading for Hanukat HaBayit and clarifies how it differs from the Zohar reading for a Berit Milah. It details the text recited, including Pesukim, Mizmor Tehillim, Masechtot of Mishna, Zohar, Gemara, and Rambam, as well as affixing the Mezuza and saying Shehecheyanu. It also mentions a reading for rented apartments set apart by Hakham Yitzchak Alfiah.",
+ "claims": [
+  "'Conclusion and Rental Homes' - The transcript does not list this as a part of the class, and the teacher only mentions rental homes as a side note at the very end of the lecture."
+ ],
+ "summary": "This class outlines the traditional order of readings for Hanukat HaBayit, clarifying that it differs from the Zohar readings used for a Berit Milah. The teacher details the sequence of Pesukim, Mishnayot, Zohar, Gemara, and Rambam, followed by the laws and customs regarding the affixing of the Mezuza and the Beracha of Shehecheyanu.",
  "subjects": [
-  "Hanukat HaBayit reading order",
-  "Berit Olam and Seder HaMitzvot books",
-  "Masechet Berakhot, Yom Tov, and Tamid",
-  "Zohar and Gemara readings",
-  "Rambam Hilkhot De'ot and Hilkhot Bet HaBechirah",
-  "Affixing the Mezuza and Berakha of Likboa Mezuza",
-  "Shehecheyanu and Shulchan Aruch Siman 223",
-  "Pizmon Al Bayit Zeh VeYoshevehu",
-  "Reading for rented apartments by Hakham Yitzchak Alfiah"
+  "Hanukat HaBayit",
+  "Mishnayot",
+  "Masechet Berachot",
+  "Masechet Beitzah",
+  "Masechet Tamid",
+  "Zohar",
+  "Rambam",
+  "Hilchot De'ot",
+  "Hilchot Beit HaBechirah",
+  "Mezuza",
+  "Shehecheyanu",
+  "Shulchan Aruch"
  ],
  "questions": [
-  "What is the difference between the reading for Hanukat HaBayit and Berit Milah?",
-  "Which Masechtot of Mishna are read during Hanukat HaBayit?",
-  "What sections of Rambam are read at Hanukat HaBayit?",
-  "When is the Mezuza affixed and what Berakha is recited?",
-  "How is the Berakha of Shehecheyanu recited when moving into a new home?",
-  "Is there a special reading for someone who rents an apartment?"
+  "What is the correct order of readings for Hanukat HaBayit?",
+  "Which Masechtot of Mishnayot are read during the house dedication?",
+  "Is the reading for Hanukat HaBayit the same as for a Berit Milah?",
+  "When should the Beracha of Shehecheyanu be recited for a new home?",
+  "Is there a special reading for people who are renting a home?"
  ],
- "quality": "good",
+ "quality": "poor",
  "terms": "reading read home new beracha order shehecheyanu zohar people habayit hanukat mezuza section upon based bayit berit gemara masechet mishnayot page small special thats theres around berachot different done doorway everybody furnishings homeowner masechtot mishna mizmor next person prayer sections tamid three tov years yom anna apartment aruch asked bechoach beit beseiter book books called chadash confused definitely doesnt dwelling elyon entire finish followed gimel give hilchot house ill involved jump laws main make milah minutes names night normal perek pesukim piece rambam rather ratzon rent set shulchan tehillim usually yehi yoshev youre according affixing afterwards aleph alfiah another anybodys apart apartments appear applying appropriate attaining attention automatically bana basic become beforehand begins beitzah bet blessing bring brings broken brought capabilities chosen clockwise clothing comes commonly commonplace concludes condo contact day decided deot depending divvy dont doorpost either encompassing entering episode etc even exist expensive festive first follow following foremost forth four generally gives goes habechirah hacham halacha hamikdash hamitzvot hananya hashems help household immediately inhabitants interested items ive jacket kaddish kaf kana knowledge known law left likboa list listening mabrouk maimonides married materials may meal mebarech members mentioned mind mishnah moving needed nothing obviously olam paying pieces pizmon pizmonim place placing pleasure preliminary primary prior privately publicized rabbi readings reason regular rely renting resh returning running seder seem seif seudut shalom siman singing sits smaller spell sports subject suit sung table tav technically tell theyre today traditional tsaddi type used veyoshevehu wear weve whatever word work year yisrael yitzchak yod zeh",
  "words": 1088,
  "language": "",
  "speaker": "",
  "made": "2026-11-20",
- "by": "gemini (video) + gemini-3.6-flash"
+ "by": "gemini (video) + gemini-3.1-flash-lite"
 }
