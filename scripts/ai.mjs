@@ -12,7 +12,8 @@ import { existsSync } from 'node:fs';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { readFileSync } from 'node:fs';
-import { searchTerms, parseModelJson, summaryPrompt, timedTranscript, parseTimedTranscript, unsupported } from './lib/ai-text.mjs';
+import { searchTerms, parseModelJson, summaryPrompt, timedTranscript, parseTimedTranscript, unsupported, titleNames } from './lib/ai-text.mjs';
+import { weekInfo } from './lib/calendar.mjs';
 
 const VERSION = 4; // 4: only what the teacher said (checked against the transcript), and the summary names the teacher
 // was 3: // 3: the community's own names for books and people (Bereshit, not Genesis)
@@ -40,10 +41,30 @@ const txFile = (c) => new URL(`ai-transcripts/${c.sid}.json`, root);
 // Take turns between teachers, newest first, so a small run covers a mix.
 const todo = data.classes.filter((c) => c.kind === 'audio' && c.sid && c.audioUrl && !upToDate(c) && c.durationSec > 120 && c.durationSec <= ONLY_UNDER_MIN * 60);
 const todoAll = data.classes.filter((c) => c.kind === 'audio' && c.sid && c.audioUrl && c.durationSec > 120 && c.durationSec <= ONLY_UNDER_MIN * 60).length;
-const byTeacher = new Map();
-for (const c of todo) { if (!byTeacher.has(c.teacherId)) byTeacher.set(c.teacherId, []); byTeacher.get(c.teacherId).push(c); }
+// The order classes are done in. The free transcription allowance is small next to the whole archive, so it goes first
+// to what people are about to look for:
+//   0. classes already transcribed on an earlier run (only the summary is left to write)
+//   1. this week's and next week's perasha, from any year
+//   2. a holiday coming in the next six weeks
+//   3. everything else
+// and within each group, newest first, taking turns between teachers.
+const nyDay = (plus = 0) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date(Date.now() + plus * 86400000));
+const soon = [];
+try {
+  const a = weekInfo(nyDay(0)), b = weekInfo(nyDay(7));
+  for (const p of [a.perasha, b.perasha]) for (const name of p?.search || []) soon.push({ name, tier: 1 });
+  if (a.holiday && (new Date(a.holiday.date) - Date.now()) / 86400000 <= 42) soon.push({ name: a.holiday.name, tier: 2 });
+  console.log(`Doing first: classes on ${soon.map((s) => s.name).join(', ') || 'nothing in particular'}.`);
+} catch (e) { console.log(`(could not read the calendar, so going newest first: ${e.message})`); }
+const tierOf = (c) => (existsSync(txFile(c)) ? 0 : soon.find((s) => titleNames(c.title, s.name))?.tier ?? 3);
 const queue = [];
-for (let i = 0; queue.length < todo.length; i++) for (const list of byTeacher.values()) if (list[i]) queue.push(list[i]);
+for (const tier of [0, 1, 2, 3]) {
+  const byTeacher = new Map();
+  for (const c of todo) if (tierOf(c) === tier) { if (!byTeacher.has(c.teacherId)) byTeacher.set(c.teacherId, []); byTeacher.get(c.teacherId).push(c); }
+  const size = [...byTeacher.values()].reduce((n, l) => n + l.length, 0);
+  if (tier > 0 && tier < 3 && size) console.log(`  ${size} waiting classes match ${tier === 1 ? 'the perasha' : 'the holiday'}.`);
+  for (let i = 0, added = 0; added < size; i++) for (const list of byTeacher.values()) if (list[i]) { queue.push(list[i]); added++; }
+}
 console.log(`${todo.length} classes waiting; this run will try up to ${MAX_CLASSES} (or ${MAX_MINUTES} minutes of audio).`);
 
 class SlowDown extends Error {}

@@ -65,6 +65,13 @@ const stemWord = (w) => (w.length > 4 ? w.replace(/(ing|ied|ies|es|ed|ly|s|e|y)$
 const bones = (w) => w.replace(/ch|kh/g, 'h').replace(/tz|ts|ss|z/g, 's').replace(/ph/g, 'f').replace(/ck|q|c/g, 'k').replace(/w|b/g, 'v').replace(/(.)\1+/g, '$1').replace(/(?!^)[aeiouy]/g, '');
 const wordsOf = (text) => String(text).split(/[\s\-–—/]+/).map(foldWord).filter(Boolean);
 
+// Does a class title name this perasha or holiday, however it is spelled? ("Vayetze 2026", "Parashat VaYesse" ↔ "Vayesse")
+export function titleNames(title, name) {
+  const have = new Set(wordsOf(title).map(bones));
+  const want = wordsOf(name).map(bones).filter(Boolean);
+  return want.length > 0 && want.every((w) => have.has(w));
+}
+
 // The meaningful words in `written` that cannot be found in the transcript (or the class title / teacher's name).
 export function unsupported(written, transcript, alsoAllowed = '') {
   const said = wordsOf(transcript + ' ' + alsoAllowed);
