@@ -17,23 +17,23 @@ async function list(folder, path = '', depth = 0) {
   for (const [, id, href, title] of entries) {
     const name = decode(title).trim();
     if (/\/folders\//.test(href)) { if (depth < 3) await list(id, `${path}${name}/`, depth + 1); continue; }
-    index.push({ id, name: path + name });
+    index.push({ id, name: path + name, href: decode(href).replace(/[?&]usp=[^&]*/, '') });
   }
 }
 await list(process.argv[2]);
 console.log(`Listed ${index.length} files.`);
 let ok = 0;
 for (const [i, f] of index.entries()) {
-  if (!/\.(jpe?g|png|webp|heic|tiff?|gif|bmp)$/i.test(f.name)) { f.skipped = 'not a picture'; continue; }
   try {
     const res = await fetch(`https://drive.usercontent.google.com/download?id=${f.id}&export=download&confirm=t`, { signal: AbortSignal.timeout(60000) });
     if (!res.ok) throw new Error(String(res.status));
     const bytes = Buffer.from(await res.arrayBuffer());
+    f.type = res.headers.get('content-type') || ''; f.bytes = bytes.length;
     f.file = `${String(i).padStart(3, '0')}.jpg`;
     await writeFile(new URL(f.file, out), await sharp(bytes, { failOn: 'none' }).rotate().resize(1400, 1400, { fit: 'inside', withoutEnlargement: true }).flatten({ background: '#ffffff' }).jpeg({ quality: 92 }).toBuffer());
     ok++;
-  } catch (e) { f.skipped = e.message.split('\n')[0]; console.log(`! ${f.name}: ${f.skipped}`); }
+  } catch (e) { f.skipped = e.message.split('\n')[0]; }
 }
 await writeFile(new URL('index.json', out), JSON.stringify(index, null, 1));
 console.log(`✓ ${ok} pictures fetched.`);
-for (const f of index) console.log(`  ${f.file || '   —   '}  ${f.name}${f.skipped ? `  (${f.skipped})` : ''}`);
+for (const f of index) console.log(`  ${f.file || '   —   '}  ${f.name}${f.skipped ? `  (${f.skipped}; ${f.type || ''} ${f.bytes || ''}; ${f.href})` : ''}`);
