@@ -1,0 +1,86 @@
+{
+ "v": 6,
+ "id": "yt:1vyxL6sysjs",
+ "title": "SCA Minhag of the Week 274: \"Eating Legumes and Rice on Pesah\"",
+ "topic": "Minhag of the Week",
+ "chapters": [
+  {
+   "at": 6,
+   "title": "Original Minhag of Halab on Dried Legumes",
+   "about": "dried legumes, Machzor Bet HaBehirah, Derech Eretz, WWI changes"
+  },
+  {
+   "at": 51,
+   "title": "Reasons and Fresh vs. Dried Legumes",
+   "about": "wheat contamination, Hakham Yitzhak Tawil, hummus, fresh vegetables"
+  },
+  {
+   "at": 96,
+   "title": "Eating and Checking Rice in Halab",
+   "about": "Ashrei Ha'am, Hakham Mordechai Abadi, Roeh Ne'eman, checking rice"
+  },
+  {
+   "at": 141,
+   "title": "Customs in Tzfat, Salonika, and Morocco",
+   "about": "Eretz HaChaim, Ateret Avot, fresh beans, Moroccan practice"
+  },
+  {
+   "at": 186,
+   "title": "Customs in Baghdad, Izmir, and Jerusalem",
+   "about": "Ben Ish Hai, Rav Pe'alim, Sha'ar HaMifkad, flour sacks"
+  },
+  {
+   "at": 231,
+   "title": "Differences Between Tunisia and Djerba",
+   "about": "Brit Kehuna, Rabbi Moshe Khalfon HaCohen, roasted chickpeas"
+  },
+  {
+   "at": 276,
+   "title": "Preservation of the Halabi Minhag Today",
+   "about": "Argentina, 1990s immigrants, New York community practice"
+  }
+ ],
+ "unsupported": [
+  "historical",
+  "outlines",
+  "behind",
+  "practices",
+  "evolved",
+  "time",
+  "circumstances",
+  "traditions",
+  "modified",
+  "modern",
+  "preservation",
+  "today"
+ ],
+ "claims": [
+  "\"and modern New York\" - Argentina is mentioned in the transcript, but modern New York is not mentioned as a place where traditions were preserved or modified (though New York is mentioned at the very end of the transcript, the description sentence frames it as a geographic list alongside others from the body of the class)"
+ ],
+ "summary": "Mr. Arking reviews historical community customs regarding eating dried legumes, fresh legumes, and rice on Pesah in Halab and other Middle Eastern and North African communities. He outlines the reasons behind these practices and how they evolved over time due to historical circumstances like food shortages. He also explains how these traditions were preserved or modified in Jerusalem, Morocco, Baghdad, Tunisia, Djerba, and modern New York.",
+ "subjects": [
+  "Customs of Pesah in Halab",
+  "Eating legumes and rice on Pesah",
+  "Hakham Avraham Hamway and Machzor Bet HaBehirah",
+  "Hakham Mordechai Abadi and Ashrei Ha'am",
+  "Hakham Yitzhak Chehebar and Roeh Ne'eman",
+  "Ben Ish Hai and Rav Pe'alim",
+  "Rabbi Refael Aharon Ben Simeon and Sha'ar HaMifkad",
+  "Rabbi Moshe Khalfon HaCohen and Brit Kehuna",
+  "Customs of Morocco, Baghdad, Jerusalem, and Djerba"
+ ],
+ "questions": [
+  "What was the original custom in Halab regarding eating dried legumes on Pesah, and why did it change?",
+  "How was rice checked for Pesah in Aleppo according to rabbinic sources?",
+  "How did the customs regarding rice and legumes on Pesah differ among Sephardic communities such as Morocco, Baghdad, and Jerusalem?",
+  "Why did the minhag regarding hummus differ between Tunisia and Djerba?",
+  "How is the Halabi custom regarding dried legumes and rice observed in New York today?"
+ ],
+ "quality": "poor",
+ "terms": "pesach custom rice eat legumes halab hummus book dried hacham century eating wrote rabbi stringent ben chametz fresh tunisia 19th 20th ate beans changed check chickpeas customary eretz however lenient reason times wheat yitzhak abadi aleppo avraham baghdad beginning beit born checking chehebar community corn derech djerba families fasoulya find flour food foods habehirah hai hamway included ish machzor mordechai moroccans moshe mujadara noted original others people preserved rabbis recorded regards sepharadim shortages sometimes tehina therefore three war world year 1990s abadis actual added african aharon alav alongside already always among antebi anymore aram argentina ashrei asis ateret avot baruch based became become brit came carefully chaim children city coast common communities described didnt difference discussed documented due eastern eaten eats especially even everyone exception extend fed following four furthermore grains grandfather greece grew grow haam hachaim hacohen halabi hamifkad hashalom imported including interestingly island israel izmir jerusalem kehuna kernels khalfon leadership legume lentils limited make means mentioned middle mixed moist morocco neeman new north northern ones package pealim peas permitted pious popcorn process published quoted rather rav refael refrain roasted roeh sacks saka salonika sell served seven shaar shelomo simeon similarly six soba sounds soussan still string stuck sure tawil toledo turkey tzfat unknown used vegetables word wouldnt years york",
+ "words": 884,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-21",
+ "by": "gemini (video) + gemini-3.6-flash"
+}
