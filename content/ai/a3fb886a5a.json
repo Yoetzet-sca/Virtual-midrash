@@ -1,0 +1,39 @@
+{
+ "v": 8,
+ "id": "yt:AcccmoQ2ebs",
+ "title": "BootCampUs 2023- Spotlight on Israel",
+ "topic": "Land of Israel",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Connection to Israel",
+   "about": "homeland, heritage, IDF, Avraham Avinu, Kotel"
+  }
+ ],
+ "unsupported": [
+  "speakers",
+  "express"
+ ],
+ "claims": [],
+ "summary": "This class discusses personal connections to Israel as the homeland for the Jewish people. Speakers express how the land connects them to their heritage, ancestors, and Avraham Avinu.",
+ "subjects": [
+  "Israel",
+  "Jewish people",
+  "IDF",
+  "Avraham Avinu",
+  "Kotel",
+  "heritage"
+ ],
+ "questions": [
+  "Why is Israel important to the Jewish people?",
+  "How does the speaker connect to Israel?",
+  "What is the connection to Avraham Avinu?"
+ ],
+ "quality": "good",
+ "terms": "israel love back feel land people connection connects fight jewish spiritual ago amazing ancestors aspects avinu avraham better born brings business close connected cousins dad dates day early else every experience feels forefathers fought gives god hard heritage history home homeland idf important inherited kotel leads lived lives nowhere past person pioneering promised purely single stage support theres thousands time together understanding worked world years",
+ "words": 252,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-21",
+ "by": "gemini (video) + gemini-3.5-flash-lite"
+}
