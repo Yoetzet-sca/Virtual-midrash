@@ -18,7 +18,7 @@ _detector = _matting = None
 
 
 def find_face(bgr):
-    """The largest face as (centre x, centre y, width), or None."""
+    """The subject's face as (centre x, centre y, width), or None."""
     global _detector
     if _detector is None:
         from uniface import RetinaFace
@@ -26,7 +26,9 @@ def find_face(bgr):
     boxes = [f.bbox for f in _detector.detect(bgr) if f.confidence > 0.7]
     if not boxes:
         return None
-    x1, y1, x2, y2 = max(boxes, key=lambda b: (b[2] - b[0]) * (b[3] - b[1]))
+    # With more than one person in the shot, the subject is the big face nearest the middle, not someone at the edge.
+    mid = bgr.shape[1] / 2
+    x1, y1, x2, y2 = max(boxes, key=lambda b: (b[2] - b[0]) * (b[3] - b[1]) * (1 - 0.8 * min(1.0, abs((b[0] + b[2]) / 2 - mid) / mid)))
     return (x1 + x2) / 2, (y1 + y2) / 2, float(x2 - x1)
 
 
