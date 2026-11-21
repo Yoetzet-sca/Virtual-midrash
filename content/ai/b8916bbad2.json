@@ -1,0 +1,44 @@
+{
+ "v": 6,
+ "id": "yt:fwK-CCVCnQw",
+ "title": "SCA Annual Campaign 2023: Mr. Morris Bailey Presents Award to Hacham Shimon Alouf",
+ "topic": null,
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Inviting Rabbi Shimon to the podium",
+   "about": "Rabbi Shimon"
+  }
+ ],
+ "unsupported": [
+  "repeatedly",
+  "invited",
+  "speaker",
+  "event",
+  "short",
+  "recording",
+  "consists",
+  "entirely",
+  "repeated",
+  "invitation",
+  "inviting"
+ ],
+ "claims": [
+  "\"The short recording consists entirely of this repeated invitation.\" - The transcript includes an introductory sentence at the beginning that is not an invitation."
+ ],
+ "summary": "Rabbi Shimon is repeatedly invited to come up to the podium by a speaker at an annual campaign event. The short recording consists entirely of this repeated invitation.",
+ "subjects": [
+  "Rabbi Shimon",
+  "Podium"
+ ],
+ "questions": [
+  "Who is invited to the podium?"
+ ],
+ "quality": "poor",
+ "terms": "ask come please podium rabbi shimon important thats",
+ "words": 166,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-21",
+ "by": "gemini (video) + gemini-3.5-flash-lite"
+}
