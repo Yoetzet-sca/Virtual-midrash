@@ -1,0 +1,85 @@
+{
+ "v": 6,
+ "id": "avi-harari:tag:soundcloud,2010:tracks/2439911574",
+ "title": "Hadlakat Nerot  - On a Bathroom Light",
+ "topic": "Halakha",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Hotel lighting restrictions",
+   "about": "B'Rakha Levatala, Tosefet Orah, hotel lobby lighting"
+  },
+  {
+   "at": 103,
+   "title": "Using bathroom lights",
+   "about": "Electric lights, bathroom light, hotel room constraints"
+  },
+  {
+   "at": 154,
+   "title": "Mitzvot in dirty places",
+   "about": "Bizui Mitzvah, Be'ur HaLakha, dirty places"
+  },
+  {
+   "at": 249,
+   "title": "Poskim on bathroom lighting",
+   "about": "Rabbi Yitzchak Zilberstein, Talmud Yerushalmi, Masekhet Pesahim"
+  },
+  {
+   "at": 352,
+   "title": "Additional rabbinic opinions",
+   "about": "Rabbi Meir Pinchasi, Rabbi Nissen Karelitz, Torah Meir"
+  },
+  {
+   "at": 400,
+   "title": "Addressing exposure",
+   "about": "Rama, minimizing exposure, Bizui Mitzvah"
+  },
+  {
+   "at": 506,
+   "title": "Summary of hotel practice",
+   "about": "Final guidance, hotel solutions, Hadlakat Neirot"
+  }
+ ],
+ "unsupported": [
+  "halakhic",
+  "validity",
+  "using",
+  "restricted",
+  "concerns",
+  "performing",
+  "potential",
+  "support",
+  "necessary",
+  "solution",
+  "restrictions",
+  "additional"
+ ],
+ "claims": [],
+ "summary": "Rabbi Harari discusses the halakhic validity of using bathroom electric lights for Hadlakat Neirot when staying in a hotel where other options are restricted. He addresses concerns regarding performing a mitzva in a dirty place and the potential for exposure, citing various poskim who support this practice as a necessary solution.",
+ "subjects": [
+  "Hadlakat Neirot",
+  "Halakha",
+  "Hotel lighting",
+  "B'Rakha Levatala",
+  "Tosefet Orah",
+  "Bizui Mitzvah",
+  "Rabbi Yitzchak Zilberstein",
+  "Rabbi Meir Pinchasi",
+  "Rabbi Chaim Kanievsky",
+  "Rama",
+  "Talmud Yerushalmi"
+ ],
+ "questions": [
+  "Is it permissible to make a Beracha on electric lights for Hadlakat Neirot?",
+  "Can I light candles in a hotel lobby?",
+  "Is it considered disrespectful to the mitzva to light in a bathroom?",
+  "How should I handle the issue of exposure when lighting in a bathroom?",
+  "What do the poskim say about using bathroom lights for Shabbat?"
+ ],
+ "quality": "good",
+ "terms": "mitzvah place candles rabbi light youre dirty bathroom should room table theres bizui even lights shabbat hotel lighting person regards thats exposure meir shouldnt yourself zilberstein best book circumstances class definition dont issue means option torah words appropriate baruch exposed front great hadlakat make nerot pinchasi problem shameful situation talmud aleph argument benefit beracha briefly cant case certain children different dining electric expose inappropriate lobby made makes matter minimize mitzvot name page put revealed statement staying summer use whats wife yerushalmi able amen angle api argues ayin batei beautiful beur brakha called came chaim changing choice claim clear comes context conversation dalet diapers doesnt don eating explicit explicitly following hacham hadakat hakadosh halakha husband initially itll laadlik law led levatala lit lubbate making moment neer neirot nero number opinion orah people per practice public putting rama rather relieve resh result reveal rooms shel shinun shofar siman sleep specific study talking theyre tosefet true try turn weighed accept according addressed adds adonai afilu agan age allowed another answered anyone area argued arukh arumim asked asleep authorities avram back bathhouses bebet ben berachah berachanet berakhav bezeh bishabbat breakfast brother bulbs calls candle cannot care certainly chacham chel chuchani circumstance cited clean commentary commitment considered contextually dafkahtet dalit dare davar day dedicated defends detail determined diborah direction dirtiness divrei done easy esh example explaining exposing fall families far felt flicking follow forbidding forth ganachowski generation getting girsah give giving glistening gods good habakat hachayim hafez hahadarim hakdama hakiseh hakol halachat halakhot hanaruch hanati hanging hasar hashanah hashuke haskamot hathakat hazon hearing helek helik hemed hes hilchot hilek home hovadyan however hufaloshu hus ideal illegal ilui instead introduction isilish issues kach kafhet kanievsky karelitz kataf kisaot knesiot knessiot kof kol ktanim lahadrik last lastly later lechassot leolam letting living makom man maseche massechet matchil matters may meaning mechatzayot meira mention mentioning mentions metunaf midst mishum mishun months mornings moshe move nahagou needs neerot never niraa nishma nishmat nishmatos nissen nobodys normal nulav obviously occasion oftentimes olek outside overly pechet perek pesachim picking pinchasieh places point pointed posgim poskim possibility pray private promised proper purpose question rabi ramazah reason reshtetvav return rosh safeq saw saying second security serve set setup sfaradim shalita sham shama shame sheelotu shelo shemuel shemutaa sheraga shohan showed sir sourced sourcing span spick stand states stay strong studying synagogues talmid themselves therefore though thought three torat tosaf toshbot tried truth tzror uncertain understanding usually vdya veamen veen vfnei wait walking wasnt weighs whos wives wont wouldnt wrote yehiyu yisrael yitzchak yosef zilbushin ziman zoned",
+ "words": 1975,
+ "language": "English",
+ "made": "2026-11-21",
+ "by": "groq whisper + gemini-3.1-flash-lite"
+}
