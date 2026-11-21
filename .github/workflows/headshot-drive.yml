@@ -1,0 +1,28 @@
+name: Headshots from Drive
+# Run by hand. Collects the photos from the SCA's shared Google Drive folder of headshots onto the headshot-src
+# branch, where they are matched to teachers and restyled.
+on:
+  workflow_dispatch:
+    inputs:
+      folder:
+        description: Google Drive folder id
+        default: 1Yzv0WJHyBTITbo9XI7hIFvKocoeSQ2NS
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node scripts/headshot-drive.mjs "${{ inputs.folder }}"
+      - run: |
+          cd headshot-drive
+          git init -q -b headshot-src
+          git add -A
+          git -c user.name="virtual-midrash-bot" -c user.email="bot@users.noreply.github.com" commit -q -m "Headshots from the SCA's Drive folder"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" headshot-src
