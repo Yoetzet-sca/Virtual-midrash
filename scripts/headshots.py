@@ -14,7 +14,6 @@ from PIL import Image, ImageOps
 SIZE, SMALL = 480, 160
 FACE_W = 0.31      # face width (ear to ear) as a share of the picture
 FACE_Y = 0.45      # where the middle of the face sits, from the top
-FACE_Y_LOW = 0.52  # ...for a photo that ends just under the chin
 _detector = _matting = None
 
 
@@ -71,23 +70,36 @@ def restyle(img):
     alpha = cut_out(bgr, cx, cy)
     if alpha is None:
         return plain(img, cx, cy, fw)
-    scale = SIZE * FACE_W / fw
-    # Never leave white under a picture that stops at the chin or the chest: the picture must reach the bottom edge.
-    # A tight photo sits a little lower and larger rather than losing its white background; only a photo that is nearly
-    # all face keeps its own background.
+    base = SIZE * FACE_W / fw
     # (Where the person ends is read from the cut-out, not the picture's edge: some photos were already cut to a circle.)
     under = np.nonzero((alpha[:, int(max(0, cx - fw / 2)):int(cx + fw / 2) + 1] > 0.5).any(axis=1))[0]
     below = max(1.0, (under[-1] if len(under) else h) - cy) / 1.03
-    y = FACE_Y
-    need = SIZE * (1 - y) / below
-    if need > scale:
-        y = FACE_Y_LOW
-        need = SIZE * (1 - y) / below
-    if need > scale * 2.3:
+    # Choose where the face goes. Ideal: the standard size, dead centre. But the round frame must never show where the
+    # photo itself stops — a shoulder sliced by the photo's edge, a head cropped at the top, white under a photo that
+    # ends at the chest. So every nearby placement is tried (a little larger, a little off-centre, a little higher or
+    # lower) and the one that shows the least of the photo's edges, for the least departure from the ideal, wins.
+    T = 96
+    yy, xx = np.mgrid[0:T, 0:T]
+    frame = ((xx - T / 2 + 0.5) ** 2 + (yy - T / 2 + 0.5) ** 2) <= (T / 2 - 1) ** 2
+    best = None
+    for zoom in (1, 1.08, 1.17, 1.27, 1.4, 1.55, 1.75, 2.0, 2.3):
+        s = base * zoom
+        for y in (0.45, 0.40, 0.50, 0.35, 0.55, 0.30):
+            if s < SIZE * (1 - y) / below:
+                continue  # would leave white under the person
+            for x in (0.5, 0.45, 0.55, 0.40, 0.60, 0.35, 0.65):
+                m = np.float32([[s, 0, SIZE * x - cx * s], [0, s, SIZE * y - cy * s]]) * (T / SIZE)
+                cut = cv2.warpAffine(alpha, m, (T, T), flags=cv2.INTER_LINEAR, borderValue=0)
+                run = cv2.warpAffine(alpha, m, (T, T), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
+                shows = float(((run > 0.5) & (cut < 0.5) & frame).sum()) / frame.sum()
+                cost = shows * 22 + (zoom - 1) * 1.0 + abs(x - 0.5) * 6 + abs(y - FACE_Y) * 3
+                if best is None or cost < best[0]:
+                    best = (cost, s, x, y, shows, zoom)
+    if best is None:
         return plain(img, cx, cy, fw)
-    scale = max(scale, need)
+    _, scale, x, y, _, _ = best
+    move = np.float32([[scale, 0, SIZE * x - cx * scale], [0, scale, SIZE * y - cy * scale]])
     # Place the person on white with one transform, so edges stay smooth.
-    move = np.float32([[scale, 0, SIZE / 2 - cx * scale], [0, scale, SIZE * y - cy * scale]])
     how = cv2.INTER_AREA if scale < 1 else cv2.INTER_CUBIC
     person = cv2.warpAffine(rgb, move, (SIZE, SIZE), flags=how, borderMode=cv2.BORDER_REPLICATE).astype(np.float32)
     a = cv2.warpAffine(alpha, move, (SIZE, SIZE), flags=cv2.INTER_LINEAR, borderValue=0)[..., None]
