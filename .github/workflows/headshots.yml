@@ -1,12 +1,13 @@
 name: Headshots
 # Run by hand (Actions → Headshots → Run workflow) after adding teachers with new photos.
-# Collects the original photos so they can be restyled: cut out onto white, face centred.
+# Restyles any photo that has not been done yet: the person cut out onto white with the face centred, so every
+# headshot matches. The app picks the new copies up on its next update.
 on:
   workflow_dispatch:
 permissions:
   contents: write
 jobs:
-  sources:
+  restyle:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,11 +16,23 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: node scripts/headshot-sources.mjs
-      # The originals go on their own branch (not main), where the restyling step picks them up.
-      - run: |
-          cd headshot-src
-          git init -q -b headshot-src
-          git add -A
-          git -c user.name="virtual-midrash-bot" -c user.email="bot@users.noreply.github.com" commit -q -m "Original headshots"
-          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" headshot-src
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install uniface opencv-python-headless pillow
+      - name: Fetch the originals that have no restyled copy yet
+        run: node scripts/headshot-sources.mjs
+      - name: Restyle
+        run: |
+          shopt -s nullglob
+          for f in headshot-src/*.jpg; do
+            key=$(basename "$f" .jpg)
+            python scripts/headshots.py "$f" "content/people/$key-m3.jpg" "content/people/$key-s3.jpg" || echo "· $key kept as it is (no face found: a logo?)"
+          done
+      - name: Save
+        run: |
+          git add content/people
+          if git diff --cached --quiet; then echo "Nothing new."; exit 0; fi
+          git -c user.name="virtual-midrash-bot" -c user.email="bot@users.noreply.github.com" commit -q -m "Headshots restyled"
+          git pull -q --rebase || true
+          git push -q

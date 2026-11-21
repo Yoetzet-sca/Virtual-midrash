@@ -24,7 +24,7 @@ async function square(bytes, px) {
   const tall = orientation >= 5 ? width > height : height > width; // a sideways-stored photo has its sides swapped
   return img.resize(px, px, { fit: 'cover', position: tall ? 'top' : 'centre' }).jpeg({ quality: 78, mozjpeg: true }).toBuffer();
 }
-let made = 0, reused = 0, failed = 0;
+let made = 0, reused = 0, failed = 0, restyled = 0;
 const todo = data.teachers.filter((t) => /^https:\/\/sca-platform\.s3\.amazonaws\.com\//.test(t.photo));
 await Promise.all(Array.from({ length: 6 }, async () => {
   for (let t; (t = todo.pop());) {
@@ -39,10 +39,13 @@ await Promise.all(Array.from({ length: 6 }, async () => {
         await writeFile(small, await square(bytes, 160));
         made++;
       } else reused++;
-      t.photo = `./people/${key}-m2.jpg`; t.photoSmall = `./people/${key}-s2.jpg`;
+      // The restyled copy (cut out onto white, face centred — made by scripts/headshots.py) is used when there is one.
+      const styled = existsSync(new URL(`${key}-m3.jpg`, dir)) && existsSync(new URL(`${key}-s3.jpg`, dir)) ? 3 : 2;
+      if (styled === 3) restyled++;
+      t.photo = `./people/${key}-m${styled}.jpg`; t.photoSmall = `./people/${key}-s${styled}.jpg`;
     } catch (e) { failed++; console.log(`  ! photo for ${t.name}: ${e.message.split('\n')[0]}`); }
   }
 }));
 for (const f of await readdir(dir)) if (f.endsWith('.jpg')) await copyFile(new URL(f, dir), new URL(f, pub));
 await writeFile(file, JSON.stringify(data));
-console.log(`✓ Photos: ${made} made, ${reused} already here${failed ? `, ${failed} left as the original` : ''}.`);
+console.log(`✓ Photos: ${made} made, ${reused} already here, ${restyled} in the house style${failed ? `, ${failed} left as the original` : ''}.`);

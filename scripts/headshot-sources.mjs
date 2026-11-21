@@ -1,6 +1,7 @@
-// Fetches every teacher's original photo from the old site's storage into headshot-src/<key>.jpg (longest side 1100),
+// Fetches each teacher's original photo that has not been restyled yet from the old site's storage into headshot-src/<key>.jpg (longest side 1100),
 // for scripts/headshots.py to restyle. <key> is the same one scripts/photos.mjs uses.
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 
@@ -11,6 +12,7 @@ await mkdir(new URL('headshot-src/', root), { recursive: true });
 let ok = 0;
 for (const url of urls) {
   const key = createHash('sha1').update(url).digest('hex').slice(0, 12);
+  if (existsSync(new URL(`content/people/${key}-m3.jpg`, root))) continue; // already restyled
   try {
     const res = await fetch(url, { signal: AbortSignal.timeout(30000) });
     if (!res.ok) throw new Error(String(res.status));
