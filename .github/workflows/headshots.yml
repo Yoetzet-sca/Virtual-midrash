@@ -1,0 +1,23 @@
+name: Headshots
+# Run by hand (Actions → Headshots → Run workflow) after adding teachers with new photos.
+# Collects the original photos so they can be restyled: cut out onto white, face centred.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sources:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node scripts/headshot-sources.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: headshot-src
+          path: headshot-src
+          retention-days: 3
