@@ -472,3 +472,17 @@ test('old archive: a video whose title names its speaker is not paired with some
   assert.equal(namesSomeoneElse('Hilkhot Shabbat: Class 4', 'Rabbi Moshe Shamah'), false);
   assert.equal(namesSomeoneElse('Remembering Rabbi Dr. Ezra Labaton', 'Dr. Sara Labaton'), true);
 });
+
+test('perasha: moves on when Shabbat ends in New York, and a double week names both', async () => {
+  const { weekInfo } = await import('./lib/calendar.mjs');
+  const w = weekInfo('2026-11-21');
+  assert.equal(w.perasha.name, 'Vayesse');
+  assert.equal(w.perashaNext.name, 'Vayishlah');
+  const ends = new Date(w.perasha.ends);
+  assert.equal(ends.toLocaleDateString('en-CA', { timeZone: 'America/New_York' }), '2026-11-21');
+  const hour = Number(ends.toLocaleString('en-US', { timeZone: 'America/New_York', hour: 'numeric', hour12: false }));
+  assert.ok(hour === 17, 'ends early evening in November');
+  const d = weekInfo('2026-04-13');
+  assert.deepEqual(d.perasha.search, ['Tazria', 'Mesora']);
+  assert.deepEqual(d.perashaNext.search, ['Aharei Mot', 'Kedoshim']);
+});

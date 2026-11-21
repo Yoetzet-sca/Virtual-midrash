@@ -1,5 +1,5 @@
 // "This week" shortcuts: today's daf, this week's perasha, and the next holiday.
-import { HebrewCalendar, flags } from '@hebcal/core';
+import { HebrewCalendar, Location, flags } from '@hebcal/core';
 
 // ---- Daf Yomi ---------------------------------------------------------------
 // The cycle: each tractate with the number of days it takes (its last page minus one, since each starts on page 2).
@@ -32,25 +32,37 @@ const HOLIDAY = { 'Rosh Hashana': 'Rosh Hashanah', 'Tzom Gedaliah': 'Som Gedalia
 const ALSO = { "Lag La'Omer": ['Lag BaOmer'], '17 BeTamuz': ['Shiba Asar BeTamuz', 'Tammuz fast'], 'Som Gedaliah': ['Fast of Gedaliah'], 'Asarah BeTebet': ['10 Tebet'], 'Pesah': ['Passover', 'Haggadah'], "Tish'a BeAb": ['9 Ab', 'Tisha BAb'], 'Yom Haasmaut': ['Yom HaAzmaut', 'Israel Independence'] };
 const ymdOf = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
+// When Shabbat ends in New York on that date (nightfall, the sun 8.5° below the horizon), as an exact moment.
+// The app moves on to the next perasha then. When Shabbat runs straight into a festival the time is that evening's
+// candle lighting, which is the same nightfall.
+export function shabbatEnds(ymd) {
+  const [y, m, d] = ymd.split('-').map(Number);
+  const day = new Date(y, m - 1, d);
+  const evs = HebrewCalendar.calendar({ start: day, end: day, candlelighting: true, location: Location.lookup('New York'), il: false });
+  const when = evs.filter((e) => e.eventTime && (e.getFlags() & (flags.LIGHT_CANDLES_TZEIS | flags.YOM_TOV_ENDS))).map((e) => e.eventTime)[0];
+  return when ? when.toISOString() : null;
+}
+
 // `ymd` is today's calendar date in New York.
 export function weekInfo(ymd) {
   const [y, m, d] = ymd.split('-').map(Number);
   const start = new Date(y, m - 1, d);
   const events = HebrewCalendar.calendar({ start, end: new Date(y, m - 1, d + 120), sedrot: true, il: false });
-  let perasha = null, holiday = null;
+  let perasha = null, perashaNext = null, holiday = null;
   for (const ev of events) {
     const date = ymdOf(ev.getDate().greg());
     if (ev.getFlags() & flags.PARSHA_HASHAVUA) {
-      if (!perasha) {
+      if (!perasha || !perashaNext) {
         // A double portion comes as "Vayakhel-Pekudei": translate each half.
         const raw = ev.getDesc().replace(/^Parashat\s+/, '');
         const names = PERASHA[raw] ? [PERASHA[raw]] : raw.split('-').map((p) => PERASHA[p] || p);
-        perasha = { name: [...new Set(names)].join(' – '), search: [...new Set(names)], shabbat: date };
+        const found = { name: [...new Set(names)].join(' – '), search: [...new Set(names)], shabbat: date };
+        if (!perasha) perasha = { ...found, ends: shabbatEnds(date) }; else perashaNext = found;
       }
     } else if (!holiday && HOLIDAY[ev.basename()]) {
       holiday = { name: HOLIDAY[ev.basename()], date, search: [HOLIDAY[ev.basename()], ...(ALSO[HOLIDAY[ev.basename()]] || [])] };
     }
-    if (perasha && holiday) break;
+    if (perasha && perashaNext && holiday) break;
   }
-  return { perasha, holiday };
+  return { perasha, perashaNext, holiday };
 }

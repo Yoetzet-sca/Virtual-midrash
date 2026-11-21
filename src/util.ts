@@ -79,5 +79,11 @@ function indexFor(data: AppData) {
 }
 // Classes matching what someone typed (title, teacher or topic, any spelling), in the app's order.
 export const findClasses = (data: AppData, query: string) => searchIndex(indexFor(data).full, query).map((i) => data.classes[i]);
+// The perasha to show: this week's until Shabbat ends in New York, then next week's.
+export const perashaNow = (data: AppData, now = new Date()) => {
+  const sc = data.shortcuts;
+  return sc?.perasha?.ends && sc.perashaNext && now.getTime() >= new Date(sc.perasha.ends).getTime() ? sc.perashaNext : sc?.perasha || null;
+};
+
 // Classes whose title names this perasha or holiday as a whole word.
 export const classesNaming = (data: AppData, name: string) => searchIndex(indexFor(data).titles, name, true).map((i) => data.classes[i]);

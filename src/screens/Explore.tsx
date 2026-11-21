@@ -3,7 +3,7 @@ import type { AppData, ClassItem, SearchEntry, Teacher } from '../types';
 import { Avatar, ClassRow, DocRow } from '../ui';
 import { ISearch } from '../icons';
 import { matches } from '../search';
-import { findClasses } from '../util';
+import { findClasses, perashaNow } from '../util';
 import { ask, prepare, type Answer } from '../ask';
 import { usePlayer } from '../player';
 import { IPlay } from '../icons';
@@ -56,10 +56,11 @@ export function Explore({ data, place: startPlace, pickTopic }: { data: AppData;
   const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
   const sc = data.shortcuts;
   const daf = sc?.daf[todayKey];
+  const week = perashaNow(data, now);
   const holidayIn = sc?.holiday ? Math.round((new Date(sc.holiday.date + 'T12:00:00').getTime() - now.getTime()) / 86400000) : 0;
   const shortcuts = [
     daf && { label: 'Today’s daf', value: `${daf.tractate} ${daf.page}`, go: () => setQ(`${daf.tractate} ${daf.page}`) },
-    sc?.perasha && { label: 'This week’s parasha', value: sc.perasha.name, go: () => setQ(sc.perasha!.search[0]) },
+    week && { label: 'This week’s parasha', value: week.name, go: () => setQ(week.search[0]) },
     sc?.holiday && { label: holidayIn <= 0 ? 'Holiday now' : `Holiday in ${holidayIn} day${holidayIn === 1 ? '' : 's'}`, value: sc.holiday.name, go: () => setQ(sc.holiday!.name) },
   ].filter(Boolean) as { label: string; value: string; go: () => void }[];
   return (

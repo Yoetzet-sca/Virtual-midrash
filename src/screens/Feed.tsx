@@ -3,7 +3,7 @@ import type { AppData, ClassItem } from '../types';
 import { usePrefs, getPrefs, setPrefs, toggleIn, learn } from '../store';
 import { usePlayer } from '../player';
 import { Avatar, erubLabel, go } from '../ui';
-import { classShare, clock, initials, matchesTopic, minutes, newFromFollowed, rank, shareLink, daysAgo, sized, findClasses, classesNaming } from '../util';
+import { classShare, clock, initials, matchesTopic, minutes, newFromFollowed, rank, shareLink, daysAgo, sized, findClasses, classesNaming, perashaNow } from '../util';
 import { matches } from '../search';
 import { IHeart, IPause, IPlay, ISave, ISaved, ISearch, IShare, IInfo } from '../icons';
 
@@ -67,8 +67,9 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
     const daf = sc?.daf[key];
     const days = sc?.holiday ? (new Date(sc.holiday.date + 'T12:00:00').getTime() - now.getTime()) / 86400000 : 99;
     const ids = (list: ClassItem[]) => new Set(list.map((c) => c.id));
+    const week = perashaNow(data, now);
     return ([
-      sc?.perasha && { id: 'wk:perasha', label: `Parasha: ${sc.perasha.name}`, ids: ids(sc.perasha.search.flatMap((n) => classesNaming(data, n))) },
+      week && { id: 'wk:perasha', label: `Parasha: ${week.name}`, ids: ids(week.search.flatMap((n) => classesNaming(data, n))) },
       sc?.holiday && days <= 42 && { id: 'wk:holiday', label: sc.holiday.name, ids: ids((sc.holiday.search || [sc.holiday.name]).flatMap((n) => classesNaming(data, n))) },
       daf && { id: 'wk:daf', label: `Today’s daf: ${daf.tractate} ${daf.page}`, ids: ids(findClasses(data, `${daf.tractate} ${daf.page}`).filter((c) => matches(`${daf.tractate} ${daf.page}`, c.title))) },
     ].filter(Boolean) as { id: string; label: string; ids: Set<string> }[]).filter((x) => x.ids.size > 0); // no chip that leads nowhere
