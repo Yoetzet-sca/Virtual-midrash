@@ -4,7 +4,7 @@ name: Headshots
 on:
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   sources:
     runs-on: ubuntu-latest
@@ -16,8 +16,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: node scripts/headshot-sources.mjs
-      - uses: actions/upload-artifact@v4
-        with:
-          name: headshot-src
-          path: headshot-src
-          retention-days: 3
+      # The originals go on their own branch (not main), where the restyling step picks them up.
+      - run: |
+          cd headshot-src
+          git init -q -b headshot-src
+          git add -A
+          git -c user.name="virtual-midrash-bot" -c user.email="bot@users.noreply.github.com" commit -q -m "Original headshots"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" headshot-src
