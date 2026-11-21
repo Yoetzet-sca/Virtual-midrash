@@ -1,0 +1,53 @@
+{
+ "v": 6,
+ "id": "old:507",
+ "title": "A Guest Regarding Ner Hanukkah",
+ "topic": "Halakha",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Requirements for a guest to fulfill the obligation",
+   "about": "Sleeping at the host's house"
+  },
+  {
+   "at": 51,
+   "title": "Participating in the cost of the oil",
+   "about": "Kaf HaHayim and paying for oil"
+  },
+  {
+   "at": 98,
+   "title": "Status of a guest on Saturday night",
+   "about": "Each night as a separate obligation"
+  }
+ ],
+ "unsupported": [
+  "must",
+  "remains",
+  "requirements",
+  "cost"
+ ],
+ "claims": [],
+ "summary": "Mr. Arking discusses the status of a guest regarding the obligation to light the Hanukkiah. He explains when a guest fulfills their obligation through the host's lighting and when they must light at their own home. He also addresses whether a guest who stays through Saturday night remains considered a guest for that night.",
+ "subjects": [
+  "Hanukkiah",
+  "Hanukkah",
+  "Obligation of a guest",
+  "Sleeping at the host's house",
+  "Participating in the oil",
+  "Kaf HaHayim",
+  "Saturday night lighting"
+ ],
+ "questions": [
+  "Do I fulfill my obligation if I am a guest at someone's house for Hanukkah?",
+  "Do I have to sleep at my host's house to fulfill my obligation through their lighting?",
+  "What if I am a guest but I am not sleeping over?",
+  "Do I need to pay for the oil if I am a guest?",
+  "If I stay through Saturday night, am I still considered a guest for that night?"
+ ],
+ "quality": "good",
+ "terms": "night host hes home youre guest obligation oil even food light money sleeping didnt hanukkiah house leave pays person sleep yet another case doesnt drink every expense fulfill fulfills gets give guests hanukkah later less lighting oclock paying persons saturday since stay yosef aqamdi automatically ayah candles cannot comes considered constitutes customary dawn day different doesn eating extra family free friday friends fulfilling gives giving goes hosting hosts included includes invite item kabbalah last late leaning lit long meal merely midnight need needs neer order participate participates point provided separate share slept somebody somebodys someone somewhere status staying still taking thats though time ultimately uses visiting whatever writes yad",
+ "words": 509,
+ "language": "English",
+ "made": "2026-11-21",
+ "by": "groq whisper + gemini-3.1-flash-lite"
+}
