@@ -1,0 +1,49 @@
+{
+ "v": 6,
+ "id": "yt:3F2anVd0zzk",
+ "title": "SCA Annual Campaign 2023: Hacham Shimon Alouf Address",
+ "topic": null,
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Introduction and thanks",
+   "about": "SCA support and community commitment"
+  },
+  {
+   "at": 45,
+   "title": "Commitment to future generations",
+   "about": "Children and grandchildren"
+  },
+  {
+   "at": 90,
+   "title": "Extended future generations",
+   "about": "Great-grandchildren and beyond"
+  }
+ ],
+ "unsupported": [
+  "organization",
+  "attendees",
+  "descendants",
+  "generations",
+  "extended"
+ ],
+ "claims": [],
+ "summary": "Rabbi Alouf addresses the SCA community regarding their support of the organization. He focuses on the commitment of the attendees to the future of the community and their descendants.",
+ "subjects": [
+  "SCA",
+  "Community support",
+  "Future generations",
+  "Commitment"
+ ],
+ "questions": [
+  "What is the focus of the SCA annual campaign?",
+  "What does Rabbi Alouf say about the future of the community?"
+ ],
+ "quality": "good",
+ "terms": "great thank commitment future grandchildren community children coming sca support tonight",
+ "words": 474,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-21",
+ "by": "gemini (video) + gemini-3.1-flash-lite"
+}
