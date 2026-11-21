@@ -1,0 +1,40 @@
+{
+ "v": 8,
+ "id": "yt:0tUjUXchIH8",
+ "title": "SCA Kadima Mission 2024- Relive the Experience",
+ "topic": null,
+ "chapters": [
+  {
+   "at": 10,
+   "title": "Song",
+   "about": "running and holding on"
+  }
+ ],
+ "unsupported": [
+  "consists",
+  "song",
+  "lyrics",
+  "running",
+  "letting",
+  "speaker",
+  "known",
+  "recording"
+ ],
+ "claims": [
+  "\"The speaker is not known from the recording.\" - The transcript contains lyrics to a song, not a speaker or teacher, making this statement an unsupported claim about the nature of the recording."
+ ],
+ "summary": "This class consists of a song with lyrics about running, standing up, letting go, heartache, and needing direction and help. The speaker is not known from the recording.",
+ "subjects": [
+  "song"
+ ],
+ "questions": [
+  "What song is sung in the class?"
+ ],
+ "quality": "poor",
+ "terms": "soldier soul bring help youre yourself dont back burner hold put sun another done else ive room run theres affection aint battle boy break broken changes changing comes direction everyones goes gold hand headache heart hearted hearts lost meet men need nowhere older perfection shine stand take used won",
+ "words": 347,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-21",
+ "by": "gemini (video) + gemini-3.5-flash-lite"
+}
