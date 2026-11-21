@@ -24,8 +24,16 @@ async function square(bytes, px) {
   const tall = orientation >= 5 ? width > height : height > width; // a sideways-stored photo has its sides swapped
   return img.resize(px, px, { fit: 'cover', position: tall ? 'top' : 'centre' }).jpeg({ quality: 78, mozjpeg: true }).toBuffer();
 }
-let made = 0, reused = 0, failed = 0, restyled = 0;
-const todo = data.teachers.filter((t) => /^https:\/\/sca-platform\.s3\.amazonaws\.com\//.test(t.photo));
+let made = 0, reused = 0, failed = 0, restyled = 0, own = 0;
+// First choice: the SCA's own headshot for this person (from its Drive folder of headshots, restyled and saved under
+// the person's name as n-<name>-m3.jpg). Only people without one fall back to the old site's photo below.
+const slug = (name) => name.toLowerCase().replace(/\b(rabbi|mrs|ms|mr|dr)\b\.?/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const named = new Set();
+for (const t of data.teachers) {
+  const key = `n-${slug(t.name)}`;
+  if (existsSync(new URL(`${key}-m3.jpg`, dir)) && existsSync(new URL(`${key}-s3.jpg`, dir))) { t.photo = `./people/${key}-m3.jpg`; t.photoSmall = `./people/${key}-s3.jpg`; named.add(t.id); own++; }
+}
+const todo = data.teachers.filter((t) => !named.has(t.id) && /^https:\/\/sca-platform\.s3\.amazonaws\.com\//.test(t.photo));
 await Promise.all(Array.from({ length: 6 }, async () => {
   for (let t; (t = todo.pop());) {
     const key = createHash('sha1').update(t.photo).digest('hex').slice(0, 12);
@@ -48,4 +56,4 @@ await Promise.all(Array.from({ length: 6 }, async () => {
 }));
 for (const f of await readdir(dir)) if (f.endsWith('.jpg')) await copyFile(new URL(f, dir), new URL(f, pub));
 await writeFile(file, JSON.stringify(data));
-console.log(`✓ Photos: ${made} made, ${reused} already here, ${restyled} in the house style${failed ? `, ${failed} left as the original` : ''}.`);
+console.log(`✓ Photos: ${own} from the SCA's headshot folder; of the rest, ${made} made, ${reused} already here, ${restyled} in the house style${failed ? `, ${failed} left as the original` : ''}.`);
