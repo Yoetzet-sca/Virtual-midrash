@@ -1,0 +1,66 @@
+{
+ "v": 6,
+ "id": "yt:aPcDkwt5mW0",
+ "title": "SCA Minhag of the Week 225: \"Repeating For HaMelekh HaMishpat\"",
+ "topic": "Halakha",
+ "chapters": [
+  {
+   "at": 6,
+   "title": "Changes in the Amidah",
+   "about": "Rosh Hashanah, Yom Kippur, HaMelech HaMishpat"
+  },
+  {
+   "at": 56,
+   "title": "Authorities who require repetition",
+   "about": "Rif, Rambam, Rosh, Shulchan Aruch, Halabi rabbis"
+  },
+  {
+   "at": 118,
+   "title": "The opinion of the Ben Ish Hai",
+   "about": "Rabbeinu Yonah, Rama, Safek Berachot Lehakel"
+  },
+  {
+   "at": 188,
+   "title": "The shift in Halabi custom",
+   "about": "Hacham Yosef Tawil, Hacham Ezra Attieh, custom change"
+  },
+  {
+   "at": 266,
+   "title": "Following a custom",
+   "about": "Consulting rabbis, personal practice"
+  }
+ ],
+ "unsupported": [
+  "shifted",
+  "time",
+  "require",
+  "repetition",
+  "shift"
+ ],
+ "claims": [],
+ "summary": "Mr. Arking discusses the custom of repeating the Amidah if one accidentally says Melech Ohev Tzedakah Umishpat instead of HaMelech HaMishpat during the days between Rosh Hashanah and Yom Kippur. He reviews the opinions of various authorities, including the Shulchan Aruch and the Ben Ish Hai, and explains how the custom in Halabi communities has shifted over time.",
+ "subjects": [
+  "Amidah",
+  "Rosh Hashanah",
+  "Yom Kippur",
+  "HaMelech HaMishpat",
+  "Melech Ohev Tzedakah Umishpat",
+  "Shulchan Aruch",
+  "Ben Ish Hai",
+  "Safek Berachot Lehakel",
+  "Halabi customs"
+ ],
+ "questions": [
+  "What should I do if I accidentally say Melech Ohev Tzedakah Umishpat during the ten days of repentance?",
+  "Do I have to repeat the entire Amidah if I miss the change to HaMelech HaMishpat?",
+  "Why did the custom in Halabi communities change regarding this repetition?",
+  "What is the difference between the Sephardic and Ashkenazic customs on this matter?"
+ ],
+ "quality": "good",
+ "terms": "repeat back hamelech hamishpat opinion custom hacham melech ohev tzedakah umishpat rabbi wrote accidentally authorities book century days halabi order rosh yom amidah ben blessing follow hai halab hashanah ish kippur rabbis should blessings case chaim changes original regarding students yitzhak yosef 19th ashkenazim called changed communities community correct customs doubt eretz even followed general halachic hashivah however include instead instructed maran must necessary opinions posek rabbeinu repeats sephardim several themselves yedid yonah 11th 13th 18th 1930s 20th abbadi abdullah accepted according ago already among another approximately around aruch asked attieh avraham background based begins beit berachot birkhat cases chida chief completed conclude concludes concur consider considered consult decide deciding derech disagreement dont east emphasizing ending entire eventually ezra hamoui harari hashulchan immediately includes including information interestingly israel isserles king knesset known land later law lehakel made main menashe middle mistake moshe muram necessarily often otherwise palaggi particular people personally prayers present provide purpose rama rambam recent recite reciting recorded response result rif role ruling safek sasson selihot shahebar shofetenu similarly since sittehon spanish tawil therefore though tov unless videos went whether word world writes year years yisrael zichron",
+ "words": 802,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-21",
+ "by": "gemini (video) + gemini-3.1-flash-lite"
+}
