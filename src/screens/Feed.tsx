@@ -216,7 +216,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
                       {/* Covers the video except its bottom strip, where YouTube's own bar (seek, full screen) stays reachable. */}
                       <button className="video-tap" aria-label={videoPaused ? 'Play' : 'Pause'} onClick={tap}>{videoPaused && <span className="disc"><IPlay size={28} /></span>}</button>
                     </>
-                    : <button className="card-play" aria-label={playing ? 'Pause' : 'Play'} onClick={tap}><span className="disc">{playing ? <IPause size={28} /> : <IPlay size={28} />}</span></button>}
+                    : <button className="card-play" aria-label={playing ? 'Pause' : 'Play'} onClick={tap}>{/* Nothing sits over the picture while a class plays: the pause sign only flashes to show the tap landed. */}<span className={'disc' + (playing ? ' flash' : '')}>{playing ? <IPause size={28} /> : <IPlay size={28} />}</span></button>}
                 </div>
               </div>
               <div className="card-info">
@@ -280,7 +280,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
                 <button onClick={() => setPrefs({ saved: toggleIn(prefs.saved, c.id) })} aria-pressed={prefs.saved.includes(c.id)}>
                   <ISave size={28} fill={prefs.saved.includes(c.id) ? 'currentColor' : 'none'} />{prefs.saved.includes(c.id) ? 'Saved' : 'Save'}
                 </button>
-                {c.summary && <button onClick={() => setAbout(c.id)} aria-label="About this class"><IInfo size={28} />About</button>}
+                <button onClick={() => setAbout(c.id)} aria-label="About this class"><IInfo size={28} />About</button>
                 <button onClick={async () => { const r = await shareLink(`${c.title} — ${t?.name}`, classShare(c)); if (r === 'copied') say('Link copied'); }}>
                   <IShare size={28} />Share
                 </button>
@@ -328,7 +328,8 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
           <div className="sheet-back" onClick={() => setAbout('')}>
             <div className="sheet about" role="dialog" aria-label="About this class" onClick={(e) => e.stopPropagation()}>
               <h2>{c.title}</h2>
-              <p className="answer-sum flush"><span className="ai-tag">AI summary</span> {c.summary}</p>
+              <p className="muted flush">{[teacher(c.teacherId)?.name, new Date(c.date).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }), minutes(c.durationSec), c.film ? 'Sound only' : c.kind === 'video' ? 'Video' : ''].filter(Boolean).join(' · ')}</p>
+              {c.summary && <p className="answer-sum flush"><span className="ai-tag">AI summary</span> {c.summary}</p>}
               {c.kind === 'audio' && (c.chapters || []).length > 0 && <>
                 <div className="label">JUMP TO A PART</div>
                 <div className="parts">{c.chapters!.map(([at, title]) => <button key={at} className="part" onClick={() => { p.play(c, at); setAbout(''); }}><IPlay size={12} /><b>{clock(at)}</b><span>{title}</span></button>)}</div>
