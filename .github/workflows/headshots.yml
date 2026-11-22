@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install uniface opencv-python-headless pillow
+      - run: pip install uniface "rembg[cpu]" opencv-python-headless pillow
       - name: Fetch the originals that have no restyled copy yet
         run: node scripts/headshot-sources.mjs
       - name: Restyle

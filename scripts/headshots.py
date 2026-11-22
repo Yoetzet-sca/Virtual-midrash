@@ -4,7 +4,7 @@
 
 Finds where the face is (to centre and size it — never to tell who anyone is), removes the background, and places the
 person on white. Exits 2 and writes nothing when there is no face (a logo, say), so the caller keeps the plain picture.
-Needs: pip install uniface opencv-python-headless pillow
+Needs: pip install uniface "rembg[cpu]" opencv-python-headless pillow
 """
 import sys
 import cv2
@@ -14,7 +14,7 @@ from PIL import Image, ImageOps
 SIZE, SMALL = 480, 160
 FACE_W = 0.31      # face width (ear to ear) as a share of the picture
 FACE_Y = 0.45      # where the middle of the face sits, from the top
-_detector = _matting = None
+_detector = _matting = _body = None
 
 
 def find_face(bgr):
@@ -32,7 +32,7 @@ def find_face(bgr):
     return (x1 + x2) / 2, (y1 + y2) / 2, float(x2 - x1)
 
 
-def cut_out(bgr, cx, cy):
+def cut_out(bgr, cx, cy, fw):
     """How much of each pixel is the person (0 to 1). Other people standing apart in the background are dropped."""
     global _matting
     if _matting is None:
@@ -41,6 +41,18 @@ def cut_out(bgr, cx, cy):
     alpha = np.clip(np.asarray(_matting.predict(bgr), dtype=np.float32), 0, 1)
     if alpha.ndim == 3:
         alpha = alpha[..., 0]
+    # That cut-out is good at heads and hair but can lose a dark jacket against a dark backdrop, slicing off a
+    # shoulder. A second cut-out that is good at bodies fills in from the chin down.
+    try:
+        global _body
+        from rembg import new_session, remove
+        if _body is None:
+            _body = new_session('u2net_human_seg')
+        body = np.asarray(remove(Image.fromarray(cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)), session=_body, only_mask=True), dtype=np.float32) / 255
+        rows = np.clip((np.arange(alpha.shape[0]) - (cy + 0.75 * fw)) / (0.25 * fw), 0, 1)[:, None]
+        alpha = np.maximum(alpha, body * rows)
+    except ImportError:
+        pass
     # Thin leftovers (the rim of a frame someone already drew round the photo) are rubbed out before choosing the person.
     k = max(5, int(max(alpha.shape) * 0.02)) | 1
     solid = cv2.morphologyEx((alpha > 0.5).astype(np.uint8), cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k, k)))
@@ -69,7 +81,7 @@ def restyle(img):
         return None
     cx, cy, fw = face
     h, w = rgb.shape[:2]
-    alpha = cut_out(bgr, cx, cy)
+    alpha = cut_out(bgr, cx, cy, fw)
     if alpha is None:
         return plain(img, cx, cy, fw)
     base = SIZE * FACE_W / fw
@@ -93,8 +105,20 @@ def restyle(img):
                 m = np.float32([[s, 0, SIZE * x - cx * s], [0, s, SIZE * y - cy * s]]) * (T / SIZE)
                 cut = cv2.warpAffine(alpha, m, (T, T), flags=cv2.INTER_LINEAR, borderValue=0)
                 run = cv2.warpAffine(alpha, m, (T, T), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
-                shows = float(((run > 0.5) & (cut < 0.5) & frame).sum()) / frame.sum()
-                cost = shows * 22 + (zoom - 1) * 1.0 + abs(x - 0.5) * 6 + abs(y - FACE_Y) * 3
+                gap = (run > 0.5) & (cut < 0.5) & frame
+                above = yy < m[1][2]  # beyond the photo's top edge: a hat or hair cropped by the photo
+                shows = float(gap.sum()) / frame.sum()
+                # A sliced shoulder or missing chest is what the eye catches, so sliding the person sideways or
+                # enlarging a little is cheap by comparison; a hat clipped at the top matters much less.
+                cost = float((gap & ~above).sum()) / frame.sum() * 70 + float((gap & above).sum()) / frame.sum() * 15 \
+                    + (zoom - 1) * 1.0 + abs(x - 0.5) * 3 + abs(y - FACE_Y) * 3
+                # A cut-out can also lose one shoulder by itself (a dark jacket on a dark backdrop). The sign is a
+                # body filled on one side of the frame's lower part and empty on the other; lean away from that.
+                low = frame & (yy > T * 0.74)
+                fx = T * x
+                lgap = float((low & (xx < fx) & (cut < 0.5)).sum()) / max(1, (low & (xx < fx)).sum())
+                rgap = float((low & (xx >= fx) & (cut < 0.5)).sum()) / max(1, (low & (xx >= fx)).sum())
+                cost += max(0.0, abs(lgap - rgap) - 0.12) * 3
                 if best is None or cost < best[0]:
                     best = (cost, s, x, y, shows, zoom)
     if best is None:
