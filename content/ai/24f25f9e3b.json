@@ -1,0 +1,55 @@
+{
+ "v": 8,
+ "id": "yt:bzh0IimIM8g",
+ "title": "SCA Bridge the Gap 2023",
+ "topic": null,
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Trip activities and sessions",
+   "about": "Hikes, team building, and morning sessions"
+  },
+  {
+   "at": 58,
+   "title": "Discussions on Israel",
+   "about": "Politics in Israel and Jewish unity"
+  },
+  {
+   "at": 103,
+   "title": "Reflections on the trip",
+   "about": "Overall experience and takeaways"
+  }
+ ],
+ "unsupported": [
+  "features",
+  "reflections",
+  "participants",
+  "speakers",
+  "share",
+  "experiences"
+ ],
+ "claims": [],
+ "summary": "This class features reflections from participants on an SCA trip in Israel. The speakers discuss their sessions on implementing what they learned in Israel back home and share their experiences with activities like hiking, laser tag, and dancing.",
+ "subjects": [
+  "SCA trip",
+  "Israel",
+  "Seminary and Yeshiva",
+  "Team building",
+  "Laser tag",
+  "Politics in Israel",
+  "Jewish unity"
+ ],
+ "questions": [
+  "What activities were included in the SCA trip?",
+  "How can students implement what they learned in Israel back home?",
+  "What is the importance of Jewish unity according to the speakers?",
+  "What was the highlight of the trip for the participants?"
+ ],
+ "quality": "good",
+ "terms": "day end great israel love morning amazing back barbecue beautiful come dancing everyone home laser learned sca sessions tag talking action activities agreement bridge building calm came complicated conversations desert dinner friends fun gap getting havent hike hikes implement jews later long loved moving need nice night non obviously organized packed played politics seen seminaries session site started stop surprise take team thank thoughts time today together trip whats whole won year yeshiva אבאלה אור אמאלה אשראם באים באצטדיון במדינה בתוך גביע גרבי דבש דגלים דור הבל הגב הדיפנס הזה החברה הלילה המגרש המועדון העולם העם הקטן ואני חדש יציעים כאן כולו כולם כחול כמובן כשניצחנו לבן לכבוש למקום מועדון מטאורים מקצוות משתגעים נאחד ערב צריך קוואדני שיבואו שים שלנו ששון",
+ "words": 322,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-22",
+ "by": "gemini (video) + gemini-3.1-flash-lite"
+}
