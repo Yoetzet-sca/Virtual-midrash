@@ -1,0 +1,64 @@
+{
+ "v": 6,
+ "id": "yt:LEUX45JuVhE",
+ "title": "SCA Minhag of the Week 203: “Tefilat HaDerekh; The Traveler’s Prayer\"",
+ "topic": "Minhag of the Week",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Gemara Berakhot Chapter 4 on Tefilat HaDerekh",
+   "about": "Rav Chasda, Abaye, singular versus plural wording"
+  },
+  {
+   "at": 59,
+   "title": "Rambam, Beit Yosef, and Shulhan Arukh",
+   "about": "Baraita in Berakhot chapter 9, omitted blessing, Maran's ruling"
+  },
+  {
+   "at": 109,
+   "title": "Mahzor Aram Soba and Siddur Bet Obed",
+   "about": "Textual versions, publication dates, text versus printed Halakha"
+  },
+  {
+   "at": 168,
+   "title": "Yishak Ranan and the Custom of Halab",
+   "about": "Chacham Yitzchak Shehebar, omitting Hashem's name, Rambam's influence"
+  }
+ ],
+ "unsupported": [
+  "variations",
+  "differences",
+  "versus",
+  "community",
+  "approached"
+ ],
+ "claims": [],
+ "summary": "Mr. Arking examines the sources and textual variations of Tefilat HaDerekh, comparing Masekhet Berakhot, Rambam, Beit Yosef, and Shulhan Arukh. He discusses differences between reciting the traveler's prayer in the singular versus the plural and whether to include a blessing at the end with Hashem's name. He also explores how Mahzor Aram Soba, Siddur Bet Obed, and the community of Halab approached this prayer.",
+ "subjects": [
+  "Tefilat HaDerekh",
+  "Masekhet Berakhot",
+  "Rav Chasda",
+  "Abaye",
+  "Rambam",
+  "Beit Yosef",
+  "Shulhan Arukh",
+  "Mahzor Aram Soba",
+  "Siddur Bet Obed",
+  "Yishak Ranan",
+  "Chacham Yitzchak Shehebar"
+ ],
+ "questions": [
+  "Should Tefilat HaDerekh be recited in the singular or plural?",
+  "How do Masekhet Berakhot chapter 4 and chapter 9 differ regarding the traveler's prayer?",
+  "Why did Rambam omit the final blessing from Tefilat HaDerekh?",
+  "What was the custom in Halab regarding saying Hashem's name at the end of Tefilat HaDerekh?",
+  "How does the text of Tefilat HaDerekh in Siddur Bet Obed compare to its printed Halakha?"
+ ],
+ "quality": "good",
+ "terms": "prayer blessing end chapter travelers maran singular berachot hashems masechet name plural version gemara rambam recite ruling siddur aruch baraita bet fourth halab must ninth obed peace printed recited shulchan without לשלום according beit chacham concludes furthermore halacha however lead mahzor published shehebar shorter sugya text years yitzchak yosef 19th abaye accordance always another anyone aram baruch based blessings book brings century chasda city closely consideration customary direct doesnt doubts eastern even famous first forth haderech halachic include interestingly journey laws longer marans match meaning middle mishneh music omitted part pertain popular provides rambams ranan rav recorded records resembles saying sets shomea should soba specified specifies statement states steps still surprised taught tefilat tefillah tenth textual though torah traveling whereas wording writes wrote year yishak אתה ברוך הדרך היוצא ותצעידני לדרך להתפלל צריך שומע שתוליכנו שתוליכני תפילה תפילת",
+ "words": 549,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-22",
+ "by": "gemini (video) + gemini-3.6-flash"
+}
