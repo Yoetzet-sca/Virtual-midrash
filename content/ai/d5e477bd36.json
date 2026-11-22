@@ -1,0 +1,71 @@
+{
+ "v": 6,
+ "id": "avi-harari:tag:soundcloud,2010:tracks/2442697188",
+ "title": "VaYishlah: Multidimensional Living",
+ "topic": "Parasha",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Yaakov Asks the Malach's Name",
+   "about": "Yaakov struggling with the Malach and asking for his name"
+  },
+  {
+   "at": 55,
+   "title": "Rashi on Angels' Names",
+   "about": "Angels changing names based on their mission"
+  },
+  {
+   "at": 106,
+   "title": "Humans Versus Angels",
+   "about": "Single human name spanning multifaceted actions"
+  },
+  {
+   "at": 152,
+   "title": "Yaakov as Tiferet",
+   "about": "Avraham, Yishak, Yaakov, Chesed, and Gevura"
+  },
+  {
+   "at": 202,
+   "title": "The Rocks of Har HaMoriah",
+   "about": "Connecting values into a single rock and single name"
+  },
+  {
+   "at": 252,
+   "title": "Expanding Beyond One Mode",
+   "about": "Peshat, Midrash, Humash, Talmud, and human growth"
+  }
+ ],
+ "unsupported": [
+  "carry",
+  "actions",
+  "combining",
+  "should",
+  "versus",
+  "beyond"
+ ],
+ "claims": [],
+ "summary": "Rabbi Harari discusses the encounter between Yaakov and the Malach in Parashat Vayishlah, focusing on Rashi's explanation of why angels do not have a permanent name. He contrasts angels, who are singularly focused on one mission at a time, with human beings who are multidimensional and carry one name through all their actions. He explains that like Yaakov combining Chesed and Gevura into Tiferet, people should be open to different dimensions of learning like Peshat, Midrash, Humash, and Talmud.",
+ "subjects": [
+  "Parashat Vayishlah",
+  "Yaakov and the Malach",
+  "Rashi on the names of angels",
+  "Avraham and Chesed",
+  "Yishak and Gevura",
+  "Yaakov and Tiferet",
+  "The rocks at Har HaMoriah",
+  "Multidimensional growth in human beings",
+  "Peshat, Midrash, Humash, and Talmud"
+ ],
+ "questions": [
+  "Why did the Malach refuse to give Yaakov his name in Parashat Vayishlah?",
+  "How does Rashi explain the changing names of angels?",
+  "How does Yaakov combine the traits of Avraham and Yishak?",
+  "Why should human beings be open to multiple dimensions of learning?"
+ ],
+ "quality": "good",
+ "terms": "name different yaakov human need angels malach singularly beings moment focused truly capability chesed dimensions ish rashi speaking aspects contrast defined drives gevura grow mission single tells thats ways ability able based dimensioned dont eyes hes manifest midrash mode open parting personality peshat response rock rocks sorts spans spectrum talmud theyre thought times together torah type ultimately values vayomer yisrael accept accompanies adonai agency almost alternatively although altogether amen angel answer answering appears ask asks aspect assume avodat avot avraham awakens away baruch beautiful beckons beginning best blessing bring cant capable change class come compartmentalize course creativity curiosities defines deflection depth discussed doings easiest effectively else embrace emerge emerges encounter enmeshes envision envisioned even every expand expansion expansive explain explaining extremes falls famous fateful features fluidity follows forth fundamental gets give gives goes growth hachamim hachhamim hagida hak hakol hamoriah har humash identities identity ill impart important incoming infiltrate influence influences interpretation involved jewish jews kavua lama lanu last learn learning lefi leisav lessons limping lishmi manifested matters maximize meaning mekubalim messages messengership mishtalihin mishtanin mitzvat moments move multi multifaceted mysterious mystics names nashemecha needs new next night nothing otosham ourselves parashat part people perhaps permanent personalities personified personify philosophy pigeon positive potential principle purviews rabbis read representing rigidity rise saroshe saying sentence shem shemotenu short significant similar simple since singular sleep somehow sometimes speak speaks splendorous split struggle suggested suggestion system teaching tendency thick though tifeiret tiferet time tishal tomorrow toward truth turns unfortunately unlike vaivarech vayishal vayishlach veamen veodam victor victorious walks week whats whereas writes",
+ "words": 1050,
+ "language": "English",
+ "made": "2026-11-22",
+ "by": "groq whisper + gemini-3.6-flash"
+}
