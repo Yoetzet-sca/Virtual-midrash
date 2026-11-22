@@ -1,0 +1,66 @@
+{
+ "v": 6,
+ "id": "yt:-cABM8OgCIQ",
+ "title": "SCA Minhag of the Week 210: \"Tefilla BeSibbur: Shabbat Tazria & Tahor\"",
+ "topic": "Minhag of the Week",
+ "chapters": [
+  {
+   "at": 6,
+   "title": "Naming Parashat Tahor",
+   "about": "Custom of using Tahor instead of Metsora"
+  },
+  {
+   "at": 53,
+   "title": "Community sources for the name Tahor",
+   "about": "Tikun of Birkat Abraham and Pizmonim books"
+  },
+  {
+   "at": 99,
+   "title": "Makam selection for the Parashiyot",
+   "about": "Makam Saba and reading Tazria and Tahor together"
+  },
+  {
+   "at": 146,
+   "title": "Holiday influence on Makam",
+   "about": "Changing Makam for Pesach, Shabuot, and Tu B'shvat"
+  }
+ ],
+ "unsupported": [
+  "avoid",
+  "selection",
+  "influence",
+  "used",
+  "services",
+  "naming"
+ ],
+ "claims": [
+  "Specifically when holidays like Pesach, Shabuot, or Tu B'shvat influence the tunes used during Shabbat services. - Tu B'shvat is not a holiday that influences Shabbat services, but rather a reference to a specific tune for Simanim."
+ ],
+ "summary": "Mr. Harari discusses the community custom of referring to the Parasha of Metsora as Tahor to avoid negative connotations. He also explains the policies of the Aleppo Hazzanut regarding the selection of Makam based on the calendar, specifically when holidays like Pesach, Shabuot, or Tu B'shvat influence the tunes used during Shabbat services.",
+ "subjects": [
+  "Parashat Tazria",
+  "Parashat Tahor",
+  "Aleppo Hazzanut",
+  "Makam Saba",
+  "Makam Nawabi",
+  "Makam Husseini",
+  "Tikun of Birkat Abraham",
+  "Yom Ha'atzmaut",
+  "Pesach",
+  "Shabuot",
+  "Tu B'shvat"
+ ],
+ "questions": [
+  "Why do we call the Parasha Tahor instead of Metsora?",
+  "How does the Hazzanut of Aleppo decide which Makam to use?",
+  "Do we change the Makam for holidays like Pesach or Shabuot?",
+  "What is the custom for the Makam when Tazria and Tahor are read together?"
+ ],
+ "quality": "poor",
+ "terms": "tahor tazria macham parasha thats generally pesach saba shabbat book however metsora minhagim parashat pizmonim read refer speak switch together use week word written years abraham aleppo alone always azam based bayat birkat books bshvat calendar called change common community concerning connotation continuing course custom day discussion dont even famous god haatzmaut halabi hazanut hazzanut holiday holidays husseini independence instance israel look machubarot makam means minhag mishallah name nawabi negative old parashiyot parshiot particular policy purity referred relate sababa scale shabbatot shalom shavuot similarly simin specific theyre tikun tune tunes whats year yom",
+ "words": 320,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-22",
+ "by": "gemini (video) + gemini-3.1-flash-lite"
+}

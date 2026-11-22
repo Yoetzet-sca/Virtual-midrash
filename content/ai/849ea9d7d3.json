@@ -1,0 +1,66 @@
+{
+ "v": 6,
+ "id": "yt:I5MkFK3kJxA",
+ "title": "SCA Minhag of the Week 209: \"Traditional Afternoon Readings on Shabu’ot\"",
+ "topic": "Holidays",
+ "chapters": [
+  {
+   "at": 6,
+   "title": "Reasons for reading Rut on Shabuot",
+   "about": "Harvest, receiving Torah, kindness, Oral Torah, David Hamelach"
+  },
+  {
+   "at": 100,
+   "title": "Ashkenazi and Sephardi customs",
+   "about": "Public reading, blessings, Megillah, informal reading"
+  },
+  {
+   "at": 146,
+   "title": "Azharot and home study in Halab",
+   "about": "Rabbi Shlomo ibn Gabirol, Chacham Yossef Abadi Shaya, Mishle"
+  },
+  {
+   "at": 239,
+   "title": "Order of readings and poems",
+   "about": "Azharat Yom Zeh, positive and negative commandments, ta'amim"
+  }
+ ],
+ "unsupported": [
+  "historical",
+  "differences",
+  "public",
+  "private",
+  "recitation",
+  "order"
+ ],
+ "claims": [
+  "\"public or private reading of Rut\" - the transcript does not mention public reading versus private reading for Ashkenazim, only that Ashkenazim read it in the synagogue before the Torah reading (some from a kosher Megillah with a blessing) and Sephardim read it informally from a printed book without a blessing."
+ ],
+ "summary": "Mr. Arking discusses the historical and traditional reasons for reading the book of Rut on Shabuot. He explains the differences between Ashkenazi and Sephardi customs regarding the public or private reading of Rut, the recitation of Azharot, and the study of Mishle.",
+ "subjects": [
+  "Rut",
+  "Shabuot",
+  "Massekhet Sofrim",
+  "Azharot",
+  "Mishle",
+  "Halabi customs",
+  "Rabbi Shlomo ibn Gabirol",
+  "Rabbi Yitzhak ben Reuben",
+  "David ben Alazar ibn Pakuda",
+  "Oral Torah"
+ ],
+ "questions": [
+  "Why is the book of Rut read on Shabuot?",
+  "What is the difference between the Ashkenazi and Sephardi customs for reading Rut?",
+  "What are the Azharot?",
+  "How was the book of Mishle traditionally studied in Halab?",
+  "Who composed the Azharot commonly used by Sephardic communities?"
+ ],
+ "quality": "poor",
+ "terms": "ruth book shavuot azharot read torah custom mishlei holiday reading recite reason chacham customary halab ibn rabbi another century commandments composed day first gabirol home kindness marry reciting shlomo spain wrote yitzhak ashkenazim ben blessing boaz celebrate convert david days even field followed half harvest importance jews middle mitzvot moabite oral permitted portions receiving regarding second sephardim similarly sing synagogue taamim taught 11th 12th 8th abadi accepted according addition africa afternoon afternoons ago alazar allowed allows arabic ascribed avraham away azharat bar beforehand began begin begins beit born called celebrated certain chesed children cohen collect commands compiled converted customs demonstrates derech descended east eastern end eretz examples explaining explanation fact family female found gaonim given good hamelach hamway hashem herself highlight house however informally judaism kosher leaves leaving mahzor male massekhet megillah megillat mentions midrash mordechai negative north observe observed old pakuda part passed perform performing person place poem poet poetic point poor positive printed prior purpose quoted reasons relevant rendition reuben reward school shachar shaya show shows since singing sofrim spanish story study takes teach ten though time torat tractate tradition upon without world years yeranel yet yom yossef zeh",
+ "words": 752,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-22",
+ "by": "gemini (video) + gemini-3.1-flash-lite"
+}

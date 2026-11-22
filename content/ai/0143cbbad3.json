@@ -1,0 +1,50 @@
+{
+ "v": 8,
+ "id": "yt:sBAT3oNwzyE",
+ "title": "Recapping SCA Summer 2023",
+ "topic": null,
+ "chapters": [
+  {
+   "at": 9,
+   "title": "Repetitive audio",
+   "about": "The fight against"
+  },
+  {
+   "at": 54,
+   "title": "Repetitive audio",
+   "about": "The fight against"
+  },
+  {
+   "at": 99,
+   "title": "Repetitive audio",
+   "about": "The fight against"
+  }
+ ],
+ "unsupported": [
+  "consists",
+  "repetitive",
+  "recording",
+  "contain",
+  "substantive",
+  "information",
+  "specific",
+  "lessons",
+  "audio"
+ ],
+ "claims": [],
+ "summary": "This class consists of a repetitive recording that does not contain any substantive information. It does not cover any specific topics or lessons.",
+ "subjects": [
+  "Repetitive audio"
+ ],
+ "questions": [
+  "What is the topic of this class?",
+  "Does this class provide any information?"
+ ],
+ "quality": "poor",
+ "terms": "against fight",
+ "words": 333,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-22",
+ "by": "gemini (video) + gemini-3.1-flash-lite"
+}
