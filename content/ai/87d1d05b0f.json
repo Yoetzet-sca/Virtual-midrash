@@ -1,0 +1,75 @@
+{
+ "v": 6,
+ "id": "yt:iXLw07fa7Uo",
+ "title": "SCA Minhag of the Week 213: \"Tefilla BeSibbur: Shabbat Ahare, Qedoshim & Emor\"",
+ "topic": "Minhag of the Week",
+ "chapters": [
+  {
+   "at": 6,
+   "title": "Maqam for Aharei Mot and Kedoshim",
+   "about": "Maqam Hijaz for Aharei Mot, Sabah for Kedoshim, and combined customs"
+  },
+  {
+   "at": 103,
+   "title": "Haftara Customs for Aharei Mot and Kedoshim",
+   "about": "Sephardic haftara readings from Yehezkel for Aharei Mot and Kedoshim"
+  },
+  {
+   "at": 154,
+   "title": "Maqam Sega for Parashat Emor",
+   "about": "Maqam Sega selection for Parashat Emor and festival themes"
+  },
+  {
+   "at": 199,
+   "title": "Lag BaOmer Connection and Bar Yohai Tune",
+   "about": "Bar Yohai tune for Naqdishak during Parashat Emor"
+  },
+  {
+   "at": 249,
+   "title": "Shishi Verse Options for Parashat Emor",
+   "about": "Customs for starting and ending the shishi aliya in Emor"
+  }
+ ],
+ "unsupported": [
+  "maqam",
+  "selection",
+  "readings",
+  "maqamot",
+  "sung",
+  "combined",
+  "citing",
+  "passages",
+  "verse",
+  "portions",
+  "baomer",
+  "connection"
+ ],
+ "claims": [
+  "citing specific haftara passages from Yehezkel - Yehezkel is mentioned generally, but the phrase 'citing specific haftara passages from Yehezkel' implies citing details beyond just naming the chapters mentioned in the transcript"
+ ],
+ "summary": "Mr. Harari discusses the community customs for maqam selection and haftara readings for Parashat Aharei Mot, Parashat Kedoshim, and Parashat Emor. He explains which maqamot are sung when Aharei Mot and Kedoshim are read separately or combined, citing specific haftara passages from Yehezkel. He also reviews the maqam Sega custom for Parashat Emor along with shishi verse options for these portions.",
+ "subjects": [
+  "Maqam Hijaz for Aharei Mot",
+  "Maqam Sabah for Kedoshim",
+  "Combined reading of Aharei Mot and Kedoshim",
+  "Haftara readings from Yehezkel",
+  "Maqam Sega for Parashat Emor",
+  "Lag BaOmer and Bar Yohai tune",
+  "Shishi verse selections",
+  "Bet HaMikdash"
+ ],
+ "questions": [
+  "What maqam is used when Parashat Aharei Mot and Parashat Kedoshim are read together?",
+  "Which haftara is read for Parashat Aharei Mot and Parashat Kedoshim?",
+  "Why is maqam Sega sung for Parashat Emor?",
+  "How does Lag BaOmer influence the prayer tunes during Parashat Emor?",
+  "What options exist for starting and ending the shishi aliya in Parashat Emor?"
+ ],
+ "quality": "poor",
+ "terms": "parashath markam ahare kedoshim emor sing custom hijaz mehubaroth read sega use adonai another haftarah shishi week ades among amongst atem avraham bayath bayim birkat comes festivals generally haftaroth holidays lachem lag lagomer ledrosh minhagim number othi passing perek predominant reason sarah tatishpot thats therefore together tools view abihu abraham aha aharon aige aleves alone alternative amos amrah ani ashkenazim associated bar based bchov begin begins beneh beney bet bikurim books brachah calendar celebrated certain community content continuing customs dealing differences eloheyhem elomoday ending ends eth even event falls first goes hadamim haf halabi hamikdash hayey hazon het holiday introduce kamoha kisa kodesh kol kushi leosif lohi look mahaya main matamli may menorah mention mentioned mentioning meyahiskayl mikray moshmotechem mot move nadab nagdishat option parashiyoth particular pasuk pilgrimage psurim reflects sabach sad sadness selected separately series sfardim shabath shabothot shalom shini shitoth speaking specific still tevuatho theres three tikun times tool tov tragedy tune used usfartem vayehi veyabtale videos whatever yaacov yahiskayl year years yerushalayim yohai yupa",
+ "words": 530,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-22",
+ "by": "gemini (video) + gemini-3.6-flash"
+}
