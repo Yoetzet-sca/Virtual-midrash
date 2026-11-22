@@ -328,7 +328,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
           <div className="sheet-back" onClick={() => setAbout('')}>
             <div className="sheet about" role="dialog" aria-label="About this class" onClick={(e) => e.stopPropagation()}>
               <h2>{c.title}</h2>
-              <p className="muted flush">{[teacher(c.teacherId)?.name, new Date(c.date).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }), minutes(c.durationSec), c.film ? 'Sound only' : c.kind === 'video' ? 'Video' : ''].filter(Boolean).join(' · ')}</p>
+              <p className="muted flush">{[teacher(c.teacherId)?.name, 'Uploaded ' + new Date(c.date).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' }), minutes(c.durationSec), c.film ? 'Sound only' : c.kind === 'video' ? 'Video' : ''].filter(Boolean).join(' · ')}</p>
               {c.summary && <p className="answer-sum flush"><span className="ai-tag">AI summary</span> {c.summary}</p>}
               {c.kind === 'audio' && (c.chapters || []).length > 0 && <>
                 <div className="label">JUMP TO A PART</div>
