@@ -1,0 +1,82 @@
+{
+ "v": 6,
+ "id": "joey-soffer:tag:soundcloud,2010:tracks/2442664524",
+ "title": "Business Halacha 5787-5",
+ "topic": "Halakha",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Introduction to monetary law",
+   "about": "Theft, Din pruta ki din mea, and American law"
+  },
+  {
+   "at": 103,
+   "title": "The case of the hotel towel",
+   "about": "Finding a hotel towel at the mikveh"
+  },
+  {
+   "at": 396,
+   "title": "Defining Yeush and acquisition",
+   "about": "Transfer of ownership and despair"
+  },
+  {
+   "at": 513,
+   "title": "Wallet theft scenario",
+   "about": "Pickpocketing, Yeush, and finding lost objects"
+  },
+  {
+   "at": 798,
+   "title": "The Gemara's fig tree analogy",
+   "about": "Figs falling from a tree and automatic Yeush"
+  },
+  {
+   "at": 971,
+   "title": "Benefiting from stolen objects",
+   "about": "Bridges in Babel and Dina de Malchuta"
+  },
+  {
+   "at": 1181,
+   "title": "Applying the law to the towel",
+   "about": "Obligations of the thief and the finder"
+  }
+ ],
+ "unsupported": [
+  "halakhic",
+  "concepts",
+  "prohibition",
+  "against",
+  "fallen",
+  "legal",
+  "analogies",
+  "awareness",
+  "constitutes",
+  "impacts",
+  "defining",
+  "analogy"
+ ],
+ "claims": [],
+ "summary": "Rabbi Soffer examines the halakhic status of using a towel taken from a hotel and left at a mikveh. He explores the concepts of Yeush and the prohibition against benefiting from a stolen object, using the Gemara's discussions on stolen wood and fallen figs as legal analogies. The class considers whether the hotel's general awareness of missing towels constitutes despair of ownership and how this impacts the obligation to return the object.",
+ "subjects": [
+  "Yeush",
+  "Halakha of theft",
+  "Din pruta ki din mea",
+  "Shabbat Avedah",
+  "Dina de Malchuta",
+  "Masekhet Baba Kamma",
+  "Ownership transfer",
+  "Benefit from stolen objects"
+ ],
+ "questions": [
+  "Can I use a towel I find at a mikveh if I know it was taken from a hotel?",
+  "Does a hotel's general expectation that towels will go missing constitute Yeush?",
+  "Am I permitted to benefit from a stolen object if I do not intend to keep it?",
+  "Does the obligation to return a stolen object change if the thief has abandoned it?",
+  "Can a person acquire ownership of an object that was stolen by someone else?"
+ ],
+ "quality": "good",
+ "terms": "towel dont stolen back hotel theres ganav use guy object return wallet despair thats towels cant good take allowed already even yehush figs tree didnt doesnt give care yeush come floor law obligation second fig find ownership people pocket room taking transfer bring call came happens keep mikveh owner question still stole theft acquire bridge day dry happened pick picks scenario took whatever case comes coming corner door else fall hes hotels knows later lost made myself pay steal tell walking without youre around belongs called cash cold difference different dina disappear fell first gift guys idea kapara look megvah name nothing ownerless saying sfat side taken theyre thief time went work zero acquisition american backyard benefit built eat end every exactly expense forgot ganaav gave gemara government guess halakha happen home intended left mala man missing need nice original part party person picked point possession problem put somebody someone street sure takes technically told torah walks worth absolutely acquiring along amin amount another anymore anyway area arizal ask assume avedah away beach benefiting billion bills bridges build claims class considered conversation creek cross deal din dollars domain enough ever face fact feel finder finds forget found four general getting gone grab great heres instead intention isur jack leave likely long longer make makes marks marruta meaning means minute monetary money nah never next obligations owns penalty penny permission picking pickpocket plunge pockets pool potentially pre premises questions realize release returning shabbat signs since start stop talk therefore though three times today trees usually value walk wanted wasnt whole wood yahush yerush yet 12th 22nd absolute accept accepting according across act active adam adonai advance ago agree agreements alea allow alone always anywhere apply ari arrived asking assumption asul asur automatic available babel babylon bag baruch basis bat bava bchol begin behind belong belonged better bill broken brought building bundle business caretaker cases categories cause causing chance check checking choice choose chop chopped chucked claim click clothes clue commerce couldnt country crimes crisp cryptocurrency cut damage defense depending derive disappearing dismissal dollar don done embezzle embezzled embroidered emine eter everyones existing exists expenses experience ezras factor falls family far feeling feet felt finding fine folded follow food freezing fulfilling gate given gives giving gmarah goes greater guard gun happening hear hed hefkir hikmanah himself hitting hold hope hundred identifying ill inform intending intentional intentionally introduction itself kamar kaparan kbarah kisa kislev knew knock knocked known leaves leaving leluh looking loose mafia malchuta manager mashmish mcvean mcvehr mea meeting mekveh minds mine minutes miriam mitzvah mkveh mobbed mouth move muget names needs new nishmat nobody november number objects obligated opposed originally owning peoples petty pickpocketed pickpocketing pile place play possible possibly pounds power preempt preventing probably professional pruta rachel releasing remember required requirements responsibility revisit ripe ripen rivers robbed round run sale saw scenarios season sees send sending sephc shaah shalom shell shihur should sir small sometimes spare specific sponsored stairs standard starts statuses stealing step stepped story sunday tallow temporary terms thinking third throw throws todays top transfers truck true trying tuesday turn turned understand unintentional used ush using wait wallets watch water week wet whats whatsoever whose words works world wouldnt wow yards yerushalomidat yotsad",
+ "words": 4329,
+ "language": "English",
+ "made": "2026-11-22",
+ "by": "groq whisper + gemini-3.1-flash-lite"
+}
