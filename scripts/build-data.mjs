@@ -206,7 +206,8 @@ const docs = [];
   const fixes = new Map((await json('content/archive-fixes.json').catch(() => [])).map((f) => [f.id, f.by]));
   for (const o of old) if (fixes.has(o.id)) o.by = fixes.get(o.id);
   const sca = () => { if (!teachers.some((x) => x.id === 'sca')) teachers.push({ id: 'sca', name: 'Sephardic Community Alliance', title: 'Classes and events from the SCA', bio: '', photo: '', affiliations: [], feed: '', defaultTopic: '' }); return 'sca'; };
-  const pairs = pairUp(old, classes);
+  const nameOf = (id) => teachers.find((t) => t.id === id)?.name || '';
+  const pairs = pairUp(old, classes, (c, by) => !!by && c.teacherId !== 'sca' && !!nameOf(c.teacherId) && !samePerson(nameOf(c.teacherId), by));
   // 1. A video the app already has but could not attribute: the old site knows who gave it.
   let named = 0;
   for (const [o, c] of pairs) if (c.teacherId === 'sca' && o.by) { const id = whoNamed(o.by); if (id) { c.teacherId = id; named++; } }

@@ -20,7 +20,9 @@ export const namesSomeoneElse = (title, by) => {
 };
 
 // Pairs each old item with the class in `classes` that is the same recording, if there is one.
-export function pairUp(old, classes) {
+// `otherTeacher(c, by)` says the class is already filed under someone who is not `by` (two teachers each gave
+// "Bava Kama 104"; they are different classes however alike the titles and lengths).
+export function pairUp(old, classes, otherTeacher = () => false) {
   const byTitle = new Map(), byDay = new Map(), byYoutube = new Map(), byEpisode = new Map();
   for (const c of classes) {
     byTitle.set(norm(c.title), c);
@@ -51,7 +53,7 @@ export function pairUp(old, classes) {
     for (const w of mine) for (const c of byWord.get(w) || []) {
       if (seen.has(c)) continue; seen.add(c);
       if (!c.durationSec || Math.abs(c.durationSec - o.sec) > Math.max(3, o.sec * 0.01)) continue;
-      if (namesSomeoneElse(c.title, o.by)) continue;
+      if (namesSomeoneElse(c.title, o.by) || otherTeacher(c, o.by)) continue;
       const theirs = new Set([...words(c.title)].filter((x) => !who.has(x)));
       const both = [...mine].filter((x) => theirs.has(x)).length;
       if (both >= 2 && both / Math.min(mine.size, theirs.size) >= 0.75) return c;
@@ -62,7 +64,7 @@ export function pairUp(old, classes) {
   for (const o of old) {
     const n = o.minhag ? minhagNumber(o.title) : null;
     const ft = fileTitle(o);
-    const hit = byYoutube.get(youtubeIdOf(o.link)) || (n != null && byEpisode.get(n)) || byTitle.get(norm(o.title)) || (ft.split(' ').length >= 3 && byTitle.get(ft)) || near(o) || sameLength(o);
+    const hit = byYoutube.get(youtubeIdOf(o.link)) || (n != null && byEpisode.get(n)) || byTitle.get(norm(o.title)) || [ft.split(' ').length >= 3 && byTitle.get(ft)].find((c) => c && !otherTeacher(c, o.by)) || near(o) || sameLength(o);
     if (hit) pairs.set(o, hit);
   }
   return pairs;
