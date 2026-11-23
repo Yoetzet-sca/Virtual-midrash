@@ -486,3 +486,18 @@ test('perasha: moves on when Shabbat ends in New York, and a double week names b
   assert.deepEqual(d.perasha.search, ['Tazria', 'Mesora']);
   assert.deepEqual(d.perashaNext.search, ['Aharei Mot', 'Kedoshim']);
 });
+
+test('old archive: a re-upload of a YouTube video is recognised years later by its file name or its length', async () => {
+  const { pairUp } = await import('./lib/archive.mjs');
+  const classes = [
+    { id: 'yt1', title: 'Mrs. Adele Tawil: The Unsung Hero of Hanukkah', date: '2020-12-10T12:00:00Z', durationSec: 221 },
+    { id: 'yt2', title: 'Rabbi Joey Soffer: Parashat Vayera', date: '2021-10-20T12:00:00Z', durationSec: 1800 },
+  ];
+  const byFile = { id: 4059, title: 'The Unsung Hero of Hanukkah', date: '2023-01-02', sec: 0, file: '4059/Mrs._Adele_Tawil__The_Unsung_Hero_of_Hanukkah.mp4', by: 'Mrs. Adele Chabot Tawil' };
+  const byLength = { id: 1, title: 'The Unsung Hero of Hanukkah', date: '2023-01-02', sec: 220, file: '1/recording.mp4', by: 'Mrs. Adele Chabot Tawil' };
+  const otherYear = { id: 2, title: 'Parashat Vayera', date: '2024-11-01', sec: 2400, file: '2/x.mp3', by: 'Rabbi Joey Soffer' };
+  const p = pairUp([byFile, byLength, otherYear], classes);
+  assert.equal(p.get(byFile).id, 'yt1');
+  assert.equal(p.get(byLength).id, 'yt1');
+  assert.equal(p.has(otherYear), false); // same title, another year's class: a different length, so not the same recording
+});

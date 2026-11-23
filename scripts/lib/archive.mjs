@@ -37,10 +37,32 @@ export function pairUp(old, classes) {
     }
     return null;
   };
+  // The old site often re-uploaded a YouTube video years later under a shorter title ("The Unsung Hero of Hanukkah" for
+  // "Mrs. Adele Tawil: The Unsung Hero of Hanukkah"). The dates are far apart, but two things give it away:
+  // the uploaded file still carries the video's title, or the titles share their words and the two run the same length.
+  const byWord = new Map();
+  for (const c of classes) for (const w of words(c.title)) { if (!byWord.has(w)) byWord.set(w, []); byWord.get(w).push(c); }
+  const fileTitle = (o) => norm(decodeURIComponent(String(o.file || '').split('/').pop() || '').replace(/\.[a-z0-9]+$/i, '').replace(/_+/g, ' '));
+  const sameLength = (o) => {
+    if (!o.sec || o.sec < 60) return null;
+    const who = words(o.by || '');
+    const mine = new Set([...words(o.title)].filter((w) => !who.has(w))); if (mine.size < 2) return null;
+    const seen = new Set();
+    for (const w of mine) for (const c of byWord.get(w) || []) {
+      if (seen.has(c)) continue; seen.add(c);
+      if (!c.durationSec || Math.abs(c.durationSec - o.sec) > Math.max(3, o.sec * 0.01)) continue;
+      if (namesSomeoneElse(c.title, o.by)) continue;
+      const theirs = new Set([...words(c.title)].filter((x) => !who.has(x)));
+      const both = [...mine].filter((x) => theirs.has(x)).length;
+      if (both >= 2 && both / Math.min(mine.size, theirs.size) >= 0.75) return c;
+    }
+    return null;
+  };
   const pairs = new Map(); // old item → class
   for (const o of old) {
     const n = o.minhag ? minhagNumber(o.title) : null;
-    const hit = byYoutube.get(youtubeIdOf(o.link)) || (n != null && byEpisode.get(n)) || byTitle.get(norm(o.title)) || near(o);
+    const ft = fileTitle(o);
+    const hit = byYoutube.get(youtubeIdOf(o.link)) || (n != null && byEpisode.get(n)) || byTitle.get(norm(o.title)) || (ft.split(' ').length >= 3 && byTitle.get(ft)) || near(o) || sameLength(o);
     if (hit) pairs.set(o, hit);
   }
   return pairs;
