@@ -1,0 +1,72 @@
+{
+ "v": 6,
+ "id": "avi-harari:tag:soundcloud,2010:tracks/2437450248",
+ "title": "Wearing Special Shoes on Shabbat",
+ "topic": "Halakha",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "The obligation of special clothing for Shabbat",
+   "about": "Gemara Masechet Shabbat, V'chibbadito, malbushim"
+  },
+  {
+   "at": 49,
+   "title": "Do special clothes include shoes?",
+   "about": "Ma'aseh Rav, Ga'on mi Vilna, Magen Avraham, Kaf HaHayim"
+  },
+  {
+   "at": 150,
+   "title": "Analyzing the Berakhot for clothing and shoes",
+   "about": "Rav Pe'alim, Ben Ish Hai, Malbish Arumim, She'as Ali Kol Sorki"
+  },
+  {
+   "at": 244,
+   "title": "The Talmud Yerushalmi on Shabbat shoes",
+   "about": "Masechet Shabbat, nailed shoes, takana"
+  },
+  {
+   "at": 434,
+   "title": "Further proofs from the Mishnah and Gemara",
+   "about": "Sha'arei Ephraim, Masechet Sanhedrin, Masechet Kiddushin, Kibud Ab Va'em"
+  },
+  {
+   "at": 583,
+   "title": "Conclusion on the Halakha",
+   "about": "Chacham Ovadia Yosef, midat hasidut, polishing shoes"
+  }
+ ],
+ "unsupported": [
+  "debate",
+  "considered",
+  "distinct",
+  "serve"
+ ],
+ "claims": [],
+ "summary": "Rabbi Harari explores whether the obligation to wear special clothing on Shabbat extends to one's shoes. He examines various sources from the Gemara and later authorities that debate whether shoes are considered distinct from clothing, ultimately concluding that while having separate Shabbat shoes is a midat hasidut, it is not an absolute necessity. He suggests that polishing one's weekday shoes for Shabbat can serve as a way to honor the day.",
+ "subjects": [
+  "V'chibbadito",
+  "Malbushim",
+  "Gemara Masechet Shabbat",
+  "Ga'on mi Vilna",
+  "Ma'aseh Rav",
+  "Magen Avraham",
+  "Kaf HaHayim",
+  "Ben Ish Hai",
+  "Rav Pe'alim",
+  "Talmud Yerushalmi",
+  "Chacham Ovadia Yosef",
+  "Yahave Da'at"
+ ],
+ "questions": [
+  "Is there an obligation to wear special shoes for Shabbat just like we wear special clothing?",
+  "Do the Berakhot we say in the morning imply that shoes and clothing are separate categories?",
+  "Can I use my fancy weekday shoes for Shabbat if I polish them?",
+  "What does it mean to have a midat hasidut regarding Shabbat footwear?"
+ ],
+ "quality": "good",
+ "terms": "shoes shabbat clothing gemara special talmud wearing thats malbish proof question should unique yerushalmi yosef appropriate means mentions person torah ben even put rabbis siman wear although another fancy masechet word youre bet cant different dont fact halakha ketubim line maaseh might mishnah nailed necessity pairs regards speak theres vadya week weekdays actions attempted bavli berachot berakhot bottom clothes dust every gimal hachamim happened hasidut hes honor idol kaf kol language make malbush malbushicha matter mentioned midat part people proofs rabbi separate supposed takana though top used weekday wont words work absolute address ali alternatively amen applicable appropriately arumim attention baghdad baruch based book briefly call certain chacham chaleke circumstance dangerous dav debar deflection didnt dispute doesnt double enactment end ephraim evidence explain explains expression father felt give great hacham ham hayim however include katan later lav look mandate mark mention morning nail naked need new pair parent piece polish prove putting quotes rav refer result samech saying sheas sheilot single sman sometimes somewhat sorki specifically statement suit talking theyll theyre tragedy unfortunately vchibbadito vhammanil ways whos yahavedat yehem yishai yishbot absolutely act add adi adonai afterwards aha aharonim aleph alfin almost already amud answer answered appears around arum arumin aside asked assuming ata attempt authorities avel avodah avraham background bad badetor barefoot bat bau bedeck begadav began beit beraqaf best biriyah biyosef bracha brachot breakfast bring bringing brought bshabat cause cave certainly chaim changed chet child children cites class clearly cleat clothe comes coming conclusive conducting context continues conversation counter cryptic dal davsamich death dedicated deflected depends details dirachecha dirasha discuss discussed drink earlier efraim either elaborate eliezer elsewhere ended ensued entirely exactly excuse extend familiar fanciest far fashion fin finish first flowery food forbidden foremost friday fsamach fulfill game gaon garment gave gersaot gima gives giving goes hadasha hadashot hadin hai haida haim hakadosh haleka haleke haleq hammalbish hamud hamut hamvad hanhagot hasid hasnt hebrew heres hiding hilek hol holav homes human ideal imagined immerse including inclusive inconclusive individual initially instead interesting interestingly ish isnt issues jews kabod kafal kafe kapdalid kapha kaptal katana khafa kibuda kiddushin killing kitabim kofiot korban lastly leave length leodam less likan likewise looking magin mahloket malbusha malbushim manifested masech massechid massechit matters may mdav measot meave mechabdatai mechabedit mechbet mekbet mentioning mepharshim miikar mim mis mishna moit moment moments mornings moshe mourner nails nasha nasham nation necessary needs never neviim nevim nice nikaf nonetheless notion obligation opinion opposed orachayim orche order otkof ourselves outside overlook owning padel page panim past pasuk pay pealim pene perekvav persecution pesach pesukim piety point poskim practice practices praising preparing pretend pretty prohibited proper provided purposeful puts ran read reading refers regel resh reshta rimei room saif saman sandilin sanhedrin seemed separately sets settles several sevilla shaaleh shaareh shaarei shabetah shailot shaya sheelot shehaya shelo shirt shlchok shlo shoe short simankov simple situation skipping sneakers speaking speedy stampede still study suggest suggests sumar summarize support sure switch switched taaseh talked talks taovdehim terms terrible themselves therefore tie times toshbot toshibot trampled tren try turn type tzitz ultimately uman umanil umashkeh understand using vchibbadeto vchid veadrosh version vilna violates voala walk watched weve whatever whats whether wide worn wouldnt writes yaakov yahef years yemei yeshaaya yishcheidu yishchire yishhai yod yohanan youve zarah zayin zayn",
+ "words": 2317,
+ "language": "English",
+ "made": "2026-11-24",
+ "by": "groq whisper + gemini-3.1-flash-lite"
+}
