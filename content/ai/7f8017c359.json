@@ -1,0 +1,69 @@
+{
+ "v": 6,
+ "id": "yt:gxqzTSAz3OU",
+ "title": "SCA Minhag of the Week 179: \"When Do We Recite Berikh Shemeh?\"",
+ "topic": "Minhag of the Week",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Berich Shmeh in Zohar and Sha'ar HaKavanot",
+   "about": "Zohar Parashat Vyakhel, Rabbi Shimon, and Arizal's practice"
+  },
+  {
+   "at": 45,
+   "title": "Opinions of Ramaz, Kaf Hahaim, and Ben Ish Hai",
+   "about": "Shabbat Minha, Rosh Hodesh, and Yamim Tovim"
+  },
+  {
+   "at": 90,
+   "title": "The Minhag of Halab and Community Siddurim",
+   "about": "Book Derech Eretz, Siddur Olat HaShachar, Tefillat Yeshurun"
+  },
+  {
+   "at": 135,
+   "title": "Conclusion on the Halab Custom",
+   "about": "Reciting Berich Shmeh only in Shacharit of Shabbat and Yamim Tovim"
+  }
+ ],
+ "unsupported": [
+  "background",
+  "upon",
+  "hekhal",
+  "remove",
+  "rulings",
+  "contrasts",
+  "established",
+  "documented",
+  "historical",
+  "syrian"
+ ],
+ "claims": [
+  "Mr. Arking presents the background and various rabbinic opinions regarding when to recite the prayer Berich Shmeh upon opening the Hekhal to remove the Sefer Torah. (Mr. Arking is not mentioned in the transcript, nor is opening the Hekhal mentioned.)"
+ ],
+ "summary": "Mr. Arking presents the background and various rabbinic opinions regarding when to recite the prayer Berich Shmeh upon opening the Hekhal to remove the Sefer Torah. He examines sources including the Zohar, Sha'ar HaKavanot, and rulings by the Ramaz, Kaf Hahaim, and Ben Ish Hai. He then contrasts these views with the established Minhag of Halab as documented in historical Syrian siddurim.",
+ "subjects": [
+  "Berich Shmeh prayer",
+  "Parashat Vyakhel in the Zohar",
+  "Rabbi Shimon",
+  "Sha'ar HaKavanot",
+  "Rabbi Chaim Vital and the Arizal",
+  "Rabbi Moshe Zakuto (Ramaz)",
+  "Kaf Hahaim Sofer",
+  "Ben Ish Hai and Torah Lishmah",
+  "Minhag of Halab",
+  "Siddur Olat HaShachar and Tefillat Yeshurun"
+ ],
+ "questions": [
+  "When did the Arizal recite Berich Shmeh according to Sha'ar HaKavanot?",
+  "What are the different rabbinic opinions on reciting Berich Shmeh during Shabbat Minha or Rosh Hodesh?",
+  "What was the traditional custom of the community of Halab regarding Berich Shmeh?",
+  "Which historical siddurim document the Halab practice for reciting Berich Shmeh?"
+ ],
+ "quality": "poor",
+ "terms": "berich shabbat shmeh rosh mincha shacharit chodesh recite arizal custom hakavanot halab shaar mention according rabbi torah used written yom zohar accordance based ben chai hashanah including ish kippur main mekubalim morning ramaz recited reported sefer siddur time 17th acronym advocated arouse book century chaim community congregation considered customary derech entitled eretz familiar following furthermore gates hachaim hashachar heaven high holidays interestingly italy kabbalist kabbalistic kaf known likewise lishmah love mercy moshe officiated olat open original parashat person pointing prayer printed quoted read reading reciting required responsa saying section shimon should siddurim similarly sod sofer straightforward student take taking tefillat text tov tovim vital vyakhel without work wrote yamim year yesharim yeshurun zakuto",
+ "words": 452,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-25",
+ "by": "gemini (video) + gemini-3.6-flash"
+}
