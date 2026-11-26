@@ -1,0 +1,74 @@
+{
+ "v": 6,
+ "id": "yt:wC6xtTWAt50",
+ "title": "SCA Minhag of the Week 168: \"Tefilla BeSibbur: Reading of Alpha Beta before Arbit Mosa'e Shabbat\"",
+ "topic": "Minhag of the Week",
+ "chapters": [
+  {
+   "at": 5,
+   "title": "Introduction to Alef-bet Custom",
+   "about": "Mr. Harari and Mr. Morris Arking introduce the custom of singing the Alef-bet between Minha of Shabbat and Arbit."
+  },
+  {
+   "at": 50,
+   "title": "Kol Yaakov Page 350 and Shir HaMa'alot",
+   "about": "Following the Brooklyn custom, they reference page 350 in the Kol Yaakov and move to Shir HaMa'alot on page 356."
+  },
+  {
+   "at": 95,
+   "title": "Mizmor le-Todah and Yoshevo",
+   "about": "Mentioning portions that are only occasionally sung if there is time, before moving to Michtam le-David."
+  },
+  {
+   "at": 140,
+   "title": "Michtam le-David on Page 363",
+   "about": "Singing Michtam le-David using a specific tune that continues to the end of the michtam."
+  },
+  {
+   "at": 187,
+   "title": "Le-David Baruch Adonai Tzuri",
+   "about": "Singing Le-David Baruch Adonai Tzuri with a tune similar to Yerushalayim and Sefardim."
+  },
+  {
+   "at": 237,
+   "title": "Le-Asaf, Avshalom, and Kaddish",
+   "about": "Continuing to Le-Asaf and Avshalom sung in unison by the Kahal, leading up to the Hazan singing the Kaddish."
+  }
+ ],
+ "unsupported": [
+  "subsequent",
+  "portions",
+  "pointing",
+  "pages",
+  "demonstrating",
+  "tunes"
+ ],
+ "claims": [],
+ "summary": "Mr. Harari and Mr. Morris Arking discuss and sing the Alef-bet and subsequent portions between Minha of Shabbat and Arbit. They cover the custom in the Brooklyn community, pointing to pages in the Kol Yaakov and demonstrating tunes for various chapters.",
+ "subjects": [
+  "Alef-bet",
+  "Pirkei Avot",
+  "Tehilim",
+  "Shir HaMa'alot",
+  "Mizmor le-Todah",
+  "Yoshevo",
+  "Michtam le-David",
+  "Le-David Baruch Adonai Tzuri",
+  "Le-Asaf",
+  "Avshalom",
+  "Kaddish"
+ ],
+ "questions": [
+  "What is the custom between Minha of Shabbat and Arbit regarding the Alef-bet?",
+  "Which book and chapter does the Alef-bet come from?",
+  "What tunes are used for the different parts like Michtam le-David and Le-David Baruch Adonai Tzuri?",
+  "Which pages in the Kol Yaakov are referenced for these texts?"
+ ],
+ "quality": "good",
+ "terms": "tune alef bet sing mentioned pirkei begin community different hamaalot last page shir singing thats video brooklyn continue continues customary david familiar following jerusalem kol michtam morris presentation similarities tehilim throughout week adonai arbit arking asaf asked avot avshalom baruch begins bracha called chapter chud completely custom directly discuss egyptians end even first follow halabi halakha hazan help hes honor join joined kaddish kahal made minha mizmor next number occasionally old part pasuk peret pesukim please previous rabenu sefardim series shabbat shalom shawan somebody sung theres though three till time todah tuv tzuri unison whole yaakov yerushalayim yoshevo youre",
+ "words": 389,
+ "language": "",
+ "speaker": "",
+ "made": "2026-11-26",
+ "by": "gemini (video) + gemini-3.5-flash-lite"
+}
