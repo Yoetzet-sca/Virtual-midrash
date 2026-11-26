@@ -1,0 +1,76 @@
+{
+ "v": 6,
+ "id": "richard-hidary:e3adf735-62ba-49c7-ba95-bd80df3d640e",
+ "title": "Bekhorot 61 - Good for Nothing Messenger",
+ "topic": "Gemara",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Two animals emerging as the tenth",
+   "about": "Three opinions on what to do when the tenth spot has two animals"
+  },
+  {
+   "at": 60,
+   "title": "Explaining the three Tannaic opinions",
+   "about": "Grazing for blemishes, sacrificing them, or letting them die"
+  },
+  {
+   "at": 251,
+   "title": "Attributing the opinions and Rabbi Yehuda's view",
+   "about": "Analyzing whether the eleventh animal can be sacrificed"
+  },
+  {
+   "at": 496,
+   "title": "Application nowadays without a Bet HaMikdash",
+   "about": "Why animals might be left to die to prevent a mishap"
+  },
+  {
+   "at": 649,
+   "title": "A messenger who makes a mistake in ma'asar",
+   "about": "Dispute between Rab Papi and Rav Papa regarding messenger agency"
+  },
+  {
+   "at": 757,
+   "title": "Comparison to Teruma and agency",
+   "about": "Contrasting ma'asar behemah mistakes with teruma estimates"
+  }
+ ],
+ "unsupported": [
+  "emerge",
+  "tannaic",
+  "must",
+  "agency",
+  "makes",
+  "error",
+  "taking",
+  "emerging",
+  "application",
+  "comparison"
+ ],
+ "claims": [],
+ "summary": "Rabbi Hidary goes through the final section of Masekhet Bechorot, discussing the laws of a mistaken count of ma'asar behemah when two animals emerge together as the tenth. He analyzes different Tannaic opinions regarding whether such animals must graze until blemished, be sacrificed, or be left to die, and examines the agency of a messenger who makes an error while taking ma'asar behemah.",
+ "subjects": [
+  "Masekhet Bechorot",
+  "Ma'asar Behemah",
+  "Temurat Ma'aser",
+  "Shalamim",
+  "Bet HaMikdash",
+  "Messenger agency",
+  "Teruma",
+  "Rabbi Shimon",
+  "Rabbi Yehuda",
+  "Rav Papa"
+ ],
+ "questions": [
+  "What happens when two animals simultaneously emerge as the tenth in ma'asar behemah?",
+  "Why do some opinions require the mistaken ma'asar animals to die?",
+  "How does the lack of a Bet HaMikdash change the halakha for these animals nowadays?",
+  "Can a sender invalidate the actions of a messenger who makes a mistake while taking ma'asar behemah?"
+ ],
+ "quality": "good",
+ "terms": "thats animal case die ten messenger therefore eleventh sacrifice holy mistake yudah tenth animals blemish even kadosh ninth sacrificed take theres make maser rabbi reb thinks wait amount become bring call cannot counted dont graze maasar opinion since time timurah within behemah braita come didnt disqualified loss problem replacement sacrificial should someone till youre amar becomes better called considered dash different maaser maaset opinions owner rabi shalamim talking three wanted wants answer asiri beudah certain comes doesnt eat gets give goes himself less likely maaseh masechet may mek meta nowadays papi people rab rav rava regular sacrifices sanctified sent shalamin shimon status substitute temurat terumah theyre thought timurat abba according afilu although amad anonymous another avoid baayn badaita bata bayah benefit brabi byuda came cant causing closet complete completely consider count disagrees eight ela ended eno extra fifty financial first forty gave general generous habayit however include karala kedusha lacharav lami likareb likelihood lishlamim lock meat middle might mikdash mishap name new nobody none null offer original osseh papa peseda put rabbanan rather realm sender seven shepherd sifra situation sixty stuff tanahada tarem tell tells temat tereh teshi third took udah valid void yamutu yohanan able achad act acted adin agrees ahadassah alai alef altogether amre apply appoint around asar ask asked askinan attribute authorized ava avid away baal baasidi badaite baikra bal baraita basuk bechorot behema behu beloh ben best betamikdash betimikdash burn bzman calls careful cause chadameh clearly commentary consecrate consume counts daf damar damree days death deikad delet denefishi dependent designated detriment develops dibrei dies difference dirbi directly disagree dismiss disqualification double earlier either elah else end enmevin enough epinavit estimate estimated except explain explained fact field figures fiikad fixed following forget fortieth front fulfill gate generously giving gizera good grazes gufe haadetana hacha hachi hai haidush haomer hapesul happened happening happens hatam hazeh herd heve hii hire hold holiness hopefully hud huge idiyat immediately increased infer instead intention islam itmar itself kadashim kamal kamash kameh kareb karib kasabar kedad keep kevan killing kivan kolban lachada laibaelach lakashya law laws lazashilamim learned leavuteh lebet lefanav left letakoneh limiteh lishinu lishloho live long look lose lrabot made malaan master meaning meantime medium meir meirs messed messengership messes minabakad mind minus mishmed mishna mishnah mission mistaken mistakenly mora mumah necessarily nevertheless next nine nothing objective obviously omer papah part passed pen person persons pin pol possibility possibly prefer previous produce protocols purpose purposes puts question raah random real reason regarding responding sage samech sar saw saying second sefer ser shalimim shear shedartich shezeh shilamim short show significant simpler sixtieth slaughter somebody speaking spoke spot squeeze squeezed starvation starve stingily stingy subjective sure takala takalah tanah tanahidach taut tautahi technically tenya tich timura tiramah tirgema together track try umishum understand unnamed usually vaaser vayikra vchi veen verdict vliklinu went whatever whereas whichever wishes without wont words work worried worry wouldnt writer wrongly yachii yafa yakribu yasushenayim yehuda yesterday yet yirohu yiru youll yuda zeh",
+ "words": 2744,
+ "language": "English",
+ "made": "2026-11-26",
+ "by": "groq whisper + gemini-3.5-flash-lite"
+}
