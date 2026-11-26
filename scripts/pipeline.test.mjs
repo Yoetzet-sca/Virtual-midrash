@@ -501,3 +501,14 @@ test('old archive: a re-upload of a YouTube video is recognised years later by i
   assert.equal(p.get(byLength).id, 'yt1');
   assert.equal(p.has(otherYear), false); // same title, another year's class: a different length, so not the same recording
 });
+
+test('instagram: the code is read from a link or from pasted embed code', async () => {
+  const { instagramCode, staffRows } = await import('./lib/staff.mjs');
+  assert.equal(instagramCode('https://www.instagram.com/reel/DgNWMUSTpf0/?utm_source=ig_embed'), 'DgNWMUSTpf0');
+  assert.equal(instagramCode('<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DgNWMUSTpf0/?utm_source=ig_embed&amp;utm_campaign=loading">'), 'DgNWMUSTpf0');
+  assert.equal(instagramCode('https://www.instagram.com/rabbitawil/p/Cabc123_-x/'), 'Cabc123_-x');
+  assert.equal(instagramCode('https://www.instagram.com/rabbitawil'), '');
+  const rows = staffRows('"Instagram link","Teacher","Title","Date","Note"\n"https://www.instagram.com/reel/DgNWMUSTpf0/","Rabbi Ikey Tawil","How to light","11/26/2026",""\n', 'instagram');
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].teacher, 'Rabbi Ikey Tawil');
+});

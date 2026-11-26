@@ -1,4 +1,5 @@
-// The staff tabs of the SCA Google Sheet: "App - Fix a class", "App - Teachers", "App - This Week", "App - Notices".
+// The staff tabs of the SCA Google Sheet: "App - Fix a class", "App - Teachers", "App - This Week", "App - Notices",
+// "App - Instagram".
 // Staff type plain words under plain headings; this turns each tab into what the build uses.
 import { csvRows, sameName } from './csv.mjs';
 
@@ -6,6 +7,7 @@ export const STAFF_TABS = {
   fixes: { tab: 'App - Fix a class', columns: { match: 'Class title contains', teacher: 'Only for this teacher', hide: 'Hide', topic: 'Change topic to', moveTo: 'Move to teacher', note: 'Note' }, needs: ['match'] },
   teachers: { tab: 'App - Teachers', columns: { name: 'Name', title: 'Title', bio: 'Bio', photo: 'Photo link', feed: 'Podcast link', hide: 'Hide', note: 'Note' }, needs: ['name', 'feed'] },
   week: { tab: 'App - This Week', columns: { day: 'Day', time: 'Time', teacher: 'Teacher', title: 'Class', mode: 'Zoom / In person / Both', location: 'Location', note: 'Note' }, needs: ['day', 'title'] },
+  instagram: { tab: 'App - Instagram', columns: { link: 'Instagram link', teacher: 'Teacher', title: 'Title', date: 'Date', note: 'Note' }, needs: ['link', 'teacher'] },
   notices: { tab: 'App - Notices', columns: { date: 'Date', text: 'Announcement', dedication: 'Dedication', note: 'Note' }, needs: ['date', 'text'] },
 };
 
@@ -33,6 +35,9 @@ export function isoDate(v) {
   m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2}|\d{4})$/);
   return m ? `${m[3].length === 2 ? '20' + m[3] : m[3]}-${m[1].padStart(2, '0')}-${m[2].padStart(2, '0')}` : '';
 }
+
+// The short code in an Instagram post or reel link (or in Instagram's pasted embed code): instagram.com/reel/DgNW…/
+export const instagramCode = (v) => (/instagram\.com\/(?:[\w.]+\/)?(?:reel|reels|p|tv)\/([\w-]{5,})/.exec(String(v || '')) || [])[1] || '';
 
 export const modeOf = (v) => (/both/i.test(v) ? 'both' : /zoom|online/i.test(v) ? 'zoom' : 'inperson');
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

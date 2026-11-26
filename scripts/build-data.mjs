@@ -14,7 +14,7 @@ import { parseBrooklyn, parseDeal } from './lib/erub.mjs';
 import { parseCsv, resourceRows, sameName } from './lib/csv.mjs';
 import { lock } from './lib/lock.mjs';
 import { applyOverrides } from './lib/overrides.mjs';
-import { STAFF_TABS, staffRows, applyTeacherEdits, isoDate, modeOf, dayOf } from './lib/staff.mjs';
+import { STAFF_TABS, staffRows, applyTeacherEdits, isoDate, modeOf, dayOf, instagramCode } from './lib/staff.mjs';
 import { dafFor, weekInfo } from './lib/calendar.mjs';
 import { channelIdFrom, feedUrl, parseYoutube, teacherForTitle, allVideos, samePerson } from './lib/youtube.mjs';
 
@@ -226,6 +226,26 @@ const docs = [];
   }
   if (old.length) console.log(`✓ Old site's archive: ${old.length} uploaded items — ${pairs.size} already here from YouTube or a feed (${named} of them now filed under their teacher), ${added} added from the old storage, ${skipped} not added as classes (inactive, a format phones cannot play, or a document); ${docs.length} written pieces listed`);
   console.log(`  Still filed under the SCA itself: ${classes.filter((c) => c.teacherId === 'sca').length} classes`);
+}
+// ---- Instagram videos ----------------------------------------------------------
+// Instagram has no feed to read, so each video is listed by its link (the "App - Instagram" tab, or content/instagram.json)
+// with the teacher and a title. The app plays it in Instagram's own embedded player.
+{
+  const rows = [...(await json('content/instagram.json').catch(() => [])), ...((await staffTab('instagram')) || [])];
+  const seen = new Set(); let added = 0;
+  for (const r of rows) {
+    const code = instagramCode(r.link);
+    if (!code || seen.has(code)) continue;
+    const teacherId = whoNamed(r.teacher);
+    if (!teacherId) { warnings.push(`Instagram — no teacher called "${r.teacher}", so ${code} was not added`); continue; }
+    seen.add(code);
+    const name = teachers.find((t) => t.id === teacherId)?.name || r.teacher;
+    const day = isoDate(r.date) || now.toISOString().slice(0, 10);
+    const title = r.title || `A short video from ${name}`;
+    classes.push({ id: `ig:${code}`, teacherId, title, date: `${day}T17:00:00.000Z`, durationSec: 0, audioUrl: '', instagram: code, image: '', link: `https://www.instagram.com/reel/${code}/`, topic: topicFor(title, null), kind: 'video' });
+    added++;
+  }
+  if (rows.length) console.log(`✓ Instagram: ${added} videos listed`);
 }
 classes.sort((a, b) => b.date.localeCompare(a.date));
 // AI summaries (made by scripts/ai.mjs): a topic where the title gave none, the parts of the class, and the search index.

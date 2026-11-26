@@ -17,6 +17,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
   const [active, setActive] = useState('');
   const [toast, setToast] = useState('');
   const [video, setVideo] = useState(''); // the class whose YouTube player is open
+  const [insta, setInsta] = useState(''); // the class whose Instagram player is open
   const [videoPaused, setVideoPaused] = useState(false);
   const frame = useRef<HTMLIFrameElement>(null);
   // YouTube's player takes play/pause commands as messages, and reports its state back the same way.
@@ -194,8 +195,10 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
           const playing = mine && p.playing;
           const img = c.image || t?.photo;
           const isVideo = c.kind === 'video' && !!c.youtubeId;
+          const isInsta = !!c.instagram;
           const tap = () => {
-            if (!isVideo) { started.current = Date.now(); p.toggle(c); }
+            if (isInsta) { p.pause(); setVideo(''); setInsta(c.id); }
+            else if (!isVideo) { started.current = Date.now(); p.toggle(c); }
             else if (video === c.id) toggleVideo(); // already open: the whole screen pauses and resumes it
             else { p.pause(); setVideo(c.id); setVideoPaused(false); setVTime(0); setVDur(0); setVRate(1); }
           };
@@ -224,6 +227,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
                   {!mine && prefs.positions[c.id] && <span className="tag new">CONTINUE · {clock(prefs.positions[c.id][0])}</span>}
                   {daysAgo(c.date) <= 0 && <span className="tag new">NEW TODAY</span>}
                   {isVideo && <span className="tag">VIDEO</span>}
+                  {isInsta && <span className="tag">INSTAGRAM VIDEO</span>}
                   {c.film && <span className="tag">SOUND ONLY</span>}
                   {c.topic && <span className="tag">{c.topic.toUpperCase()}</span>}
                   {c.durationSec > 0 && <span className="tag">{(c.durationSec < 660 ? 'QUICK · ' : '') + minutes(c.durationSec).toUpperCase()}</span>}
@@ -245,7 +249,8 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
                 {!prefs.swiped && <div className="card-hint">Swipe up for more from {t?.name.split(' ').slice(-1)[0]} · swipe sideways for another teacher · hold Follow to hide a teacher</div>}
                 {mine && p.error && <div className="card-error" role="alert">{p.error}</div>}
               </div>
-              {!isVideo && (
+              {isInsta && <div className="insta-go"><button className="btn wide" onClick={tap}>Watch the video</button></div>}
+              {!isVideo && !isInsta && (
                 <div className={'scrub' + (mine ? '' : ' idle')}>
                   {!mine && <button className="scrub-cover" aria-label="Play" onClick={tap} />}
                   <button disabled={!mine} onClick={() => p.skip(-15)} aria-label="Back 15 seconds">−15</button>
@@ -320,6 +325,20 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
       {columns.length > 1 && <div className="feed-dots" aria-hidden="true">{columns.slice(0, 12).map((col, i) => <span key={col.teacherId} className={i === activeCol ? 'on' : ''} />)}</div>}
       {current && <div className="feed-progress" style={{ width: `${(current.duration ? current.time / current.duration : 0) * 100}%` }} />}
       {toast && <div className="toast" role="status">{toast}</div>}
+      {insta && (() => {
+        // Instagram videos play in Instagram's own player, opened over the feed.
+        const c = data.classes.find((x) => x.id === insta);
+        if (!c?.instagram) return null;
+        return (
+          <div className="sheet-back" onClick={() => setInsta('')}>
+            <div className="sheet insta-sheet" role="dialog" aria-label={c.title} onClick={(e) => e.stopPropagation()}>
+              <div className="spread"><b className="insta-title">{c.title}</b><button className="btn small ghost" onClick={() => setInsta('')}>Close</button></div>
+              <iframe title={c.title} src={`https://www.instagram.com/reel/${c.instagram}/embed/`} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen scrolling="yes" />
+              <a className="muted small center" href={c.link} target="_blank" rel="noreferrer">Open in Instagram</a>
+            </div>
+          </div>
+        );
+      })()}
       {about && (() => {
         const c = data.classes.find((x) => x.id === about);
         if (!c) return null;
