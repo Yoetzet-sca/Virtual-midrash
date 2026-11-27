@@ -1,0 +1,61 @@
+{
+ "v": 6,
+ "id": "richard-hidary:a469020e-007f-4d41-adbd-5b9aa7cc39e8",
+ "title": "Bekhorot 59 - Counting Sheep",
+ "topic": "Gemara",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Rava's Chidush on Automatic Holiness",
+   "about": "Rava teaches that the tenth animal becomes holy on its own even without being explicitly named."
+  },
+  {
+   "at": 101,
+   "title": "Searching for Sources for Rava",
+   "about": "Reviewing baraitot about miscounts where the ninth animal is called the tenth."
+  },
+  {
+   "at": 519,
+   "title": "Contradiction and Rabbi Shimon's Position",
+   "about": "Resolving a conflicting baraita through the view of Rabbi Shimon ben Yehuda regarding uprooting the name ten."
+  },
+  {
+   "at": 994,
+   "title": "Minyan Haraoi - A Worthy Count",
+   "about": "Analyzing Rava's principle that a proper count exempts the animals even if the tenth animal dies."
+  },
+  {
+   "at": 1378,
+   "title": "Scenarios with Multiple Exits",
+   "about": "Examining how splitting sheep between different exits impacts the ma'aser count."
+  }
+ ],
+ "unsupported": [
+  "multiple",
+  "searching"
+ ],
+ "claims": [],
+ "summary": "Rabbi Hidary goes through Masekhet Bechorot, analyzing the rules of counting animals for ma'aser behemah and when animals automatically become holy. He discusses various baraitot and mishnayot regarding what happens when a counter makes mistakes in the count or when animals die or exit through multiple openings.",
+ "subjects": [
+  "Masekhet Bechorot",
+  "Ma'aser Behemah",
+  "Rava",
+  "Rabbi Shimon",
+  "Rabbi Shimon ben Yehuda",
+  "Rav Shashat",
+  "Minyan haraoi",
+  "Kedushah"
+ ],
+ "questions": [
+  "Does an animal become holy as a ma'aser automatically even if the owner does not say anything?",
+  "What is the status of the ninth animal if the counter mistakenly calls it the tenth?",
+  "If an animal designated as the tenth dies in the pen, are the previously counted animals exempt from being counted again?",
+  "How does a pen with multiple exits affect the counting of animals for ma'aser behemah?"
+ ],
+ "quality": "good",
+ "terms": "tenth ten went ninth thats count four even case nine first counted six called already didnt next level eleventh exempt rava pen altogether eight exit proof animal asiri blemish holy last wait dont good therefore though animals braita doesnt left name ones theres become call passed comes gate nothing time back kedushah since still calls died might sacrifice till fact gets kodesh maaser never pass talking theyre yet 10th dies different fit happens haraoi holiness low matter means nevertheless uproot youre another became becomes came cant hemenu high itll long mistake opening rabbi rather rest shimon source uprooted automatically ben bepetach clear counts covered jumped kadosh maased meaning minuyin minyan mishnah number patur pointed seven should teshii thought whether zeh afterwards albaah argue begin behind complete counting eaten ela end everybody exempted gathering gemara hes however inside kedusha learn least made make neekar obviously openings opposite peturim peturin possible principle proper put rebishimon sacrificable sanctified saying selected sham shem someone status take true whats wont words worthy able add alive amrinan answer arba asar assuming baraita behemah bemomo bring careful cases chidush come compare dechazi depends didn difference direction eat echad either eno exempts explanation five follows full goes goren happened hatishii hulin imke jumps kara ladir lahacha lav leasiri likarev lower maasad makes making may meha met mikomakom must necessarily nechal opposed oseh pasuk perhaps pitturim point poter prove quoted rav ravahs ravas reason regarding saw scenario seems sefeq sent shashat sheep shemo shisha situation skipped specifically started sufficient sure tana tithed took vim vimlav wasnt without word wrong yehuda yehudah 11th 9th aaf accord achada ached acher achher actual adonai afagav agree ahad alav albaa alehem alternate although ama amarava amed amen aminah analyze anybody apparently asara ashishah asir asirim ask assume attack author avar avaz baa baah bada badir barayta baraytot baruch based basic bechorot becoming beminan beminyan bemumo bepetah bminyan bunch cannot certainly cholin choose claim clarified clearly compared completely confused continue contradict dafnun dahave dava dead declare deelonek definitely deibadad dekada demina detania determined dettanya diber diifteru discussion doesn don drops easier easily echal elah elav elava ended enodin enough exactly excited exercise exited expectation explain fast fine finished fitting follow forever forgot found fourteen front future gateway gone great group guess gufayud haacher haamarava hamahaditnan hamaneh hamenuyin hamesh haminuyin hanotenet hard hashem hatishine haydush hayu heart heres hii himenu hiyo hol holined homed humrah ibadah ifteru ila ilala ilaveh ilem imin imotar inameh inclusive indeed ine instead ipoted isma itself kamashmalan kamed karada kashem katila kavach kavachom khafas kolam kulan laa laamishum lagoran latter leave leaves lehu leleravaha lema leolam letokhan liela likareb lives logic lravaha maasar maasev maasir maika maotetema masechet mased mashlim mashmaran masir mead meelav mehadetaniah mehen mehmehachad memorized mess meusarin min minah minale minayin misalfin misarfin misheenal mishna mishtarfin mishum misurin moneu nada narau need negorne neither nishteiru nootar oishem otam otherwise pator people permanently phrase plenty position possibly potential potentially present previous problem professional properly puts question radava ravah ravaz reading ready realize realized realizing reciter regardless regular reject rejection rejects remain rod sacrificed sacrificial sacrifisable sanctity sashuosei scenarios second sefik send shanehatam sheen shehu sheim shekara shelea shishayasu side simpler skips sometimes somewhat sperita split start statement stay stayed stays stuff sudden supports suspect taama tamodomar taneh tanya teaches telahim teleim term teru tet theyll three tishii together total totally try trying tulamidi twice uma umanah umet uncertainty unless use vachad vaday valbaa valbaah valbaalbaam vamara vamen variation vashah vasiri vasri vdirma vechazi vecholam vedilma velo verdict viknisan vishishab vneishtayiru vshanal vshisha vshishah vyasa vyishtayidu whatever whereas whole wouldnt writer yasu yasual yavor yekodesh yihie yistarfin youll zimna",
+ "words": 5372,
+ "language": "English",
+ "made": "2026-11-27",
+ "by": "groq whisper + gemini-3.5-flash-lite"
+}
