@@ -1,0 +1,72 @@
+{
+ "v": 6,
+ "id": "joey-soffer:tag:soundcloud,2010:tracks/2434729665",
+ "title": "Bechorot daf 51",
+ "topic": "Gemara",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Items invalid for Pidyon HaBen",
+   "about": "Mishnaic list of items like slaves and land that cannot be used for redemption"
+  },
+  {
+   "at": 99,
+   "title": "Rebi and the Rabbanan's hermeneutics",
+   "about": "Debate on Ribu Umi'ut versus Klal Uprat in interpreting the verses"
+  },
+  {
+   "at": 439,
+   "title": "Hekdesh and the status of the redemption",
+   "about": "Whether Hekdesh items can be redeemed and the validity of using a Shtar"
+  },
+  {
+   "at": 537,
+   "title": "Returning the money to the father",
+   "about": "The practice of Kohanim returning the five Salaim and the requirement of wholehearted giving"
+  }
+ ],
+ "unsupported": [
+  "laws",
+  "hermeneutical",
+  "concerning",
+  "interpretation",
+  "verses",
+  "halakhic",
+  "implications",
+  "redemption",
+  "invalid",
+  "hermeneutics",
+  "responsibility"
+ ],
+ "claims": [
+  "He discusses the hermeneutical debate between Rebi and the Rabbanan concerning the interpretation of the verses",
+  "that does not come up in the transcript"
+ ],
+ "summary": "Rabbi Soffer explores the Mishna in Masekhet Bechorot regarding the laws of Pidyon HaBen, specifically focusing on which items are valid for redeeming a firstborn son. He discusses the hermeneutical debate between Rebi and the Rabbanan concerning the interpretation of the verses, as well as the halakhic implications of a Kohen returning the redemption money to the father.",
+ "subjects": [
+  "Pidyon HaBen",
+  "Masekhet Bechorot",
+  "Rebi",
+  "Rabbanan",
+  "Klal Uprat",
+  "Ribu Umi'ut",
+  "Hekdesh",
+  "Kohen",
+  "Salaim",
+  "Erech Erech",
+  "Rekam Rekam"
+ ],
+ "questions": [
+  "Can a father use land or documents to perform Pidyon HaBen?",
+  "Why does Rebi disagree with the Rabbanan on how to interpret the verses regarding redemption?",
+  "What happens if a Kohen returns the five Salaim to the father after the redemption?",
+  "Is a father still obligated to perform Pidyon HaBen if the child passes away after thirty days?",
+  "What is the source for the father's responsibility to replace lost redemption money?"
+ ],
+ "quality": "poor",
+ "terms": "rabbi give back gave mishnah prat five klal money padui kohen pasuk therefore yudah erech pidyon rekam thats yosef cant even ribu kol youre hes riba shekalim source talking wants bino darish didnt doresh father intrinsically movable rebi time use valuable yara amar ben days format fulfilled gives good klaal opinion salaim son take velo wrote yatsah bitafon chameset chayav child deibi documents gemara guy halakha hanina hekdesh kesef klaus learned make mamon may miut never next rabbis reason reiya still team technically torah used whatever whats work yet already ama another anyway avadim bachraiyoto bad bamaim beginning belongs bmarzea btamikdash cannot chayavin chayev course deivre detail different document doesnt done dont dtanya either elah else exactly expecting first fit fulfill given gizera haben habev hamafrish idea ishmael karkaot klale kodesh kohenim lasara later law learn look lost maan maita marzeh matechet means mearakhin meoteh metal metatel obligated obligation owe passed payment period plays praklal pyon rabbe raben rashi rebbe rebuyeh redeemed responsible return returning ribi saw second shal shalaim shtar shtarot shtei slaves spike taan taanena ten thorn tivdeh tvdeh ula yorshim 28th 8th aben abishimu abogated accepted according ach acha acharzeh actual adan adonai afkan afterwards aharze ala aleph alive allowed amad amah amen ameyokhad amreno amut anay ani aoteh apish argue arguing aside atya ava away ayom bachara bachayu banecha baraita baraka baray baruch bchorbanecha bdonav beabadim bealma bechor bechorot bee beel beerkecha beit bekarkaot bekhayut belong beno beos beribi bgyona bhekdeshot bishmon bishnarot bishtar biyad biyonatan bkhalal bnakish bne bought boy bringing brought byohanan bzee bzeh cash category causes chach chadosh chamesh chat chaya chaza cheshvan chidush chita chodesh clearly coin compared consecrated dafnun daharibi dasheh dava davara day debt decided didn dimi drill duresh dvar ear eat eight ein ela emad enzei erekecha everywhere evidence except exception excludes excluding ezirlo following forth front fulfilling gmana goes goshu gufan gvashava haber hacha hachamim haerekam hamikdash happens hashem hattel havent hayam heard hekdeshot hello hem hishiten hold hole however hukshu ibi ill item items itll itself kakha kakhta kalim kamayi karka karkah katav kedamim keen kesar khaloprat khalot kiyem klaalim klalim krah kwan kwanim lahadetanur lakeish lakohen land larabot lchishiten leave lecha lefi leolam lich licha lines list liten litenlo lkra loh lohchamesh lra maalahan machloken maditi maha makhlok man maolat marvela masichet master matkif mearachin mechtav meet meforash mekom meolat meprish meremor metatelin mibay miber miet migdach minatura mind mishna mishnahs mishterot mitzvahs miutz mnala morning mozei natanu natsah need needle neither netalo nili normally november olat omeer oseh paamim pado page papa paper part pasukim pdo peg pen pgyon piercing pijon piyon podin pointy poke possession praat prate prats problem prove psukim pudin put raba rabana rabbanan rabdinia rabnah rashai rav ravina ravonan reading reba rebaa rebis rebuyem redeem regarding replace representative ribbis ribui ribuy rule ruling saying selaim semukhim separated set seven shata shavaf sheaf shenei shino shiten shubchayev since sira six someone soul sources specific starting status stylus switch tama tamud tan tana tanakama tani tara tarot tavara tdupejona tells tevdeh thank theres though throw tifteh tiveder today toh told took top treyona tuz tvede twice type uda uftu uftuya umiet umiuet understand upadot uprat uprate uprateh valif vavad vchach vchol vchule veamen veava veech vekalal vemat vematana verbi vidyon vlo vyalif waiting walking wholeheartedly wood word words worked yats yatsuush yavi years yechayah yelecha yimiut yimut yiraupan yrauf yurto zagzera zei zela zoh",
+ "words": 2194,
+ "language": "English",
+ "made": "2026-11-27",
+ "by": "groq whisper + gemini-3.1-flash-lite"
+}
