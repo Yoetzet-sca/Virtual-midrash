@@ -1,7 +1,7 @@
 // One audio player for the whole app. Audio streams straight from the teacher's own feed link.
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import type { ClassItem, Teacher } from './types';
-import { learn, getPrefs, setPrefs, savePosition } from './store';
+import { learn, getPrefs, setPrefs, savePosition, markHeard } from './store';
 import { track, listened } from './analytics';
 
 type Player = {
@@ -46,6 +46,7 @@ export function PlayerProvider({ teachers, classes, children }: { teachers: Teac
       const done = clsRef.current;
       if (!done) return;
       savePosition(done.id, null);
+      markHeard(done.id);
       // Carry on to the next class in the series, and move the feed to it if the feed is showing.
       const next = nextInSeries(done, classes);
       if (next) {
@@ -70,6 +71,7 @@ export function PlayerProvider({ teachers, classes, children }: { teachers: Teac
         lastSaved.current = a.currentTime;
         const nearEnd = Number.isFinite(a.duration) && a.currentTime > a.duration - 30;
         savePosition(c.id, nearEnd || a.currentTime < 10 ? null : a.currentTime);
+        if (nearEnd && !getPrefs().heard?.[c.id]) markHeard(c.id); // the last half minute is goodbyes: it counts as heard
       }
       // Listening for a full minute counts as interest in that teacher and topic.
       if (c && a.currentTime > 60 && !counted.current.has(c.id)) {

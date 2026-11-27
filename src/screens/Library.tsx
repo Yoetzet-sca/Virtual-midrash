@@ -1,6 +1,6 @@
 import type { AppData, ClassItem } from '../types';
 import { useEffect, useState } from 'react';
-import { usePrefs, setPrefs, toggleIn, savePosition } from '../store';
+import { usePrefs, setPrefs, toggleIn, savePosition, markHeard } from '../store';
 import { usePlayer } from '../player';
 import { Avatar, ClassRow } from '../ui';
 import { clock, newFromFollowed } from '../util';
@@ -20,6 +20,8 @@ export function Library({ data }: { data: AppData }) {
   const inProgress = pick(Object.entries(prefs.positions).sort((a, b) => b[1][1] - a[1][1]).map((e) => e[0]));
   const saved = pick([...prefs.saved].reverse());
   const liked = pick([...prefs.liked].reverse());
+  // Finished classes, most recent first (the newest 40 are listed).
+  const heard = pick(Object.entries(prefs.heard || {}).sort((a, b) => b[1] - a[1]).map((e) => e[0])).slice(0, 40);
   // Taking a class off a list. A class that is playing is paused first, or the player would put its place straight back.
   const forget = (c: ClassItem) => { if (player.cls?.id === c.id) player.pause(); setTimeout(() => savePosition(c.id, null), 60); };
   const Section = ({ title, list, empty, note, remove }: { title: string; list: ClassItem[]; empty: string; note?: (c: ClassItem) => string; remove?: (c: ClassItem) => void }) => (
@@ -36,6 +38,7 @@ export function Library({ data }: { data: AppData }) {
       {prefs.following.length > 0 && <Section title="NEW FROM TEACHERS YOU FOLLOW" list={fresh} empty="Nothing new since you last looked. New classes from teachers you follow will show here." />}
       <Section title="CONTINUE LISTENING" list={inProgress} empty="Classes you start and don’t finish will wait for you here." note={(c) => `You’re ${clock(prefs.positions[c.id][0])} in`} remove={forget} />
       <Section title="SAVED" list={saved} empty="Tap Save on a class to keep it here." remove={(c) => setPrefs({ saved: prefs.saved.filter((x) => x !== c.id) })} />
+      {heard.length > 0 && <Section title={`HEARD · ${Object.keys(prefs.heard || {}).length}`} list={heard} empty="" remove={(c) => markHeard(c.id, false)} />}
       <Section title="LIKED" list={liked} empty="Classes you like show up here." remove={(c) => setPrefs({ liked: prefs.liked.filter((x) => x !== c.id) })} />
 
       <h2 className="sub">Your preferences</h2>

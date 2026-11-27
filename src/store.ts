@@ -17,9 +17,10 @@ export type Prefs = {
   swiped: boolean; // has learned the swipe directions, so the hint can go away
   // Quiet learning: small scores per topic and teacher, nudged by what people listen to, like and skip.
   learned: Record<string, number>;
+  heard: Record<string, number>; // class id -> when it was finished (or marked heard by hand)
 };
 const KEY = 'vm.prefs.v1';
-const empty: Prefs = { onboarded: false, topics: [], following: [], hidden: [], liked: [], saved: [], code: '', seenAt: '', visits: 0, installAsked: false, rate: 1, positions: {}, swiped: false, learned: {} };
+const empty: Prefs = { onboarded: false, topics: [], following: [], hidden: [], liked: [], saved: [], code: '', seenAt: '', visits: 0, installAsked: false, rate: 1, positions: {}, swiped: false, learned: {}, heard: {} };
 
 function read(): Prefs {
   try {
@@ -54,6 +55,17 @@ export function learn(keys: (string | null | undefined)[], by: number) {
 }
 
 // Remember how far into a class someone is, so it can pick up there. Keeps the 60 most recent.
+// A class played to the end is remembered as heard, so nobody sits through it twice by accident. `on` false clears it.
+export function markHeard(id: string, on = true) {
+  setPrefs((p) => {
+    const heard = { ...(p.heard || {}) };
+    if (on) heard[id] = Date.now(); else delete heard[id];
+    const keep = Object.entries(heard).sort((a, b) => b[1] - a[1]).slice(0, 3000);
+    const positions = { ...p.positions }; if (on) delete positions[id];
+    return { heard: Object.fromEntries(keep), positions };
+  });
+}
+
 export function savePosition(id: string, seconds: number | null) {
   setPrefs((p) => {
     const positions = { ...p.positions };

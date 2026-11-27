@@ -31,6 +31,7 @@ export function Chips({ items, value, onPick }: { items: { id: string; label: st
 
 export function ClassRow({ c, teacher, showTeacher = true, brief = true }: { c: ClassItem; teacher?: Teacher; showTeacher?: boolean; brief?: boolean }) {
   const p = usePlayer();
+  const heard = !!usePrefs().heard?.[c.id];
   const [open, setOpen] = useState(false);
   const active = p.cls?.id === c.id && p.playing;
   const row = (
@@ -38,7 +39,7 @@ export function ClassRow({ c, teacher, showTeacher = true, brief = true }: { c: 
       <span className="row-play">{active ? <IPause size={18} /> : <IPlay size={18} />}</span>
       <span className="row-text">
         <span className="row-title">{c.title}</span>
-        <span className="row-meta">{[showTeacher && teacher?.name, c.instagram ? 'Instagram video' : c.kind === 'video' && 'Video', c.film && 'Sound only', c.topic, when(c.date), minutes(c.durationSec)].filter(Boolean).join(' · ')}</span>
+        <span className="row-meta">{heard && <b className="row-heard">✓ {c.kind === 'video' ? 'Watched' : 'Heard'} · </b>}{[showTeacher && teacher?.name, c.instagram ? 'Instagram video' : c.kind === 'video' && 'Video', c.film && 'Sound only', c.topic, when(c.date), minutes(c.durationSec)].filter(Boolean).join(' · ')}</span>
       </span>
     </button>
   );

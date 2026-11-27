@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { AppData, ClassItem } from '../types';
-import { usePrefs, getPrefs, setPrefs, toggleIn, learn } from '../store';
+import { usePrefs, getPrefs, setPrefs, toggleIn, learn, markHeard } from '../store';
 import { usePlayer } from '../player';
 import { Avatar, erubLabel, go } from '../ui';
 import { classShare, clock, initials, matchesTopic, minutes, newFromFollowed, rank, shareLink, daysAgo, sized, findClasses, classesNaming, perashaNow } from '../util';
@@ -17,6 +17,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
   const [active, setActive] = useState('');
   const [toast, setToast] = useState('');
   const [video, setVideo] = useState(''); // the class whose YouTube player is open
+  const videoNow = useRef(''); videoNow.current = video;
   const [insta, setInsta] = useState(''); // the class whose Instagram player is open
   const [videoPaused, setVideoPaused] = useState(false);
   const frame = useRef<HTMLIFrameElement>(null);
@@ -39,6 +40,7 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
         if (typeof info?.playbackRate === 'number') setVRate(info.playbackRate);
         const state = info?.playerState;
         if (state === 1) setVideoPaused(false); // playing
+        if (state === 0 && videoNow.current) markHeard(videoNow.current); // the video played to its end
         if (state === 2 || state === 0) setVideoPaused(true); // paused or ended (e.g. from YouTube's own controls)
       } catch { /* not a player message */ }
     };
@@ -225,7 +227,8 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
               <div className="card-info">
                 <div className="tags">
                   {!mine && prefs.positions[c.id] && <span className="tag new">CONTINUE · {clock(prefs.positions[c.id][0])}</span>}
-                  {daysAgo(c.date) <= 0 && <span className="tag new">NEW TODAY</span>}
+                  {prefs.heard?.[c.id] && <span className="tag heard">✓ {c.kind === 'video' ? 'WATCHED' : 'HEARD'}</span>}
+                  {daysAgo(c.date) <= 0 && !prefs.heard?.[c.id] && <span className="tag new">NEW TODAY</span>}
                   {isVideo && <span className="tag">VIDEO</span>}
                   {isInsta && <span className="tag">INSTAGRAM VIDEO</span>}
                   {c.film && <span className="tag">SOUND ONLY</span>}
@@ -353,6 +356,9 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
                 <div className="label">JUMP TO A PART</div>
                 <div className="parts">{c.chapters!.map(([at, title]) => <button key={at} className="part" onClick={() => { p.play(c, at); setAbout(''); }}><IPlay size={12} /><b>{clock(at)}</b><span>{title}</span></button>)}</div>
               </>}
+              {prefs.heard?.[c.id]
+                ? <button className="btn wide ghost" onClick={() => markHeard(c.id, false)}>✓ {c.kind === 'video' ? 'Watched' : 'Heard'} · tap to clear</button>
+                : <button className="btn wide ghost" onClick={() => markHeard(c.id)}>Mark as {c.kind === 'video' ? 'watched' : 'heard'}</button>}
               <button className="btn wide ghost" onClick={() => setAbout('')}>Close</button>
             </div>
           </div>

@@ -36,6 +36,7 @@ export function rank(data: AppData, prefs: Prefs, now = new Date()): ClassItem[]
     if (age === 0) s += 15;
     if (prefs.following.includes(c.teacherId)) s += 50;
     if (c.topic && prefs.topics.some((t) => matchesTopic(c.topic, t))) s += 20;
+    if (prefs.heard?.[c.id]) s -= 300; // already heard: still there, but after everything new
     s += (prefs.learned['t:' + c.teacherId] || 0) + (c.topic ? prefs.learned['k:' + c.topic] || 0 : 0);
     return s;
   };
