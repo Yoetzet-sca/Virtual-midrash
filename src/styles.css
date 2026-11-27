@@ -324,9 +324,11 @@ input::placeholder { color: var(--sky); opacity: 1; }
 .row-sum-text { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .row-sum.open .row-sum-text { display: block; }
 .row-sum-more { color: var(--sky); font-weight: 700; font-size: 12px; }
-.card-sum { text-align: left; background: none; border: 0; padding: 0; color: #d3e4f5; font-size: 13px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex-shrink: 0; }
-.card-sum.one { -webkit-line-clamp: 1; }
-@media (max-height: 700px) { .card-sum { -webkit-line-clamp: 1; } }
+.card-sum { display: block; width: 100%; text-align: left; background: none; border: 0; padding: 0; color: #d3e4f5; font-size: 13px; line-height: 1.4; overflow: hidden; flex-shrink: 0; max-height: 2.95em; }
+.card-sum-text { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.card-sum.one { max-height: 1.55em; }
+.card-sum.one .card-sum-text { -webkit-line-clamp: 1; }
+@media (max-height: 700px) { .card-sum { max-height: 1.55em; } .card-sum-text { -webkit-line-clamp: 1; } }
 .answer-sum.flush { margin: 0; }
 .sheet.about { max-height: 82%; }
 .sheet.about .parts { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; min-height: 0; }

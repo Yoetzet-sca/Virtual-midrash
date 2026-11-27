@@ -238,7 +238,8 @@ export function Feed({ data, startId: linkId, topic, setTopic }: { data: AppData
                 <h2 className={'card-title' + (c.title.length > 100 ? ' xlong' : c.title.length > 55 ? ' long' : '')}>{c.title}</h2>
                 {c.summary && prefs.swiped && c.title.length <= 100 && (
                   <button className={'card-sum' + (c.title.length > 55 ? ' one' : '')} onClick={() => setAbout(c.id)} aria-label="AI summary of this class. Open to read it all.">
-                    <span className="ai-tag">AI summary</span>{c.summary}
+                    {/* iPhones ignore a line limit set on a button itself, so the limit sits on this inner span. */}
+                    <span className="card-sum-text"><span className="ai-tag">AI summary</span>{c.summary}</span>
                   </button>
                 )}
                 <div className="card-by">
