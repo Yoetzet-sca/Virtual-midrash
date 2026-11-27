@@ -1,0 +1,83 @@
+{
+ "v": 6,
+ "id": "avi-harari:tag:soundcloud,2010:tracks/2434845603",
+ "title": "\"Shnayim Mikra...\" - For a Mourner",
+ "topic": "Halakha",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Introduction to Shnayim Mikra and Avelut",
+   "about": "Definition of Shnayim Mikra and the mourner's status regarding Talmud Torah"
+  },
+  {
+   "at": 48,
+   "title": "The Tur and the Rosh on Avelut",
+   "about": "The Tur's citation of the Rosh regarding private matters and Talmud Torah"
+  },
+  {
+   "at": 150,
+   "title": "Interpretations of the Tur and Shulchan Arukh",
+   "about": "Differing views on whether Shnayim Mikra is permitted for a mourner"
+  },
+  {
+   "at": 200,
+   "title": "Regional Practices and Restrictive Views",
+   "about": "Practices in Baghdad and Izmir and the view of the Maharshal"
+  },
+  {
+   "at": 251,
+   "title": "The Precedent of Kiryat Shema",
+   "about": "The argument that Shnayim Mikra is an obligatory act like Kiryat Shema"
+  },
+  {
+   "at": 407,
+   "title": "Reconciling the Authorities",
+   "about": "Maharikash's position versus the Maharshal's restriction to Shabbat"
+  },
+  {
+   "at": 455,
+   "title": "Halakha for the Mourner",
+   "about": "Guidance from Hazon Ovadiah and Rabbi Meir Mazuz on practical application"
+  }
+ ],
+ "unsupported": [
+  "perform",
+  "conflicting",
+  "among",
+  "authorities",
+  "restricted",
+  "legal",
+  "precedent",
+  "interpretations",
+  "regional",
+  "restrictive",
+  "reconciling"
+ ],
+ "claims": [],
+ "summary": "Rabbi Harari discusses whether a mourner is permitted to perform the mitzvah of Shnayim Mikra ve-Echad Targum during the seven days of shiv'ah. He examines the conflicting opinions among authorities regarding whether this practice is restricted to Shabbat or permitted throughout the week, based on the legal precedent of Kiryat Shema.",
+ "subjects": [
+  "Shnayim Mikra",
+  "Aveilut",
+  "Talmud Torah",
+  "Tur",
+  "Shulchan Arukh",
+  "Rosh",
+  "Maharshal",
+  "Maharikash",
+  "Rabbi Ovadia Yosef",
+  "Rabbi Meir Mazuz",
+  "Kiryat Shema"
+ ],
+ "questions": [
+  "Is a mourner allowed to perform Shnayim Mikra during shiv'ah?",
+  "Does the prohibition of Talmud Torah for a mourner apply to Shnayim Mikra?",
+  "Is Shnayim Mikra permitted only on Shabbat for a mourner?",
+  "What is the significance of the comparison to Kiryat Shema in this context?"
+ ],
+ "quality": "good",
+ "terms": "shabbat targum torah reading thats arukh tur shohan talmud week permitted shanai shanaim writes even mikra parasha read shema aveil avel avelut kiryat matter practice rosh forbidden matters mikrave words youre allowed amen aveilut mikravei obligatory shiva should simple specifically aruch circumstance commentary course days didnt gemara great ikra likewise maharikash page rabbi seven siman talking theres throughout time adam asur called cant citing clear context derisha dvarim friday halakha hand haparasha hatargum hear helik however lahazor list lkrot logic maharshal maintain mentioned might muta point referring regards shanaimikra shinai shnai shulchan since sometimes though against almost alternatively although argues badiai baghdad basis ben bet class different echad everyone exempted father hachamu hard hashiva hayav hayim hazon hilchot ilui individual initially knis language makes masechet mikrah mitzvah morning mourner name naveel nishmat obligation others otherwise ovadiyah parashat parashiotavim permitting places private review shebefar shebetoh shivat shouldnt shulhan sibur somewhat started suggest tefillah tell tor veahad vee vsabbat wait whos yemei yosef accept according activities adonai afternoon agree agreed agrees aguda akin alim along alphans already aluria amud angle argue asked aval badia bakov baruch based bashiyotah begins benny berachot berakhot berura betok bifraat bimashlim bitzror biyosef book breakfast bringing castro catch chara chen chok circumstances cited cites claim community complete congregation contemporary continues contradiction conversation copied cut dal daphhet davchet day dea dedicated definition derashot devarim deyasimhan difficult directly diverge doesnt dont earlier easiest easy else end especially every evlo ezeumekoman fact feels finality find formerly forth found foundation fridays fundamentally goab haaveel hacham hachayim hagesh haiyom hakorbanot halakbet halekal hanah happening harizal hashema hasipo hatarkum hatorah havelut haverav hazonu hed heisya heres hes hesya hilek hilkot home horaa hoshesh ikrat immediately importantly includes indicate interesting interestingly issue izmir kashtro katam kisei kivan known kofzaditet kohen kol kore korei lahashlim lamidalaf later lave lavei law lchom learning least leave lehashlim lenient leolam lhashlim lhazor lifted line listen lut machmir made mahara maharikashs maharil maintaining maintains make makpid mandate manifestation manifested maran masech mazuz means meir memory michael mid mikubalim min mirottenberg mmatsibur moed mornings mourning musa mutar need nihogim nihuge nishmatam normal numhetu nunbet obligated omer opinion oppose order otamidalit parshiyotavim part partially past people person pesakim pointed position possible practices preface pretty principle probably proof public publicly published question quotes quoting rabbanan rabbinic rahamim rationale reads reason reasoning recently refers regroup resh result reviewing rsimukhin ruach saratihi saying scheduled section seder seem sefer serura settle several shach shalom shana shcher shebat shebe shebet sheelotu shehayav shenai shimpeh shin shivaa shivada shivah simantaf simon sinah sitting sivteh someone speak specific spectacle stated straightforward strong suggestion taf taff talked tetzayin text theyre times tishubot truth try turin turkey tzinaah unanimously understand understanding upon used vadya vchad vchen vdino veechat veil vla voredea weekdays weekly weve whats whole women write writings yaaveilu yaavor yabiyah yehoshua yeshivat yisrael yod yore yoredea yoreh youll",
+ "words": 1961,
+ "language": "English",
+ "made": "2026-11-27",
+ "by": "groq whisper + gemini-3.1-flash-lite"
+}
