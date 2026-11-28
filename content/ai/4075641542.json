@@ -1,0 +1,78 @@
+{
+ "v": 6,
+ "id": "avi-harari:tag:soundcloud,2010:tracks/2432596467",
+ "title": "\"Shnayim Mikra...\" - Until When? (1)",
+ "topic": "Halakha",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Latest Time for Shnayim Mikra",
+   "about": "cutoff time congregation Shohan Arukh parameters"
+  },
+  {
+   "at": 48,
+   "title": "Shohan Arukh on Eating Before Shnayim Mikra",
+   "about": "Mitzvah min ha-mubhar eating Shabbat Minha"
+  },
+  {
+   "at": 98,
+   "title": "Source in Tosafot and Midrash",
+   "about": "Rabbeinu HaKadosh instruction bread Shabbat morning"
+  },
+  {
+   "at": 145,
+   "title": "Levels of Mitzva Performance",
+   "about": "Mitzvah min ha-mubhar Lecha Tehillah Bedi'avad debate"
+  },
+  {
+   "at": 243,
+   "title": "Debate in Tosafot Wording",
+   "about": "sarich shapir dami Lecha Tehillah Bedi'avad"
+  },
+  {
+   "at": 337,
+   "title": "View of Hakham Ovadia Yosef",
+   "about": "Hazon Ovadia shapir dami Lecha Tehillah"
+  },
+  {
+   "at": 386,
+   "title": "Minhat Me'ir and Rishonim",
+   "about": "Rabbi Meir Kohen Rosh Recanati Kaf HaHayim"
+  },
+  {
+   "at": 539,
+   "title": "Rabbi Meir Mazuz and Or Zarua",
+   "about": "Makor Ne'eman Matot Masei 49 minutes Or Zarua"
+  }
+ ],
+ "unsupported": [
+  "menahem"
+ ],
+ "claims": [],
+ "summary": "Rabbi Harari examines the latest time to finish Shnayim Mikra ve'Ehad Targum on Shabbat, focusing on the statement in Shohan Arukh that the most choice way is before eating. He explores whether finishing the Parasha after the Shabbat morning meal is still Lecha Tehillah or Bedi'avad. He reviews opinions from Tosafot, Hakham Ovadia Yosef, the Rosh, Rabbeinu Menahem Recanati, Kaf HaHayim, and Rabbi Meir Mazuz.",
+ "subjects": [
+  "Shnayim Mikra ve'Ehad Targum",
+  "Shohan Arukh on finishing before eating",
+  "Tosafot in Masekhet Berakhot",
+  "Rabbeinu HaKadosh and his sons",
+  "Mitzvah min ha-mubhar, Lecha Tehillah, and Bedi'avad",
+  "Hakham Ovadia Yosef in Hazon Ovadia",
+  "Rabbi Meir Kohen in Sefer Minhat Me'ir",
+  "Opinions of Rosh, Rabbeinu Menahem Recanati, and Kaf HaHayim",
+  "Rabbi Meir Mazuz in Makor Ne'eman",
+  "Or Zarua on post-meal distractions"
+ ],
+ "questions": [
+  "What is the latest time to finish Shnayim Mikra ve'Ehad Targum on Shabbat?",
+  "Why does Shohan Arukh say one should finish Shnayim Mikra before eating on Shabbat morning?",
+  "Is finishing Shnayim Mikra after the Shabbat meal Lecha Tehillah or Bedi'avad?",
+  "What did Rabbeinu HaKadosh instruct his children regarding eating bread on Shabbat morning?",
+  "How long did it take Rabbi Meir Mazuz to read Parashat Matot-Masei?"
+ ],
+ "quality": "good",
+ "terms": "eating finish mitzvah words language tosafot ideal still afterwards dont tehillah book min shabbat should bidiavad lecha mikra rabbi targum time certain didnt morning performing shapir thats whats arukh good minutes mubhar seems shohan three youre called choice course dameh first highest less make minamubhar performance understanding yourself address amazing conversation day dealing entire even fulfilled kodem listen makes meir midrash mikrah mikravei muvchar need pages parasha rabbis read regards sarich shanae talk times achila afternoon aleph alternatively appears bediavad children circumstance circumstances cites clear debate eat end excuse explicit foremost forget friday greatest hakadosh havent himself ideally imply instructed interesting knows kol later lcha level likewise line longest masechet mashma masi matot matter mazuz meal means might mincha minha mitzvot must next person point position practical pray prior put rabbeinu rishonim rosh sarih second shanai shenai shenay shi shnai siman sounds speaking statement steadfast supposed talked understand veehad weve world writes written yashlim yosef abbanan ach achar acting adam addressing adonai alash already although always amen among amudbet answer answers anyway apparently approach arguments aruch ate away bad baruch based basing bchananya bediavadavka beforehand begin berachot berakhot best bidi bimahsibur bishabbat bmeshech bnei brachot brak bread bshaa bshabat capable carried chaim chalik characterized characterizing chatechilan cited citing come commenting concludes confusing congregation continued copies cutoff dalid dami davchet deal death decision dedicated delve derived deriving determinations determining difference different dine direction disagrees dispute divarim domain dvhet easy efshar endeavor establishment everybody exactly explains extent factor familiar family far final find finished following formulate friends fulfill full gam gave gekodem gemara generally generation getting grades great guidelines habaa hachamu hachila hakib hako halakha halakhot hanakhila hanasi hang haparasha hargum hasibur havadya hayim hazon heard helek hilchot hishlimah hold honey however idea imagine implying inspiration instead instruct involved issue kafa khila kiriat klis kod kohen lachar lamedalet languages lashlimah last late latest lchan leads least leaves lebanav lech lechatechilat lechem leolam levels lhashlimah limit live lives logic long longer look lunch making makor massechet meaning mechanic mena mentioned midr mikom minhat minute minyan missed mistaken misvahat mitrash moments mukhak needs neeman nekra niftar nobody ochal okhil olam operation opportunity opposite ota ovadia parameters parashat parashiyota parashot parenthetic parenthetically passing pealif per picks plus possible practice previous properly push puts quickly quote quotes rabbanan rabbino rationale reading reason repeating respect rikanati rim rote saif sake sariqh scheme seemingly sefer sense several shanaim shanay sheafna shekhatfu shiloshah shilotokhlu shin shtigmeru significant simamhet site situation sivah sivu sleep sofer sound specifically spend start state stating stretch structure stuff suggest summarize sure takana takanad telahaveh terms text thought timing tired told tosfat tosfot translation truth type ubediavad ultimately umiuim unideal unquote use uzman vadya veachad veamen vechad veechad week weekly weigh weighs whether whole whos word worst write yaakov years yehuda yeshom yom zaruah",
+ "words": 1989,
+ "language": "English",
+ "made": "2026-11-28",
+ "by": "groq whisper + gemini-3.5-flash"
+}
