@@ -1,0 +1,87 @@
+{
+ "v": 6,
+ "id": "avi-harari:tag:soundcloud,2010:tracks/2432061123",
+ "title": "Tevilat Kelim - Do Oven Racks Need to be Dipped?",
+ "topic": "Halakha",
+ "chapters": [
+  {
+   "at": 0,
+   "title": "Introduction to Tevilat Kelim",
+   "about": "Origin of the mitzvah and the definition of kele se'uda"
+  },
+  {
+   "at": 94,
+   "title": "Direct contact with food",
+   "about": "Shulhan Arukh on trivets and the requirement for food contact"
+  },
+  {
+   "at": 228,
+   "title": "Majority usage vs. occasional usage",
+   "about": "Rama's view on usage and the opposing view of Peri Hadash"
+  },
+  {
+   "at": 330,
+   "title": "Rabbi Obadiah Yosef's final opinion",
+   "about": "Reviewing Yabia Omer and Halichot Olam"
+  },
+  {
+   "at": 478,
+   "title": "Peri To'ar and the purpose of the utensil",
+   "about": "Distinguishing oven racks from utensils made for food"
+  },
+  {
+   "at": 576,
+   "title": "Arukh HaShulhan and stationary utensils",
+   "about": "The argument that stationary items are not kele se'uda"
+  },
+  {
+   "at": 677,
+   "title": "Rabbi Moshe Feinstein's perspective",
+   "about": "Whether making toast constitutes food production"
+  },
+  {
+   "at": 733,
+   "title": "Conclusion",
+   "about": "Summary of reasons for leniency regarding oven racks"
+  }
+ ],
+ "unsupported": [
+  "require",
+  "halakhic",
+  "perspectives",
+  "importance",
+  "components",
+  "qualify",
+  "multiple",
+  "immersion",
+  "occasional",
+  "perspective"
+ ],
+ "claims": [],
+ "summary": "Rabbi Harari discusses whether oven racks require tevilat kelim, examining the definition of a utensil used for food production. He reviews several halakhic perspectives, including the importance of majority usage and whether stationary oven components qualify as utensils of the meal. The class concludes by presenting multiple reasons why oven racks generally do not require immersion.",
+ "subjects": [
+  "Tevilat Kelim",
+  "Kele Se'uda",
+  "Shulhan Arukh",
+  "Rama",
+  "Peri Hadash",
+  "Peri To'ar",
+  "Arukh HaShulhan",
+  "Igrot Moshe",
+  "Rabbi Obadiah Yosef",
+  "Rabbi Moshe Feinstein",
+  "Rabbi Hayim Ben-Atar"
+ ],
+ "questions": [
+  "Do the racks in a kitchen oven need to be dipped?",
+  "Does the fact that I sometimes put food directly on the rack change the requirement for tevilat kelim?",
+  "Does the majority usage of a utensil determine if it needs to be immersed?",
+  "Are oven racks considered utensils of the meal if they are not moved to the table?"
+ ],
+ "quality": "good",
+ "terms": "oven food even thats usage need racks used opinion regards arukh based majority put tevilat dont kelim rabbi onto directly matter according hadash production peri rack rama should tefillah toaster utensils another case conversation needs pizza toast use yosef assume bread hashulhan shulhan situation tashmish theres whats whether words back built close commentary didnt first foremost forward great halakha halei hayim immerse immersed knife made make moshe move moved new olam partial pesukim piri putting rav reason saif siman sufficient talking though time today torah underneath youre around berakha bringing called certainly clear cut dipped ever everyone fact feinstein gemara hes hot kele kofkaf lenient midyan moisture needed never number order poskim pots question seudah table taking therefore theyre writes against agree agrees always angles apply arai arguments arukhs atar background ben beracha book brings calls came certain changed circumstance comes contemporary dalet derive direct discussed doesnt exactly far final generally hacham halichot hold issue kale khot kitchen lahalakha leniency makes making maran matters meal means mikveh mishnah mitzvah name necessitate nobody old omer ovens pans people peritoar plate point posek potentially produced published punchline questions raks ramah regular remove safek seems separation seuda shailot shal shohan simukhin since situations speaking state stringent suggest tinfoil toar turning usages utensil vadya water weve whos without written yod yoreh zayim abbanan abdallah abiyah absolutely acha adaa add adds age aharonah alef alehem aleph almost alp already alternatively amazing angle answer apartments apparently approach approaches arab arbach argues argument arises arukhah ashkenazic asked asmachta assisting author avodazaran ayin azmantet bank barzel batil began beit better black bmidbar bnei bottom bought braka brief btfilah build building buy buying call change changing channel checked cited claim class closer confusing considered contact course dab dafa dates day deahala debate decide definition derived detail determine different differently dip direction disagree disagrees dispute doesn don done dough eating ekzaim else embedded enam end ended energy entire every everybody exist explained explicitly fashion feels felder finished follow following foodstuff forth four front furthermore generations gimal hachamu hadashs hakadosh harder hashohan hashulhans hatzedek havent hayav hear heard heat held helik helped het himself hit hizkiyaz homes igrot ikar imagine immersing initially interpretation isur karo kashrut katani kavdala kedera kelchita kelesa kelesi keli klafim kle klem known kosher kovkaf lakewood lametet land last lastly later latkelim learning leave lecha lesseuda lhakel lhakil likewise line literally lived looks lots machmir mahloket mahmir main maintain maintains man masechet mekil mention mentioned metal midr mimchat moment moves moving nahakil necessitates nehoshet neither nonetheless normal normally obadiah oda odaa often omech opposite ovedeh page paper parchment parchments part past per person plata pointed poschim posekim poski poskinen post pot potential primarily produce protect prove provided purpose questioning quickly quotes quoting rabbis rather read reality reasons reish remember retracts rights rishonim room rov sake samech save second sefer sense seodah sephardic served set settled several shemuel sheshoktim shiurei sholchan sholm significant silva simon simple simuchim simuchin somech somewhere sons starts stationary stay stays stringency strong student suggested suggests summer support talk tanur tashmisho tehillah tell telling tells teshbot teunot three tivillat toasty toshvot touch touches trays tripidish tripods trivet ultimately understand unnecessary upon usually veheter war wasnt wasting wax weigh weighing went whatever white winning within wonders wont word wouldnt writing wrote yabia yabiyah years yet yisrael yorot youd young zayin ziv",
+ "words": 2789,
+ "language": "English",
+ "made": "2026-11-28",
+ "by": "groq whisper + gemini-3.1-flash-lite"
+}
